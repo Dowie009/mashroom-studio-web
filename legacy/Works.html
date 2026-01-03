@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WORKS & VOICE | 第３スタジオ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Kaisei+Decol&family=Klee+One:wght@400;600&family=RocknRoll+One&family=Share+Tech+Mono&family=Yomogi&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            /* JSで変更するためのカスタムプロパティ（ページ固有） */
+            --nav-color: var(--pop-5); 
+            /* レインボー背景の回転角度用 */
+            --rainbow-rotation: 0deg;
+            --font-klee: 'Klee One', cursive;
+        }
+
+        body { 
+            background: linear-gradient(180deg, #F0F0F0, #E0E8F0); /* 修正: 背景色を淡いグラデーションに変更 */
+        }
+
+        /* 背景ネオンライン (大人っぽい演出に変更) */
+        /* CSSファイルを修正してください */
+        .bg-lines {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: -1; overflow: hidden; pointer-events: none;
+            /* 修正: 背景を暗くする処理を削除し、bodyのグラデーションに任せる */
+            /* background: #1a1a1a; */ 
+        }
+        .bg-line {
+            position: absolute;
+            /* 修正: グラデーションを多色ネオンに変更 (JSでランダムな多色をインライン設定) */
+            /* background: linear-gradient(90deg, transparent, var(--pop-1), var(--pop-5), var(--pop-2), transparent); */
+            opacity: 0.2; 
+            overflow: hidden; /* 光が走る演出用 */
+        }
+        
+        /* 光が走るエフェクト */
+        .bg-line::after {
+    content: '';
+    position: absolute;
+    top: 0; 
+    /* カスタムプロパティを使って位置をJS制御 */
+    left: var(--after-left, -100%); 
+    width: 50%; 
+    height: 100%;
+    /* 光を強く */
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,1), transparent);
+    opacity: 1; 
+}
+
+        
+        /* 個別のライン設定（角度をつけて配置） */
+        .bg-line:nth-child(1) {
+            top: 20%; left: -10%; width: 120%; height: 2px;
+            transform: rotate(-5deg); 
+        }
+        .bg-line:nth-child(2) {
+            top: 50%; left: -20%; width: 150%; height: 1px;
+            transform: rotate(10deg); 
+        }
+        .bg-line:nth-child(3) {
+            top: 80%; left: -15%; width: 130%; height: 3px;
+            transform: rotate(-3deg); 
+        }
+        
+        /* カーソル (水色ネオン) */
+        .cursor { position: fixed; top: 0; left: 0; width: 20px; height: 20px; background: var(--pop-5); border-radius: 50%; pointer-events: none; z-index: 99999; mix-blend-mode: normal; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background-color 0.3s, opacity 0.3s, box-shadow 0.3s; box-shadow: 0 0 10px var(--pop-5); }
+        .cursor.hovered { width: 80px; height: 80px; opacity: 0.5; }
+
+        /* ヘッダー */
+        header { 
+            padding: 10px 3%; /* パディングをさらに詰める */
+            display: flex; justify-content: space-between; align-items: center; 
+            background: var(--c-white); border-bottom: 4px solid var(--c-text); 
+            position: relative; z-index: 100; height: 150px; /* ヘッダー高さを確保 */
+        }
+        
+        /* ロゴ周りのスタイル（グリッチエフェクト用） */
+        .logo-container { 
+            display: block; 
+            text-decoration: none; 
+            position: relative;
+            width: auto;
+            height: 120px; /* 画像の高さに合わせて確保 */
+        }
+
+        /* ロゴ画像共通スタイル */
+        .logo-img, .logo-glitch {
+            height: 120px; /* 大きさを120pxに設定 */
+            width: auto; 
+            object-fit: contain; 
+            mix-blend-mode: multiply; /* 白背景を透過 */
+            display: block;
+        }
+
+        /* メインのロゴ */
+        .logo-img {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* グリッチ用の複製レイヤー（アニメーション用） */
+        .logo-glitch {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+            opacity: 0; /* 通常時は見えない（ここで静を表現） */
+            pointer-events: none;
+        }
+
+        /* 赤ズレのアニメーション（静 → 動） */
+        .logo-glitch-1 {
+            filter: drop-shadow(4px 0px 0px rgba(255, 0, 85, 0.7)); 
+            animation: glitch-anim-1 4s infinite; /* 4秒周期 */
+        }
+
+        /* 青ズレのアニメーション（静 → 動） */
+        .logo-glitch-2 {
+            filter: drop-shadow(-4px 0px 0px rgba(0, 255, 255, 0.7)); 
+            animation: glitch-anim-2 4s infinite; /* 4秒周期 */
+        }
+
+        /* グリッチアニメーション定義：ほとんどの時間(0-90%)は何もしない */
+        @keyframes glitch-anim-1 {
+            0%, 92% { opacity: 0; transform: translate(0); }
+            93% { opacity: 0.8; transform: translate(4px, -2px); }
+            94% { opacity: 0.8; transform: translate(-2px, 2px); }
+            95% { opacity: 0; transform: translate(0); } /* 一瞬消える */
+            96% { opacity: 0.8; transform: translate(-3px, -1px); }
+            97% { opacity: 0; transform: translate(0); }
+            100% { opacity: 0; transform: translate(0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0%, 92% { opacity: 0; transform: translate(0); }
+            93% { opacity: 0.8; transform: translate(-4px, 2px); }
+            94% { opacity: 0.8; transform: translate(2px, -2px); }
+            95% { opacity: 0; transform: translate(0); }
+            96% { opacity: 0.8; transform: translate(3px, 1px); }
+            97% { opacity: 0; transform: translate(0); }
+            100% { opacity: 0; transform: translate(0); }
+        }
+
+        /* メインロゴも少し揺らす */
+        .logo-container:hover .logo-img {
+            transform: scale(1.02);
+            transition: 0.3s;
+        }
+
+        .back-btn { font-weight: bold; text-decoration: none; color: var(--c-text); border: 2px solid var(--c-text); padding: 10px 20px; transition: 0.3s; margin-right: 100px; }
+        .back-btn:hover { background: var(--c-text); color: var(--c-white); }
+
+        /* --- HAMBURGER & DECODE MENU (共通パーツ) --- */
+        /* CSSファイルを修正してください */
+        .hamburger-btn { position: fixed; top: 30px; right: 30px; z-index: 11000; width: 80px; height: 80px; background: var(--c-text); border: 4px solid var(--pop-2); border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; transition: background 0.3s; box-shadow: 5px 5px 0px rgba(0,0,0,0.2); }
+        .hamburger-btn:hover { background: var(--pop-1); border-color: var(--c-white); }
+        .h-line { width: 40px; height: 5px; background: var(--c-white); transition: 0.3s; pointer-events: none; border-radius: 4px; }
+        .pop-sidebar { position: fixed; top: 0; right: 0; width: 500px; max-width: 90vw; height: 100vh; background: rgba(255, 255, 255, 0.95); border-left: 8px solid var(--c-text); z-index: 10500; transform: translateX(120%) skewX(-5deg); transform-origin: top right; box-shadow: -20px 0 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center; padding: 40px; background-image: radial-gradient(var(--pop-5) 2px, transparent 2px); background-size: 30px 30px; }
+        .menu-list { list-style: none; width: 100%; text-align: right; }
+        .menu-item { margin: 15px 0; perspective: 1000px; }
+        .menu-link { display: inline-block; font-family: var(--font-en); font-size: 4rem; font-weight: 900; color: var(--c-text); text-decoration: none; line-height: 1; text-transform: uppercase; position: relative; transition: 0.3s; padding: 0 10px; background: transparent; }
+        .menu-link .menu-num { color: rgba(0, 0, 0, 0.4); }
+        .menu-item:nth-child(1) .menu-link:hover { color: var(--pop-1); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(2) .menu-link:hover { color: var(--pop-2); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(3) .menu-link:hover { color: var(--pop-3); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(4) .menu-link:hover { color: var(--pop-4); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(5) .menu-link:hover { color: var(--pop-5); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(6) .menu-link:hover { color: var(--pop-6); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(7) .menu-link:hover { color: var(--pop-1); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(8) .menu-link:hover { color: var(--pop-6); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-text); }
+        .menu-deco { position: absolute; bottom: 20px; right: 40px; font-family: var(--font-digi); font-size: 1rem; color: var(--c-text); opacity: 0.5; text-align: right; }
+        .hamburger-btn.is-active { background: var(--c-white); border-color: var(--c-text); transform: rotate(0deg) !important; }
+        .hamburger-btn.is-active .h-line { background: var(--c-text); }
+        /* --- END MENU --- */
+
+        /* --- モーダル (小窓) --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 20000;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: 0.3s;
+            padding: 40px;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .modal-content {
+            background: var(--c-white); 
+            width: 100%; max-width: 1000px;
+            height: auto; max-height: 90vh;
+            border: 4px solid var(--c-text);
+            box-shadow: 20px 20px 0 var(--pop-2);
+            position: relative; transform: scale(0.95);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; 
+            overflow: hidden; 
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        /* モーダル左側：画像エリア */
+        .modal-image-area {
+            flex: 1.2;
+            position: relative;
+            background: #222;
+            display: none; 
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border-right: 4px solid var(--c-text);
+        }
+        .modal-image-area.active { display: flex; }
+
+        .modal-art-image {
+            max-width: 100%; max-height: 100%; 
+            object-fit: contain; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* モーダル右側：テキストエリア */
+        .modal-text-area {
+            flex: 1; 
+            padding: 50px;
+            display: flex; flex-direction: column; justify-content: center;
+            background: var(--c-white);
+            position: relative;
+            overflow-y: auto;
+        }
+
+        /* リンクのスタイル */
+        .modal-body a {
+            color: var(--pop-4);
+            text-decoration: underline;
+            font-weight: bold;
+            transition: 0.2s;
+            word-break: break-all;
+        }
+        .modal-body a:hover {
+            color: var(--pop-1);
+            background: var(--c-text);
+        }
+
+        .modal-close {
+            position: absolute; top: 20px; right: 20px; 
+            width: 40px; height: 40px; background: var(--pop-1);
+            color: var(--c-white); font-weight: bold; font-family: var(--font-en);
+            display: flex; justify-content: center; align-items: center;
+            border: 2px solid var(--c-text); border-radius: 50%;
+            cursor: pointer; font-size: 1.2rem; transition: 0.3s;
+            z-index: 10;
+        }
+        .modal-close:hover { transform: scale(1.1) rotate(90deg); background: var(--c-text); color: var(--pop-1); border-color: var(--pop-1); }
+
+        .modal-header { 
+            font-family: var(--font-en); font-size: 2.5rem; margin-bottom: 25px; line-height: 1.2; 
+            border-bottom: 4px solid var(--pop-3); padding-bottom: 15px; display: inline-block; 
+            word-break: keep-all; overflow-wrap: break-word; /* タイトルの改行制御 */
+        }
+        .modal-body { 
+            font-size: 1.0rem; line-height: 1.9; font-weight: 500; color: #333; 
+            word-break: keep-all; overflow-wrap: break-word; /* 本文の改行制御 */
+        }
+        .modal-tag-label { display: inline-block; background: var(--c-text); color: var(--c-white); padding: 5px 12px; font-family: var(--font-en); font-size: 0.9rem; margin-bottom: 15px; }
+
+        /* メインコンテナ幅を拡大 */
+        .container { max-width: 1600px; margin: 0 auto; padding: 80px 3%; position: relative; z-index: 1; opacity: 1; visibility: visible; }
+        
+        .page-title { font-size: 5rem; font-family: var(--font-en); margin-bottom: 20px; line-height: 0.9; text-shadow: 5px 5px 0 var(--c-white); }
+        .page-desc { font-size: 1.2rem; margin-bottom: 80px; max-width: 600px; font-weight: 500; line-height: 1.8; background: rgba(255,255,255,0.8); padding: 20px; border: 2px solid var(--c-text); }
+
+        /* WORKS Section */
+        .works-section { margin-bottom: 40px; } /* 修正: 80px から 40px に削減 */
+        .section-header { 
+            font-size: 3rem; 
+            font-family: var(--font-en); 
+            margin-bottom: 80px; 
+            display: inline-block; 
+            background: var(--c-text);
+            color: var(--c-white);
+            padding: 10px 30px;
+            transform: rotate(-2deg);
+            box-shadow: 10px 10px 0px var(--pop-3);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* パララックスラッパー（整列用に調整） */
+        .parallax-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px; /* 隙間を均等に */
+            position: relative;
+            padding-bottom: 100px;
+        }
+
+        /* カラム（整列用に調整） */
+        .parallax-col { 
+            width: 32%; /* 均等な幅 */
+            display: flex; flex-direction: column; gap: 60px; position: relative; 
+            /* 個別のマージンやZ-indexをリセット */
+            margin: 0; z-index: auto;
+        }
+        
+        /* --- Work Card Style --- */
+        .work-card { 
+            background: var(--c-white); 
+            border: 4px solid var(--c-text); 
+            padding: 20px; 
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative; 
+            display: flex; 
+            flex-direction: column; 
+            z-index: 1;
+            min-height: auto;
+            --hover-color: var(--c-text); 
+            /* 回転を削除し、垂直に */
+            transform: rotate(0deg);
+        }
+        
+        /* ホバー時の挙動 (維持) */
+        .work-card:hover { 
+            z-index: 20; 
+            transform: scale(1.05) !important; /* 拡大のみ */
+            border-color: var(--hover-color);
+            box-shadow: 20px 20px 0px var(--hover-color); 
+        }
+        
+        .work-img-box { 
+            position: relative; 
+            overflow: hidden; 
+            border: 2px solid var(--c-text); 
+            margin-bottom: 20px; 
+            width: 100%; 
+            transition: 0.3s;
+            background: #ffffff; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .work-card:hover .work-img-box { border-color: var(--hover-color); }
+        
+        .ratio-wide { aspect-ratio: 16/9; }
+        .ratio-tall { aspect-ratio: 3/4; }
+        .ratio-square { aspect-ratio: 1/1; }
+        .ratio-cinema { aspect-ratio: 21/9; }
+        .ratio-banner { aspect-ratio: 3.5/1; } 
+
+        .work-img { 
+            width: 100%; height: 100%; object-fit: cover; transition: 0.5s; 
+        }
+        .work-card:hover .work-img { transform: scale(1.05); }
+
+        .work-tags { display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
+        
+        /* * タグのデザイン修正
+         * - フォントをZen Kaku Gothic Newに変更 (読みやすさ重視)
+         * - フォントサイズを拡大 (1.1rem)
+         * - paddingをタイトに調整 (2px 8px)
+         */
+        .work-tag { 
+            font-size: 1.1rem; /* 大きく */
+            font-weight: 900; /* 太く */
+            background: var(--c-text); color: var(--c-white); 
+            padding: 2px 8px; /* 文字ギリギリまで詰める */
+            line-height: 1.2; /* 行間も詰める */
+            font-family: var(--font-jp); /* 読みやすいゴシック体 */
+            transition: 0.2s; position: relative; overflow: hidden; white-space: nowrap;
+            border: 2px solid transparent; /* ホバー時の枠線用 */
+            cursor: pointer; /* クリックできる感 */
+        }
+
+        /* 揺れるアニメーション定義 */
+        @keyframes shake {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            20% { transform: translate(-2px, 0) rotate(-2deg); }
+            40% { transform: translate(2px, 0) rotate(2deg); }
+            60% { transform: translate(-2px, 0) rotate(-1deg); }
+            80% { transform: translate(2px, 0) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* * タグのホバー時の挙動
+         * - アニメーション: 揺れる
+         * - 色: 背景白、文字黒 (高コントラストで読みやすく)
+         */
+       .work-tag:hover { 
+    animation: shake 0.4s linear; 
+    background: var(--c-white); /* !important を削除 */
+    color: var(--c-text); /* !important を削除 */
+    border-color: var(--c-text); 
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+        
+        /* タイトルの改行制御：単語の途中での改行を防ぐ */
+        .work-title { 
+            font-size: 1.8rem; 
+            font-family: var(--font-jp); /* 小文字対応のため日本語フォントに変更 */
+            font-weight: 900;
+            margin-bottom: 10px; 
+            line-height: 1.4; 
+            /* text-transform: uppercase;  <-- これを削除 */
+            pointer-events: none; 
+            word-break: keep-all; 
+            overflow-wrap: break-word; 
+        }
+        .work-desc { font-size: 0.95rem; color: #333; font-weight: 600; line-height: 1.6; pointer-events: none; }
+
+        .work-detail-data { display: none; }
+
+        /* VOICE Section */
+        .voice-section { margin-bottom: 100px; position: relative; margin-top: -40px; z-index: 10; } /* z-indexを追加して確実に表示 */
+        .voice-bg-shape {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--pop-2); opacity: 0.1; z-index: -1; transform: skewY(-2deg);
+        }
+
+        .voice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 50px; }
+        
+        .voice-card { 
+            background: var(--c-white); border: 4px solid var(--c-text); padding: 40px; 
+            position: relative; box-shadow: 10px 10px 0px var(--c-text); border-radius: 20px;
+        }
+        .voice-card::after {
+            content: ''; position: absolute; bottom: -20px; left: 50px;
+            border-width: 20px 20px 0; border-style: solid; border-color: var(--c-text) transparent;
+            display: block; width: 0;
+        }
+        .voice-card::before {
+            content: ''; position: absolute; bottom: -14px; left: 54px;
+            border-width: 16px 16px 0; border-style: solid; border-color: var(--c-white) transparent;
+            display: block; width: 0; z-index: 1;
+        }
+
+        .voice-text { font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; font-weight: 600; font-family: var(--font-klee); }
+        .voice-author { display: flex; align-items: center; justify-content: flex-end; gap: 15px; margin-top: 30px; }
+        .voice-icon { width: 50px; height: 50px; background: #ddd; border-radius: 50%; border: 2px solid var(--c-text); object-fit: cover; }
+        .voice-info { text-align: right; }
+        .voice-name { font-weight: 900; font-size: 1.1rem; display: block; }
+        .voice-attr { font-size: 0.8rem; color: #666; font-weight: bold; }
+
+        .vc-1:hover { border-color: var(--pop-1); box-shadow: 10px 10px 0px var(--pop-1); }
+        .vc-1:hover .voice-name { color: var(--pop-1); }
+        .vc-2:hover { border-color: var(--pop-4); box-shadow: 10px 10px 0px var(--pop-4); }
+        .vc-2:hover .voice-name { color: var(--pop-4); }
+
+        /* Client & Artist List Section */
+        .client-section { margin-bottom: 100px; padding: 40px; background: var(--c-white); border: 4px solid var(--c-text); position: relative; z-index: 10; } /* z-indexを追加して確実に表示 */
+        
+        .list-group { margin-bottom: 40px; }
+        .list-group:last-child { margin-bottom: 0; }
+        
+        .list-header {
+            font-family: var(--font-en); font-size: 2rem; color: var(--c-white); background: var(--c-text);
+            display: inline-block; padding: 5px 20px; margin-bottom: 20px;
+            box-shadow: 5px 5px 0 var(--pop-3); transform: rotate(-1deg);
+        }
+        
+        .client-list { 
+            display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: flex-start; 
+            font-family: var(--font-jp); font-size: 1.1rem; line-height: 1.6; font-weight: 500; color: #333; 
+        }
+        .client-item { transition: 0.2s; cursor: default; white-space: nowrap; }
+        .client-item:hover { color: var(--pop-1); transform: scale(1.1); font-weight: 700; }
+        .client-sep { color: #ccc; margin: 0 5px; font-weight: 300; font-family: var(--font-en); }
+
+        /* NAV HUB */
+        .nav-hub-container { 
+            display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 40px; 
+            margin-top: 100px; padding: 60px 20px; border-top: 4px solid var(--c-text); background: #F0F0F0; position: relative; z-index: 5; 
+        }
+        .hub-main { 
+            font-family: var(--font-en); font-size: 5rem; font-weight: 900; color: #ccc; 
+            text-decoration: none; position: relative; line-height: 1; letter-spacing: 0.02em; 
+            margin-right: 40px; pointer-events: none; 
+        }
+        .hub-link { 
+            font-family: var(--font-en); font-size: 1.8rem; font-weight: 900; color: var(--c-text); 
+            text-decoration: none; padding: 5px 10px; transition: 0.3s; 
+        }
+        .hub-link:hover { color: var(--pop-1); transform: scale(1.1); }
+
+        footer { background: var(--c-text); color: var(--c-white); padding: 50px 5%; text-align: center; }
+        .reveal-text { opacity: 0; transform: translateY(50px); }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 3.5rem; }
+            .parallax-wrapper { flex-direction: column; gap: 50px; }
+            .parallax-col { width: 100%; margin: 0 !important; gap: 50px; }
+            .work-card { transform: rotate(0deg) !important; margin: 0 !important; width: 100% !important; }
+            .nav-hub-container { flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+            .hub-main { font-size: 3.5rem; margin-right: 0; margin-bottom: 10px; }
+            .bg-line { width: 200%; height: 50px; }
+            
+            .modal-content { flex-direction: column; width: 95%; height: auto; max-height: 85vh; }
+            .modal-image-area { border-right: none; border-bottom: 4px solid var(--c-text); min-height: 250px; flex: auto; }
+            .modal-text-area { padding: 30px 20px; flex: auto; }
+            .modal-close { top: 10px; right: 10px; }
+            .client-list { font-size: 1rem; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+
+    <div class="bg-lines">
+        <div class="bg-line"></div>
+        <div class="bg-line"></div>
+        <div class="bg-line"></div>
+    </div>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-image-area" id="modal-image-area"></div>
+            <div class="modal-text-area">
+                <div class="modal-close" id="modal-close">×</div>
+                <div id="modal-content-area">
+                    <div class="modal-header">TITLE</div>
+                    <div class="modal-body">Description...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <div class="hamburger-btn magnet" id="hamburger">
+        <div class="h-line"></div>
+        <div class="h-line"></div>
+        <div class="h-line"></div>
+    </div>
+
+    <nav class="pop-sidebar" id="pop-sidebar">
+        <ul class="menu-list">
+            <li class="menu-item"><a href="Home_new.html" class="menu-link"><span class="menu-num">00</span> HOME</a></li>
+            <li class="menu-item"><a href="Profile.html" class="menu-link"><span class="menu-num">01</span> PROFILE</a></li>
+            <li class="menu-item"><a href="Works.html" class="menu-link"><span class="menu-num">02</span> WORKS</a></li>
+            <li class="menu-item"><a href="Lesson.html" class="menu-link"><span class="menu-num">03</span> LESSON</a></li>
+            <li class="menu-item"><a href="GearList.html" class="menu-link"><span class="menu-num">04</span> GEAR</a></li>
+            <li class="menu-item"><a href="Price.html" class="menu-link"><span class="menu-num">05</span> PRICE</a></li>
+            <li class="menu-item"><a href="https://xn--3-sj5c.jp/blog/" class="menu-link" target="_blank" rel="noopener noreferrer"><span class="menu-num">06</span> BLOG</a></li>
+            <li class="menu-item"><a href="Home_new.html#contact" class="menu-link"><span class="menu-num">07</span> CONTACT</a></li>
+        </ul>
+        <div class="menu-deco">/// MENU_ACCESSED /// SAPPORO_STUDIO ///</div>
+    </nav>
+
+    <header>
+        <a href="Home_new.html" class="logo-container magnet">
+            <img src="img/logo.png" alt="第３スタジオ" class="logo-img">
+            <img src="img/logo.png" alt="" class="logo-glitch logo-glitch-1">
+            <img src="img/logo.png" alt="" class="logo-glitch logo-glitch-2">
+        </a>
+        <a href="Home_new.html" class="back-btn magnet">← BACK TO HOME</a>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title reveal-text">WORKS &<br>VOICE</h1>
+        <p class="page-desc reveal-text">
+            第３スタジオで生まれた作品たち。<br>
+            <span style="font-size:0.9rem; color:#666;">※写真やタグをクリックすると詳細が表示されます</span>
+        </p>
+
+        <section class="works-section">
+            <h2 class="section-header reveal-text">WORKS</h2>
+            
+            <div class="parallax-wrapper">
+                
+                <div class="parallax-col col-1">
+                    
+                    <div class="work-card magnet" style="--hover-color: var(--pop-2);">
+                         <div class="work-img-box ratio-banner magnet">
+                            <img src="img/image_a048c4.png" alt="AKTIO" class="work-img" style="transform: scale(1.02);">
+                        </div>
+                        <div class="work-tags">
+                            <span class="work-tag magnet" data-tag="SOUND LOGO" style="background:var(--pop-2); color:var(--c-text);">SOUND LOGO</span>
+                            <span class="work-tag magnet" data-tag="MIX" style="background:var(--pop-4);">MIX</span>
+                        </div>
+                        <div class="work-title">AKTIO</div>
+                        <p class="work-desc">Sound Logo Production (Mix & SE)</p>
+                        <div class="work-detail-data" data-img-src="img/image_a048c4.png">
+                            <h3 class="modal-header">AKTIO</h3>
+                            <p class="modal-body">
+                                サウンドロゴ制作。<br>
+                                シンプルながら一瞬でインパクトのある<br>
+                                サウンドメイクを追求。<br>
+                                何パターンも制作しクライアントさんに<br>
+                                チョイスしていただくスタイル！
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="work-card magnet" style="--hover-color: var(--pop-5);">
+                        <div class="work-img-box ratio-wide magnet">
+                            <img src="img/image_a03d20.png" alt="Consadole Sapporo" class="work-img" style="transform: scale(1.01);">
+                        </div>
+                        <div class="work-tags">
+                            <span class="work-tag magnet" data-tag="ANTHEM" style="background:var(--pop-5);">ANTHEM</span>
+                            <span class="work-tag magnet" data-tag="PRODUCE" style="background:var(--c-text);">PRODUCE</span>
+                        </div>
+                        <div class="work-title">CONSADOLE SAPPORO</div>
+                        <p class="work-desc">Official Anthem Sound Production</p>
+                        <div class="work-detail-data" data-img-src="img/image_a03d20.png">
+                            <h3 class="modal-header">CONSADOLE<br>SAPPORO</h3>
+                            <p class="modal-body">
+                                2023-2024シーズン。<br>
+                                2年間にわたるメンバー紹介BGMと<br>
+                                会場を煽る映像BGMを担当。<br>
+                                札幌ドームを揺らすための<br>
+                                ロックを追求しました。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="work-card magnet ratio-square-card" style="--hover-color: var(--pop-3);">
+                        <div class="work-img-box ratio-cinema magnet">
+                            <img src="img/Chevon.jpg" alt="Chevon" class="work-img" style="transform: scale(1.15);">
+                        </div>
+                        <div class="work-tags">
+                            <span class="work-tag magnet" data-tag="PRODUCE" style="background:var(--c-text);">PRODUCE</span>
+                            <span class="work-tag magnet" data-tag="REC" style="background:var(--pop-1);">REC</span>
+                            <span class="work-tag magnet" data-tag="MANIPULATE" style="background:var(--pop-4);">MANIPULATE</span>
+                        </div>
+                        <div class="work-title">Chevon</div>
+                        <p class="work-desc">Sound Produce / Rec / Manipulate</p>
+                        <div class="work-detail-data" data-img-src="img/Chevon.jpg">
+                            <h3 class="modal-header">Chevon</h3>
+                            <p class="modal-body">
+                                初期のサウンドプロデュース、<br>
+                                レコーディング、マニピュレートを担当。<br>
+                                大活躍中のChevon 突き進めー👍<br><br>
+                                <a href="https://www.youtube.com/watch?v=g63pjGHhhx0" target="_blank">No.4 (YouTube)</a><br>
+                                <a href="https://www.youtube.com/watch?v=iz5cU3yQbn4" target="_blank">Banquet (YouTube)</a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="parallax-col col-2">
+                    
+                    <div class="work-card magnet ratio-wide-card" style="--hover-color: var(--pop-2);">
+                        <div class="work-img-box ratio-wide magnet">
+                            <img src="img/image_a03568.jpg" alt="TAIGAN" class="work-img">
+                        </div>
+                        <div class="work-tags">
+                            <span class="work-tag magnet" data-tag="COMPOSE" style="background:var(--pop-3);">COMPOSE</span>
+                            <span class="work-tag magnet" data-tag="MANIPULATE" style="background:var(--pop-4);">MANIPULATE</span>
+                        </div>
+                        <div class="work-title">【ドラマ】対岸の家事</div>
+                        <p class="work-desc">Drama "Taigan no Kaji" Music Production</p>
+                        <div class="work-detail-data" data-img-src="img/image_a03568.jpg">
+                            <h3 class="modal-header">【ドラマ】対岸の家事</h3>
+                            <p class="modal-body">
+                                flumpoolの阪井一生さんと<br>
+                                共同で作曲を行いました。<br>
+                                楽曲のマニピュレート<br>
+                                （プログラミングや音色制作）も担当。<br>
+                                30曲以上作ったりするんです👌<br>
+                                <a href="https://www.tbs.co.jp/taigannokaji_tbs/" target="_blank">公式サイト</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="work-card magnet ratio-square-card" style="--hover-color: var(--pop-6);">
+                        <div class="work-img-box ratio-square magnet">
+                            <img src="img/image_a035c2.jpg" alt="Tenma" class="work-img">
+                        </div>
+                        <div class="work-tags">
+                            <span class="work-tag magnet" data-tag="ARRANGE" style="background:var(--pop-3);">ARRANGE</span>
+                            <span class="work-tag magnet" data-tag="MIX" style="background:var(--pop-4);">MIX</span>
+                        </div>
+                        <div class="work-title">【映画】天間荘の三姉妹</div>
+                        <p class="work-desc">Full Sound Production</p>
+                        <div class="work-detail-data" data-img-src="img/image_a035c2.jpg">
+                            <h3 class="modal-header">【映画】天間荘の三姉妹</h3>
+                            <p class="modal-body">
+                                巨匠 松本晃彦氏のチームにて<br>
+                                1ヶ月半のマニピュレート活動。<br>
+                                L.Aとのストリングスレコーディングも<br>
+                                経験しました（オンライン）。<br>
+                                <a href="https://www.tenmasou.com/" target="_blank">公式サイト</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="work-card magnet ratio-wide-card" style="--hover-color: var(--pop-1);">
+                         <div class="work-img-box ratio-wide magnet">
+                            <img src="img/placeholder_projz.png" alt="Project Z" class="work-img">
+                        </div>
+                        <div class="work-tags">
+                            <span class="work-tag magnet" data-tag="MASTERING" style="background:var(--c-text);">MASTERING</span>
+                        </div>
+                        <div class="work-title">PROJECT Z</div>
+                        <p class="work-desc">Album Mastering</p>
+                        <div class="work-detail-data" data-img-src="img/placeholder_projz.png">
+                            <h3 class="modal-header">PROJECT Z</h3>
+                            <p class="modal-body">
+                                全10曲のアルバムマスタリングを担当。<br>
+                                曲ごとのダイナミクスを整えつつ、<br>
+                                アルバム全体としての統一感<br>
+                                （トーン＆マナー）を意識して仕上げました。<br>
+                                配信プラットフォームごとの<br>
+                                ラウドネス基準にも準拠させています。
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="parallax-col col-3">
+                    
+                    <div class="work-card magnet ratio-square-card" style="--hover-color: var(--pop-5);">
+                        <div class="work-img-box ratio-square magnet">
+                            <img src="img/L_Logo.jpeg" alt="LeTAO" class="work-img">
+                        </div>
+                        <div class="work-tags">
+                            <span class="work-tag magnet" data-tag="WEB CM BGM" style="background:var(--pop-5); color:var(--c-text);">WEB CM BGM</span>
+                            <span class="work-tag magnet" data-tag="COMPOSE" style="background:var(--pop-3);">COMPOSE</span>
+                        </div>
+                        <div class="work-title">LeTAO 小樽洋菓子舗ルタオ</div>
+                        <p class="work-desc">Web CM Music Production</p>
+                        <div class="work-detail-data" data-img-src="img/L_Logo.jpeg">
+                            <h3 class="modal-header">小樽洋菓子舗ルタオ</h3>
+                            <p class="modal-body">
+                                WebCMの音楽を3作品担当させていただきました。<br>
+                                作曲、ナレーションレコーディング、<br>
+                                ミックスまでトータルで<br>
+                                音関係を全て制作しています。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="work-card magnet ratio-square-card" style="--hover-color: var(--pop-1);">
+                        <div class="work-img-box ratio-square magnet">
+                            <img src="img/image_a121e5.jpg" alt="JIN" class="work-img" style="transform: scale(1.05);">
+                        </div>
+                        <div class="work-tags">
+                            <span class="work-tag magnet" data-tag="REC" style="background:var(--pop-1);">REC</span>
+                            <span class="work-tag magnet" data-tag="MIX" style="background:var(--pop-4);">MIX</span>
+                            <span class="work-tag magnet" data-tag="MANIPULATE" style="background:var(--pop-2); color:var(--c-text);">MANIPULATE</span>
+                        </div>
+                        <div class="work-title">【積丹スピリット】火の帆 UMI</div>
+                        <p class="work-desc">Rec / Mix / Mastering / Manipulate</p>
+                        <div class="work-detail-data" data-img-src="img/image_a121e5.jpg"> 
+                            <h3 class="modal-header">【積丹スピリット】火の帆 UMI</h3>
+                            <p class="modal-body">
+                                楽器録音からミックス、マスタリングまで担当。<br>
+                                さらにSEとリズムを足すマニピュレートを行い、<br>
+                                楽曲の世界観を拡張しました。<br>
+                                トータルサウンドプロデュースに近い<br>
+                                関わり方をしています。<br>
+                                <a href="https://www.youtube.com/watch?v=-eJu5lWd3G4" target="_blank">YouTubeで聴く</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="work-card magnet ratio-square-card" style="--hover-color: var(--pop-4);">
+                        <div class="work-img-box ratio-square magnet">
+                            <img src="img/unclose.jpg" alt="UNCLOSE" class="work-img">
+                        </div>
+                        <div class="work-tags">
+                            <span class="work-tag magnet" data-tag="LIVE" style="background:var(--pop-6); color:var(--c-text);">LIVE</span>
+                            <span class="work-tag magnet" data-tag="GUITAR" style="background:var(--pop-1);">GUITAR</span>
+                        </div>
+                        <div class="work-title">flumpool tour 2009『Unclose』</div>
+                        <p class="work-desc">Support Guitar</p>
+                        <div class="work-detail-data" data-img-src="img/unclose.jpg">
+                            <h3 class="modal-header">flumpool tour 2009『Unclose』</h3>
+                            <p class="modal-body">
+                                flumpool tour 2009『Unclose』Special!!<br>
+                                LIVE at 日本武道館〈2枚組〉 [DVD]<br>
+                                サポートギターで参加しました。<br>
+                                <a href="https://tower.jp/search/item/AZBS-1002/1" target="_blank">Tower Records Online</a>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="voice-section">
+            <div class="voice-bg-shape"></div>
+            <h2 class="section-header reveal-text" style="background: var(--c-white); color: var(--c-text); border: 4px solid var(--c-text); box-shadow: 10px 10px 0px var(--pop-6);">VOICE</h2>
+            
+            <div class="voice-grid">
+                <div class="voice-card vc-1 reveal-text">
+                    <p class="voice-text">
+                        「初めてのレコーディングで緊張していましたが、道ゐさんがとても優しくサポートしてくれて、リラックスして歌えました。出来上がった音源のクオリティに感動しました！」
+                    </p>
+                    <div class="voice-author">
+                        <div class="voice-info">
+                            <span class="voice-name">Aさん</span>
+                            <span class="voice-attr">シンガーソングライター</span>
+                        </div>
+                        <div class="voice-icon" style="background:var(--pop-1);"></div>
+                    </div>
+                </div>
+
+                <div class="voice-card vc-2 reveal-text">
+                    <p class="voice-text">
+                        「ただ録音するだけでなく、アレンジのアドバイスもいただけて、曲が何倍も良くなりました。まさに『一緒に作る』という感覚で、とても楽しかったです。またお願いします！」
+                    </p>
+                    <div class="voice-author">
+                        <div class="voice-info">
+                            <span class="voice-name">Bバンド 様</span>
+                            <span class="voice-attr">ロックバンド</span>
+                        </div>
+                        <div class="voice-icon" style="background:var(--pop-4);"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="client-section reveal-text">
+            <h2 class="section-header" style="background:var(--c-text); color:var(--c-white); box-shadow: 5px 5px 0 var(--pop-2); transform: rotate(1deg); font-size: 2.5rem;">CLIENTS & ARTISTS</h2>
+            
+            <div class="list-group">
+                <h3 class="list-header" style="background: var(--pop-1); box-shadow: 5px 5px 0 var(--c-text);">ARTISTS</h3>
+                <div class="client-list">
+                    <span class="client-item">Chevon</span><span class="client-sep">/</span>
+                    <span class="client-item">EN</span><span class="client-sep">/</span>
+                    <span class="client-item">flumpool</span><span class="client-sep">/</span>
+                    <span class="client-item">Fubuki</span><span class="client-sep">/</span>
+                    <span class="client-item">HELLsy</span><span class="client-sep">/</span>
+                    <span class="client-item">HiColor</span><span class="client-sep">/</span>
+                    <span class="client-item">KOHEI SHINOHARA</span><span class="client-sep">/</span>
+                    <span class="client-item">MiU</span><span class="client-sep">/</span>
+                    <span class="client-item">North Sound Signal</span><span class="client-sep">/</span>
+                    <span class="client-item">Rihwa</span><span class="client-sep">/</span>
+                    <span class="client-item">Tomomi</span><span class="client-sep">/</span>
+                    <span class="client-item">TRIPLANE</span><span class="client-sep">/</span>
+                    <span class="client-item">小澤ちひろ</span><span class="client-sep">/</span>
+                    <span class="client-item">観月</span><span class="client-sep">/</span>
+                    <span class="client-item">木歩</span><span class="client-sep">/</span>
+                    <span class="client-item">佐藤広大</span><span class="client-sep">/</span>
+                    <span class="client-item">しー坊</span><span class="client-sep">/</span>
+                    <span class="client-item">爽</span><span class="client-sep">/</span>
+                    <span class="client-item">田高健太郎</span><span class="client-sep">/</span>
+                    <span class="client-item">ハルノ雨</span><span class="client-sep">/</span>
+                    <span class="client-item">水原ゆき</span><span class="client-sep">/</span>
+                    <span class="client-item">みゆう</span><span class="client-sep">/</span>
+                    <span class="client-item">森大翔</span><span class="client-sep">/</span>
+                    <span class="client-item">山下まみ</span><span class="client-sep">/</span>
+                    <span class="client-item">吉岡茉祐</span><span class="client-sep">/</span>
+                    <span class="client-item">脇田唯</span>
+                </div>
+            </div>
+
+            <div class="list-group">
+                <h3 class="list-header" style="background: var(--pop-5); box-shadow: 5px 5px 0 var(--c-text); color: var(--c-text);">CLIENTS</h3>
+                <div class="client-list">
+                    <span class="client-item">&Border</span><span class="client-sep">/</span>
+                    <span class="client-item">AKTIO</span><span class="client-sep">/</span>
+                    <span class="client-item">AMUSE INC.</span><span class="client-sep">/</span>
+                    <span class="client-item">avex</span><span class="client-sep">/</span>
+                    <span class="client-item">HOKKAIDO CONSADOLE SAPPORO</span><span class="client-sep">/</span>
+                    <span class="client-item">K'sSOUND</span><span class="client-sep">/</span>
+                    <span class="client-item">LeTAO</span><span class="client-sep">/</span>
+                    <span class="client-item">TBS</span><span class="client-sep">/</span>
+                    <span class="client-item">音楽処</span><span class="client-sep">/</span>
+                    <span class="client-item">株式会社メガ・コミュニケーションズ</span><span class="client-sep">/</span>
+                    <span class="client-item">コローレワールド株式会社</span><span class="client-sep">/</span>
+                    <span class="client-item">札幌PARCO</span><span class="client-sep">/</span>
+                    <span class="client-item">中古車買取・中古車査定のアップル</span><span class="client-sep">/</span>
+                    <span class="client-item">マウントアライブ</span><span class="client-sep">/</span>
+                    <span class="client-item">雪印</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="nav-hub-container">
+            <span class="hub-main">02. WORKS</span>
+            <div style="display:flex; gap:30px; align-items:baseline; flex-wrap:wrap; justify-content:center;">
+                <a href="Home_new.html" class="hub-link magnet">00. HOME</a>
+                <a href="Profile.html" class="hub-link magnet">01. PROFILE</a>
+                <a href="Lesson.html" class="hub-link magnet">03. LESSON</a>
+                <a href="GearList.html" class="hub-link magnet">04. GEAR</a>
+                <a href="Price.html" class="hub-link magnet">05. PRICE</a>
+                <a href="https://xn--3-sj5c.jp/blog/" class="hub-link magnet" target="_blank" rel="noopener noreferrer">06. BLOG</a>
+                <a href="Home_new.html#contact" class="hub-link magnet">07. CONTACT</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 WALEWALEWA / Dowie Mashiba</p>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // --- モーダル・タグ・カーソルの基本ロジック ---
+        const tagDictionary = {
+            "REC": { title: "RECORDING", desc: "ボーカルや楽器のレコーディング。アーティストのパフォーマンスを最大限に引き出し、最高音質でキャプチャします。" },
+            "MIX": { title: "MIXING", desc: "録音された各トラックの音量や音質バランスを整え、楽曲として完成させる工程。立体感のあるサウンドを作ります。" },
+            "MASTERING": { title: "MASTERING", desc: "2MIX音源を最終的なプロダクトとして磨き上げる最終工程。音圧調整や質感統一を行います。" },
+            "PRODUCE": { title: "SOUND PRODUCE", desc: "楽曲制作の総指揮。方向性の策定から、アレンジ、レコーディングのディレクションまで行います。" },
+            "ARRANGE": { title: "ARRANGEMENT", desc: "編曲。メロディとコード進行を元に、楽曲の彩りとドラマ性を生み出します。" },
+            "ANTHEM": { title: "ANTHEM", desc: "チームや団体のための公式楽曲制作。一体感を生むための力強いサウンドを制作します。" },
+            "SOUND LOGO": { title: "SOUND LOGO", desc: "企業やブランドの音のロゴ。短い時間で強烈な印象を残すサウンドデザインを行います。" },
+            "COMPOSE": { title: "COMPOSITION", desc: "作曲。メロディやハーモニー、リズムの骨組みを作り、楽曲の基礎を築きます。" },
+            "MANIPULATE": { title: "MANIPULATION", desc: "シンセサイザーやシーケンサーを用いた音色制作、プログラミング、サウンドエフェクトの構築などを行います。" },
+            "WEB CM BGM": { title: "WEB CM BGM", desc: "WebCMのためのBGM制作。映像の意図や世界観に寄り添い、効果的な音響演出を行います。" },
+            "GUITAR": { title: "GUITAR", desc: "ギター演奏。スタジオワークからライブサポートまで、楽曲に最適なプレイを提供します。" }
+        };
+
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalClose = document.getElementById('modal-close');
+        const modalContentArea = document.getElementById('modal-content-area');
+        const modalImageArea = document.getElementById('modal-image-area');
+
+        function openModal(htmlContent, imgSrc = null) {
+            modalContentArea.innerHTML = htmlContent;
+            if (imgSrc) {
+                const finalImgSrc = imgSrc.startsWith('img/') ? imgSrc : 'img/' + imgSrc;
+                modalImageArea.innerHTML = `<img src="${finalImgSrc}" class="modal-art-image">`;
+                modalImageArea.classList.add('active');
+            } else {
+                modalImageArea.innerHTML = '';
+                modalImageArea.classList.remove('active');
+            }
+            modalOverlay.classList.add('active');
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            setTimeout(() => {
+                modalContentArea.innerHTML = '';
+                modalImageArea.innerHTML = '';
+                modalImageArea.classList.remove('active');
+            }, 400);
+        }
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+
+        document.querySelectorAll('.work-img-box').forEach(box => {
+            box.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const card = box.closest('.work-card');
+                const detailData = card.querySelector('.work-detail-data');
+                if (detailData) { openModal(detailData.innerHTML, detailData.getAttribute('data-img-src')); }
+            });
+        });
+
+        document.querySelectorAll('.work-tag').forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const tagKey = tag.getAttribute('data-tag');
+                const data = tagDictionary[tagKey];
+                const computedStyle = window.getComputedStyle(tag);
+                const tagColor = computedStyle.backgroundColor;
+                if (data) {
+                    const htmlContent = `<span class="modal-tag-label">TERM INFO</span><h3 class="modal-header" style="color:${tagColor}; border-color:${tagColor};">${data.title}</h3><p class="modal-body">${data.desc}</p>`;
+                    openModal(htmlContent);
+                }
+            });
+        });
+
+        const cursor = document.querySelector('.cursor');
+        const magnets = document.querySelectorAll('.magnet');
+        document.addEventListener('mousemove', (e) => { gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.1 }); });
+        magnets.forEach(magnet => {
+            magnet.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            magnet.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+        
+        gsap.utils.toArray('.reveal-text').forEach(element => {
+            gsap.fromTo(element, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: element, start: 'top 85%' } });
+        });
+
+        if (window.innerWidth > 768) {
+            gsap.to('.col-1', { y: -100, ease: 'none', scrollTrigger: { trigger: '.works-section', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+            gsap.to('.col-2', { y: -50, ease: 'none', scrollTrigger: { trigger: '.works-section', start: 'top bottom', end: 'bottom top', scrub: 1.5 } });
+            gsap.to('.col-3', { y: -80, ease: 'none', scrollTrigger: { trigger: '.works-section', start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
+        }
+
+        // --- 背景ラインの光アニメーション ---
+        const bgLines = document.querySelectorAll('.bg-line');
+        const lineColors = ['linear-gradient(90deg, transparent, var(--pop-1), var(--pop-6), transparent)', 'linear-gradient(90deg, transparent, var(--pop-5), var(--pop-2), transparent)', 'linear-gradient(90deg, transparent, var(--pop-4), var(--pop-3), transparent)'];
+
+        bgLines.forEach((line) => {
+            const randomColor = lineColors[Math.floor(Math.random() * lineColors.length)];
+            line.style.background = randomColor;
+            const duration = 5 + Math.random() * 5;
+            const delay = Math.random() * 5;
+            line.style.setProperty('--after-left', '-100%'); 
+
+            gsap.fromTo(line, 
+                { '--after-left': '-100%' }, 
+                { '--after-left': '200%', duration: duration, repeat: -1, ease: 'none', delay: delay }
+            );
+        });
+    </script>
+    <script src="js/common.js" defer></script>
+</body>
+</html>

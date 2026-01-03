@@ -1,0 +1,833 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PRICE | MASHROOM STUDIO">
+    <script slot="head" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js" is:inline></script>
+    <!-- 修正箇所: ページ上部の戻るボタンのリンクを index.html に変更 -->
+    <a href="/" class="btn-pop back-link magnet">← HOME</a>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1 class="page-title reveal-text">PRICE LIST</h1>
+        <p class="page-subtitle reveal-text">15 TYPES OF CREATIVE MISSION</p>
+    </header>
+
+    <!-- TOGGLE SWITCH -->
+    <div class="toggle-container reveal-text">
+        <span class="toggle-label active" id="label-hourly">HOURLY (1h)</span>
+        <div class="toggle-switch magnet" id="billing-toggle">
+            <div class="toggle-knob"></div>
+        </div>
+        <span class="toggle-label" id="label-pack">PACK (Deal!)</span>
+    </div>
+
+    <div class="swipe-hint" id="swipe-hint">&lt;&lt;&lt; DRAG TO SPIN &gt;&gt;&gt;<br><span style="font-size:0.8em; opacity:0.8;">TAP CARD FOR DETAILS</span></div>
+
+    <!-- 3D CYLINDER CAROUSEL -->
+    <div class="carousel-scene" id="carousel-scene">
+        <div class="carousel-container" id="carousel-container">
+            <!-- カードはJSで生成されます -->
+        </div>
+        <!-- NAVIGATION BUTTONS -->
+        <div class="nav-btn nav-prev magnet" id="nav-prev">&lt;</div>
+        <div class="nav-btn nav-next magnet" id="nav-next">&gt;</div>
+        <!-- DICE BUTTON -->
+        <div class="dice-btn magnet" id="dice-btn">
+            <div class="dice-dot"></div><div class="dice-dot"></div><div class="dice-dot"></div><div class="dice-dot"></div><div class="dice-dot"></div>
+        </div>
+    </div>
+
+    <!-- MODAL (CARD EXPANSION) -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-content" id="modal-content">
+            <div class="modal-close" id="modal-close">×</div>
+            <div class="modal-col-left" id="modal-col-left"></div>
+            <div class="modal-col-right" id="modal-col-right"></div>
+            <div id="modal-footer-action" style="grid-column: 1 / -1; text-align:center; width:100%;">
+                <a href="/#contact" class="btn-pop magnet" style="width:100%; display:block; background:var(--c-text); color:white; font-size:1.5rem; padding:20px 0; border-radius: 12px;">相談する・予約する</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD-ON (STICKER WALL) -->
+    <section class="addons-section">
+        <!-- Free Ticker -->
+        <div class="ticker-wrap">
+            <div class="ticker">
+                <div class="ticker-item">FREE: Wi-Fi <span>完備</span></div>
+                <div class="ticker-item">FREE: PARKING <span>2台</span></div>
+                <div class="ticker-item">FREE: COFFEE <span>エスプレッソ</span></div>
+                <div class="ticker-item">FREE: 1st MIC <span>マイク1本</span></div>
+                <div class="ticker-item">FREE: SETUP <span>セッティング</span></div>
+                <div class="ticker-item">FREE: ADVICE <span>機材相談</span></div>
+                <div class="ticker-item">FREE: STORAGE <span>データ1ヶ月</span></div>
+                <div class="ticker-item">FREE: CHARGE <span>充電器</span></div>
+                <!-- Duplicate for seamless loop -->
+                <div class="ticker-item">FREE: Wi-Fi <span>完備</span></div>
+                <div class="ticker-item">FREE: PARKING <span>2台</span></div>
+                <div class="ticker-item">FREE: COFFEE <span>エスプレッソ</span></div>
+                <div class="ticker-item">FREE: 1st MIC <span>マイク1本</span></div>
+                <div class="ticker-item">FREE: SETUP <span>セッティング</span></div>
+                <div class="ticker-item">FREE: ADVICE <span>機材相談</span></div>
+                <div class="ticker-item">FREE: STORAGE <span>データ1ヶ月</span></div>
+                <div class="ticker-item">FREE: CHARGE <span>充電器</span></div>
+            </div>
+        </div>
+
+        <div class="addons-header">
+            <h2 class="addons-title reveal-text">EXTRAS & FREEBIES</h2>
+            <div class="addons-sub reveal-text">業界の相場感もなんとなく分かる目安表</div>
+        </div>
+
+        <div class="sticker-wall reveal-text" id="sticker-wall">
+            <!-- Stickers rendered via JS -->
+        </div>
+    </section>
+
+    <!-- NAVIGATION HUB -->
+    <section style="background: var(--c-bg); padding: 50px 5% 60px; position: relative; z-index: 10; border-top: 5px solid var(--c-text); border-bottom: 5px solid var(--c-text);">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap;">
+            <h2 style="font-family: var(--font-en); font-size: 2.5rem; color: var(--c-text); margin: 0; letter-spacing: 0.1em;">05. PRICE LIST</h2>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                <a href="/" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">00. HOME</a>
+                <a href="/profile" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">01. PROFILE</a>
+                <a href="/works" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">02. WORKS</a>
+                <a href="/lesson" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">03. LESSON</a>
+                <a href="/gear" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">04. GEAR</a>
+                <a href="/price" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white); opacity: 0.5; pointer-events: none;">05. PRICE</a>
+                <a href="https://xn--3-sj5c.jp/blog/" class="hub-link magnet" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">06. BLOG</a>
+                <a href="/#contact" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">07. CONTACT</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 MASHROOM STUDIO by Walewalewa</p>
+    </footer>
+</Layout>
+
+<style is:global>
+    /* CURSOR（ページ固有） */
+    .cursor.on-modal {
+        mix-blend-mode: normal; 
+        background: var(--pop-1); 
+        box-shadow: 0 0 20px var(--pop-1);
+        border: 2px solid white;
+        width: 30px; height: 30px;
+    }
+    .cursor.on-modal.hovered { width: 60px; height: 60px; opacity: 0.8; }
+
+    /* COMMON */
+    h1, h2, h3 { text-transform: uppercase; line-height: 0.9; }
+    .en-font { font-family: var(--font-en); }
+    .btn-pop { display: inline-block; padding: 15px 40px; font-size: 1.2rem; font-weight: 900; color: var(--c-text); background: var(--c-white); border: 4px solid var(--c-text); text-decoration: none; box-shadow: 8px 8px 0px var(--c-text); transition: all 0.2s; position: relative; overflow: hidden; font-family: var(--font-en); border-radius: 12px; }
+    .btn-pop:hover { transform: translate(-3px, -3px); box-shadow: 12px 12px 0px var(--c-text); background: var(--pop-2); }
+    
+    .back-link { position: absolute; top: 30px; left: 30px; z-index: 100; cursor: pointer; }
+
+    /* PAGE HEADER */
+    .page-header { padding: 120px 5% 60px; background: var(--c-text); color: var(--pop-2); text-align: center; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); }
+    .page-title { font-size: 8rem; font-family: var(--font-en); line-height: 0.8; margin-bottom: 20px; }
+    .page-subtitle { font-size: 1.5rem; font-weight: 700; color: var(--c-white); font-family: var(--font-jp); }
+
+    /* PRICING TOGGLE */
+    .toggle-container { display: flex; justify-content: center; align-items: center; margin: 60px 0; gap: 20px; position: relative; z-index: 50; }
+    .toggle-label { font-size: 1.5rem; font-weight: 900; font-family: var(--font-en); color: var(--c-text); opacity: 0.5; transition: 0.3s; }
+    .toggle-label.active { opacity: 1; color: var(--pop-1); text-decoration: underline; text-decoration-thickness: 4px; }
+    
+    .toggle-switch { 
+        width: 80px; height: 40px; background: var(--c-text); border-radius: 40px; position: relative; cursor: none; 
+        border: 3px solid var(--c-text);
+    }
+    .toggle-knob { 
+        width: 30px; height: 30px; background: var(--pop-2); border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+        border: 2px solid var(--c-text);
+    }
+    .toggle-switch.on .toggle-knob { transform: translateX(40px); background: var(--pop-1); }
+
+    /* 3D CAROUSEL */
+    .carousel-scene {
+        width: 100%;
+        height: 520px; 
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        perspective: 1800px; 
+        overflow: hidden;
+        margin-bottom: 0; 
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #111; 
+        border-top: 5px solid var(--c-text);
+    }
+
+    .carousel-scene::before {
+        content: ''; position: absolute; top: 0; left: 0; width: 200%; height: 200%;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        background-size: 50px 50px;
+        transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+        pointer-events: none;
+    }
+
+    .carousel-container {
+        width: 190px; 
+        height: 290px; 
+        position: absolute;
+        transform-style: preserve-3d;
+    }
+
+    /* NAVIGATION BUTTONS */
+    .nav-btn {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        width: 60px; height: 60px; background: var(--c-text); color: var(--pop-2);
+        border: 3px solid var(--pop-2); border-radius: 50%;
+        display: flex; justify-content: center; align-items: center;
+        font-size: 2rem; font-weight: 900; font-family: var(--font-en);
+        cursor: pointer; z-index: 100; transition: 0.2s;
+        box-shadow: 5px 5px 0px rgba(0,0,0,0.3);
+    }
+    .nav-btn:hover { background: var(--pop-2); color: var(--c-text); border-color: var(--c-text); }
+    .nav-prev { left: 30px; }
+    .nav-next { right: 30px; }
+
+    /* DICE BUTTON (CSSで作るリアルなサイコロ) */
+    .dice-btn {
+        position: absolute; bottom: 30px; right: 30px;
+        width: 80px; height: 80px; background: var(--c-white);
+        border: 4px solid var(--c-text); border-radius: 16px;
+        cursor: pointer; z-index: 100; transition: 0.3s;
+        box-shadow: 8px 8px 0px var(--pop-6); /* 黄色の影 */
+        display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+        padding: 10px; gap: 2px;
+    }
+    .dice-btn:hover { transform: translate(-3px, -3px) rotate(15deg); box-shadow: 12px 12px 0px var(--pop-6); }
+    .dice-dot { background: var(--c-text); border-radius: 50%; width: 100%; height: 100%; }
+    /* 5の目を作る */
+    .dice-dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .dice-dot:nth-child(2) { grid-column: 3; grid-row: 1; }
+    .dice-dot:nth-child(3) { grid-column: 2; grid-row: 2; }
+    .dice-dot:nth-child(4) { grid-column: 1; grid-row: 3; }
+    .dice-dot:nth-child(5) { grid-column: 3; grid-row: 3; }
+
+
+    /* カード本体 */
+    .plan-card { 
+        position: absolute;
+        width: 190px; 
+        height: 290px; 
+        left: 0;
+        top: 0;
+        background: var(--c-white); 
+        border: 3px solid var(--c-text); 
+        padding: 10px; 
+        display: flex; flex-direction: column; 
+        transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+        box-shadow: 4px 4px 0px rgba(0,0,0,0.1); 
+        user-select: none;
+        backface-visibility: hidden; 
+        cursor: pointer; 
+        border-radius: 12px; 
+    }
+
+    .plan-card::after {
+        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.8); opacity: 0; transition: opacity 0.3s; pointer-events: none;
+        border-radius: 10px;
+    }
+    .plan-card.is-far::after { opacity: 0.7; }
+    
+    .plan-card.is-active { 
+        z-index: 100;
+    }
+    /* アクティブ時のテキストカラーを黒に */
+    .plan-card.is-active .plan-number,
+    .plan-card.is-active .plan-features li span { color: var(--c-text) !important; }
+
+    .badge { 
+        position: absolute; top: -8px; right: -5px; 
+        color: var(--c-text); padding: 2px 6px; font-weight: 900; font-family: var(--font-en); 
+        border: 2px solid var(--c-text); transform: rotate(3deg); z-index: 20; font-size: 0.6rem;
+        background: var(--c-white); 
+        border-radius: 4px;
+    }
+
+    .plan-number { font-family: var(--font-digi); font-size: 0.7rem; color: #888; margin-bottom: 2px; transition: color 0.3s; }
+    .plan-name { font-size: 1.2rem; font-family: var(--font-en); line-height: 0.9; margin-bottom: 5px; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    
+    .plan-desc { 
+        display: block; 
+        font-size: 0.55rem; 
+        margin-bottom: 5px; 
+        line-height: 1.3; 
+        font-weight: 600; 
+        height: 22px; 
+        overflow: hidden; 
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    
+    .plan-price-box { 
+        background: var(--c-text); color: var(--c-white); padding: 3px; text-align: center; margin-bottom: 5px; 
+        transform: rotate(-1deg); border: 2px solid var(--c-text); transition: 0.3s; 
+        border-radius: 4px;
+    }
+    .plan-price { font-size: 1.1rem; font-family: var(--font-en); color: var(--pop-2); line-height: 1; }
+    .plan-unit { font-size: 0.5rem; font-family: var(--font-jp); opacity: 0.8; }
+
+    .plan-features { 
+        list-style: none; margin-bottom: 5px; flex-grow: 1; overflow: hidden; 
+        max-height: 50px;
+    }
+    .plan-features li { padding: 1px 0; border-bottom: 1px dashed #ddd; font-weight: 700; font-size: 0.55rem; display: flex; align-items: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .plan-features li span { transition: color 0.3s; }
+    
+    .plan-btn { width: 100%; text-align: center; background: var(--c-text); color: var(--c-white); padding: 4px 0; font-size: 0.7rem; border: 2px solid var(--c-text); pointer-events: none; margin-top: auto; border-radius: 6px; }
+    
+    /* SWIPE HINT (視認性アップ) */
+    .swipe-hint { 
+        text-align: center; font-family: var(--font-en); font-size: 1.2rem; 
+        margin-top: -20px; margin-bottom: 30px; color: var(--c-white);
+        background: rgba(0,0,0,0.6); border: 2px solid var(--pop-5); border-radius: 30px;
+        display: inline-block; padding: 10px 30px;
+        position: relative; left: 50%; transform: translateX(-50%);
+        animation: blink 2s infinite; pointer-events: none; 
+        box-shadow: 0 0 15px var(--pop-5);
+    }
+    @keyframes blink { 0%, 100% { opacity: 0.6; box-shadow: 0 0 15px var(--pop-5); } 50% { opacity: 1; box-shadow: 0 0 25px var(--pop-5); } }
+
+    /* MODAL (拡大表示用) */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.85); z-index: 99999;
+        display: none; justify-content: center; align-items: center;
+        opacity: 0; backdrop-filter: blur(8px);
+    }
+    .modal-content {
+        width: 90vw; max-width: 800px; height: auto; max-height: 90vh; 
+        background: var(--c-white); border: 6px solid var(--c-text); padding: 50px;
+        box-shadow: 0 0 50px rgba(0,0,0,0.5); 
+        position: relative; transform: scale(0.8);
+        display: grid; grid-template-columns: 1fr 1fr; gap: 40px; 
+        align-items: center; overflow-y: auto; border-radius: 20px;
+    }
+    .modal-content .plan-number { font-size: 1.5rem; margin-bottom: 10px; }
+    .modal-content .plan-name { font-size: 4rem; margin-bottom: 20px; white-space: normal; line-height: 0.9; }
+    .modal-content .plan-desc { font-size: 1.2rem; -webkit-line-clamp: unset; height: auto; margin-bottom: 30px; }
+    .modal-content .plan-price-box { padding: 20px; margin-bottom: 30px; transform: rotate(-2deg) scale(1.1); border-radius: 8px; }
+    .modal-content .plan-price { font-size: 4rem; }
+    .modal-content .plan-unit { font-size: 1.2rem; }
+    .modal-content .plan-features { max-height: none; margin-bottom: 30px; }
+    .modal-content .plan-features li { padding: 15px 0; font-size: 1.1rem; border-bottom: 2px dashed #ddd; }
+    .modal-content .plan-btn { display: none; } 
+    .modal-col-left { display: flex; flex-direction: column; justify-content: center; }
+    .modal-col-right { display: flex; flex-direction: column; justify-content: center; }
+    .modal-close {
+        position: absolute; top: 20px; right: 20px;
+        width: 60px; height: 60px; background: var(--c-text); color: white;
+        border-radius: 50%; display: flex; justify-content: center; align-items: center;
+        font-size: 2rem; cursor: pointer; border: 2px solid white; transition: 0.2s; z-index: 10;
+    }
+    .modal-close:hover { transform: rotate(90deg); background: var(--pop-1); }
+
+    /* ADD-ON SECTION (STICKER WALL) */
+    .addons-section { 
+        padding: 80px 0; 
+        background: var(--pop-5); 
+        border-top: 5px solid var(--c-text); 
+        border-bottom: 5px solid var(--c-text); 
+        position: relative; 
+        z-index: 10; 
+        overflow: hidden;
+    }
+    .addons-header { text-align: center; margin-bottom: 60px; position: relative; z-index: 2; margin-top: 100px; }
+    .addons-title { font-size: 4rem; font-family: var(--font-en); text-shadow: 4px 4px 0px var(--c-white); line-height: 1; }
+    .addons-sub { font-size: 1.2rem; font-weight: bold; margin-top: 10px; background: var(--c-text); color: var(--c-white); display: inline-block; padding: 5px 20px; transform: rotate(-2deg); }
+
+    /* Ticker for Free Items */
+    .ticker-wrap {
+        position: absolute; top: 80px; left: 0; width: 100%; overflow: hidden; background: var(--pop-6); border-top: 4px solid var(--c-text); border-bottom: 4px solid var(--c-text); transform: rotate(2deg) scale(1.1); z-index: 1; box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+    .ticker {
+        display: flex; width: max-content; animation: ticker 30s linear infinite; 
+    }
+    .ticker-item {
+        font-family: var(--font-en); font-size: 2rem; padding: 10px 40px; font-weight: 900; color: var(--c-text); display: flex; align-items: center;
+    }
+    .ticker-item span { font-size: 1rem; margin-left: 10px; font-family: var(--font-jp); background: var(--c-text); color: var(--pop-6); padding: 2px 8px; border-radius: 4px; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* Sticker Grid (Full Width & Size Variant) */
+    .sticker-wall {
+        display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; 
+        width: 100%; 
+        padding: 0 10px; 
+        margin: 60px auto 0; position: relative; z-index: 2;
+    }
+    .sticker {
+        background: var(--c-white);
+        border: 3px solid var(--c-text);
+        padding: 15px 10px;
+        font-weight: 700;
+        color: var(--c-text);
+        box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        transform: rotate(var(--r, 0deg));
+        cursor: pointer; /* クリック可 */
+        border-radius: 8px; 
+        display: flex; flex-direction: column; align-items: center; text-align: center;
+        min-width: 120px; 
+        /* サイズバリエーションのための基本設定 */
+        flex: 0 0 auto; 
+    }
+    
+    /* サイズバリエーション */
+    .sticker.sm { transform: scale(0.85) rotate(var(--r)); z-index: 1; font-size: 0.9em; min-width: 100px; }
+    .sticker.md { transform: scale(1) rotate(var(--r)); z-index: 2; min-width: 130px; }
+    .sticker.lg { transform: scale(1.15) rotate(var(--r)); z-index: 3; font-size: 1.1em; min-width: 160px; box-shadow: 8px 8px 0 rgba(0,0,0,0.2); }
+
+    .sticker:hover {
+        transform: scale(1.3) rotate(0deg) !important;
+        z-index: 100;
+        box-shadow: 15px 15px 0 var(--c-text);
+        background: var(--pop-2);
+    }
+    .sticker-label { font-size: 0.8em; margin-bottom: 5px; opacity: 0.8; }
+    .sticker-name { font-size: 1.2em; font-family: var(--font-en); line-height: 1; margin-bottom: 5px; text-transform: uppercase; word-break: break-word;}
+    .sticker-price { font-size: 1em; font-weight: 900; background: var(--c-text); color: var(--pop-2); padding: 2px 8px; border-radius: 4px; }
+    
+    .sticker.is-std { background: var(--c-text); color: var(--c-white); }
+    .sticker.is-std .sticker-price { background: var(--c-white); color: var(--c-text); }
+    .sticker.is-std:hover { background: var(--pop-1); color: var(--c-text); }
+
+    /* FOOTER */
+    footer { background: var(--c-text); color: var(--c-white); padding: 80px 5%; text-align: center; position: relative; z-index: 10; }
+    
+    .hidden { display: none; }
+    .reveal-text { opacity: 0; transform: translateY(30px); }
+
+    /* SIDEBAR */
+    .hamburger-btn { position: fixed; top: 30px; right: 30px; z-index: 11000; width: 80px; height: 80px; background: var(--c-text); border: 4px solid var(--pop-2); border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; transition: 0.3s; }
+    .hamburger-btn:hover { background: var(--pop-2); border-color: var(--c-black); }
+    .hamburger-btn:hover .h-line { background: var(--c-black); }
+    .h-line { width: 40px; height: 4px; background: var(--c-black); transition: 0.3s; border-radius: 2px; }
+    
+    .pop-sidebar { position: fixed; top: 0; right: 0; width: 100%; max-width: 500px; height: 100vh; background: rgba(0,0,0,0.95); border-left: 4px solid var(--pop-2); z-index: 10500; transform: translateX(100%); display: flex; flex-direction: column; justify-content: center; padding: 40px; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
+    /* Price.html用のメニュー数字スタイル（黒背景用） */
+    .pop-sidebar .menu-num { color: rgba(255, 255, 255, 0.6) !important; font-weight: 100; letter-spacing: 0.2em; }
+    .pop-sidebar.is-open { transform: translateX(0); }
+    .menu-item { list-style: none; margin: 20px 0; text-align: right; }
+    .menu-link { font-family: var(--font-en); font-size: 3rem; color: #ffffff; text-decoration: none; transition: 0.3s; }
+    .menu-link:hover { color: var(--pop-2); letter-spacing: 5px; text-shadow: 0 0 20px var(--pop-2); }
+    .menu-link .menu-num { color: rgba(255, 255, 255, 0.6); font-weight: 100; letter-spacing: 0.2em; }
+    .hamburger-btn.is-active .h-line:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .hamburger-btn.is-active .h-line:nth-child(2) { opacity: 0; }
+    .hamburger-btn.is-active .h-line:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
+
+    @media (max-width: 768px) {
+        .page-title { font-size: 5rem; }
+        .carousel-scene { height: 500px; margin-bottom: 100px; }
+        .plan-card { width: 160px; height: 250px; padding: 10px; } /* スマホも少し大きく */
+        .carousel-container { width: 160px; height: 250px; }
+        .pop-sidebar { width: 100%; transform: translateX(120%); border-left: none; }
+        .modal-content { 
+            grid-template-columns: 1fr; padding: 20px; 
+            width: 90%; max-height: 85vh; 
+        }
+        .modal-content .plan-name { font-size: 2rem; }
+        .modal-content .plan-price { font-size: 2.5rem; }
+        .modal-col-right { order: -1; margin-bottom: 20px; }
+        .sticker-wall { gap: 15px; }
+        .sticker { min-width: 100px; padding: 10px; }
+        .ticker-wrap { top: 60px; }
+        .addons-header { margin-top: 80px; }
+        .nav-btn { width: 40px; height: 40px; font-size: 1.5rem; }
+        .nav-prev { left: 10px; }
+        .nav-next { right: 10px; }
+        .dice-btn { width: 60px; height: 60px; font-size: 1.2rem; right: 10px; bottom: 10px; }
+    }
+</style>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined' || typeof Draggable === 'undefined') {
+            window.addEventListener('load', initPrice);
+        } else {
+            initPrice();
+        }
+    });
+
+    function initPrice() {
+        gsap.registerPlugin(ScrollTrigger, Draggable);
+
+        // --- DATA: 15 PLANS ---
+        const plansData = [
+            { name: "REHEARSAL", desc: "個人の練習、作曲、デモ制作に。<br>爆音で鳴らせる防音ブース。", priceH: "1,500", priceP: "12,000", features: ["防音ブース (3畳)", "高速Wi-Fi完備", "DAW用モニター貸出", "マイク1本まで無料", "飲食持ち込み可"] },
+            { name: "STANDARD REC", desc: "本格的なボーカル・楽器録音。<br>業界標準のマイクとプロツールス完備。", priceH: "3,500", priceP: "28,000", features: ["メインスタジオ (10畳)", "Pro Tools システム", "Neumann U87Ai 常設", "コントロールルーム利用", "ラウンジ利用OK"], recommend: true },
+            { name: "FULL PROD.", desc: "エンジニア付きの完パケ制作。<br>ミックス・マスタリングまで対応。", priceH: "8,000", priceP: "65,000", features: ["全エリア完全貸切", "専属エンジニア1名付", "Mix/Mastering 修正2回迄", "映像撮影サポート", "機材フルアクセス"] },
+            { name: "VOCAL EDIT", desc: "ピッチ修正・リズム補正のみ。<br>歌ってみたのクオリティアップに。", priceH: "3,000", priceP: "20,000", features: ["Melodyne使用", "自然な補正", "ハモリ生成", "タイミング補正", "即日納品可"] },
+            { name: "MIXING", desc: "録音済みデータのミックス。<br>2mix納品まで。", priceH: "5,000", priceP: "15,000", features: ["パラデータ受領", "2回修正込", "エフェクト処理", "バランス調整", "2mix納品"] },
+            { name: "MASTERING", desc: "配信・CDプレス用の最終仕上げ。<br>音圧と質感を最適化。", priceH: "3,000", priceP: "5,000", features: ["音圧調整", "質感補正", "配信規格対応", "DDP書き出し", "曲間調整"] },
+            { name: "MV SHOOTING", desc: "スタジオ内でのMV撮影。<br>照明機材・カメラ利用。", priceH: "10,000", priceP: "80,000", features: ["4Kカメラ貸出", "照明機材一式", "背景紙利用", "撮影補助スタッフ", "データ即日渡し"] },
+            { name: "LYRIC VIDEO", desc: "イラストや素材を使った<br>リリックビデオ制作。", priceH: "Ask", priceP: "30,000~", features: ["After Effects制作", "文字アニメーション", "AIイラスト生成", "YouTube用エンコード", "サムネイル作成"] },
+            { name: "ARTWORK", desc: "ジャケット写真・アーティスト写真。<br>専属カメラマン手配。", priceH: "Ask", priceP: "20,000~", features: ["撮影ディレクション", "レタッチ編集", "デザインレイアウト", "スタジオ撮影", "ロケ撮影対応"] },
+            { name: "BEAT MAKE", desc: "オリジナルビート制作。<br>HipHop, R&B, Pops等。", priceH: "Ask", priceP: "30,000~", features: ["完全オリジナル", "パラデータ納品", "著作権譲渡可", "ジャンル相談", "独占使用権"] },
+            { name: "SONG WRITING", desc: "作詞・作曲・編曲の提供。<br>ゼロからの楽曲制作。", priceH: "Ask", priceP: "50,000~", features: ["ヒアリング重視", "デモ制作", "仮歌収録", "フルアレンジ", "譜面作成"] },
+            { name: "DTM LESSON", desc: "Logic, Studio One等の<br>操作方法・制作テクニック。", priceH: "4,000", priceP: "35,000", features: ["マンツーマン指導", "機材の使い方", "Mixテクニック", "初心者歓迎", "オンライン対応"] },
+            { name: "LIVE STREAM", desc: "スタジオからの生配信サポート。<br>高音質・高画質配信。", priceH: "6,000", priceP: "50,000", features: ["OBS設定", "マルチカメラ", "配信ミキシング", "アーカイブ録画", "回線手配"] },
+            { name: "NARRATION", desc: "CM・動画・ボイスドラマ等の<br>ナレーション収録。", priceH: "4,000", priceP: "30,000", features: ["ノイズ処理", "整音・編集", "映像同期(MA)", "ディレクション", "ファイルカット"] },
+            { name: "PODCAST", desc: "ポッドキャスト・ラジオ収録。<br>対談形式も可能。", priceH: "3,000", priceP: "25,000", features: ["マイク4本まで", "BGM挿入", "編集代行", "データ納品", "RSS配信サポート"] },
+        ];
+
+        // カラーパレット (Neon Colors)
+        const popColors = [
+            "var(--pop-1)", "var(--pop-2)", "var(--pop-3)", "var(--pop-4)", "var(--pop-5)", "var(--pop-6)",
+            "#FF00FF", "#00FF99", "#FF3300", "#AA00FF", "#0088FF", "#CCFF33", "#FF66FF", "#00CCFF", "#FFCC00"
+        ];
+
+        // --- RENDER 3D CAROUSEL ---
+        const container = document.getElementById('carousel-container');
+        if (!container) { console.error('❌ ERROR: carousel-container要素が見つかりません！'); return; }
+        const numCards = plansData.length;
+        const radius = 650; 
+        const theta = 360 / numCards;
+
+        plansData.forEach((plan, i) => {
+            const num = (i + 1).toString().padStart(2, '0');
+            const color = popColors[i % popColors.length]; 
+            
+            const badge = plan.recommend ? `<div class="badge" style="background:${color}; color:black; border-color:black;">POPULAR</div>` : '';
+            // メイン画面用リスト（短縮版）
+            const featuresHtml = plan.features.slice(0, 3).map(f => `<li style="border-bottom-color:${color}88;"><span style="color:${color}; margin-right:5px;">★</span>${f}</li>`).join('');
+            
+            const card = document.createElement('div');
+            card.className = 'plan-card';
+            card.setAttribute('data-index', i);
+            
+            const angle = theta * i;
+            card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+            
+            card.innerHTML = `
+                ${badge}
+                <div class="plan-number" style="color:${color};">PLAN.${num}</div>
+                <div class="plan-name">${plan.name}</div>
+                <div class="plan-desc">${plan.desc}</div>
+                <div class="plan-price-box" style="border-color:${color};" id="box-${i}">
+                    <div class="plan-price price-hourly">¥${plan.priceH}</div>
+                    <div class="plan-price price-pack hidden">¥${plan.priceP}</div>
+                    <div class="plan-unit unit-hourly">/ 1h</div>
+                    <div class="plan-unit unit-pack hidden">/ PACK</div>
+                </div>
+                <ul class="plan-features">${featuresHtml}</ul>
+                <div class="btn-pop plan-btn" style="background:${color}; color:black; border-color:black;">DETAILS</div>
+            `;
+            container.appendChild(card);
+        });
+
+        // --- RENDER STICKERS ---
+        const stickerData = [
+            { label: "EDIT", name: "PITCH", price: "¥3,000~", size: "sm", rot: -3, desc: "ボーカルのピッチ修正を行います。" },
+            { label: "EDIT", name: "TIMING", price: "¥2,000~", size: "sm", rot: 2, desc: "リズムのズレを補正します。" },
+            { label: "INDUSTRY STD.", name: "MIXING", price: "¥15,000~", size: "lg", rot: -1, isStd: true, desc: "プロクオリティのミックスダウン。" },
+            { label: "OPTION", name: "HARMONY", price: "¥2,000~", size: "md", rot: 4, desc: "ハモリパートの生成・作成。" },
+            { label: "RENTAL", name: "GUITAR", price: "¥500 /h", size: "sm", rot: -5, desc: "エレキギターのレンタル。" },
+            { label: "RENTAL", name: "VIDEO LT.", price: "¥1,000 /h", size: "md", rot: 3, desc: "撮影用照明機材一式。" },
+            { label: "TIME", name: "EXTEND", price: "¥2,000 /h", size: "md", rot: 1, desc: "延長料金（1時間あたり）。" },
+            { label: "INDUSTRY STD.", name: "MASTERING", price: "¥5,000~", size: "lg", rot: -4, isStd: true, desc: "最終的な音圧・質感調整。" },
+            { label: "TIME", name: "LATE NIGHT", price: "+20%", size: "md", rot: 2, desc: "深夜24時以降の利用割増。" },
+            { label: "DATA", name: "STEMS", price: "¥2,000~", size: "sm", rot: -2, desc: "パラデータ（ステム）の書き出し。" },
+            { label: "SERVICE", name: "RUSH", price: "+30%", size: "md", rot: 5, desc: "特急仕上げオプション。" },
+            { label: "RENTAL", name: "BASS", price: "¥500 /h", size: "sm", rot: -4, desc: "エレキベースのレンタル。" },
+            { label: "RENTAL", name: "SNARE", price: "¥800 /h", size: "sm", rot: 3, desc: "スネアドラムのレンタル。" },
+            { label: "PRO STAFF", name: "REC ENG.", price: "¥5,000 /h", size: "lg", rot: 1, isStd: true, desc: "専属レコーディングエンジニア。" },
+            { label: "EDIT", name: "NOISE RED.", price: "¥2,000~", size: "sm", rot: -2, desc: "ノイズ除去処理。" },
+            { label: "OPTION", name: "VOCAL TUNE", price: "¥5,000 /曲", size: "md", rot: 5, desc: "ボーカル補正フルパック。" },
+            { label: "DATA", name: "DDP MASTER", price: "¥3,000", size: "sm", rot: -3, desc: "CDプレス用DDPデータ作成。" },
+            { label: "DAY PACK", name: "STUDIO LOCK", price: "¥65,000 /day", size: "lg", rot: 2, isStd: true, desc: "スタジオ1日完全貸切。" },
+            { label: "VIDEO", name: "4K CAM", price: "¥3,000 /h", size: "md", rot: -1, desc: "4Kビデオカメラレンタル。" },
+            { label: "VIDEO", name: "BACK PAPER", price: "¥2,000 /回", size: "md", rot: 4, desc: "撮影用背景紙の利用。" },
+            { label: "SUPPORT", name: "ASSISTANT", price: "¥2,500 /h", size: "sm", rot: -5, desc: "レコーディングアシスタント。" },
+            { label: "LESSON", name: "DAW LECTURE", price: "¥4,000 /h", size: "md", rot: 3, desc: "DAWソフトの使い方レクチャー。" },
+            { label: "BEAT MAKE", name: "EXCLUSIVE", price: "¥30,000~", size: "lg", rot: 1, isStd: true, desc: "ビート独占使用権。" },
+            { label: "DESIGN", name: "JACKET ART", price: "¥20,000~", size: "md", rot: -4, desc: "ジャケットデザイン制作。" },
+            { label: "VIDEO", name: "LYRIC VIDEO", price: "¥30,000~", size: "md", rot: 2, desc: "リリックビデオ制作。" },
+            { label: "STREAM", name: "OBS SETUP", price: "¥5,000", size: "sm", rot: -2, desc: "配信ソフトOBSの設定代行。" },
+            { label: "RENTAL", name: "CABLE SET", price: "¥500", size: "sm", rot: 4, desc: "シールド・ケーブル類セット。" },
+            { label: "RENTAL", name: "HEADPHONE", price: "FREE", size: "sm", rot: -3, desc: "モニターヘッドホン貸出。" },
+            { label: "PLANNING", name: "CONSULTING", price: "¥10,000~", size: "lg", rot: 1, isStd: true, desc: "音楽活動コンサルティング。" },
+            { label: "DATA", name: "BACKUP", price: "¥5,000", size: "sm", rot: -5, desc: "プロジェクトデータのバックアップ。" },
+            { label: "OTHER", name: "CATERING", price: "Ask", size: "sm", rot: 2, desc: "ケータリング手配。" }
+        ];
+
+        const stickerWall = document.getElementById('sticker-wall');
+        if (!stickerWall) { console.error('❌ ERROR: sticker-wall要素が見つかりません！'); return; }
+
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalContent = document.getElementById('modal-content');
+        const modalLeft = document.getElementById('modal-col-left');
+        const modalRight = document.getElementById('modal-col-right');
+        const modalClose = document.getElementById('modal-close');
+        const cursor = document.querySelector('.cursor');
+
+        stickerData.forEach(sticker => {
+            const el = document.createElement('div');
+            el.className = `sticker ${sticker.size} ${sticker.isStd ? 'is-std' : ''}`;
+            el.style.setProperty('--r', `${sticker.rot}deg`);
+            el.innerHTML = `
+                <div class="sticker-label">${sticker.label}</div>
+                <div class="sticker-name">${sticker.name}</div>
+                <div class="sticker-price">${sticker.price}</div>
+            `;
+            el.addEventListener('click', () => {
+                if (!modalLeft || !modalRight || !modalContent || !modalOverlay) return;
+                modalLeft.innerHTML = `
+                    <div class="plan-name" style="font-size:3rem; margin-bottom:10px;">${sticker.name}</div>
+                    <div class="sticker-label" style="font-size:1.2rem; margin-bottom:20px;">${sticker.label}</div>
+                    <div class="plan-price-box" style="background:var(--c-text); color:white;">
+                        <div class="plan-price" style="font-size:2.5rem; color:var(--pop-2);">${sticker.price}</div>
+                    </div>
+                `;
+                modalRight.innerHTML = `
+                    <p style="font-size:1.2rem; line-height:1.6; font-weight:bold;">${sticker.desc}</p>
+                    <p style="font-size:0.9rem; margin-top:20px; opacity:0.7;">※ 詳細はご相談ください。</p>
+                `;
+                
+                modalContent.style.borderColor = "var(--c-text)";
+                modalContent.style.boxShadow = "0 0 50px rgba(0,0,0,0.2)";
+                
+                modalOverlay.style.display = 'flex';
+                if (cursor) cursor.classList.add('on-modal');
+                gsap.to(modalOverlay, { opacity: 1, duration: 0.3 });
+                gsap.fromTo(modalContent, { scale: 0.8, opacity:0 }, { scale: 1, opacity:1, duration: 0.4, ease: "back.out(1.2)" });
+            });
+            stickerWall.appendChild(el);
+        });
+
+
+        // --- ROTATION LOGIC ---
+        let currentRotation = 0;
+        const proxy = document.createElement("div"); 
+
+        function updateCarousel() {
+            gsap.set(container, {
+                rotationY: currentRotation
+            });
+            
+            let normRot = -currentRotation % 360;
+            if (normRot < 0) normRot += 360;
+            
+            const cards = document.querySelectorAll('.plan-card');
+            cards.forEach((card, i) => {
+                const cardAngle = (theta * i) % 360;
+                let diff = Math.abs(cardAngle - normRot);
+                if (diff > 180) diff = 360 - diff;
+                
+                const color = popColors[i % popColors.length];
+                const shadowColor = popColors[(i + 2) % popColors.length];
+                const priceBox = document.getElementById(`box-${i}`);
+
+                if (diff < theta / 1.2) { // アクティブ判定
+                    card.classList.add('is-active');
+                    card.classList.remove('is-far');
+                    // アクティブ時のスタイル (影の色を変更)
+                    card.style.borderColor = color;
+                    card.style.boxShadow = `4px 4px 0px ${shadowColor}`; 
+                    card.style.transform = `rotateY(${theta * i}deg) translateZ(${radius}px) scale(1.1)`;
+                    card.style.pointerEvents = "auto"; 
+                    
+                    if (priceBox) {
+                        priceBox.style.background = color;
+                        priceBox.style.color = "black";
+                        priceBox.querySelectorAll('.plan-price').forEach(p => p.style.color = "black");
+                    }
+                    
+                } else {
+                    card.classList.remove('is-active');
+                    if (diff > 100) card.classList.add('is-far');
+                    else card.classList.remove('is-far');
+                    
+                    // 非アクティブ時のスタイル
+                    card.style.borderColor = "#333"; 
+                    card.style.boxShadow = `none`;
+                    card.style.transform = `rotateY(${theta * i}deg) translateZ(${radius}px) scale(1)`;
+                    card.style.pointerEvents = "none"; 
+                    
+                    if (priceBox) {
+                        priceBox.style.background = "var(--c-text)";
+                        priceBox.style.color = "#888";
+                        priceBox.querySelectorAll('.plan-price').forEach(p => p.style.color = "#aaa");
+                    }
+                }
+            });
+        }
+
+        Draggable.create(proxy, {
+            trigger: "#carousel-scene",
+            type: "x",
+            inertia: true,
+            edgeResistance: 0.9, 
+            dragResistance: 0.4, 
+            onDrag: function() {
+                const rotateSpeed = 0.15;
+                currentRotation += this.deltaX * rotateSpeed;
+                updateCarousel();
+            },
+            onThrowUpdate: function() {
+                const rotateSpeed = 0.15;
+                currentRotation += this.deltaX * rotateSpeed;
+                updateCarousel();
+            },
+            onClick: function(e) {}
+        });
+
+        // Navigation Buttons - Click Action
+        const rotateCarousel = (deltaAngle, duration = 0.5, ease = "power2.out") => {
+            const targetRotation = currentRotation + deltaAngle;
+            gsap.to({ val: currentRotation }, {
+                val: targetRotation,
+                duration: duration,
+                ease: ease,
+                onUpdate: function() {
+                    currentRotation = this.targets()[0].val;
+                    updateCarousel();
+                }
+            });
+        };
+        
+        const navPrev = document.getElementById('nav-prev');
+        const navNext = document.getElementById('nav-next');
+        if (navPrev) navPrev.addEventListener('click', () => rotateCarousel(theta));
+        if (navNext) navNext.addEventListener('click', () => rotateCarousel(-theta));
+
+        // Dice Button (Random Spin)
+        const diceBtn = document.getElementById('dice-btn');
+        if (diceBtn) {
+            diceBtn.addEventListener('click', () => {
+                const randomIndex = Math.floor(Math.random() * numCards);
+                
+                // Adjust for current rotation cycles
+                const currentCycle = Math.floor(currentRotation / 360);
+                let target = (currentCycle * 360) - (theta * randomIndex);
+                
+                // Ensure we spin at least 2 times
+                if (target > currentRotation - 720) {
+                    target -= 1080;
+                }
+                
+                gsap.to({ val: currentRotation }, {
+                    val: target,
+                    duration: 3, 
+                    ease: "power4.inOut", 
+                    onUpdate: function() { 
+                        currentRotation = this.targets()[0].val; 
+                        updateCarousel(); 
+                    }
+                });
+            });
+        }
+
+        updateCarousel(); // 初期実行
+
+        // --- EXPAND CARD LOGIC ---
+        let isPack = false;
+
+        document.querySelectorAll('.plan-card').forEach(card => {
+            card.addEventListener('click', () => {
+                if(!card.classList.contains('is-active')) return; 
+
+                const i = card.getAttribute('data-index');
+                const data = plansData[i];
+                const color = popColors[i % popColors.length];
+                const shadowColor = popColors[(i + 2) % popColors.length];
+                
+                const num = (parseInt(i) + 1).toString().padStart(2, '0');
+                
+                if (!modalLeft || !modalRight || !modalContent || !modalOverlay) return;
+
+                modalLeft.innerHTML = `
+                    <div class="plan-number" style="color:${color};">PLAN.${num}</div>
+                    <div class="plan-name">${data.name}</div>
+                    <div class="plan-desc">${data.desc}</div>
+                    <div class="plan-price-box" style="background:${color}; color:black; border-color:black;">
+                        <div class="plan-price price-hourly ${isPack ? 'hidden' : ''}">¥${data.priceH}</div>
+                        <div class="plan-price price-pack ${isPack ? '' : 'hidden'}">¥${data.priceP}</div>
+                        <div class="plan-unit unit-hourly ${isPack ? 'hidden' : ''}">/ 1時間</div>
+                        <div class="plan-unit unit-pack ${isPack ? '' : 'hidden'}">/ パック料金</div>
+                    </div>
+                `;
+                
+                const fullFeatures = data.features.map(f => `<li style="border-bottom-color:${color}88;"><span style="color:${color}; margin-right:10px;">★</span>${f}</li>`).join('');
+                modalRight.innerHTML = `
+                    <ul class="plan-features">${fullFeatures}</ul>
+                `;
+
+                modalContent.style.borderColor = color;
+                modalContent.style.boxShadow = `10px 10px 0px ${shadowColor}`; 
+
+                modalOverlay.style.display = 'flex';
+                if (cursor) cursor.classList.add('on-modal'); 
+                
+                gsap.to(modalOverlay, { opacity: 1, duration: 0.3 });
+                gsap.fromTo(modalContent, { scale: 0.8, opacity:0 }, { scale: 1.1, opacity:1, duration: 0.5, ease: "back.out(1.2)" });
+            });
+        });
+
+        const closeModal = () => {
+            if (!modalOverlay) return;
+            gsap.to(modalOverlay, { opacity: 0, duration: 0.3, onComplete: () => { 
+                modalOverlay.style.display = 'none'; 
+                if (cursor) cursor.classList.remove('on-modal');
+            }});
+        };
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (modalOverlay) modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) closeModal(); });
+
+
+        // --- TOGGLE LOGIC ---
+        const toggleSwitch = document.getElementById('billing-toggle');
+        const labelHourly = document.getElementById('label-hourly');
+        const labelPack = document.getElementById('label-pack');
+
+        if (toggleSwitch) {
+            toggleSwitch.addEventListener('click', () => {
+                isPack = !isPack;
+                toggleSwitch.classList.toggle('on');
+                
+                const updatePrices = (parent) => {
+                    if (isPack) {
+                        parent.querySelectorAll('.price-hourly, .unit-hourly').forEach(el => el.classList.add('hidden'));
+                        parent.querySelectorAll('.price-pack, .unit-pack').forEach(el => el.classList.remove('hidden'));
+                        gsap.fromTo(parent.querySelectorAll('.price-pack'), {scale: 0.5, opacity: 0}, {scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.7)'});
+                    } else {
+                        parent.querySelectorAll('.price-pack, .unit-pack').forEach(el => el.classList.add('hidden'));
+                        parent.querySelectorAll('.price-hourly, .unit-hourly').forEach(el => el.classList.remove('hidden'));
+                        gsap.fromTo(parent.querySelectorAll('.price-hourly'), {scale: 0.5, opacity: 0}, {scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.7)'});
+                    }
+                };
+
+                if(isPack) {
+                    if (labelHourly) labelHourly.classList.remove('active');
+                    if (labelPack) labelPack.classList.add('active');
+                } else {
+                    if (labelPack) labelPack.classList.remove('active');
+                    if (labelHourly) labelHourly.classList.add('active');
+                }
+
+                document.querySelectorAll('.plan-card').forEach(card => updatePrices(card));
+                
+                if(modalOverlay && modalOverlay.style.display === 'flex') {
+                    const modalPriceBox = document.querySelector('.modal-content .plan-price-box');
+                    if(modalPriceBox) updatePrices(modalPriceBox);
+                }
+            });
+        }
+
+        gsap.utils.toArray('.reveal-text').forEach(element => {
+            gsap.fromTo(element, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power4.out', scrollTrigger: { trigger: element, start: 'top 85%' } });
+        });
+    }
+</script>

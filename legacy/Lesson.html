@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LESSON & FLOW - 第３スタジオ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Kaisei+Decol:wght@400;700&family=Klee+One:wght@400;600&family=RocknRoll+One&family=Share+Tech+Mono&family=Yomogi&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- 共通CSS -->
+    <link rel="stylesheet" href="css/common.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --c-bg: #f4f4f0; 
+            --c-text: #333333;
+            --c-accent: #000000;
+        }
+
+        /* BACKGROUND DECORATION */
+        .bg-decor {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            pointer-events: none; opacity: 0.4;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 85, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.03) 0%, transparent 20%);
+        }
+        .bg-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background-image: linear-gradient(#e0e0e0 1px, transparent 1px), linear-gradient(90deg, #e0e0e0 1px, transparent 1px);
+            background-size: 50px 50px; opacity: 0.3; pointer-events: none;
+        }
+
+        /* NAV & HAMBURGER */
+        .back-link { 
+            position: absolute; top: 30px; left: 30px; z-index: 100; 
+            font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); 
+            text-decoration: none; border: 3px solid var(--c-text); 
+            padding: 10px 25px; border-radius: 30px; transition: 0.3s; 
+            background: rgba(255,255,255,0.9); font-weight: bold;
+            box-shadow: 5px 5px 0px var(--c-text);
+        }
+        .back-link:hover { transform: translate(-3px, -3px); box-shadow: 8px 8px 0px var(--pop-2); background: var(--c-text); color: white; }
+
+        .hamburger-btn { 
+            position: fixed; top: 30px; right: 30px; z-index: 11000; 
+            width: 80px; height: 80px; 
+            background: var(--c-text); 
+            border: 4px solid var(--pop-2); 
+            border-radius: 12px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            gap: 6px; cursor: pointer; 
+            transition: background-color 0.3s;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.2); 
+        }
+        .hamburger-btn:hover { background: var(--pop-1); border-color: var(--c-accent); }
+        .hamburger-btn:hover .h-line { background: var(--c-accent); }
+        
+        .h-line { width: 40px; height: 4px; background: white; transition: 0.3s; border-radius: 2px; }
+        
+        .hamburger-btn.is-active {
+            background: var(--c-text) !important;
+            border-color: var(--pop-2) !important;
+            transform: rotate(0deg) !important;
+        }
+        .hamburger-btn.is-active .h-line:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger-btn.is-active .h-line:nth-child(2) { opacity: 0; }
+        .hamburger-btn.is-active .h-line:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
+
+        
+        .hamburger-btn { position: fixed; top: 30px; right: 30px; z-index: 11000; width: 80px; height: 80px; background: var(--c-text); border: 4px solid var(--pop-2); border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; transition: background 0.3s; box-shadow: 5px 5px 0px rgba(0,0,0,0.2); }
+        .hamburger-btn:hover { background: var(--pop-1); border-color: var(--c-white); }
+        .h-line { width: 40px; height: 5px; background: var(--c-white); transition: 0.3s; pointer-events: none; border-radius: 4px; }
+        .pop-sidebar { position: fixed; top: 0; right: 0; width: 500px; max-width: 90vw; height: 100vh; background: rgba(255, 255, 255, 0.95); border-left: 8px solid var(--c-text); z-index: 10500; transform: translateX(120%) skewX(-5deg); transform-origin: top right; box-shadow: -20px 0 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center; padding: 40px; background-image: radial-gradient(var(--pop-5) 2px, transparent 2px); background-size: 30px 30px; }
+        .menu-list { list-style: none; width: 100%; text-align: right; }
+        .menu-item { margin: 15px 0; perspective: 1000px; }
+        .menu-link { display: inline-block; font-family: var(--font-en); font-size: 4rem; font-weight: 900; color: var(--c-text); text-decoration: none; line-height: 1; text-transform: uppercase; position: relative; transition: 0.3s; padding: 0 10px; background: transparent; }
+        .menu-link .menu-num { color: rgba(0, 0, 0, 0.4); }
+        .menu-item:nth-child(1) .menu-link:hover { color: var(--pop-1); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(2) .menu-link:hover { color: var(--pop-2); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(3) .menu-link:hover { color: var(--pop-3); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(4) .menu-link:hover { color: var(--pop-4); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(5) .menu-link:hover { color: var(--pop-5); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(6) .menu-link:hover { color: var(--pop-6); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(7) .menu-link:hover { color: var(--pop-1); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+        .menu-item:nth-child(8) .menu-link:hover { color: var(--pop-6); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-text); }
+        .menu-deco { position: absolute; bottom: 20px; right: 40px; font-family: var(--font-digi); font-size: 1rem; color: var(--c-text); opacity: 0.5; text-align: right; }
+        .hamburger-btn.is-active { background: var(--c-white); border-color: var(--c-text); transform: rotate(0deg) !important; }
+        .hamburger-btn.is-active .h-line { background: var(--c-text); }
+
+        /* UTILITY FOR LINE BREAKS */
+        .br-pc { display: block; }
+        .br-sp { display: none; }
+        @media (max-width: 768px) {
+            .br-pc { display: none; }
+            .br-sp { display: block; }
+        }
+        .nowrap { white-space: nowrap; }
+
+        /* HERO (COMPACT) */
+        .hero { 
+            height: 60vh; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; 
+            padding-top: 60px;
+        }
+        
+        .hero-tag {
+            font-family: var(--font-en); font-size: 1rem; color: var(--c-text); 
+            background: var(--pop-2); border: 2px solid var(--c-text); 
+            padding: 5px 20px; border-radius: 50px; margin-bottom: 15px; 
+            box-shadow: 4px 4px 0px var(--c-text); display: inline-block;
+        }
+        
+        .hero-title { 
+            font-size: 3.5rem; font-weight: 900; line-height: 1.2; margin-bottom: 20px;
+            color: var(--c-text); letter-spacing: 0.05em; white-space: nowrap;
+        }
+        @media (max-width: 900px) {
+            .hero-title { white-space: normal; font-size: 2.5rem; line-height: 1.3; }
+        }
+
+        .hero-desc { font-size: 1rem; font-weight: 700; line-height: 1.8; max-width: 700px; color: #555; margin-bottom: 30px; }
+        
+        .hero-btn {
+            display: inline-block; padding: 15px 50px; font-size: 1.2rem; font-weight: 900; 
+            color: var(--c-text); background: linear-gradient(90deg, var(--pop-5), var(--pop-4)); 
+            border: 3px solid var(--c-text); border-radius: 12px;
+            text-decoration: none; font-family: var(--font-en); 
+            box-shadow: 8px 8px 0px var(--c-text); transition: 0.2s;
+            position: relative; overflow: hidden; text-transform: uppercase;
+        }
+        .hero-btn:hover { transform: translate(-3px, -3px); box-shadow: 12px 12px 0px var(--pop-1); background: var(--c-white); }
+        
+        /* WORKFLOW SECTION */
+        .flow-section { 
+            padding: 80px 5%; position: relative; overflow: hidden; 
+            background-color: var(--pop-6);
+            background-image: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 20px,
+                rgba(255, 255, 255, 0.3) 20px,
+                rgba(255, 255, 255, 0.3) 40px
+            );
+            border-bottom: 5px solid var(--c-text);
+        }
+        .section-title { 
+            font-size: 4rem; font-family: var(--font-en); text-align: center; margin-bottom: 50px; 
+            color: var(--c-text); position: relative; display: block;
+            text-shadow: 4px 4px 0px var(--c-white);
+            background: var(--c-text); color: var(--pop-6); display: inline-block;
+            padding: 5px 30px; transform: skewX(-10deg) translateX(-50%); left: 50%;
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+        }
+        
+        .flow-container {
+            max-width: 1400px; margin: 0 auto; 
+            display: flex; justify-content: space-between; gap: 20px;
+            position: relative; flex-wrap: wrap; 
+            align-items: flex-start;
+        }
+        
+        .flow-card {
+            flex: 1; min-width: 260px; 
+            background: #ffffff; 
+            color: var(--c-text);
+            border-radius: 16px; padding: 30px 20px; position: relative;
+            cursor: pointer; transition: 0.3s;
+            border: 4px solid var(--c-text);
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+            min-height: 350px;
+            z-index: 1;
+            height: auto;
+        }
+        
+        .flow-card:hover { 
+            transform: translateY(-10px) rotate(2deg); 
+            z-index: 10; 
+        }
+
+        .step-num {
+            font-family: var(--font-en); font-size: 1.8rem; color: var(--c-text); 
+            background: var(--pop-5); width: 50px; height: 50px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            border: 3px solid var(--c-text); margin-bottom: 15px;
+            position: absolute; top: -25px;
+        }
+        .flow-card:nth-child(1) .step-num { background: var(--pop-1); color:white; }
+        .flow-card:nth-child(3) .step-num { background: var(--pop-5); color:black; }
+        .flow-card:nth-child(5) .step-num { background: var(--pop-2); color:black; }
+        .flow-card:nth-child(7) .step-num { background: var(--pop-4); color: white; }
+
+        /* ★修正: イラスト部分のデザイン - 画像表示用 */
+        .step-illust {
+            width: 100%; height: 140px; 
+            border-radius: 12px; margin-bottom: 15px; margin-top: 20px;
+            overflow: hidden; 
+            display: flex; justify-content: center; align-items: center; 
+            position: relative;
+            transition: 0.3s;
+        }
+        
+        /* 画像のスタイル */
+        .step-illust img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            border-radius: 12px;
+        }
+        
+        /* STEP 1: ピンク/赤系 */
+        .flow-card:nth-child(1) .step-illust {
+            background: linear-gradient(135deg, #ffebf0 0%, #ffe0e8 100%);
+            border: 3px solid var(--pop-1);
+        }
+        
+        /* STEP 2: シアン系 */
+        .flow-card:nth-child(3) .step-illust {
+            background: linear-gradient(135deg, #e0f7ff 0%, #ccf2ff 100%);
+            border: 3px solid var(--pop-5);
+        }
+        
+        /* STEP 3: ライム/黄緑系 */
+        .flow-card:nth-child(5) .step-illust {
+            background: linear-gradient(135deg, #f7ffe0 0%, #eeff99 100%);
+            border: 3px solid var(--pop-2);
+        }
+        
+        /* STEP 4: 紫系 */
+        .flow-card:nth-child(7) .step-illust {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e8d5ff 100%);
+            border: 3px solid var(--pop-4);
+        }
+        
+        .flow-card:hover .step-illust {
+            transform: scale(1.05) rotate(-2deg);
+        }
+        
+        .step-title { font-size: 1.4rem; font-weight: 900; margin-bottom: 10px; }
+        .step-short { 
+            font-size: 1rem; line-height: 1.5; margin-bottom: 15px; font-weight: 700; color: #555;
+            min-height: 4.5em;
+        }
+        
+        .toggle-icon { margin-top: auto; font-size: 1rem; font-weight:bold; transition: 0.3s; color: white; background: var(--c-text); padding: 5px 15px; border-radius: 20px; }
+        .flow-card:hover .toggle-icon { background: var(--pop-1); }
+
+        .card-detail {
+            display: none;
+            width: 100%;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px dashed #ccc;
+            text-align: left;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #333;
+            animation: fadeIn 0.5s ease;
+        }
+        .flow-card.active .card-detail, .case-card.active .card-detail {
+            display: block;
+        }
+        .flow-card.active .toggle-icon, .case-card.active .case-price {
+            background: var(--c-text); color: var(--pop-2);
+        }
+        .flow-card.active .toggle-icon::after { content: " ▼ OPEN"; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .flow-arrow {
+            font-size: 2rem; color: var(--c-text); align-self: center; margin: 0 5px; opacity: 0.5;
+        }
+
+        .flow-detail-list { list-style: none; padding: 0; margin-top: 10px; }
+        .flow-detail-list li { margin-bottom: 12px; font-size: 0.95rem; line-height: 1.6; text-align: left; padding-left: 0; display: flex; align-items: baseline; }
+        .flow-detail-list li .emoji { font-size: 1.2rem; margin-right: 8px; flex-shrink: 0; width: 20px; text-align: center; }
+        .flow-detail-list strong { margin-right: 5px; font-weight: 900; font-family: var(--font-jp); }
+        .flow-detail-list .txt { flex-grow: 1; }
+
+        .flow-card:nth-child(1) .flow-detail-list strong { color: var(--pop-1); }
+        .flow-card:nth-child(3) .flow-detail-list strong { color: #00838f; }
+        .flow-card:nth-child(5) .flow-detail-list strong { color: #558b2f; }
+        .flow-card:nth-child(7) .flow-detail-list strong { color: var(--pop-4); }
+
+        /* CASE STUDY SECTION */
+        .case-section { 
+            padding: 80px 5%; background: #fdf0f3; 
+            position: relative; 
+            background-image: radial-gradient(#eec0c0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .case-header { text-align: center; margin-bottom: 40px; margin-top: 0; }
+        .case-section .section-title { 
+            margin-bottom: 5px; color: var(--c-text); font-size: 3.5rem; 
+            background: none; transform: none; left: auto; box-shadow: none; display: inline-block;
+            text-shadow: 2px 2px 0 white;
+        }
+        .case-sub { font-weight: bold; color: #666; font-size: 1rem; background: white; padding: 5px 15px; border-radius: 20px; display: inline-block; border: 1px solid #ddd; }
+
+        .case-container { max-width: 1200px; margin: 0 auto; }
+        
+        .case-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; 
+            align-items: start;
+        }
+        
+        .case-card {
+            background: white; 
+            border: 2px solid white; 
+            border-left: 6px solid var(--c-text);
+            border-radius: 12px;
+            padding: 25px; position: relative; transition: 0.3s;
+            display: flex; flex-direction: column; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            z-index: 1;
+            height: auto;
+        }
+        .case-card:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,0.1); z-index: 10; }
+        
+        .case-tag { 
+            display: inline-block; padding: 3px 10px; background: #eee; color: #333; 
+            font-size: 0.8rem; font-weight: bold; border-radius: 20px; margin-bottom: 10px; width: fit-content;
+            border: 1px solid #ddd;
+        }
+        .case-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; line-height: 1.4; color: var(--c-text); }
+        .case-digest { flex-grow: 1; font-size: 0.9rem; color: #666; line-height: 1.6; margin-bottom: 20px; }
+        
+        .case-footer { 
+            margin-top: auto; display: flex; justify-content: space-between; align-items: center; 
+            font-size: 0.9rem; font-weight: bold; border-top: 2px dashed #f0f0f0; padding-top: 15px;
+            width: 100%;
+        }
+        .case-price { color: var(--pop-1); font-family: var(--font-en); font-size: 1.3rem; }
+
+        .case-detail-list { margin-top: 10px; list-style: none; padding: 0; }
+        .case-detail-list li { margin-bottom: 5px; font-size: 0.9rem; border-bottom: 1px dashed #eee; padding-bottom: 3px; }
+        .case-detail-list span { font-weight: bold; margin-right: 5px; color: var(--pop-1); font-family: var(--font-en); }
+
+        /* FAQ SECTION */
+        .faq-section { 
+            padding: 80px 5%; background: #fff; position: relative; border-top: 5px solid var(--c-text);
+            background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .faq-container { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+        .faq-item { 
+            background: white; border: 3px solid var(--c-text); border-radius: 12px; margin-bottom: 15px; 
+            cursor: pointer; transition: 0.2s; box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+        }
+        .faq-item:hover { border-color: var(--pop-4); box-shadow: 8px 8px 0 var(--pop-4); transform: translate(-2px, -2px); }
+        .faq-q { padding: 20px; font-weight: bold; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; }
+        .faq-q::after { content: '+'; font-family: var(--font-en); font-size: 1.5rem; color: var(--c-text); }
+        .faq-item.active .faq-q::after { content: '-'; }
+        .faq-item.active .faq-q { background: var(--pop-4); color: white; }
+        .faq-a { padding: 0 20px 20px; display: none; font-size: 0.95rem; line-height: 1.6; color: #555; }
+        .faq-item.active .faq-a { display: block; }
+
+        /* RESERVATION */
+        .reserve-section { padding: 100px 5%; text-align: center; background: #f0f0f0; border-top: 5px solid var(--c-text); }
+        .reserve-wrapper { 
+            max-width: 1000px; margin: 0 auto; 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 50px; 
+            align-items: start;
+        }
+        .reserve-info { text-align: left; }
+        .reserve-box { 
+            background: white; border: 4px solid var(--c-text); border-radius: 20px; 
+            padding: 30px; box-shadow: 15px 15px 0px var(--pop-4); 
+        }
+
+        .safe-badge { 
+            background: white; border: 2px solid var(--c-text); padding: 8px 15px; border-radius: 30px; 
+            font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 10px;
+            margin-bottom: 10px; width: fit-content; cursor: default; transition: 0.2s; box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+        }
+        .safe-badge:hover { transform: scale(1.05); background: var(--pop-2); }
+        .safe-icon { font-size: 1.2rem; }
+
+        .cal-mock {
+            display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; margin-top: 20px;
+        }
+        .cal-cell { padding: 10px; background: #f5f5f5; border-radius: 4px; font-size: 0.8rem; cursor: pointer; transition:0.2s; }
+        .cal-cell:hover { background: var(--pop-5); font-weight: bold; transform: scale(1.1); }
+        .cal-cell.ok { border: 2px solid var(--pop-2); background: #fff; }
+        
+        .input-group { margin-bottom: 15px; }
+        .input-field { 
+            width: 100%; padding: 15px; background: #f9f9f9; border: 2px solid #ddd; 
+            border-radius: 8px; font-size: 1rem; transition: 0.3s;
+        }
+        .input-field:focus { border-color: var(--pop-1); outline: none; box-shadow: 0 0 10px rgba(255,0,85,0.1); background: white; }
+        
+        .submit-btn {
+            width: 100%; padding: 15px; background: var(--c-text); color: white;
+            border: none; border-radius: 10px; font-size: 1.2rem; font-weight: 900; cursor: pointer;
+            font-family: var(--font-en); text-transform: uppercase; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: var(--pop-1); }
+
+        footer { background: var(--c-text); color: white; padding: 50px 5%; text-align: center; }
+
+        @media (max-width: 900px) {
+            .hero-title { font-size: 2.5rem; }
+            .flow-container { flex-direction: column; }
+            .flow-card { min-height: auto; }
+            .flow-arrow { transform: rotate(90deg); margin: 10px 0; }
+            .reserve-wrapper { grid-template-columns: 1fr; }
+            .case-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <a href="Home_new.html" class="back-link magnet">← HOME</a>
+
+    <div class="hamburger-btn magnet" id="hamburger">
+        <div class="h-line"></div>
+        <div class="h-line"></div>
+        <div class="h-line"></div>
+    </div>
+
+    <nav class="pop-sidebar" id="pop-sidebar">
+        <ul class="menu-list">
+            <li class="menu-item"><a href="Home_new.html" class="menu-link"><span class="menu-num">00</span> HOME</a></li>
+            <li class="menu-item"><a href="Profile.html" class="menu-link"><span class="menu-num">01</span> PROFILE</a></li>
+            <li class="menu-item"><a href="Works.html" class="menu-link"><span class="menu-num">02</span> WORKS</a></li>
+            <li class="menu-item"><a href="Lesson.html" class="menu-link"><span class="menu-num">03</span> LESSON</a></li>
+            <li class="menu-item"><a href="GearList.html" class="menu-link"><span class="menu-num">04</span> GEAR</a></li>
+            <li class="menu-item"><a href="Price.html" class="menu-link"><span class="menu-num">05</span> PRICE</a></li>
+            <li class="menu-item"><a href="https://xn--3-sj5c.jp/blog/" class="menu-link" target="_blank" rel="noopener noreferrer"><span class="menu-num">06</span> BLOG</a></li>
+            <li class="menu-item"><a href="Home_new.html#contact" class="menu-link"><span class="menu-num">07</span> CONTACT</a></li>
+        </ul>
+        <div class="menu-deco">/// MENU_ACCESSED /// SAPPORO_STUDIO ///</div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-tag reveal-hero">ONLINE & STUDIO LESSON</div>
+        <h1 class="hero-title">
+            <span class="nowrap">あなたの音楽を、</span><br class="br-sp"><span class="nowrap">プロのクオリティで。</span>
+        </h1>
+        <p class="hero-desc reveal-hero">
+            「わからない」を「できた！」に変える最短ルート。<br class="br-pc">
+            初心者からプロ志向まで、<br class="br-sp">一人ひとりに合わせたマンツーマンレッスン。
+        </p>
+        <a href="#reserve" class="hero-btn magnet reveal-hero">無料相談を予約する</a>
+    </section>
+
+    <section class="flow-section">
+        <h2 class="section-title reveal">LESSON FLOW</h2>
+        
+        <div class="flow-container">
+            <div class="flow-card magnet reveal-card">
+                <div class="step-num">01</div>
+                <div class="step-illust">
+                    <img src="img/step1-counseling.png" alt="無料カウンセリング">
+                </div>
+                <h3 class="step-title">無料カウンセリング</h3>
+                <p class="step-short">まずはあなたの<br>「やりたいこと」を<br>お聞かせください。</p>
+                <div class="toggle-icon">CLICK FOR DETAIL</div>
+                
+                <div class="card-detail">
+                    <ul class="flow-detail-list">
+                        <li>
+                            <span class="emoji">🗣</span>
+                            <span class="txt"><strong>ヒアリング:</strong> あなたの「悩み」や「夢」をリラックスしてお話しましょう。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🎸</span>
+                            <span class="txt"><strong>機材相談:</strong> 「何を買えばいい？」から相談OK。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">💻</span>
+                            <span class="txt"><strong>形式自由:</strong> Zoom / LINE / スタジオ対面、選べます。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flow-arrow reveal-card">▶</div>
+
+            <div class="flow-card magnet reveal-card">
+                <div class="step-num">02</div>
+                <div class="step-illust">
+                    <img src="img/step2-planning.png" alt="プランのご提案">
+                </div>
+                <h3 class="step-title">プランのご提案</h3>
+                <p class="step-short">あなただけの<br>「上達の地図」を<br>作ります。</p>
+                <div class="toggle-icon">CLICK FOR DETAIL</div>
+
+                 <div class="card-detail">
+                    <ul class="flow-detail-list">
+                        <li>
+                            <span class="emoji">🗺</span>
+                            <span class="txt"><strong>上達の地図:</strong> あなた専用のカリキュラムを作成。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🎯</span>
+                            <span class="txt"><strong>目標設定:</strong> 「3ヶ月で1曲」「予算5万円で」など具体的に。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">💰</span>
+                            <span class="txt"><strong>明朗会計:</strong> 必要な費用を事前にご提示。無理な勧誘なし！</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flow-arrow reveal-card">▶</div>
+
+            <div class="flow-card magnet reveal-card">
+                <div class="step-num">03</div>
+                <div class="step-illust">
+                    <img src="img/step3-lesson.png" alt="レッスンスタート">
+                </div>
+                <h3 class="step-title">レッスンスタート</h3>
+                <p class="step-short">いよいよ制作開始！<br>一緒に手を<br>動かしましょう。</p>
+                <div class="toggle-icon">CLICK FOR DETAIL</div>
+
+                 <div class="card-detail">
+                    <ul class="flow-detail-list">
+                        <li>
+                            <span class="emoji">🔥</span>
+                            <span class="txt"><strong>実践形式:</strong> 画面共有や実機操作で、「作りながら」学ぶ。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🎵</span>
+                            <span class="txt"><strong>あなた仕様:</strong> 教科書通りではなく、「作りたい曲」のための技術を。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">📹</span>
+                            <span class="txt"><strong>復習OK:</strong> レッスン動画を録画して後で見返せます。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flow-arrow reveal-card">▶</div>
+
+            <div class="flow-card magnet reveal-card">
+                <div class="step-num">04</div>
+                <div class="step-illust">
+                    <img src="img/step4-completion.png" alt="完成&フィードバック">
+                </div>
+                <h3 class="step-title">完成 & フィードバック</h3>
+                <p class="step-short">作品の完成！<br>次のステップへ。</p>
+                <div class="toggle-icon">CLICK FOR DETAIL</div>
+
+                 <div class="card-detail">
+                    <ul class="flow-detail-list">
+                        <li>
+                            <span class="emoji">✨</span>
+                            <span class="txt"><strong>プロの視点:</strong> クオリティを上げるための最終アドバイス。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🚀</span>
+                            <span class="txt"><strong>発信サポート:</strong> SNS投稿や配信リリースの手順もレクチャー。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🤝</span>
+                            <span class="txt"><strong>次のステップ:</strong> 「できた！」を自信に、次の目標へ。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="case-section">
+        <div class="case-header">
+            <h2 class="section-title reveal">CASE STUDY</h2>
+            <p class="case-sub reveal">実際にどんな人が利用しているの？</p>
+        </div>
+
+        <div class="case-container">
+            <div class="case-grid">
+                <div class="case-card magnet reveal">
+                    <div class="case-tag" style="background:var(--pop-1); color:white;">歌ってみた初心者</div>
+                    <h3 class="case-title">初めての録音。<br>機材選びからMixまで。</h3>
+                    <p class="case-digest">PCも持っていない状態からスタート。予算10万円で揃う機材の選定アドバイスから始め...</p>
+                    <div class="case-footer">
+                        <span>3ヶ月コース</span>
+                        <span class="case-price">Click to Open</span>
+                    </div>
+                    <div class="card-detail">
+                        <p style="margin-bottom:10px;">PCも持っていない状態からスタートしたAさん。予算10万円で揃う機材の選定アドバイスから始め、3ヶ月後には自分で動画投稿まで！</p>
+                        <ul class="case-detail-list">
+                            <li><span>01</span> カウンセリング：予算と目標の設定</li>
+                            <li><span>02</span> 機材購入同行 & セットアップ講習</li>
+                            <li><span>03</span> DAW（Studio One）の基本操作レッスン</li>
+                            <li><span>04</span> 初レコーディング & 簡易ミックス指導</li>
+                            <li><span>GOAL</span> 「歌ってみた」初投稿完了！</li>
+                        </ul>
+                        <div style="text-align:right; font-weight:bold; color:var(--pop-1); margin-top:10px;">¥60,000 (全6回)</div>
+                    </div>
+                </div>
+                
+                <div class="case-card magnet reveal" style="border-left-color: var(--pop-5);">
+                    <div class="case-tag" style="background:var(--pop-5); color:black;">オリジナル曲制作</div>
+                    <h3 class="case-title">鼻歌から<br>フルアレンジへ。</h3>
+                    <p class="case-digest">メロディは浮かぶけどコードがわからない方。AI作曲支援ツールの使い方とコード進行の基礎をレッスン。</p>
+                    <div class="case-footer">
+                        <span>2ヶ月コース</span>
+                        <span class="case-price">Click to Open</span>
+                    </div>
+                    <div class="card-detail">
+                        <p style="margin-bottom:10px;">メロディは浮かぶけどコードがわからないBさん。AI作曲支援ツールの使い方と、コード進行の基礎をレッスン。</p>
+                        <ul class="case-detail-list">
+                            <li><span>01</span> 作りたい曲のイメージ共有</li>
+                            <li><span>02</span> AIツール（Synthesizer V等）活用法</li>
+                            <li><span>03</span> コード進行のパズル的理解</li>
+                            <li><span>04</span> アレンジ構築 & 音色選び</li>
+                            <li><span>GOAL</span> オリジナル曲のデモ完成！</li>
+                        </ul>
+                        <div style="text-align:right; font-weight:bold; color:var(--pop-5); margin-top:10px;">¥45,000 (全4回)</div>
+                    </div>
+                </div>
+
+                <div class="case-card magnet reveal" style="border-left-color: var(--pop-2);">
+                    <div class="case-tag" style="background:var(--pop-2); color:black;">バンドマン</div>
+                    <h3 class="case-title">デモ音源の<br>クオリティアップ。</h3>
+                    <p class="case-digest">バンドのデモ音源をよりプロフェッショナルに。ミックス・マスタリングの実践レッスン。</p>
+                    <div class="case-footer">
+                        <span>1.5ヶ月コース</span>
+                        <span class="case-price">Click to Open</span>
+                    </div>
+                    <div class="card-detail">
+                        <p style="margin-bottom:10px;">バンド活動をしているCさん。自分たちで録音したデモのクオリティを上げたい！</p>
+                        <ul class="case-detail-list">
+                            <li><span>01</span> 現状のデモ音源分析</li>
+                            <li><span>02</span> ミックスの基礎理論レッスン</li>
+                            <li><span>03</span> プラグインの実践的な使い方</li>
+                            <li><span>04</span> マスタリングの基本</li>
+                            <li><span>GOAL</span> 配信リリース可能なクオリティに！</li>
+                        </ul>
+                        <div style="text-align:right; font-weight:bold; color:var(--pop-2); margin-top:10px;">¥35,000 (全3回)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <h2 class="section-title reveal">FAQ</h2>
+        <div class="faq-container">
+            <div class="faq-item reveal">
+                <div class="faq-q">Q. 完全初心者でも大丈夫ですか？</div>
+                <div class="faq-a">A. もちろんです！機材の選び方から丁寧にサポートします。「何もわからない」状態からのスタートでも全く問題ありません。</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">Q. オンラインレッスンはどのように行いますか？</div>
+                <div class="faq-a">A. ZoomやDiscordなどのビデオ通話ツールを使用します。画面共有で実際の作業を見せながら進めるので、対面レッスンとほぼ同じ感覚で学べます。</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">Q. レッスン料金の支払い方法は？</div>
+                <div class="faq-a">A. 銀行振込、クレジットカード決済、PayPayなど各種決済に対応しています。詳しくはカウンセリング時にご案内します。</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">Q. キャンセルや日程変更は可能ですか？</div>
+                <div class="faq-a">A. レッスン開始24時間前までのご連絡であれば、日程変更が可能です。それ以降のキャンセルは1回分消化となりますのでご注意ください。</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reserve-section" id="reserve">
+        <div class="reserve-wrapper">
+            <div class="reserve-info">
+                <h2 class="section-title reveal" style="font-size:3rem;">無料相談予約</h2>
+                <div class="safe-badge reveal-hero">
+                    <span class="safe-icon">🔒</span>
+                    <span>完全無料・勧誘なし</span>
+                </div>
+                <div class="safe-badge reveal-hero">
+                    <span class="safe-icon">⏱</span>
+                    <span>所要時間：約30分</span>
+                </div>
+                <div class="safe-badge reveal-hero">
+                    <span class="safe-icon">💬</span>
+                    <span>オンライン/対面 選択可</span>
+                </div>
+                <p style="margin-top:20px; line-height:1.8;">
+                    まずは気軽にお話ししましょう。<br>
+                    あなたの「やりたいこと」を聞かせてください。<br>
+                    <strong style="color:var(--pop-1);">強引な勧誘は一切ありません。</strong>
+                </p>
+            </div>
+
+            <div class="reserve-box reveal">
+                <h3 style="font-size:1.5rem; margin-bottom:20px;">予約フォーム</h3>
+                <form>
+                    <div class="input-group">
+                        <input type="text" class="input-field" placeholder="お名前*" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" class="input-field" placeholder="メールアドレス*" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" class="input-field" placeholder="電話番号（任意）">
+                    </div>
+                    <div class="input-group">
+                        <textarea class="input-field" rows="4" placeholder="ご相談内容（任意）"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn magnet">予約を確定する</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 第３スタジオ All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+
+        document.querySelectorAll('.flow-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+
+        document.querySelectorAll('.case-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray('.reveal').forEach(el => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 80%',
+                    toggleActions: 'play none none none'
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1
+            });
+        });
+
+        gsap.utils.toArray('.reveal-card').forEach((el, index) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                y: 80,
+                opacity: 0,
+                duration: 0.8,
+                delay: index * 0.1
+            });
+        });
+
+    </script>
+
+    <!-- NAVIGATION HUB -->
+    <section style="background: var(--c-bg); padding: 50px 5% 60px; position: relative; z-index: 10; border-top: 5px solid var(--c-text); border-bottom: 5px solid var(--c-text);">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap;">
+            <h2 style="font-family: var(--font-en); font-size: 2.5rem; color: var(--c-text); margin: 0; letter-spacing: 0.1em;">03. LESSON</h2>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                <a href="Home_new.html" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">00. HOME</a>
+                <a href="Profile.html" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">01. PROFILE</a>
+                <a href="Works.html" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">02. WORKS</a>
+                <a href="Lesson.html" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white); opacity: 0.5; pointer-events: none;">03. LESSON</a>
+                <a href="GearList.html" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">04. GEAR</a>
+                <a href="Price.html" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">05. PRICE</a>
+                <a href="https://xn--3-sj5c.jp/blog/" class="hub-link magnet" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">06. BLOG</a>
+                <a href="Home_new.html#contact" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">07. CONTACT</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/common.js" defer></script>
+</body>
+</html>

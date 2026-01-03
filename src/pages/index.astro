@@ -1,0 +1,511 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+    <!-- 1. NEW HERO -->
+    <header class="new-hero">
+        <div class="new-hero-bg">
+            <img src="/img/20.png" alt="Background">
+        </div>
+        <div class="particles-container" id="particles"></div>
+        <div class="new-hero-content">
+            <div class="new-hero-logo-container">
+                <div class="new-hero-logo-wrapper">
+                    <!-- 背景グロー -->
+                    <div class="logo-glow"></div>
+                    
+                    <!-- ロゴ画像 -->
+                    <img src="/img/MASHROOM_Logo.png" alt="MASHROOM STUDIOS">
+                    
+                    <!-- 光沢エフェクト -->
+                    <div class="logo-shine"></div>
+                </div>
+            </div>
+            <!-- 斜め帯 -->
+            <div class="diagonal-bar">
+                <div class="diagonal-content">
+                    /// RECORDING STUDIO /// SAPPORO /// CREATIVE BASE /// MUSIC PRODUCTION /// VIDEO SHOOTING /// DTM LESSON /// RECORDING STUDIO /// SAPPORO /// CREATIVE BASE ///
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. ABOUT -->
+    <section class="about" data-cursor="color-pop-4">
+        <!-- campaign_banner.pngが存在しないためコメントアウト -->
+        <!--
+        <a href="workshop.html" class="campaign-banner-link">
+            <div class="campaign-banner">
+                <img src="/img/campaign_banner.png" alt="呼吸の塾カラダリズム - 小中高生対象・完全無料ワークショップ" class="banner-image">
+                <div class="banner-overlay">
+                    <div class="banner-left">
+                        <span class="banner-label">🌱 NEW!</span>
+                        <div class="banner-text">
+                            <p class="banner-sub">呼吸の塾</p>
+                            <p class="banner-main">「カラダリズム」始動！</p>
+                            <p class="banner-desc">小中高生対象・完全無料ワークショップ</p>
+                        </div>
+                        <span class="banner-cta">→ 詳しく見る</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        -->
+
+        <div class="about-collage-container">
+            <div class="about-left-col reveal-text">
+                <img src="/img/Main Message.png" alt="おうち、職場、そしてあなたにとっての第3の場所でありたい。" class="handwritten-msg" loading="lazy">
+                <div class="collage-photo-wrapper">
+                    <img src="/img/Main00.jpg" alt="Studio" class="collage-photo" loading="lazy">
+                </div>
+            </div>
+
+            <div class="about-right-col reveal-text">
+                <h2 class="stamp-title">NOT JUST<br><span>A STUDIO.</span></h2>
+                <img src="/img/Main Message02.jpg" alt="Message Card" class="message-card-img" loading="lazy">
+                <div class="nav-hub-container">
+                    <a href="/profile" class="glitch-link magnet" data-text="01 WHO IS OWNER?">01 WHO IS OWNER?</a>
+                    <div class="nav-hub-others" style="display:flex; gap:40px; align-items:baseline; margin-left: 20px;">
+                        <a href="/price" class="glitch-sub magnet">02 PRICE</a><a href="/works" class="glitch-sub magnet">03 WORKS</a>
+                        <a href="/gear" class="glitch-sub magnet">04 GEAR</a><a href="/lesson" class="glitch-sub magnet">05 LESSON</a>
+                        <a href="https://xn--3-sj5c.jp/blog/" class="glitch-sub magnet" target="_blank">06 BLOG</a><a href="#contact" class="glitch-sub magnet">07 CONTACT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. MENUS -->
+    <section class="menu">
+        <div class="neon-line nl-1"></div><div class="neon-line nl-2"></div><div class="neon-line nl-3"></div><div class="neon-line nl-4"></div>
+        <h2 class="section-title reveal-text"><span>Our Service</span>MISSIONS</h2>
+        
+        <div class="card-grid">
+            <!-- カード 1 -->
+            <div class="card card-1 reveal-text magnet" data-card-id="card-1">
+                <div class="card-badge">POPULAR</div>
+                <h3>01. Simple Rec</h3>
+                <p>
+                    <span class="keep-break">来ちゃった！感覚で◎</span><br>
+                    <span class="keep-break">「歌ってみた」も</span><span class="keep-break">「弾き語り」も。</span><br>
+                    <span class="keep-break">録音って楽しい！を</span><br>
+                    <span class="keep-break">まず体験してください！</span>
+                </p>
+                <div class="price">¥5,000~ / 1h</div>
+                <div class="card-details">
+                    <p>初めての方でも安心！高品質なマイクとプリアンプで、歌ってみたや弾き語りを手軽にプロ品質で録音できます。面倒な準備は一切不要です。</p>
+                </div>
+                <div class="card-toggle">詳細を見る 🔽</div>
+            </div>
+            <!-- カード 2 -->
+            <div class="card card-2 reveal-text magnet" data-card-id="card-2">
+                <div class="card-badge">NEW!</div>
+                <h3>02. Rec & Shoot</h3>
+                <p>
+                    <span class="keep-break">録音風景を、</span><br>
+                    <span class="keep-break">そのまま映像作品に。</span><br>
+                    <span class="keep-break">SNSでの発信、</span><br>
+                    <span class="keep-break">最高の機材で</span><span class="keep-break">やってみませんか？</span>
+                </p>
+                <div class="price">¥15,000~</div>
+                <div class="card-details">
+                    <p>レコーディング風景をプロのカメラで撮影し、そのままミュージックビデオやプロモーション動画に仕上げます。音と映像をワンストップで制作することで、最高のクリエイティブを提供します。</p>
+                </div>
+                <div class="card-toggle">詳細を見る 🔽</div>
+            </div>
+            <!-- カード 3 -->
+            <div class="card card-3 reveal-text magnet" data-card-id="card-3">
+                <h3>03. School</h3>
+                <p>
+                    <span class="keep-break">現場で本当に使える</span><br>
+                    <span class="keep-break">「技術」と「考え方」を</span><br>
+                    <span class="keep-break">シェアします。</span><br>
+                    <span class="keep-break">グループレッスンや</span><span class="keep-break">オンラインレッスンも◎</span>
+                </p>
+                <div class="price">¥2,000~</div>
+                <div class="card-details">
+                    <p>DTM、ミックス、ボーカル、ギターなど、現場で使える実践的な技術をマンツーマンで指導。初心者からプロ志向の方まで、目標に合わせたカスタムカリキュラムを提供します。</p>
+                </div>
+                <div class="card-toggle">詳細を見る 🔽</div>
+            </div>
+            <!-- カード 4 -->
+            <div class="card card-4 reveal-text magnet" data-card-id="card-4">
+                <div class="card-badge">RECOMMEND</div>
+                <h3>04. Branding</h3>
+                <p>
+                    <span class="keep-break">魅せ方の時代です！</span><br>
+                    <span class="keep-break">音楽を「仕事」に</span><span class="keep-break">するための、</span><br>
+                    <span class="keep-break">最初の一歩。</span><br>
+                    <span class="keep-break">3ヶ月間徹底的に</span><span class="keep-break">伴走します。</span>
+                </p>
+                <div class="price">¥150,000〜 / 3ヶ月</div>
+                <div class="card-details">
+                    <p>音楽活動をビジネスとして成功させたいアーティスト向けの集中支援プログラム。ブランディング、コンテンツ戦略、プロモーションまで、3ヶ月間で集中的にサポートします。</p>
+                </div>
+                <div class="card-toggle">詳細を見る 🔽</div>
+            </div>
+            <!-- カード 5 -->
+            <div class="card card-5 reveal-text magnet" data-card-id="card-5">
+                <h3>05. Business</h3>
+                <p>
+                    <span class="keep-break">御社のブランドを、</span><br>
+                    <span class="keep-break">今の時代に</span><span class="keep-break">フィットさせる</span><br>
+                    <span class="keep-break">お手伝いを。</span><br>
+                    <span class="keep-break">ありきたりではない、</span><br>
+                    <span class="keep-break">心に残る</span><span class="keep-break">クリエイティブを</span><br>
+                    <span class="keep-break">提案します。</span>
+                </p>
+                <div class="price">¥100,000~</div>
+                <div class="card-details">
+                    <p>CM、企業VP、イベント音楽など、法人向けの高品質な音響制作と楽曲提供。企業のブランドイメージを最大限に引き出すクリエイティブな提案を行います。</p>
+                </div>
+                <div class="card-toggle">詳細を見る 🔽</div>
+            </div>
+        </div>
+
+        <!-- NEW STUDIO NAV BAR -->
+        <div class="studio-nav-bar reveal-text">
+            <a href="/" class="nav-item magnet passed">00 HOME</a>
+            <div class="nav-sep"></div>
+            <a href="/profile" class="nav-item magnet">01 PROFILE</a>
+            <div class="nav-sep"></div>
+            <a href="/works" class="nav-item magnet">02 WORKS</a>
+            <div class="nav-sep"></div>
+            <a href="/lesson" class="nav-item magnet">03 LESSON</a>
+            <div class="nav-sep"></div>
+            <a href="/gear" class="nav-item magnet">04 GEAR</a>
+            <div class="nav-sep"></div>
+            <a href="/price" class="nav-item magnet">05 PRICE</a>
+            <div class="nav-sep"></div>
+            <a href="https://xn--3-sj5c.jp/blog/" class="nav-item magnet" target="_blank">06 BLOG</a>
+            <div class="nav-sep"></div>
+            <a href="#contact" class="nav-item magnet">07 CONTACT</a>
+        </div>
+    </section>
+
+    <!-- 4. GALLERY -->
+    <div class="gallery-container-box">
+        <div class="gallery-wrapper" data-cursor="color-pop-4">
+            <div class="marquee-content">
+                <div class="gallery-item">SOUND</div><div class="gallery-item" style="background:url('/img/Main02.jpg') center/cover;"></div>
+                <div class="gallery-item">VISION</div><div class="gallery-item" style="background:url('/img/Main03.jpg') center/cover;"></div>
+                <div class="gallery-item">PASSION</div><div class="gallery-item" style="background:url('/img/Main08.jpg') center/cover;"></div>
+                <div class="gallery-item">CREATIVE</div><div class="gallery-item" style="background:url('/img/Main05.jpg') center/cover;"></div>
+                <div class="gallery-item">SOUND</div><div class="gallery-item" style="background:url('/img/Main09.jpg') center/cover;"></div>
+                <div class="gallery-item">VISION</div><div class="gallery-item" style="background:url('/img/Main10.jpg') center/cover;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. EXPLORE -->
+    <section class="explore" data-cursor="color-pop-1">
+        <h2 class="explore-title reveal-text">STUDIO CONTENTS</h2>
+        <div class="explore-grid">
+            <div class="explore-card ex-1 reveal-text magnet">
+                <div class="explore-icon">🎸</div><div class="explore-name">GEAR LIST</div><div class="explore-desc">使用機材一覧を見る</div>
+                <a href="/gear" class="card-link" onclick="window.location.href='/gear'; return false;"></a>
+            </div>
+            <div class="explore-card ex-2 reveal-text magnet">
+                <div class="explore-icon">🎬</div><div class="explore-name">WORKS</div><div class="explore-desc">制作実績・お客様の声</div>
+                <a href="/works" class="card-link" onclick="window.location.href='/works'; return false;"></a>
+            </div>
+            <div class="explore-card ex-3 reveal-text magnet">
+                <div class="explore-icon">💰</div><div class="explore-name">PRICE LIST</div><div class="explore-desc">詳細料金表を見る</div>
+                <a href="/price" class="card-link" onclick="window.location.href='/price'; return false;"></a>
+            </div>
+            <!-- ADDED LESSON -->
+            <div class="explore-card ex-4 reveal-text magnet">
+                <div class="explore-icon">🎓</div>
+                <div class="explore-name">LESSON</div>
+                <div class="explore-desc">スクール・講座情報</div>
+                <a href="/lesson" class="card-link" onclick="window.location.href='/lesson'; return false;"></a>
+            </div>
+            <!-- ★追加★ BLOGカード -->
+            <div class="explore-card ex-5 reveal-text magnet">
+                <div class="explore-icon">📝</div>
+                <div class="explore-name">BLOG</div>
+                <div class="explore-desc">AI活用術・DTM機材レビュー</div>
+                <a href="https://xn--3-sj5c.jp/blog/" class="card-link" target="_blank"></a>
+            </div>
+        </div>
+
+        <!-- ひっそりメニュー -->
+        <div class="explore-sub-nav reveal-text">
+            <a href="/profile" class="sub-link magnet">WHO IS OWNER?</a>
+            <span class="sep">/</span>
+            <a href="#contact" class="sub-link magnet">CONTACT</a>
+        </div>
+    </section>
+
+    <!-- ESTIMATE & Q&A (Modified to Light Theme + Dropdown Style) -->
+    <section class="estimate-qa-section" data-cursor="color-pop-6">
+        <div class="section-split">
+            <div class="qa-area">
+                <h2>Q&A SEARCH 🔍</h2>
+                <div class="search-box"><input type="text" id="qa-search" class="search-input" placeholder="キーワードを入力 (例: キャンセル, 機材, 駐車場...)"></div>
+                <div class="qa-list" id="qa-results">
+                    <div class="qa-item"><div class="qa-q">Q1. 駐車場はありますか？</div><div class="qa-a">A. あります。事前にご連絡いただければ、2台まで駐車可能です。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q2. キャンセル料はかかりますか？</div><div class="qa-a">A. 1週間前まで：無料 前日まで：15% 当日：30%</div></div>
+                    <div class="qa-item"><div class="qa-q">Q3. 機材の持ち込みはできますか？</div><div class="qa-a">A. できます。大型機材（マーシャルの大型アンプなど）の場合は事前にご相談ください。ドラムセット一式は対応できませんが、スネアなどパーツ単位でのレコーディングであれば、ブース内で録音可能です。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q4. 初心者でも大丈夫ですか？</div><div class="qa-a">A. 初心者の方も大歓迎です。事前のミーティングでご要望をお伺いし、お客様に合わせたプランをご提案いたします。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q5. 見学はできますか？</div><div class="qa-a">A. 見学は無料で承っております。お気軽にお問い合わせください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q6. 支払い方法は何がありますか？</div><div class="qa-a">A. 現金、銀行振込、請求書発行に対応しております。分割払いも場合によっては可能ですので、お気軽にご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q7. 何時から何時まで営業していますか？</div><div class="qa-a">A. お客様のご都合に合わせて、柔軟にスケジュールを調整いたします。まずはご希望の日時をご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q8. レコーディング時間はどのくらいかかりますか？</div><div class="qa-a">A. 事前の打ち合わせでレコーディング内容を決め、セッティングを整えた上で進めますので、あとはお客様が納得いくまでレコーディングしていただけます。時間制の料金プランもございますので、ご不安な場合は事前にご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q9. ミックス・マスタリングもお願いできますか？</div><div class="qa-a">A. もちろん可能です。リファレンス音源（理想とする音源）をお教えいただければ、それに近づけることも可能です。難しい場合は事前にお伝えし、必要であれば他のエンジニアをご紹介することもできます。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q10. どんなジャンルに対応していますか？</div><div class="qa-a">A. アイドル、地下アイドル、J-POP、洋楽、カントリー、ロックなど幅広く対応しております。ジャズやヘビーメタルは苦手分野ですが、ご相談いただければ頑張って録ります！（笑）</div></div>
+                    <div class="qa-item"><div class="qa-q">Q11. 楽曲制作（作曲・編曲）もお願いできますか？</div><div class="qa-a">A. もちろん可能です。納期もなるべくご希望に沿うよう調整いたします。リファレンス音源や理想のイメージをお伝えいただければ、打ち合わせがスムーズに進みます。途中まで制作された楽曲の続きや仕上げも対応できますので、お気軽にご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q12. ミュージックビデオ（MV）の撮影もできますか？</div><div class="qa-a">A. もちろん可能です。スタジオ内には複数台のカメラがあり、スタジオ内での撮影が可能です。また、提携しているカメラマンやエディターと共に、屋外でのロケーション撮影にも対応しております。AIを使ったアニメーションやイラストを活用したリリックビデオの制作も可能です。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q13. 配信（Spotify、Apple Musicなど）のサポートはありますか？</div><div class="qa-a">A. 手数料をいただければ、配信代行も承ります。どこまでお客様ご自身で対応でき、どこからを代行してほしいかなど、打ち合わせで柔軟に対応いたします。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q14. SNS運用のアドバイスや代行もしてもらえますか？</div><div class="qa-a">A. SNSの代行は対応しておりませんが、運用方法のアドバイスやコンサルティングは可能です。どのように進めていくか、サポートいたします。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q15. レッスン（ボーカル、DTMなど）は受けられますか？</div><div class="qa-a">A. 様々な形式のレッスンに対応しております。ブレスレッスン、ボーカルレッスン、ギター弾き語りレッスン、DTMレッスン（初級〜上級）など幅広く行っております。ギターの中級者・上級者向けには、知り合いのプロギタリストをご紹介することも可能です。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q16. 企業案件（CM、企業VP、イベント音楽など）も対応できますか？</div><div class="qa-a">A. 企業案件の実績も豊富にございます。北海道コンサドーレ札幌様をはじめ、WebCM、企業VP、イベント音楽制作など幅広く対応しております。現場での音響オペレーション、コーディネート、機材手配なども可能です。どのような形の企業案件でも対応いたしますので、お気軽にご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q17. バンドでのレコーディングも可能ですか？</div><div class="qa-a">A. 可能です。ただし、生ドラムセットと生ピアノのレコーディングには対応しておりません。ギターはアンプをお持ち込みいただくか、当スタジオのシミュレーターソフトで対応できます。ドラムは高品質な打ち込みソフトで再現可能です。どうしても生ドラムが必要な場合は、別スタジオで生ドラム録音後、当スタジオで仕上げるハイブリッド方式もご提案できます。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q18. 録音データの納品形式は選べますか？</div><div class="qa-a">A. 選択可能です。MP3、WAV、マスタリングデータなど、ご希望の形式で納品いたします。複数の形式での納品も対応しております。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q19. 修正は何回まで対応してもらえますか？</div><div class="qa-a">A. 料金プランによって対応が異なります。<br>【グロス（買い切り）プランの場合】 基本料金に修正3回まで含まれております。4回目以降は1回あたり追加料金が発生します。また、大幅な方向性変更や複数パターンの制作は別途お見積もりとなります。<br>【時間制プランの場合】 修正作業も制作時間に含まれますので、修正回数に制限はございません。ただし、修正が増えるほど作業時間が延び、料金も増加いたします。想定作業時間を超える場合は事前にご連絡いたします。<br>いずれの場合も、事前の打ち合わせで方向性をしっかり固めることで、スムーズかつ効率的に進められます。お客様のご予算やご要望に合わせて柔軟に対応いたしますので、まずはお気軽にご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q20. 著作権はどうなりますか？</div><div class="qa-a">A. 基本的には、お客様が著作権を持つ形で進めております。ただし、案件内容によって最適な形が異なる場合もございますので、打ち合わせの段階でしっかりとご説明し、お客様に合った形を一緒に決めていきます。「著作権ってよくわからない...」という方にも、わかりやすくアドバイスいたしますので、ご安心ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q21. 遠方からでも依頼できますか？</div><div class="qa-a">A. もちろん可能です！最新のオンラインツールを活用しており、遠方のお客様ともスムーズにやり取りができます。打ち合わせ、レコーディングの立ち会い、確認作業など、すべてオンラインで対応可能です。遠方だからと諦めず、ぜひご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q22. 急ぎの案件にも対応できますか？</div><div class="qa-a">A. 急ぎの案件もぜひご相談ください。スケジュール次第では、通常のスタジオよりもスムーズに対応できる場合があります。納期が厳しい場合でも、まずは一度お話を聞かせてください。できる限りご希望に添えるよう調整いたします。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q23. どんな機材がありますか？</div><div class="qa-a">A. 「GEAR LIST（ギアリスト）」ページに主な機材を記載しております。掲載されていない機材についても、お気軽にメールでお問い合わせください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q24. 防音はしっかりしていますか？</div><div class="qa-a">A. しっかりと防音されておりますので、大きな音でも安心してレコーディングしていただけます。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q25. Wi-Fiは使えますか？</div><div class="qa-a">A. Wi-Fi完備しております。自由にご利用ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q26. 飲食物の持ち込みはできますか？</div><div class="qa-a">A. 持ち込み可能です。また、ご予算に応じてこちらでご用意することも可能です。デロンギマシンで本格的なエスプレッソもお淹れできます。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q27. 喫煙スペースはありますか？</div><div class="qa-a">A. スタジオ内は禁煙となっております。喫煙される方は外、またはお車の中でお願いしております。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q28. 予約はどのくらい前から可能ですか？</div><div class="qa-a">A. 半年以上前からでも予約可能です。お気軽にご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q29. 当日予約はできますか？</div><div class="qa-a">A. スケジュール次第では前日・当日でも対応可能な場合がございます。まずは一度ご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q30. 延長は可能ですか？</div><div class="qa-a">A. スケジュール次第で延長可能です。ご希望の際はご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q31. 休業日はありますか？</div><div class="qa-a">A. 特に定休日は設けておりませんので、柔軟にスケジュール調整が可能です。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q32. 見積もりは無料ですか？</div><div class="qa-a">A. 見積もりは無料です。お気軽にご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q33. 学割はありますか？</div><div class="qa-a">A. 学割ございます。学生の皆さん、ぜひご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q34. 複数曲の割引はありますか？</div><div class="qa-a">A. 複数曲をまとめてご依頼いただく場合、割引対応が可能です。ご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q35. ナレーション録音もできますか？</div><div class="qa-a">A. ナレーション録音、声の調整、映像との同期（MA）まで対応可能です。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q36. ポッドキャスト収録もできますか？</div><div class="qa-a">A. ポッドキャスト収録、生配信にも対応しております。お気軽にご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q37. 仮歌の手配もお願いできますか？</div><div class="qa-a">A. 仮歌シンガーの手配も可能です。また、AIソフトを使った高精度な仮歌生成にも対応しております。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q38. ジャケット写真の撮影もできますか？</div><div class="qa-a">A. ジャケット写真の撮影も可能です。プロのカメラマンと提携しておりますので、ご紹介や共同制作も対応できます。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q39. 最寄り駅はどこですか？</div><div class="qa-a">A. 地下鉄：北24条駅、北34条駅 JR：新川駅 場合によっては地下鉄駅までお迎えに上がることも可能です。ご相談ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q40. 荷物を預けるスペースはありますか？</div><div class="qa-a">A. 荷物を預けるスペースもございます。お気軽にご利用ください。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q41. 友人の同伴は可能ですか？</div><div class="qa-a">A. もちろん可能です。ご家族で来られる方もいらっしゃいます。</div></div>
+                    <div class="qa-item"><div class="qa-q">Q42. 子連れでも大丈夫ですか？</div><div class="qa-a">A. お子様連れでも大歓迎です。安心してお越しください。</div></div>
+                </div>
+            </div>
+            <div class="estimate-area">
+                <h2>QUICK ESTIMATE ⚡</h2>
+                <div class="estimate-form">
+                    <div class="form-group">
+                        <label class="form-label">PLAN</label>
+                        <div class="select-wrapper">
+                            <select id="est-plan" class="form-select">
+                                <option value="1500">Rehearsal (¥1,500/h)</option><option value="3500">Standard Rec (¥3,500/h)</option><option value="8000">Full Production (¥8,000/h)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">HOURS</label>
+                        <div class="select-wrapper">
+                            <select id="est-hours" class="form-select">
+                                <option value="1">1時間</option><option value="2">2時間</option><option value="3">3時間</option><option value="4">4時間</option><option value="5">5時間</option><option value="6">6時間 (Pack検討推奨)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">OPTIONS</label>
+                        <div class="select-wrapper">
+                            <select id="est-opt" class="form-select">
+                                <option value="0">なし</option><option value="15000">ミックス (¥15,000)</option><option value="5000">マスタリング (¥5,000)</option><option value="20000">ミックス＆マスタリング (¥20,000)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="total-price-box">TOTAL: ¥<span id="est-total">1,500</span></div>
+                    <button id="copy-line-btn" class="line-copy-btn">この内容をコピーして<br>LINEで相談する 💬</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" data-cursor="color-pop-5">
+        <p style="font-weight: bold; margin-bottom: 20px;">ARE YOU READY?</p>
+        <div class="footer-cta reveal-text">LET'S MAKE<br>SOMETHING<br>CRAZY...</div>
+        <p style="margin-bottom: 40px; font-size: 1.2rem;">まずは一度、スタジオに遊びに来ませんか？<br>美味しいコーヒー淹れて待ってる。</p>
+        <div class="footer-btn-container">
+            <a href="#" class="btn-pop magnet">LINEで相談する 💬</a>
+            <a id="mail-trigger" class="btn-glitch magnet">MAIL FORM</a>
+        </div>
+        <div style="margin-top: 80px; font-size: 0.8rem;">&copy; 2025 MASHROOM STUDIO by Walewalewa</div>
+    </footer>
+
+    <!-- MAIL MODAL -->
+    <div class="mail-modal-overlay" id="mail-modal-overlay">
+        <div class="mail-modal" id="mail-modal">
+            <div class="modal-close-btn" id="mail-close">×</div>
+            <h2>MAIL FORM</h2>
+            <p style="margin-bottom: 20px;">※ 営業メールなどは一切いたしません。安心してお問い合わせください。</p>
+            <input type="text" id="mail-name" class="mail-input" placeholder="お名前 (例: 山田 太郎)">
+            <input type="text" id="mail-contact" class="mail-input" placeholder="連絡先 (メールアドレス or 電話番号)">
+            <textarea id="mail-body" class="mail-textarea" placeholder="ご相談内容"></textarea>
+            <button id="mail-send" class="mail-send-btn">メールソフトを起動する 🚀</button>
+            <p class="mail-note">ボタンを押すと、入力内容が反映された状態でメールソフトが起動します。</p>
+        </div>
+    </div>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        // パーティクル生成
+        const particlesContainer = document.getElementById('particles');
+        if (particlesContainer) {
+            for (let i = 0; i < 10; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.width = (Math.random() * 6 + 4) + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.animationDuration = (Math.random() * 6 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        const isMobile = window.innerWidth <= 900;
+
+        if (!isMobile) {
+            gsap.utils.toArray('.reveal-text').forEach(element => { 
+                gsap.fromTo(element, { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power4.out', scrollTrigger: { trigger: element, start: 'top 80%', toggleActions: 'play none none reverse' } }); 
+            });
+        } else {
+            // Simple fade in for mobile to prevent "shaking"
+            gsap.utils.toArray('.reveal-text').forEach(element => { 
+                gsap.fromTo(element, { opacity: 0 }, { opacity: 1, duration: 0.5, scrollTrigger: { trigger: element, start: 'top 90%' } }); 
+            });
+        }
+        
+        const hubs = gsap.utils.toArray('.nav-hub-container');
+        hubs.forEach(hub => {
+            const links = hub.querySelectorAll('a');
+            gsap.from(links, {
+                x: -50,
+                opacity: 0,
+                duration: 0.8,
+                ease: "back.out(1.7)",
+                stagger: 0.1,
+                scrollTrigger: {
+                    trigger: hub,
+                    start: "top 95%", 
+                    toggleActions: "play none none reverse"
+                }
+            });
+        });
+
+        const marqueeContent = document.querySelector('.marquee-content');
+        const clone = marqueeContent.cloneNode(true);
+        document.querySelector('.gallery-wrapper').appendChild(clone);
+        gsap.to('.marquee-content', { xPercent: -100, ease: "none", duration: 20, repeat: -1 });
+
+        const searchInput = document.getElementById('qa-search');
+        const qaItems = document.querySelectorAll('.qa-item');
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            qaItems.forEach(item => { item.style.display = item.innerText.toLowerCase().includes(term) ? 'block' : 'none'; });
+        });
+        
+        // Q&Aアコーディオンの切り替えロジック
+        qaItems.forEach(item => { item.addEventListener('click', () => { 
+            // PC版ではアコーディオン
+            if (window.innerWidth > 900) {
+                item.classList.toggle('active');
+            }
+        }); });
+
+        // --- MISSIONS CARD CLICK LOGIC ---
+        const cardItems = document.querySelectorAll('.card');
+        cardItems.forEach(card => {
+            card.addEventListener('click', () => {
+                if (window.innerWidth > 900) return; // PCでは何もしない (ホバーアニメーションが優先)
+
+                const details = card.querySelector('.card-details');
+                const toggle = card.querySelector('.card-toggle');
+
+                if (details && toggle) {
+                    const isOpening = !card.classList.contains('is-open');
+
+                    // 他のカードを閉じる
+                    cardItems.forEach(otherCard => {
+                        if (otherCard !== card && otherCard.classList.contains('is-open')) {
+                            gsap.to(otherCard.querySelector('.card-details'), { height: 0, opacity: 0, duration: 0.2, onComplete: () => { otherCard.querySelector('.card-details').style.display = 'none'; } });
+                            otherCard.querySelector('.card-toggle').innerText = '詳細を見る 🔽';
+                            otherCard.classList.remove('is-open');
+                        }
+                    });
+
+                    if (isOpening) {
+                        // 開く
+                        details.style.display = 'block';
+                        gsap.fromTo(details, { height: 0, opacity: 0 }, { height: 'auto', opacity: 1, duration: 0.3, ease: 'power2.out' });
+                        toggle.innerText = '閉じる 🔼';
+                        card.classList.add('is-open');
+                    } else {
+                        // 閉じる
+                        gsap.to(details, { height: 0, opacity: 0, duration: 0.2, onComplete: () => { details.style.display = 'none'; } });
+                        toggle.innerText = '詳細を見る 🔽';
+                        card.classList.remove('is-open');
+                    }
+                }
+            });
+        });
+
+        // --- ESTIMATE AND OTHER LOGIC ---
+        const estPlan = document.getElementById('est-plan');
+        const estHours = document.getElementById('est-hours');
+        const estOpt = document.getElementById('est-opt');
+        const estTotal = document.getElementById('est-total');
+        const copyBtn = document.getElementById('copy-line-btn');
+
+        function calculateTotal() {
+            const total = (parseInt(estPlan.value) * parseInt(estHours.value)) + parseInt(estOpt.value);
+            estTotal.innerText = total.toLocaleString();
+        }
+        [estPlan, estHours, estOpt].forEach(el => el.addEventListener('change', calculateTotal));
+
+        copyBtn.addEventListener('click', () => {
+            const textToCopy = `【見積もり相談】\nプラン: ${estPlan.options[estPlan.selectedIndex].text}\n時間: ${estHours.options[estHours.selectedIndex].text}\nオプション: ${estOpt.options[estOpt.selectedIndex].text}\n概算合計: ¥${estTotal.innerText}\n\nこの内容で予約・相談したいです。`;
+            const tempInput = document.createElement("textarea");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            console.log('内容をコピーしました');
+        });
+
+        // ページロード時に合計を計算
+        calculateTotal();
+
+        const mailBtn = document.getElementById('mail-trigger');
+        const mailOverlay = document.getElementById('mail-modal-overlay');
+        const mailModal = document.getElementById('mail-modal');
+        const mailClose = document.getElementById('mail-close');
+        const mailSend = document.getElementById('mail-send');
+
+        mailBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            mailOverlay.style.display = 'flex';
+            gsap.to(mailModal, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(1.7)' });
+        });
+
+        function closeMailModal() {
+            gsap.to(mailModal, { scale: 0.9, opacity: 0, duration: 0.3, ease: 'power2.in', onComplete: () => { mailOverlay.style.display = 'none'; } });
+        }
+        mailClose.addEventListener('click', closeMailModal);
+        mailOverlay.addEventListener('click', (e) => { if (e.target === mailOverlay) closeMailModal(); });
+
+        mailSend.addEventListener('click', () => {
+            const name = document.getElementById('mail-name').value;
+            const contact = document.getElementById('mail-contact').value;
+            const body = document.getElementById('mail-body').value;
+            if(!name || !contact || !body) { console.error('すべての項目を入力してください'); return; }
+            
+            const subject = encodeURIComponent("【MASHROOM STUDIO】相談・問い合わせ");
+            const mailBody = encodeURIComponent(`お名前: ${name}\n連絡先: ${contact}\n\n相談内容:\n${body}\n\n----------------\n※このメールはWebサイトから送信されました。`);
+            window.location.href = `mailto:info@walewalewa.com?subject=${subject}&body=${mailBody}`;
+        });
+    </script>
+</Layout>

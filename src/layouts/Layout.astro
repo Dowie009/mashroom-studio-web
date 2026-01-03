@@ -1,0 +1,113 @@
+---
+import '../styles/common.css';
+import '../styles/home.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "札幌のレコーディング＆音楽制作スタジオ | MASHROOM STUDIO (歌ってみた/MV撮影/DTM教室)",
+  description = "札幌市北区のレコーディングスタジオ「MASHROOM STUDIO」。初心者歓迎の「歌ってみた」録音から、プロ仕様のMV撮影、DTMレッスン、企業向け楽曲制作までトータルサポート。機材充実、手ぶらでOK。あなたの「やりたい」をプロの技術で形にします。まずはお気軽にLINEでご相談を。",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO対策: タイトルと説明文 -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <!-- 強制キャッシュ無効化（iPhone/Safari対策） -->
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+
+    <!-- 構造化データ (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "MusicVenue",
+      "name": "MASHROOM STUDIO by Walewalewa",
+      "image": "/img/image_47d437.jpg",
+      "@id": "https://walewalewa.com",
+      "url": "https://walewalewa.com",
+      "telephone": "",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "北区",
+        "addressLocality": "札幌市",
+        "addressRegion": "北海道",
+        "postalCode": "",
+        "addressCountry": "JP"
+      },
+      "priceRange": "¥1,500~",
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.0,
+        "longitude": 141.3
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "10:00",
+        "closes": "23:00"
+      },
+      "sameAs": [
+        "https://www.instagram.com/walewalewa",
+        "https://twitter.com/walewalewa"
+      ]
+    })} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Kaisei+Decol:wght@400;700&family=Klee+One:wght@400;600&family=RocknRoll+One&family=Share+Tech+Mono&family=Yomogi&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <slot name="head" />
+</head>
+<body>
+    <div class="cursor"></div>
+    
+    <div class="menu-overlay" id="menu-overlay"></div>
+
+    <!-- HAMBURGER -->
+    <div class="hamburger-btn magnet" id="hamburger">
+        <div class="h-line"></div>
+        <div class="h-line"></div>
+        <div class="h-line"></div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <nav class="pop-sidebar" id="pop-sidebar">
+        <ul class="menu-list">
+            <li class="menu-item"><a href="/" class="menu-link"><span class="menu-num">00</span> HOME</a></li>
+            <li class="menu-item"><a href="/profile" class="menu-link"><span class="menu-num">01</span> PROFILE</a></li>
+            <li class="menu-item"><a href="/works" class="menu-link"><span class="menu-num">02</span> WORKS</a></li>
+            <li class="menu-item"><a href="/lesson" class="menu-link"><span class="menu-num">03</span> LESSON</a></li>
+            <li class="menu-item"><a href="/gear" class="menu-link"><span class="menu-num">04</span> GEAR</a></li>
+            <li class="menu-item"><a href="/price" class="menu-link"><span class="menu-num">05</span> PRICE</a></li>
+            <li class="menu-item"><a href="https://xn--3-sj5c.jp/blog/" class="menu-link" target="_blank" rel="noopener noreferrer"><span class="menu-num">06</span> BLOG</a></li>
+            <li class="menu-item"><a href="/#contact" class="menu-link"><span class="menu-num">07</span> CONTACT</a></li>
+        </ul>
+        <div class="menu-deco">/// MENU_ACCESSED /// SAPPORO_STUDIO ///</div>
+    </nav>
+    
+    <slot />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" is:inline></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" is:inline></script>
+    <script is:inline src="/js/common.js"></script>
+    <slot name="scripts" />
+</body>
+</html>
+
