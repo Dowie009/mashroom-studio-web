@@ -778,8 +778,9 @@ transform: rotate(-1deg) !important;
     content: '';
     position: absolute;
     bottom: 0; left: 0; right: 0;
-    height: 116px;
-    background: linear-gradient(to left bottom, transparent 50%, rgb(240, 240, 240) 50%);
+    height: 38px;
+    background: rgb(240, 240, 240);
+    clip-path: polygon(0 0px, 100% 38px, 100% 100%, 0 100%);
     z-index: 3;
     pointer-events: none;
 }

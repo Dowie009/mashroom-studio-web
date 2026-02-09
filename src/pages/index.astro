@@ -663,6 +663,87 @@ import Layout from '../layouts/Layout.astro';
             document.addEventListener('mouseup', function() { d2 = false; });
         })();
 
+        // ===== DEBUG: .menu 下端境界線 調整パネル =====
+        (function() {
+            var menu = document.querySelector('.menu');
+            if (!menu) return;
+
+            // ::after用の動的styleタグ
+            var dynStyle = document.createElement('style');
+            dynStyle.id = 'dbg-menu-bottom-style';
+            document.head.appendChild(dynStyle);
+
+            var panel3 = document.createElement('div');
+            panel3.id = 'debug-panel-bottom';
+            panel3.innerHTML = '<style>'
+                + '#debug-panel-bottom { position:fixed; bottom:10px; left:10px; z-index:99999; background:rgba(0,0,0,0.92); color:#0f0; font-family:monospace; font-size:13px; padding:16px 20px; border-radius:10px; border:1px solid #0f0; min-width:320px; cursor:move; user-select:none; backdrop-filter:blur(8px); }'
+                + '#debug-panel-bottom h3 { margin:0 0 12px; color:#0f0; font-size:14px; text-align:center; }'
+                + '#debug-panel-bottom .row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }'
+                + '#debug-panel-bottom label { width:80px; text-align:right; flex-shrink:0; }'
+                + '#debug-panel-bottom input[type=range] { flex:1; accent-color:#0f0; }'
+                + '#debug-panel-bottom .val { width:70px; text-align:left; color:#fff; }'
+                + '#debug-panel-bottom .actions { display:flex; gap:8px; margin-top:14px; }'
+                + '#debug-panel-bottom button { flex:1; padding:8px; border:1px solid #0f0; background:transparent; color:#0f0; font-family:monospace; font-size:12px; cursor:pointer; border-radius:4px; }'
+                + '#debug-panel-bottom button:hover { background:#0f0; color:#000; }'
+                + '#debug-panel-bottom .copied { color:#ff0; font-size:11px; text-align:center; margin-top:6px; min-height:16px; }'
+                + '</style>'
+                + '<h3>DEBUG: .menu 下端の斜め境界線</h3>'
+                + '<div class="row"><label>左下:</label><input type="range" id="dbg-btmL" min="0" max="300" step="1" value="115"><span class="val" id="dbg-btmL-v">115px</span></div>'
+                + '<div class="row"><label>右下:</label><input type="range" id="dbg-btmR" min="0" max="300" step="1" value="0"><span class="val" id="dbg-btmR-v">0px</span></div>'
+                + '<div class="actions"><button id="dbg-btm-copy">COPY CSS</button><button id="dbg-btm-reset">RESET</button></div>'
+                + '<div class="copied" id="dbg-btm-copied"></div>';
+            document.body.appendChild(panel3);
+
+            var elL = document.getElementById('dbg-btmL');
+            var elR = document.getElementById('dbg-btmR');
+            var valL = document.getElementById('dbg-btmL-v');
+            var valR = document.getElementById('dbg-btmR-v');
+
+            function applyBottom() {
+                var l = parseInt(elL.value);
+                var r = parseInt(elR.value);
+                var h = Math.max(l, r, 1);
+                // ::afterの中にclip-pathで台形を作る
+                // 高さhpx、左側はl px食い込み、右側はr px食い込み
+                // 左上(0, h-l)px 右上(100%, h-r)px 右下(100%, h)px 左下(0, h)px
+                dynStyle.textContent = '.menu::after { height: ' + h + 'px !important; background: rgb(240,240,240) !important; clip-path: polygon(0 ' + (h - l) + 'px, 100% ' + (h - r) + 'px, 100% ' + h + 'px, 0 ' + h + 'px) !important; }';
+                valL.textContent = l + 'px';
+                valR.textContent = r + 'px';
+            }
+
+            elL.addEventListener('input', applyBottom);
+            elR.addEventListener('input', applyBottom);
+            applyBottom();
+
+            document.getElementById('dbg-btm-copy').addEventListener('click', function() {
+                var l = parseInt(elL.value);
+                var r = parseInt(elR.value);
+                var h = Math.max(l, r, 1);
+                var css = '.menu::after {\n  height: ' + h + 'px;\n  background: rgb(240,240,240);\n  clip-path: polygon(0 ' + (h-l) + 'px, 100% ' + (h-r) + 'px, 100% 100%, 0 100%);\n}';
+                navigator.clipboard.writeText(css);
+                document.getElementById('dbg-btm-copied').textContent = 'Copied!';
+                setTimeout(function() { document.getElementById('dbg-btm-copied').textContent = ''; }, 2000);
+            });
+
+            document.getElementById('dbg-btm-reset').addEventListener('click', function() {
+                elL.value = 115; elR.value = 0;
+                applyBottom();
+            });
+
+            // ドラッグ移動
+            var d3 = false, dx3 = 0, dy3 = 0;
+            panel3.addEventListener('mousedown', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+                d3 = true; dx3 = e.clientX - panel3.offsetLeft; dy3 = e.clientY - panel3.offsetTop;
+            });
+            document.addEventListener('mousemove', function(e) {
+                if (!d3) return;
+                panel3.style.left = (e.clientX - dx3) + 'px'; panel3.style.top = (e.clientY - dy3) + 'px';
+                panel3.style.right = 'auto'; panel3.style.bottom = 'auto';
+            });
+            document.addEventListener('mouseup', function() { d3 = false; });
+        })();
+
         const mailBtn = document.getElementById('mail-trigger');
         const mailOverlay = document.getElementById('mail-modal-overlay');
         const mailModal = document.getElementById('mail-modal');
