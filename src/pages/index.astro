@@ -6,7 +6,7 @@ import Layout from '../layouts/Layout.astro';
     <!-- 1. NEW HERO -->
     <header class="new-hero">
         <div class="new-hero-bg">
-            <img src="/img/20.png" alt="Background">
+            <img src="/img/20_compressed.jpg" alt="Background">
         </div>
         <div class="particles-container" id="particles"></div>
         <div class="new-hero-content">
@@ -55,7 +55,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="about-collage-container">
             <div class="about-left-col reveal-text">
-                <img src="/img/Main Message.png" alt="おうち、職場、そしてあなたにとっての第3の場所でありたい。" class="handwritten-msg" loading="lazy">
+                <img src="/img/main-message.png" alt="MASHROOM Recording & Creative Studio - 音楽・映像・デザイン、海外テイストのエンターテイメント、最先端な技術のレコーディングスタジオ" class="handwritten-msg" loading="lazy">
                 <div class="collage-photo-wrapper">
                     <img src="/img/Main00.jpg" alt="Studio" class="collage-photo" loading="lazy">
                 </div>
@@ -78,13 +78,13 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- 3. MENUS -->
     <section class="menu">
-        <div class="neon-line nl-1"></div><div class="neon-line nl-2"></div><div class="neon-line nl-3"></div><div class="neon-line nl-4"></div>
+        <div class="menu-bg-overlay"></div>
         <h2 class="section-title reveal-text"><span>Our Service</span>MISSIONS</h2>
-        
+
         <div class="card-grid">
             <!-- カード 1 -->
             <div class="card card-1 reveal-text magnet" data-card-id="card-1">
-                <div class="card-badge">POPULAR</div>
+                <div class="card-img"><img src="/img/missions/card-rec.jpg" alt="Recording" loading="lazy"></div>
                 <h3>01. Simple Rec</h3>
                 <p>
                     <span class="keep-break">来ちゃった！感覚で◎</span><br>
@@ -92,7 +92,7 @@ import Layout from '../layouts/Layout.astro';
                     <span class="keep-break">録音って楽しい！を</span><br>
                     <span class="keep-break">まず体験してください！</span>
                 </p>
-                <div class="price">¥5,000~ / 1h</div>
+                <div class="price">¥5,000~/1h</div>
                 <div class="card-details">
                     <p>初めての方でも安心！高品質なマイクとプリアンプで、歌ってみたや弾き語りを手軽にプロ品質で録音できます。面倒な準備は一切不要です。</p>
                 </div>
@@ -100,7 +100,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <!-- カード 2 -->
             <div class="card card-2 reveal-text magnet" data-card-id="card-2">
-                <div class="card-badge">NEW!</div>
+                <div class="card-img"><img src="/img/missions/card-shoot.jpg" alt="Rec & Shoot" loading="lazy"></div>
                 <h3>02. Rec & Shoot</h3>
                 <p>
                     <span class="keep-break">録音風景を、</span><br>
@@ -116,6 +116,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <!-- カード 3 -->
             <div class="card card-3 reveal-text magnet" data-card-id="card-3">
+                <div class="card-img"><img src="/img/missions/card-school.jpg" alt="School" loading="lazy"></div>
                 <h3>03. School</h3>
                 <p>
                     <span class="keep-break">現場で本当に使える</span><br>
@@ -131,7 +132,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <!-- カード 4 -->
             <div class="card card-4 reveal-text magnet" data-card-id="card-4">
-                <div class="card-badge">RECOMMEND</div>
+                <div class="card-img"><img src="/img/missions/card-branding.jpg" alt="Branding" loading="lazy"></div>
                 <h3>04. Branding</h3>
                 <p>
                     <span class="keep-break">魅せ方の時代です！</span><br>
@@ -139,7 +140,7 @@ import Layout from '../layouts/Layout.astro';
                     <span class="keep-break">最初の一歩。</span><br>
                     <span class="keep-break">3ヶ月間徹底的に</span><span class="keep-break">伴走します。</span>
                 </p>
-                <div class="price">¥150,000〜 / 3ヶ月</div>
+                <div class="price">¥150,000~/3ヶ月</div>
                 <div class="card-details">
                     <p>音楽活動をビジネスとして成功させたいアーティスト向けの集中支援プログラム。ブランディング、コンテンツ戦略、プロモーションまで、3ヶ月間で集中的にサポートします。</p>
                 </div>
@@ -147,6 +148,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <!-- カード 5 -->
             <div class="card card-5 reveal-text magnet" data-card-id="card-5">
+                <div class="card-img"><img src="/img/missions/card-business.jpg" alt="Business" loading="lazy"></div>
                 <h3>05. Business</h3>
                 <p>
                     <span class="keep-break">御社のブランドを、</span><br>
@@ -478,6 +480,188 @@ import Layout from '../layouts/Layout.astro';
 
         // ページロード時に合計を計算
         calculateTotal();
+
+        // ===== DEBUG PANEL: .handwritten-msg 調整用 =====
+        (function() {
+            const target = document.querySelector('.handwritten-msg');
+            if (!target) return;
+
+            const panel = document.createElement('div');
+            panel.id = 'debug-panel';
+            panel.innerHTML = `
+                <style>
+                    #debug-panel {
+                        position: fixed; top: 10px; left: 10px; z-index: 99999;
+                        background: rgba(0,0,0,0.92); color: #0f0; font-family: monospace; font-size: 13px;
+                        padding: 16px 20px; border-radius: 10px; border: 1px solid #0f0;
+                        min-width: 320px; cursor: move; user-select: none;
+                        backdrop-filter: blur(8px);
+                    }
+                    #debug-panel h3 { margin: 0 0 12px; color: #0f0; font-size: 14px; text-align: center; }
+                    #debug-panel .row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+                    #debug-panel label { width: 110px; text-align: right; flex-shrink: 0; }
+                    #debug-panel input[type=range] { flex: 1; accent-color: #0f0; }
+                    #debug-panel .val { width: 70px; text-align: left; color: #fff; }
+                    #debug-panel .actions { display: flex; gap: 8px; margin-top: 14px; }
+                    #debug-panel button {
+                        flex: 1; padding: 8px; border: 1px solid #0f0; background: transparent;
+                        color: #0f0; font-family: monospace; font-size: 12px; cursor: pointer; border-radius: 4px;
+                    }
+                    #debug-panel button:hover { background: #0f0; color: #000; }
+                    #debug-panel .copied { color: #ff0; font-size: 11px; text-align: center; margin-top: 6px; min-height: 16px; }
+                </style>
+                <h3>DEBUG: .handwritten-msg</h3>
+                <div class="row"><label>rotate:</label><input type="range" id="dbg-rotate" min="-20" max="20" step="0.5" value="-3"><span class="val" id="dbg-rotate-v">-3deg</span></div>
+                <div class="row"><label>scale:</label><input type="range" id="dbg-scale" min="0.3" max="2" step="0.05" value="1"><span class="val" id="dbg-scale-v">1</span></div>
+                <div class="row"><label>margin-bottom:</label><input type="range" id="dbg-mb" min="-200" max="200" step="5" value="0"><span class="val" id="dbg-mb-v">0px</span></div>
+                <div class="row"><label>margin-top:</label><input type="range" id="dbg-mt" min="-200" max="200" step="5" value="0"><span class="val" id="dbg-mt-v">0px</span></div>
+                <div class="row"><label>width:</label><input type="range" id="dbg-w" min="30" max="150" step="1" value="100"><span class="val" id="dbg-w-v">100%</span></div>
+                <div class="actions">
+                    <button id="dbg-copy">COPY CSS</button>
+                    <button id="dbg-reset">RESET</button>
+                </div>
+                <div class="copied" id="dbg-copied"></div>
+            `;
+            document.body.appendChild(panel);
+
+            const els = {
+                rotate: document.getElementById('dbg-rotate'),
+                scale: document.getElementById('dbg-scale'),
+                mb: document.getElementById('dbg-mb'),
+                mt: document.getElementById('dbg-mt'),
+                w: document.getElementById('dbg-w'),
+            };
+            const vals = {
+                rotate: document.getElementById('dbg-rotate-v'),
+                scale: document.getElementById('dbg-scale-v'),
+                mb: document.getElementById('dbg-mb-v'),
+                mt: document.getElementById('dbg-mt-v'),
+                w: document.getElementById('dbg-w-v'),
+            };
+
+            function apply() {
+                const r = els.rotate.value;
+                const s = els.scale.value;
+                const mb = els.mb.value;
+                const mt = els.mt.value;
+                const w = els.w.value;
+                target.style.transform = 'rotate(' + r + 'deg) scale(' + s + ')';
+                target.style.marginBottom = mb + 'px';
+                target.style.marginTop = mt + 'px';
+                target.style.width = w + '%';
+                vals.rotate.textContent = r + 'deg';
+                vals.scale.textContent = s;
+                vals.mb.textContent = mb + 'px';
+                vals.mt.textContent = mt + 'px';
+                vals.w.textContent = w + '%';
+            }
+
+            Object.values(els).forEach(function(el) { el.addEventListener('input', apply); });
+
+            document.getElementById('dbg-copy').addEventListener('click', function() {
+                const css = '.handwritten-msg {\n'
+                    + '  width: ' + els.w.value + '%;\n'
+                    + '  transform: rotate(' + els.rotate.value + 'deg) scale(' + els.scale.value + ');\n'
+                    + '  margin-top: ' + els.mt.value + 'px;\n'
+                    + '  margin-bottom: ' + els.mb.value + 'px;\n'
+                    + '}';
+                navigator.clipboard.writeText(css);
+                document.getElementById('dbg-copied').textContent = 'Copied!';
+                setTimeout(function() { document.getElementById('dbg-copied').textContent = ''; }, 2000);
+            });
+
+            document.getElementById('dbg-reset').addEventListener('click', function() {
+                els.rotate.value = -3; els.scale.value = 1; els.mb.value = 0; els.mt.value = 0; els.w.value = 100;
+                apply();
+            });
+
+            // ドラッグ移動
+            let dragging = false, dx = 0, dy = 0;
+            panel.addEventListener('mousedown', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+                dragging = true; dx = e.clientX - panel.offsetLeft; dy = e.clientY - panel.offsetTop;
+            });
+            document.addEventListener('mousemove', function(e) {
+                if (!dragging) return;
+                panel.style.left = (e.clientX - dx) + 'px'; panel.style.top = (e.clientY - dy) + 'px';
+            });
+            document.addEventListener('mouseup', function() { dragging = false; });
+        })();
+
+        // ===== DEBUG: .menu (MISSIONS) 上端境界線 調整パネル =====
+        (function() {
+            var menu = document.querySelector('.menu');
+            if (!menu) return;
+
+            var panel2 = document.createElement('div');
+            panel2.id = 'debug-panel-border';
+            panel2.innerHTML = '<style>'
+                + '#debug-panel-border { position:fixed; bottom:10px; right:10px; z-index:99999; background:rgba(0,0,0,0.92); color:#0f0; font-family:monospace; font-size:13px; padding:16px 20px; border-radius:10px; border:1px solid #0f0; min-width:320px; cursor:move; user-select:none; backdrop-filter:blur(8px); }'
+                + '#debug-panel-border h3 { margin:0 0 12px; color:#0f0; font-size:14px; text-align:center; }'
+                + '#debug-panel-border .row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }'
+                + '#debug-panel-border label { width:80px; text-align:right; flex-shrink:0; }'
+                + '#debug-panel-border input[type=range] { flex:1; accent-color:#0f0; }'
+                + '#debug-panel-border .val { width:70px; text-align:left; color:#fff; }'
+                + '#debug-panel-border .actions { display:flex; gap:8px; margin-top:14px; }'
+                + '#debug-panel-border button { flex:1; padding:8px; border:1px solid #0f0; background:transparent; color:#0f0; font-family:monospace; font-size:12px; cursor:pointer; border-radius:4px; }'
+                + '#debug-panel-border button:hover { background:#0f0; color:#000; }'
+                + '#debug-panel-border .copied { color:#ff0; font-size:11px; text-align:center; margin-top:6px; min-height:16px; }'
+                + '</style>'
+                + '<h3>DEBUG: .menu 上端の斜め境界線</h3>'
+                + '<div class="row"><label>左上 Y:</label><input type="range" id="dbg-menuLY" min="0" max="300" step="5" value="0"><span class="val" id="dbg-menuLY-v">0px</span></div>'
+                + '<div class="row"><label>右上 Y:</label><input type="range" id="dbg-menuRY" min="0" max="300" step="5" value="0"><span class="val" id="dbg-menuRY-v">0px</span></div>'
+                + '<div class="row"><label>margin-top:</label><input type="range" id="dbg-menuMT" min="-200" max="0" step="5" value="0"><span class="val" id="dbg-menuMT-v">0px</span></div>'
+                + '<div class="actions"><button id="dbg-menu-copy">COPY CSS</button><button id="dbg-menu-reset">RESET</button></div>'
+                + '<div class="copied" id="dbg-menu-copied"></div>';
+            document.body.appendChild(panel2);
+
+            var elLY = document.getElementById('dbg-menuLY');
+            var elRY = document.getElementById('dbg-menuRY');
+            var elMT = document.getElementById('dbg-menuMT');
+            var valLY = document.getElementById('dbg-menuLY-v');
+            var valRY = document.getElementById('dbg-menuRY-v');
+            var valMT = document.getElementById('dbg-menuMT-v');
+
+            function applyMenu() {
+                var ly = elLY.value;
+                var ry = elRY.value;
+                var mt = elMT.value;
+                menu.style.setProperty('clip-path', 'polygon(0 ' + ly + 'px, 100% ' + ry + 'px, 100% 100%, 0 100%)', 'important');
+                menu.style.setProperty('margin-top', mt + 'px', 'important');
+                valLY.textContent = ly + 'px';
+                valRY.textContent = ry + 'px';
+                valMT.textContent = mt + 'px';
+            }
+
+            elLY.addEventListener('input', applyMenu);
+            elRY.addEventListener('input', applyMenu);
+            elMT.addEventListener('input', applyMenu);
+
+            document.getElementById('dbg-menu-copy').addEventListener('click', function() {
+                var css = '.menu {\n  clip-path: polygon(0 ' + elLY.value + 'px, 100% ' + elRY.value + 'px, 100% 100%, 0 100%);\n  margin-top: ' + elMT.value + 'px;\n}';
+                navigator.clipboard.writeText(css);
+                document.getElementById('dbg-menu-copied').textContent = 'Copied!';
+                setTimeout(function() { document.getElementById('dbg-menu-copied').textContent = ''; }, 2000);
+            });
+
+            document.getElementById('dbg-menu-reset').addEventListener('click', function() {
+                elLY.value = 0; elRY.value = 0; elMT.value = 0;
+                applyMenu();
+            });
+
+            // ドラッグ移動
+            var d2 = false, dx2 = 0, dy2 = 0;
+            panel2.addEventListener('mousedown', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+                d2 = true; dx2 = e.clientX - panel2.offsetLeft; dy2 = e.clientY - panel2.offsetTop;
+            });
+            document.addEventListener('mousemove', function(e) {
+                if (!d2) return;
+                panel2.style.left = (e.clientX - dx2) + 'px'; panel2.style.top = (e.clientY - dy2) + 'px';
+                panel2.style.right = 'auto'; panel2.style.bottom = 'auto';
+            });
+            document.addEventListener('mouseup', function() { d2 = false; });
+        })();
 
         const mailBtn = document.getElementById('mail-trigger');
         const mailOverlay = document.getElementById('mail-modal-overlay');
