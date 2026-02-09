@@ -688,7 +688,7 @@ import Layout from '../layouts/Layout.astro';
                 + '#debug-panel-bottom .copied { color:#ff0; font-size:11px; text-align:center; margin-top:6px; min-height:16px; }'
                 + '</style>'
                 + '<h3>DEBUG: .menu 下端の斜め境界線</h3>'
-                + '<div class="row"><label>左下:</label><input type="range" id="dbg-btmL" min="0" max="300" step="1" value="115"><span class="val" id="dbg-btmL-v">115px</span></div>'
+                + '<div class="row"><label>左下:</label><input type="range" id="dbg-btmL" min="0" max="300" step="1" value="38"><span class="val" id="dbg-btmL-v">38px</span></div>'
                 + '<div class="row"><label>右下:</label><input type="range" id="dbg-btmR" min="0" max="300" step="1" value="0"><span class="val" id="dbg-btmR-v">0px</span></div>'
                 + '<div class="actions"><button id="dbg-btm-copy">COPY CSS</button><button id="dbg-btm-reset">RESET</button></div>'
                 + '<div class="copied" id="dbg-btm-copied"></div>';
@@ -706,7 +706,8 @@ import Layout from '../layouts/Layout.astro';
                 // ::afterの中にclip-pathで台形を作る
                 // 高さhpx、左側はl px食い込み、右側はr px食い込み
                 // 左上(0, h-l)px 右上(100%, h-r)px 右下(100%, h)px 左下(0, h)px
-                dynStyle.textContent = '.menu::after { height: ' + h + 'px !important; background: rgb(240,240,240) !important; clip-path: polygon(0 ' + (h - l) + 'px, 100% ' + (h - r) + 'px, 100% ' + h + 'px, 0 ' + h + 'px) !important; }';
+                dynStyle.textContent = '.menu::after { height: ' + h + 'px !important; background: rgb(240,240,240) !important; clip-path: polygon(0 ' + (h - l) + 'px, 100% ' + (h - r) + 'px, 100% ' + h + 'px, 0 ' + h + 'px) !important; }'
+                    + ' .gallery-container-box { margin-top: -' + h + 'px !important; padding-top: ' + (50 + h) + 'px !important; }';
                 valL.textContent = l + 'px';
                 valR.textContent = r + 'px';
             }
@@ -719,14 +720,14 @@ import Layout from '../layouts/Layout.astro';
                 var l = parseInt(elL.value);
                 var r = parseInt(elR.value);
                 var h = Math.max(l, r, 1);
-                var css = '.menu::after {\n  height: ' + h + 'px;\n  background: rgb(240,240,240);\n  clip-path: polygon(0 ' + (h-l) + 'px, 100% ' + (h-r) + 'px, 100% 100%, 0 100%);\n}';
+                var css = '.menu::after {\n  height: ' + h + 'px;\n  background: rgb(240,240,240);\n  clip-path: polygon(0 ' + (h-l) + 'px, 100% ' + (h-r) + 'px, 100% 100%, 0 100%);\n}\n\n.gallery-container-box {\n  margin-top: -' + h + 'px;\n  padding-top: ' + (50+h) + 'px;\n}';
                 navigator.clipboard.writeText(css);
                 document.getElementById('dbg-btm-copied').textContent = 'Copied!';
                 setTimeout(function() { document.getElementById('dbg-btm-copied').textContent = ''; }, 2000);
             });
 
             document.getElementById('dbg-btm-reset').addEventListener('click', function() {
-                elL.value = 115; elR.value = 0;
+                elL.value = 38; elR.value = 0;
                 applyBottom();
             });
 
