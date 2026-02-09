@@ -588,161 +588,123 @@ import Layout from '../layouts/Layout.astro';
             document.addEventListener('mouseup', function() { dragging = false; });
         })();
 
-        // ===== DEBUG: .menu (MISSIONS) 上端境界線 調整パネル =====
+        // ===== DEBUG: MISSIONS 上下の空白 調整パネル =====
         (function() {
             var menu = document.querySelector('.menu');
             if (!menu) return;
 
-            var panel2 = document.createElement('div');
-            panel2.id = 'debug-panel-border';
-            panel2.innerHTML = '<style>'
-                + '#debug-panel-border { position:fixed; bottom:10px; right:10px; z-index:99999; background:rgba(0,0,0,0.92); color:#0f0; font-family:monospace; font-size:13px; padding:16px 20px; border-radius:10px; border:1px solid #0f0; min-width:320px; cursor:move; user-select:none; backdrop-filter:blur(8px); }'
-                + '#debug-panel-border h3 { margin:0 0 12px; color:#0f0; font-size:14px; text-align:center; }'
-                + '#debug-panel-border .row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }'
-                + '#debug-panel-border label { width:80px; text-align:right; flex-shrink:0; }'
-                + '#debug-panel-border input[type=range] { flex:1; accent-color:#0f0; }'
-                + '#debug-panel-border .val { width:70px; text-align:left; color:#fff; }'
-                + '#debug-panel-border .actions { display:flex; gap:8px; margin-top:14px; }'
-                + '#debug-panel-border button { flex:1; padding:8px; border:1px solid #0f0; background:transparent; color:#0f0; font-family:monospace; font-size:12px; cursor:pointer; border-radius:4px; }'
-                + '#debug-panel-border button:hover { background:#0f0; color:#000; }'
-                + '#debug-panel-border .copied { color:#ff0; font-size:11px; text-align:center; margin-top:6px; min-height:16px; }'
-                + '</style>'
-                + '<h3>DEBUG: .menu 上端の斜め境界線</h3>'
-                + '<div class="row"><label>左上 Y:</label><input type="range" id="dbg-menuLY" min="0" max="300" step="5" value="0"><span class="val" id="dbg-menuLY-v">0px</span></div>'
-                + '<div class="row"><label>右上 Y:</label><input type="range" id="dbg-menuRY" min="0" max="300" step="5" value="0"><span class="val" id="dbg-menuRY-v">0px</span></div>'
-                + '<div class="row"><label>margin-top:</label><input type="range" id="dbg-menuMT" min="-200" max="0" step="5" value="0"><span class="val" id="dbg-menuMT-v">0px</span></div>'
-                + '<div class="actions"><button id="dbg-menu-copy">COPY CSS</button><button id="dbg-menu-reset">RESET</button></div>'
-                + '<div class="copied" id="dbg-menu-copied"></div>';
-            document.body.appendChild(panel2);
-
-            var elLY = document.getElementById('dbg-menuLY');
-            var elRY = document.getElementById('dbg-menuRY');
-            var elMT = document.getElementById('dbg-menuMT');
-            var valLY = document.getElementById('dbg-menuLY-v');
-            var valRY = document.getElementById('dbg-menuRY-v');
-            var valMT = document.getElementById('dbg-menuMT-v');
-
-            function applyMenu() {
-                var ly = elLY.value;
-                var ry = elRY.value;
-                var mt = elMT.value;
-                menu.style.setProperty('clip-path', 'polygon(0 ' + ly + 'px, 100% ' + ry + 'px, 100% 100%, 0 100%)', 'important');
-                menu.style.setProperty('margin-top', mt + 'px', 'important');
-                valLY.textContent = ly + 'px';
-                valRY.textContent = ry + 'px';
-                valMT.textContent = mt + 'px';
-            }
-
-            elLY.addEventListener('input', applyMenu);
-            elRY.addEventListener('input', applyMenu);
-            elMT.addEventListener('input', applyMenu);
-
-            document.getElementById('dbg-menu-copy').addEventListener('click', function() {
-                var css = '.menu {\n  clip-path: polygon(0 ' + elLY.value + 'px, 100% ' + elRY.value + 'px, 100% 100%, 0 100%);\n  margin-top: ' + elMT.value + 'px;\n}';
-                navigator.clipboard.writeText(css);
-                document.getElementById('dbg-menu-copied').textContent = 'Copied!';
-                setTimeout(function() { document.getElementById('dbg-menu-copied').textContent = ''; }, 2000);
-            });
-
-            document.getElementById('dbg-menu-reset').addEventListener('click', function() {
-                elLY.value = 0; elRY.value = 0; elMT.value = 0;
-                applyMenu();
-            });
-
-            // ドラッグ移動
-            var d2 = false, dx2 = 0, dy2 = 0;
-            panel2.addEventListener('mousedown', function(e) {
-                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
-                d2 = true; dx2 = e.clientX - panel2.offsetLeft; dy2 = e.clientY - panel2.offsetTop;
-            });
-            document.addEventListener('mousemove', function(e) {
-                if (!d2) return;
-                panel2.style.left = (e.clientX - dx2) + 'px'; panel2.style.top = (e.clientY - dy2) + 'px';
-                panel2.style.right = 'auto'; panel2.style.bottom = 'auto';
-            });
-            document.addEventListener('mouseup', function() { d2 = false; });
-        })();
-
-        // ===== DEBUG: .menu 下端境界線 調整パネル =====
-        (function() {
-            var menu = document.querySelector('.menu');
-            if (!menu) return;
-
-            // ::after用の動的styleタグ
             var dynStyle = document.createElement('style');
-            dynStyle.id = 'dbg-menu-bottom-style';
+            dynStyle.id = 'dbg-menu-gap-style';
             document.head.appendChild(dynStyle);
 
-            var panel3 = document.createElement('div');
-            panel3.id = 'debug-panel-bottom';
-            panel3.innerHTML = '<style>'
-                + '#debug-panel-bottom { position:fixed; bottom:10px; left:10px; z-index:99999; background:rgba(0,0,0,0.92); color:#0f0; font-family:monospace; font-size:13px; padding:16px 20px; border-radius:10px; border:1px solid #0f0; min-width:320px; cursor:move; user-select:none; backdrop-filter:blur(8px); }'
-                + '#debug-panel-bottom h3 { margin:0 0 12px; color:#0f0; font-size:14px; text-align:center; }'
-                + '#debug-panel-bottom .row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }'
-                + '#debug-panel-bottom label { width:80px; text-align:right; flex-shrink:0; }'
-                + '#debug-panel-bottom input[type=range] { flex:1; accent-color:#0f0; }'
-                + '#debug-panel-bottom .val { width:70px; text-align:left; color:#fff; }'
-                + '#debug-panel-bottom .actions { display:flex; gap:8px; margin-top:14px; }'
-                + '#debug-panel-bottom button { flex:1; padding:8px; border:1px solid #0f0; background:transparent; color:#0f0; font-family:monospace; font-size:12px; cursor:pointer; border-radius:4px; }'
-                + '#debug-panel-bottom button:hover { background:#0f0; color:#000; }'
-                + '#debug-panel-bottom .copied { color:#ff0; font-size:11px; text-align:center; margin-top:6px; min-height:16px; }'
+            var panel = document.createElement('div');
+            panel.id = 'debug-panel-gap';
+            panel.innerHTML = '<style>'
+                + '#debug-panel-gap { position:fixed; bottom:10px; left:10px; z-index:99999; background:rgba(0,0,0,0.92); color:#0f0; font-family:monospace; font-size:13px; padding:16px 20px; border-radius:10px; border:1px solid #0f0; min-width:360px; cursor:move; user-select:none; backdrop-filter:blur(8px); }'
+                + '#debug-panel-gap h3 { margin:0 0 10px; color:#0f0; font-size:14px; text-align:center; }'
+                + '#debug-panel-gap .section-label { color:#ff0; font-size:12px; font-weight:bold; margin:12px 0 6px; padding-top:8px; border-top:1px solid rgba(0,255,0,0.3); }'
+                + '#debug-panel-gap .section-label:first-of-type { border-top:none; margin-top:4px; }'
+                + '#debug-panel-gap .row { display:flex; align-items:center; gap:8px; margin-bottom:6px; }'
+                + '#debug-panel-gap label { width:100px; text-align:right; flex-shrink:0; font-size:12px; }'
+                + '#debug-panel-gap input[type=range] { flex:1; accent-color:#0f0; }'
+                + '#debug-panel-gap .val { width:60px; text-align:left; color:#fff; font-size:12px; }'
+                + '#debug-panel-gap .actions { display:flex; gap:8px; margin-top:14px; }'
+                + '#debug-panel-gap button { flex:1; padding:8px; border:1px solid #0f0; background:transparent; color:#0f0; font-family:monospace; font-size:12px; cursor:pointer; border-radius:4px; }'
+                + '#debug-panel-gap button:hover { background:#0f0; color:#000; }'
+                + '#debug-panel-gap .copied { color:#ff0; font-size:11px; text-align:center; margin-top:6px; min-height:16px; }'
                 + '</style>'
-                + '<h3>DEBUG: .menu 下端の斜め境界線</h3>'
-                + '<div class="row"><label>左下:</label><input type="range" id="dbg-btmL" min="0" max="300" step="1" value="38"><span class="val" id="dbg-btmL-v">38px</span></div>'
+                + '<h3>DEBUG: MISSIONS 上下の空白調整</h3>'
+                + '<div class="section-label">▲ 上の空白（about → MISSIONS）</div>'
+                + '<div class="row"><label>::before高さ:</label><input type="range" id="dbg-topH" min="0" max="300" step="1" value="60"><span class="val" id="dbg-topH-v">60px</span></div>'
+                + '<div class="row"><label>about下余白:</label><input type="range" id="dbg-topMB" min="-500" max="200" step="1" value="-43"><span class="val" id="dbg-topMB-v">-43px</span></div>'
+                + '<div class="section-label">▼ 下の空白（MISSIONS → gallery）</div>'
+                + '<div class="row"><label>左下:</label><input type="range" id="dbg-btmL" min="0" max="300" step="1" value="80"><span class="val" id="dbg-btmL-v">80px</span></div>'
                 + '<div class="row"><label>右下:</label><input type="range" id="dbg-btmR" min="0" max="300" step="1" value="0"><span class="val" id="dbg-btmR-v">0px</span></div>'
-                + '<div class="actions"><button id="dbg-btm-copy">COPY CSS</button><button id="dbg-btm-reset">RESET</button></div>'
-                + '<div class="copied" id="dbg-btm-copied"></div>';
-            document.body.appendChild(panel3);
+                + '<div class="row"><label>下の余白:</label><input type="range" id="dbg-btmMB" min="-300" max="300" step="1" value="-70"><span class="val" id="dbg-btmMB-v">-70px</span></div>'
+                + '<div class="actions"><button id="dbg-gap-copy">COPY CSS</button><button id="dbg-gap-reset">RESET</button></div>'
+                + '<div class="copied" id="dbg-gap-copied"></div>';
+            document.body.appendChild(panel);
 
-            var elL = document.getElementById('dbg-btmL');
-            var elR = document.getElementById('dbg-btmR');
-            var valL = document.getElementById('dbg-btmL-v');
-            var valR = document.getElementById('dbg-btmR-v');
+            var elTopH = document.getElementById('dbg-topH');
+            var elTopMB = document.getElementById('dbg-topMB');
+            var elBtmL = document.getElementById('dbg-btmL');
+            var elBtmR = document.getElementById('dbg-btmR');
+            var elBtmMB = document.getElementById('dbg-btmMB');
+            var valTopH = document.getElementById('dbg-topH-v');
+            var valTopMB = document.getElementById('dbg-topMB-v');
+            var valBtmL = document.getElementById('dbg-btmL-v');
+            var valBtmR = document.getElementById('dbg-btmR-v');
+            var valBtmMB = document.getElementById('dbg-btmMB-v');
 
-            function applyBottom() {
-                var l = parseInt(elL.value);
-                var r = parseInt(elR.value);
-                var h = Math.max(l, r, 1);
-                // ::afterの中にclip-pathで台形を作る
-                // 高さhpx、左側はl px食い込み、右側はr px食い込み
-                // 左上(0, h-l)px 右上(100%, h-r)px 右下(100%, h)px 左下(0, h)px
-                dynStyle.textContent = '.menu::after { height: ' + h + 'px !important; background: rgb(240,240,240) !important; clip-path: polygon(0 ' + (h - l) + 'px, 100% ' + (h - r) + 'px, 100% ' + h + 'px, 0 ' + h + 'px) !important; }'
-                    + ' .gallery-container-box { margin-top: -' + h + 'px !important; padding-top: ' + (50 + h) + 'px !important; }';
-                valL.textContent = l + 'px';
-                valR.textContent = r + 'px';
+            function applyAll() {
+                var topH = parseInt(elTopH.value);
+                var topMB = parseInt(elTopMB.value);
+                var btmL = parseInt(elBtmL.value);
+                var btmR = parseInt(elBtmR.value);
+                var btmMB = parseInt(elBtmMB.value);
+                var btmH = Math.max(btmL, btmR, 1);
+
+                var css = '';
+                // 上: ::before の高さ
+                css += '.menu::before { height: ' + topH + 'px !important; }';
+                // 上: aboutのmargin-bottom
+                css += ' .about { margin-bottom: ' + topMB + 'px !important; }';
+                // 下: ::after
+                css += ' .menu::after { height: ' + btmH + 'px !important; background: rgb(240,240,240) !important; clip-path: polygon(0 ' + (btmH - btmL) + 'px, 100% ' + (btmH - btmR) + 'px, 100% ' + btmH + 'px, 0 ' + btmH + 'px) !important; }';
+                // 下: gallery連動（btmMBで空白を追加調整）
+                css += ' .gallery-container-box { margin-top: -' + btmH + 'px !important; padding-top: ' + (50 + btmH + btmMB) + 'px !important; }';
+
+                dynStyle.textContent = css;
+                valTopH.textContent = topH + 'px';
+                valTopMB.textContent = topMB + 'px';
+                valBtmL.textContent = btmL + 'px';
+                valBtmR.textContent = btmR + 'px';
+                valBtmMB.textContent = btmMB + 'px';
             }
 
-            elL.addEventListener('input', applyBottom);
-            elR.addEventListener('input', applyBottom);
-            applyBottom();
+            elTopH.addEventListener('input', applyAll);
+            elTopMB.addEventListener('input', applyAll);
+            elBtmL.addEventListener('input', applyAll);
+            elBtmR.addEventListener('input', applyAll);
+            elBtmMB.addEventListener('input', applyAll);
+            applyAll();
 
-            document.getElementById('dbg-btm-copy').addEventListener('click', function() {
-                var l = parseInt(elL.value);
-                var r = parseInt(elR.value);
-                var h = Math.max(l, r, 1);
-                var css = '.menu::after {\n  height: ' + h + 'px;\n  background: rgb(240,240,240);\n  clip-path: polygon(0 ' + (h-l) + 'px, 100% ' + (h-r) + 'px, 100% 100%, 0 100%);\n}\n\n.gallery-container-box {\n  margin-top: -' + h + 'px;\n  padding-top: ' + (50+h) + 'px;\n}';
+            document.getElementById('dbg-gap-copy').addEventListener('click', function() {
+                var topH = parseInt(elTopH.value);
+                var topMB = parseInt(elTopMB.value);
+                var btmL = parseInt(elBtmL.value);
+                var btmR = parseInt(elBtmR.value);
+                var btmMB = parseInt(elBtmMB.value);
+                var btmH = Math.max(btmL, btmR, 1);
+                var css = '/* ▲ 上の空白 */\n'
+                    + '.menu::before {\n  height: ' + topH + 'px;\n}\n'
+                    + '.about {\n  margin-bottom: ' + topMB + 'px;\n}\n\n'
+                    + '/* ▼ 下の空白 */\n'
+                    + '.menu::after {\n  height: ' + btmH + 'px;\n  background: rgb(240,240,240);\n  clip-path: polygon(0 ' + (btmH-btmL) + 'px, 100% ' + (btmH-btmR) + 'px, 100% 100%, 0 100%);\n}\n'
+                    + '.gallery-container-box {\n  margin-top: -' + btmH + 'px;\n  padding-top: ' + (50+btmH+btmMB) + 'px;\n}';
                 navigator.clipboard.writeText(css);
-                document.getElementById('dbg-btm-copied').textContent = 'Copied!';
-                setTimeout(function() { document.getElementById('dbg-btm-copied').textContent = ''; }, 2000);
+                document.getElementById('dbg-gap-copied').textContent = 'Copied!';
+                setTimeout(function() { document.getElementById('dbg-gap-copied').textContent = ''; }, 2000);
             });
 
-            document.getElementById('dbg-btm-reset').addEventListener('click', function() {
-                elL.value = 38; elR.value = 0;
-                applyBottom();
+            document.getElementById('dbg-gap-reset').addEventListener('click', function() {
+                elTopH.value = 60; elTopMB.value = -43;
+                elBtmL.value = 80; elBtmR.value = 0; elBtmMB.value = -70;
+                applyAll();
             });
 
             // ドラッグ移動
-            var d3 = false, dx3 = 0, dy3 = 0;
-            panel3.addEventListener('mousedown', function(e) {
+            var d = false, dx = 0, dy = 0;
+            panel.addEventListener('mousedown', function(e) {
                 if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
-                d3 = true; dx3 = e.clientX - panel3.offsetLeft; dy3 = e.clientY - panel3.offsetTop;
+                d = true; dx = e.clientX - panel.offsetLeft; dy = e.clientY - panel.offsetTop;
             });
             document.addEventListener('mousemove', function(e) {
-                if (!d3) return;
-                panel3.style.left = (e.clientX - dx3) + 'px'; panel3.style.top = (e.clientY - dy3) + 'px';
-                panel3.style.right = 'auto'; panel3.style.bottom = 'auto';
+                if (!d) return;
+                panel.style.left = (e.clientX - dx) + 'px'; panel.style.top = (e.clientY - dy) + 'px';
+                panel.style.right = 'auto'; panel.style.bottom = 'auto';
             });
-            document.addEventListener('mouseup', function() { d3 = false; });
+            document.addEventListener('mouseup', function() { d = false; });
         })();
 
         const mailBtn = document.getElementById('mail-trigger');
