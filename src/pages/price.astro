@@ -4,14 +4,21 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="PRICE | MASHROOM STUDIO">
     <script slot="head" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js" is:inline></script>
-    <!-- 修正箇所: ページ上部の戻るボタンのリンクを index.html に変更 -->
-    <a href="/" class="btn-pop back-link magnet">← HOME</a>
 
-    <!-- HEADER -->
-    <header class="page-header">
+    <header class="nav-header">
+        <a href="/" class="logo-container magnet">
+            <img src="/img/logo.png" alt="MASHROOM STUDIO" class="logo-img">
+            <img src="/img/logo.png" alt="" class="logo-glitch logo-glitch-1">
+            <img src="/img/logo.png" alt="" class="logo-glitch logo-glitch-2">
+        </a>
+        <a href="/" class="back-btn magnet">← BACK TO HOME</a>
+    </header>
+
+    <!-- PAGE TITLE HEADER -->
+    <div class="page-header">
         <h1 class="page-title reveal-text">PRICE LIST</h1>
         <p class="page-subtitle reveal-text">15 TYPES OF CREATIVE MISSION</p>
-    </header>
+    </div>
 
     <!-- TOGGLE SWITCH -->
     <div class="toggle-container reveal-text">
@@ -125,7 +132,72 @@ import Layout from '../layouts/Layout.astro';
     .btn-pop { display: inline-block; padding: 15px 40px; font-size: 1.2rem; font-weight: 900; color: var(--c-text); background: var(--c-white); border: 4px solid var(--c-text); text-decoration: none; box-shadow: 8px 8px 0px var(--c-text); transition: all 0.2s; position: relative; overflow: hidden; font-family: var(--font-en); border-radius: 12px; }
     .btn-pop:hover { transform: translate(-3px, -3px); box-shadow: 12px 12px 0px var(--c-text); background: var(--pop-2); }
     
-    .back-link { position: absolute; top: 30px; left: 30px; z-index: 100; cursor: pointer; }
+    /* NAV HEADER (Works style) */
+    .nav-header {
+        padding: 10px 3%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--c-white);
+        border-bottom: 4px solid var(--c-text);
+        position: relative;
+        z-index: 100;
+        height: 150px;
+    }
+    .logo-container {
+        display: block;
+        text-decoration: none;
+        position: relative;
+        width: auto;
+        height: 120px;
+    }
+    .logo-img {
+        height: 100%;
+        width: auto;
+        display: block;
+    }
+    .logo-glitch {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: auto;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .logo-container:hover .logo-glitch-1 {
+        animation: glitch1 0.3s infinite;
+    }
+    .logo-container:hover .logo-glitch-2 {
+        animation: glitch2 0.3s infinite;
+    }
+    @keyframes glitch1 {
+        0%, 100% { opacity: 0; transform: translate(0); }
+        20% { opacity: 0.8; transform: translate(-5px, 2px); filter: hue-rotate(90deg); }
+        40% { opacity: 0; transform: translate(0); }
+        60% { opacity: 0.6; transform: translate(3px, -2px); filter: hue-rotate(180deg); }
+        80% { opacity: 0; transform: translate(0); }
+    }
+    @keyframes glitch2 {
+        0%, 100% { opacity: 0; transform: translate(0); }
+        25% { opacity: 0.7; transform: translate(4px, -3px); filter: hue-rotate(-90deg); }
+        50% { opacity: 0; transform: translate(0); }
+        75% { opacity: 0.5; transform: translate(-3px, 3px); filter: hue-rotate(270deg); }
+    }
+    .back-btn {
+        font-family: var(--font-en);
+        font-weight: bold;
+        text-decoration: none;
+        color: var(--c-text);
+        border: 2px solid var(--c-text);
+        padding: 10px 20px;
+        transition: 0.3s;
+        margin-right: 100px;
+    }
+    .back-btn:hover {
+        background: var(--c-text);
+        color: var(--c-white);
+    }
 
     /* PAGE HEADER */
     .page-header { padding: 120px 5% 60px; background: var(--c-text); color: var(--pop-2); text-align: center; clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); }

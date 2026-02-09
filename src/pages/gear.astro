@@ -6,7 +6,14 @@ import Layout from '../layouts/Layout.astro';
     <script slot="head" src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js" is:inline></script>
     <div class="bg-grid"></div>
 
-    <a href="/" class="back-link magnet">← HOME</a>
+    <header>
+        <a href="/" class="logo-container magnet">
+            <img src="/img/logo.png" alt="MASHROOM STUDIO" class="logo-img">
+            <img src="/img/logo.png" alt="" class="logo-glitch logo-glitch-1">
+            <img src="/img/logo.png" alt="" class="logo-glitch logo-glitch-2">
+        </a>
+        <a href="/" class="back-btn magnet">← BACK TO HOME</a>
+    </header>
 
     <!-- COMPACT HEADER -->
     <div class="compact-header">
@@ -322,9 +329,68 @@ import Layout from '../layouts/Layout.astro';
         border-width: 1px;
     }
 
-    /* NAV */
-    .back-link { position: absolute; top: 30px; left: 30px; z-index: 100; font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; border: 2px solid var(--c-text); padding: 10px 20px; border-radius: 30px; transition: 0.3s; background: rgba(0,0,0,0.5); }
-    .back-link:hover { background: var(--c-text); color: var(--c-black); }
+    /* HEADER (Works style) */
+    header {
+        padding: 10px 3%;
+        display: flex; justify-content: space-between; align-items: center;
+        background: var(--c-white); border-bottom: 4px solid var(--c-text);
+        position: relative; z-index: 100; height: 150px;
+    }
+    .logo-container {
+        display: block;
+        text-decoration: none;
+        position: relative;
+        width: auto;
+        height: 120px;
+    }
+    .logo-img {
+        height: 100%;
+        width: auto;
+        transition: 0.3s;
+    }
+    .logo-glitch {
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%;
+        width: auto;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .logo-container:hover .logo-glitch-1 {
+        animation: glitch1 0.3s infinite;
+        opacity: 0.8;
+    }
+    .logo-container:hover .logo-glitch-2 {
+        animation: glitch2 0.3s infinite;
+        opacity: 0.8;
+    }
+    @keyframes glitch1 {
+        0%, 100% { transform: translate(0); filter: hue-rotate(0deg); }
+        25% { transform: translate(-5px, 2px); filter: hue-rotate(90deg); }
+        50% { transform: translate(3px, -3px); filter: hue-rotate(180deg); }
+        75% { transform: translate(-2px, 5px); filter: hue-rotate(270deg); }
+    }
+    @keyframes glitch2 {
+        0%, 100% { transform: translate(0); filter: hue-rotate(180deg); }
+        25% { transform: translate(4px, -2px); filter: hue-rotate(270deg); }
+        50% { transform: translate(-3px, 4px); filter: hue-rotate(0deg); }
+        75% { transform: translate(2px, -4px); filter: hue-rotate(90deg); }
+    }
+    .logo-container:hover .logo-img {
+        transform: scale(1.02);
+        transition: 0.3s;
+    }
+    .back-btn {
+        font-family: var(--font-en);
+        font-weight: bold;
+        text-decoration: none;
+        color: var(--c-text);
+        border: 2px solid var(--c-text);
+        padding: 10px 20px;
+        transition: 0.3s;
+        margin-right: 100px;
+    }
+    .back-btn:hover { background: var(--c-text); color: var(--c-white); }
 
     .hamburger-btn { position: fixed; top: 30px; right: 30px; z-index: 11000; width: 80px; height: 80px; background: var(--c-text); border: 4px solid var(--pop-2); border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; transition: 0.3s; }
     /* 回転はJSに任せるためCSSのhover回転を削除 */

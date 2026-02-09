@@ -78,13 +78,13 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- 3. MENUS -->
     <section class="menu">
-        <div class="menu-bg-overlay"></div>
+        <div class="neon-line nl-1"></div><div class="neon-line nl-2"></div><div class="neon-line nl-3"></div><div class="neon-line nl-4"></div>
         <h2 class="section-title reveal-text"><span>Our Service</span>MISSIONS</h2>
-
+        
         <div class="card-grid">
             <!-- カード 1 -->
             <div class="card card-1 reveal-text magnet" data-card-id="card-1">
-                <div class="card-img"><img src="/img/missions/card-rec.jpg" alt="Recording" loading="lazy"></div>
+                <div class="card-badge">POPULAR</div>
                 <h3>01. Simple Rec</h3>
                 <p>
                     <span class="keep-break">来ちゃった！感覚で◎</span><br>
@@ -92,7 +92,7 @@ import Layout from '../layouts/Layout.astro';
                     <span class="keep-break">録音って楽しい！を</span><br>
                     <span class="keep-break">まず体験してください！</span>
                 </p>
-                <div class="price">¥5,000~/1h</div>
+                <div class="price">¥5,000~ / 1h</div>
                 <div class="card-details">
                     <p>初めての方でも安心！高品質なマイクとプリアンプで、歌ってみたや弾き語りを手軽にプロ品質で録音できます。面倒な準備は一切不要です。</p>
                 </div>
@@ -100,7 +100,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <!-- カード 2 -->
             <div class="card card-2 reveal-text magnet" data-card-id="card-2">
-                <div class="card-img"><img src="/img/missions/card-shoot.jpg" alt="Rec & Shoot" loading="lazy"></div>
+                <div class="card-badge">NEW!</div>
                 <h3>02. Rec & Shoot</h3>
                 <p>
                     <span class="keep-break">録音風景を、</span><br>
@@ -116,7 +116,6 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <!-- カード 3 -->
             <div class="card card-3 reveal-text magnet" data-card-id="card-3">
-                <div class="card-img"><img src="/img/missions/card-school.jpg" alt="School" loading="lazy"></div>
                 <h3>03. School</h3>
                 <p>
                     <span class="keep-break">現場で本当に使える</span><br>
@@ -132,7 +131,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <!-- カード 4 -->
             <div class="card card-4 reveal-text magnet" data-card-id="card-4">
-                <div class="card-img"><img src="/img/missions/card-branding.jpg" alt="Branding" loading="lazy"></div>
+                <div class="card-badge">RECOMMEND</div>
                 <h3>04. Branding</h3>
                 <p>
                     <span class="keep-break">魅せ方の時代です！</span><br>
@@ -140,7 +139,7 @@ import Layout from '../layouts/Layout.astro';
                     <span class="keep-break">最初の一歩。</span><br>
                     <span class="keep-break">3ヶ月間徹底的に</span><span class="keep-break">伴走します。</span>
                 </p>
-                <div class="price">¥150,000~/3ヶ月</div>
+                <div class="price">¥150,000〜 / 3ヶ月</div>
                 <div class="card-details">
                     <p>音楽活動をビジネスとして成功させたいアーティスト向けの集中支援プログラム。ブランディング、コンテンツ戦略、プロモーションまで、3ヶ月間で集中的にサポートします。</p>
                 </div>
@@ -148,7 +147,6 @@ import Layout from '../layouts/Layout.astro';
             </div>
             <!-- カード 5 -->
             <div class="card card-5 reveal-text magnet" data-card-id="card-5">
-                <div class="card-img"><img src="/img/missions/card-business.jpg" alt="Business" loading="lazy"></div>
                 <h3>05. Business</h3>
                 <p>
                     <span class="keep-break">御社のブランドを、</span><br>
@@ -586,156 +584,6 @@ import Layout from '../layouts/Layout.astro';
                 panel.style.left = (e.clientX - dx) + 'px'; panel.style.top = (e.clientY - dy) + 'px';
             });
             document.addEventListener('mouseup', function() { dragging = false; });
-        })();
-
-        // ===== DEBUG: MISSIONS 上下の空白 調整パネル =====
-        (function() {
-            var menu = document.querySelector('.menu');
-            if (!menu) return;
-
-            var dynStyle = document.createElement('style');
-            dynStyle.id = 'dbg-menu-gap-style';
-            document.head.appendChild(dynStyle);
-
-            var panel = document.createElement('div');
-            panel.id = 'debug-panel-gap';
-            panel.innerHTML = '<style>'
-                + '#debug-panel-gap { position:fixed; bottom:10px; left:10px; z-index:99999; background:rgba(0,0,0,0.92); color:#0f0; font-family:monospace; font-size:13px; padding:16px 20px; border-radius:10px; border:1px solid #0f0; min-width:360px; cursor:move; user-select:none; backdrop-filter:blur(8px); }'
-                + '#debug-panel-gap h3 { margin:0 0 10px; color:#0f0; font-size:14px; text-align:center; }'
-                + '#debug-panel-gap .section-label { color:#ff0; font-size:12px; font-weight:bold; margin:12px 0 6px; padding-top:8px; border-top:1px solid rgba(0,255,0,0.3); }'
-                + '#debug-panel-gap .section-label:first-of-type { border-top:none; margin-top:4px; }'
-                + '#debug-panel-gap .row { display:flex; align-items:center; gap:8px; margin-bottom:6px; }'
-                + '#debug-panel-gap label { width:100px; text-align:right; flex-shrink:0; font-size:12px; }'
-                + '#debug-panel-gap input[type=range] { flex:1; accent-color:#0f0; }'
-                + '#debug-panel-gap .val { width:60px; text-align:left; color:#fff; font-size:12px; }'
-                + '#debug-panel-gap .actions { display:flex; gap:8px; margin-top:14px; }'
-                + '#debug-panel-gap button { flex:1; padding:8px; border:1px solid #0f0; background:transparent; color:#0f0; font-family:monospace; font-size:12px; cursor:pointer; border-radius:4px; }'
-                + '#debug-panel-gap button:hover { background:#0f0; color:#000; }'
-                + '#debug-panel-gap .copied { color:#ff0; font-size:11px; text-align:center; margin-top:6px; min-height:16px; }'
-                + '</style>'
-                + '<h3>DEBUG: MISSIONS 上下の空白調整</h3>'
-                + '<div class="section-label">▲ 上の空白（about → MISSIONS）</div>'
-                + '<div class="row"><label>::before高さ:</label><input type="range" id="dbg-topH" min="0" max="300" step="1" value="60"><span class="val" id="dbg-topH-v">60px</span></div>'
-                + '<div class="row"><label>about下余白:</label><input type="range" id="dbg-topMB" min="-500" max="200" step="1" value="-43"><span class="val" id="dbg-topMB-v">-43px</span></div>'
-                + '<div class="section-label">▼ 下の空白（MISSIONS → gallery）</div>'
-                + '<div class="row"><label>左下:</label><input type="range" id="dbg-btmL" min="0" max="300" step="1" value="80"><span class="val" id="dbg-btmL-v">80px</span></div>'
-                + '<div class="row"><label>右下:</label><input type="range" id="dbg-btmR" min="0" max="300" step="1" value="0"><span class="val" id="dbg-btmR-v">0px</span></div>'
-                + '<div class="row"><label>下の余白:</label><input type="range" id="dbg-btmMB" min="-300" max="300" step="1" value="-70"><span class="val" id="dbg-btmMB-v">-70px</span></div>'
-                + '<div class="section-label">▼ estimate-qa → footer 斜め境界</div>'
-                + '<div class="row"><label>左下:</label><input type="range" id="dbg-eqL" min="0" max="200" step="1" value="0"><span class="val" id="dbg-eqL-v">0px</span></div>'
-                + '<div class="row"><label>右下:</label><input type="range" id="dbg-eqR" min="0" max="200" step="1" value="80"><span class="val" id="dbg-eqR-v">80px</span></div>'
-                + '<div class="row"><label>footer上余白:</label><input type="range" id="dbg-eqFT" min="-200" max="200" step="1" value="-80"><span class="val" id="dbg-eqFT-v">-80px</span></div>'
-                + '<div class="actions"><button id="dbg-gap-copy">COPY CSS</button><button id="dbg-gap-reset">RESET</button></div>'
-                + '<div class="copied" id="dbg-gap-copied"></div>';
-            document.body.appendChild(panel);
-
-            var elTopH = document.getElementById('dbg-topH');
-            var elTopMB = document.getElementById('dbg-topMB');
-            var elBtmL = document.getElementById('dbg-btmL');
-            var elBtmR = document.getElementById('dbg-btmR');
-            var elBtmMB = document.getElementById('dbg-btmMB');
-            var elEqL = document.getElementById('dbg-eqL');
-            var elEqR = document.getElementById('dbg-eqR');
-            var elEqFT = document.getElementById('dbg-eqFT');
-            var valTopH = document.getElementById('dbg-topH-v');
-            var valTopMB = document.getElementById('dbg-topMB-v');
-            var valBtmL = document.getElementById('dbg-btmL-v');
-            var valBtmR = document.getElementById('dbg-btmR-v');
-            var valBtmMB = document.getElementById('dbg-btmMB-v');
-            var valEqL = document.getElementById('dbg-eqL-v');
-            var valEqR = document.getElementById('dbg-eqR-v');
-            var valEqFT = document.getElementById('dbg-eqFT-v');
-
-            function applyAll() {
-                var topH = parseInt(elTopH.value);
-                var topMB = parseInt(elTopMB.value);
-                var btmL = parseInt(elBtmL.value);
-                var btmR = parseInt(elBtmR.value);
-                var btmMB = parseInt(elBtmMB.value);
-                var btmH = Math.max(btmL, btmR, 1);
-                var eqL = parseInt(elEqL.value);
-                var eqR = parseInt(elEqR.value);
-                var eqFT = parseInt(elEqFT.value);
-                var eqH = Math.max(eqL, eqR, 1);
-
-                var css = '';
-                // 上: ::before の高さ
-                css += '.menu::before { height: ' + topH + 'px !important; }';
-                // 上: aboutのmargin-bottom
-                css += ' .about { margin-bottom: ' + topMB + 'px !important; }';
-                // 下: ::after
-                css += ' .menu::after { height: ' + btmH + 'px !important; background: rgb(240,240,240) !important; clip-path: polygon(0 ' + (btmH - btmL) + 'px, 100% ' + (btmH - btmR) + 'px, 100% ' + btmH + 'px, 0 ' + btmH + 'px) !important; }';
-                // 下: gallery連動（btmMBで空白を追加調整）
-                css += ' .gallery-container-box { margin-top: -' + btmH + 'px !important; padding-top: ' + (50 + btmH + btmMB) + 'px !important; }';
-                // estimate-qa → footer 斜め境界
-                css += ' .estimate-qa-section::after { height: ' + eqH + 'px !important; background: rgb(240,240,240) !important; clip-path: polygon(0 ' + eqL + 'px, 100% ' + eqR + 'px, 100% 100%, 0 100%) !important; }';
-                css += ' footer { margin-top: ' + eqFT + 'px !important; padding-top: ' + (180 - eqFT) + 'px !important; }';
-
-                dynStyle.textContent = css;
-                valTopH.textContent = topH + 'px';
-                valTopMB.textContent = topMB + 'px';
-                valBtmL.textContent = btmL + 'px';
-                valBtmR.textContent = btmR + 'px';
-                valBtmMB.textContent = btmMB + 'px';
-                valEqL.textContent = eqL + 'px';
-                valEqR.textContent = eqR + 'px';
-                valEqFT.textContent = eqFT + 'px';
-            }
-
-            elTopH.addEventListener('input', applyAll);
-            elTopMB.addEventListener('input', applyAll);
-            elBtmL.addEventListener('input', applyAll);
-            elBtmR.addEventListener('input', applyAll);
-            elBtmMB.addEventListener('input', applyAll);
-            elEqL.addEventListener('input', applyAll);
-            elEqR.addEventListener('input', applyAll);
-            elEqFT.addEventListener('input', applyAll);
-            applyAll();
-
-            document.getElementById('dbg-gap-copy').addEventListener('click', function() {
-                var topH = parseInt(elTopH.value);
-                var topMB = parseInt(elTopMB.value);
-                var btmL = parseInt(elBtmL.value);
-                var btmR = parseInt(elBtmR.value);
-                var btmMB = parseInt(elBtmMB.value);
-                var btmH = Math.max(btmL, btmR, 1);
-                var eqL = parseInt(elEqL.value);
-                var eqR = parseInt(elEqR.value);
-                var eqFT = parseInt(elEqFT.value);
-                var eqH = Math.max(eqL, eqR, 1);
-                var css = '/* ▲ 上の空白 */\n'
-                    + '.menu::before {\n  height: ' + topH + 'px;\n}\n'
-                    + '.about {\n  margin-bottom: ' + topMB + 'px;\n}\n\n'
-                    + '/* ▼ 下の空白 */\n'
-                    + '.menu::after {\n  height: ' + btmH + 'px;\n  background: rgb(240,240,240);\n  clip-path: polygon(0 ' + (btmH-btmL) + 'px, 100% ' + (btmH-btmR) + 'px, 100% 100%, 0 100%);\n}\n'
-                    + '.gallery-container-box {\n  margin-top: -' + btmH + 'px;\n  padding-top: ' + (50+btmH+btmMB) + 'px;\n}\n\n'
-                    + '/* ▼ estimate-qa → footer 斜め境界 */\n'
-                    + '.estimate-qa-section::after {\n  height: ' + eqH + 'px;\n  background: rgb(240,240,240);\n  clip-path: polygon(0 ' + eqL + 'px, 100% ' + eqR + 'px, 100% 100%, 0 100%);\n}\n'
-                    + 'footer {\n  margin-top: ' + eqFT + 'px;\n  padding-top: ' + (180-eqFT) + 'px;\n}';
-                navigator.clipboard.writeText(css);
-                document.getElementById('dbg-gap-copied').textContent = 'Copied!';
-                setTimeout(function() { document.getElementById('dbg-gap-copied').textContent = ''; }, 2000);
-            });
-
-            document.getElementById('dbg-gap-reset').addEventListener('click', function() {
-                elTopH.value = 60; elTopMB.value = -43;
-                elBtmL.value = 80; elBtmR.value = 0; elBtmMB.value = -70;
-                elEqL.value = 0; elEqR.value = 80; elEqFT.value = -80;
-                applyAll();
-            });
-
-            // ドラッグ移動
-            var d = false, dx = 0, dy = 0;
-            panel.addEventListener('mousedown', function(e) {
-                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
-                d = true; dx = e.clientX - panel.offsetLeft; dy = e.clientY - panel.offsetTop;
-            });
-            document.addEventListener('mousemove', function(e) {
-                if (!d) return;
-                panel.style.left = (e.clientX - dx) + 'px'; panel.style.top = (e.clientY - dy) + 'px';
-                panel.style.right = 'auto'; panel.style.bottom = 'auto';
-            });
-            document.addEventListener('mouseup', function() { d = false; });
         })();
 
         const mailBtn = document.getElementById('mail-trigger');
