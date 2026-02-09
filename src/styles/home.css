@@ -779,7 +779,7 @@ transform: rotate(-1deg) !important;
     position: absolute;
     bottom: 0; left: 0; right: 0;
     height: 116px;
-    background: linear-gradient(to right bottom, transparent 50%, rgb(240, 240, 240) 50%);
+    background: linear-gradient(to left bottom, transparent 50%, rgb(240, 240, 240) 50%);
     z-index: 3;
     pointer-events: none;
 }
