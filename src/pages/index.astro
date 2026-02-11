@@ -738,6 +738,192 @@ import Layout from '../layouts/Layout.astro';
             document.addEventListener('mouseup', function() { d = false; });
         })();
 
+        // ===== DEBUG: 水色背景調整パネル（右上）=====
+        (function() {
+            var dynStyle = document.createElement('style');
+            dynStyle.id = 'dbg-cyan-style';
+            document.head.appendChild(dynStyle);
+
+            var panel = document.createElement('div');
+            panel.id = 'debug-panel-cyan';
+            panel.innerHTML = '<style>'
+                + '#debug-panel-cyan { position:fixed; top:10px; right:10px; z-index:99999; background:rgba(0,0,0,0.92); color:#0f0; font-family:monospace; font-size:13px; padding:16px 20px; border-radius:10px; border:1px solid #0f0; min-width:320px; cursor:move; user-select:none; backdrop-filter:blur(8px); }'
+                + '#debug-panel-cyan h3 { margin:0 0 12px; color:#0f0; font-size:14px; text-align:center; }'
+                + '#debug-panel-cyan .row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }'
+                + '#debug-panel-cyan label { width:110px; text-align:right; flex-shrink:0; }'
+                + '#debug-panel-cyan input[type=range] { flex:1; accent-color:#0f0; }'
+                + '#debug-panel-cyan .val { width:70px; text-align:left; color:#fff; }'
+                + '#debug-panel-cyan .actions { display:flex; gap:8px; margin-top:14px; }'
+                + '#debug-panel-cyan button { flex:1; padding:8px; border:1px solid #0f0; background:transparent; color:#0f0; font-family:monospace; font-size:12px; cursor:pointer; border-radius:4px; }'
+                + '#debug-panel-cyan button:hover { background:#0f0; color:#000; }'
+                + '</style>'
+                + '<h3>💧 水色背景調整</h3>'
+                + '<div class="row"><label>背景を上に:</label><input type="range" id="dbg-cyan" min="0" max="600" step="10" value="440"><span class="val" id="dbg-cyan-v">440px</span></div>'
+                + '<div class="actions"><button id="dbg-cyan-copy">COPY CSS</button><button id="dbg-cyan-reset">RESET</button></div>';
+            document.body.appendChild(panel);
+
+            var elCyan = document.getElementById('dbg-cyan');
+            var valCyan = document.getElementById('dbg-cyan-v');
+
+            function applyCyan() {
+                var cyan = parseInt(elCyan.value);
+                var negMargin = -cyan;
+                var css = '.explore { margin-top: ' + negMargin + 'px !important; padding-top: ' + (50 + cyan) + 'px !important; }';
+                dynStyle.textContent = css;
+                valCyan.textContent = cyan + 'px';
+            }
+
+            elCyan.addEventListener('input', applyCyan);
+            applyCyan();
+
+            document.getElementById('dbg-cyan-copy').addEventListener('click', function() {
+                var cyan = parseInt(elCyan.value);
+                var css = '.explore {\n  margin-top: -' + cyan + 'px;\n  padding-top: ' + (50 + cyan) + 'px;\n}';
+                navigator.clipboard.writeText(css);
+            });
+
+            document.getElementById('dbg-cyan-reset').addEventListener('click', function() {
+                elCyan.value = 440;
+                applyCyan();
+            });
+
+            var dragging = false, dx = 0, dy = 0;
+            panel.addEventListener('mousedown', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+                dragging = true; dx = e.clientX - panel.offsetLeft; dy = e.clientY - panel.offsetTop;
+            });
+            document.addEventListener('mousemove', function(e) {
+                if (!dragging) return;
+                panel.style.left = (e.clientX - dx) + 'px'; panel.style.top = (e.clientY - dy) + 'px';
+                panel.style.right = 'auto';
+            });
+            document.addEventListener('mouseup', function() { dragging = false; });
+        })();
+
+        // ===== DEBUG: オレンジ境界調整パネル（左下）=====
+        (function() {
+            var dynStyle = document.createElement('style');
+            dynStyle.id = 'dbg-orange-style';
+            document.head.appendChild(dynStyle);
+
+            var panel = document.createElement('div');
+            panel.id = 'debug-panel-orange';
+            panel.innerHTML = '<style>'
+                + '#debug-panel-orange { position:fixed; bottom:10px; left:10px; z-index:99999; background:rgba(0,0,0,0.92); color:#ff8800; font-family:monospace; font-size:13px; padding:16px 20px; border-radius:10px; border:1px solid #ff8800; min-width:320px; cursor:move; user-select:none; backdrop-filter:blur(8px); }'
+                + '#debug-panel-orange h3 { margin:0 0 12px; color:#ff8800; font-size:14px; text-align:center; }'
+                + '#debug-panel-orange .row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }'
+                + '#debug-panel-orange label { width:110px; text-align:right; flex-shrink:0; }'
+                + '#debug-panel-orange input[type=range] { flex:1; accent-color:#ff8800; }'
+                + '#debug-panel-orange .val { width:70px; text-align:left; color:#fff; }'
+                + '#debug-panel-orange .actions { display:flex; gap:8px; margin-top:14px; }'
+                + '#debug-panel-orange button { flex:1; padding:8px; border:1px solid #ff8800; background:transparent; color:#ff8800; font-family:monospace; font-size:12px; cursor:pointer; border-radius:4px; }'
+                + '#debug-panel-orange button:hover { background:#ff8800; color:#000; }'
+                + '</style>'
+                + '<h3>🍊 オレンジ境界調整</h3>'
+                + '<div class="row"><label>背景を上に:</label><input type="range" id="dbg-orange" min="0" max="600" step="10" value="0"><span class="val" id="dbg-orange-v">0px</span></div>'
+                + '<div class="actions"><button id="dbg-orange-copy">COPY CSS</button><button id="dbg-orange-reset">RESET</button></div>';
+            document.body.appendChild(panel);
+
+            var elOrange = document.getElementById('dbg-orange');
+            var valOrange = document.getElementById('dbg-orange-v');
+
+            function applyOrange() {
+                var orange = parseInt(elOrange.value);
+                var negMargin = -orange;
+                var css = '.estimate-qa-section { margin-top: ' + negMargin + 'px !important; padding-top: ' + (50 + orange) + 'px !important; }';
+                dynStyle.textContent = css;
+                valOrange.textContent = orange + 'px';
+            }
+
+            elOrange.addEventListener('input', applyOrange);
+            applyOrange();
+
+            document.getElementById('dbg-orange-copy').addEventListener('click', function() {
+                var orange = parseInt(elOrange.value);
+                var css = '.estimate-qa-section {\n  margin-top: -' + orange + 'px;\n  padding-top: ' + (50 + orange) + 'px;\n}';
+                navigator.clipboard.writeText(css);
+            });
+
+            document.getElementById('dbg-orange-reset').addEventListener('click', function() {
+                elOrange.value = 0;
+                applyOrange();
+            });
+
+            var dragging = false, dx = 0, dy = 0;
+            panel.addEventListener('mousedown', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+                dragging = true; dx = e.clientX - panel.offsetLeft; dy = e.clientY - panel.offsetTop;
+            });
+            document.addEventListener('mousemove', function(e) {
+                if (!dragging) return;
+                panel.style.left = (e.clientX - dx) + 'px'; panel.style.top = (e.clientY - dy) + 'px';
+                panel.style.bottom = 'auto';
+            });
+            document.addEventListener('mouseup', function() { dragging = false; });
+        })();
+
+        // ===== DEBUG: Footer境界調整パネル（左下・オレンジの隣）=====
+        (function() {
+            var dynStyle = document.createElement('style');
+            dynStyle.id = 'dbg-footer-style';
+            document.head.appendChild(dynStyle);
+
+            var panel = document.createElement('div');
+            panel.id = 'debug-panel-footer';
+            panel.innerHTML = '<style>'
+                + '#debug-panel-footer { position:fixed; bottom:10px; left:350px; z-index:99999; background:rgba(0,0,0,0.92); color:#ccc; font-family:monospace; font-size:13px; padding:16px 20px; border-radius:10px; border:1px solid #ccc; min-width:320px; cursor:move; user-select:none; backdrop-filter:blur(8px); }'
+                + '#debug-panel-footer h3 { margin:0 0 12px; color:#ccc; font-size:14px; text-align:center; }'
+                + '#debug-panel-footer .row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }'
+                + '#debug-panel-footer label { width:110px; text-align:right; flex-shrink:0; }'
+                + '#debug-panel-footer input[type=range] { flex:1; accent-color:#ccc; }'
+                + '#debug-panel-footer .val { width:70px; text-align:left; color:#fff; }'
+                + '#debug-panel-footer .actions { display:flex; gap:8px; margin-top:14px; }'
+                + '#debug-panel-footer button { flex:1; padding:8px; border:1px solid #ccc; background:transparent; color:#ccc; font-family:monospace; font-size:12px; cursor:pointer; border-radius:4px; }'
+                + '#debug-panel-footer button:hover { background:#ccc; color:#000; }'
+                + '</style>'
+                + '<h3>⚪ Footer境界調整</h3>'
+                + '<div class="row"><label>背景を上に:</label><input type="range" id="dbg-footer" min="0" max="600" step="10" value="0"><span class="val" id="dbg-footer-v">0px</span></div>'
+                + '<div class="actions"><button id="dbg-footer-copy">COPY CSS</button><button id="dbg-footer-reset">RESET</button></div>';
+            document.body.appendChild(panel);
+
+            var elFooter = document.getElementById('dbg-footer');
+            var valFooter = document.getElementById('dbg-footer-v');
+
+            function applyFooter() {
+                var footer = parseInt(elFooter.value);
+                var negMargin = -footer;
+                var css = 'footer { margin-top: ' + negMargin + 'px !important; padding-top: ' + (180 + footer) + 'px !important; }';
+                dynStyle.textContent = css;
+                valFooter.textContent = footer + 'px';
+            }
+
+            elFooter.addEventListener('input', applyFooter);
+            applyFooter();
+
+            document.getElementById('dbg-footer-copy').addEventListener('click', function() {
+                var footer = parseInt(elFooter.value);
+                var css = 'footer {\n  margin-top: -' + footer + 'px;\n  padding-top: ' + (180 + footer) + 'px;\n}';
+                navigator.clipboard.writeText(css);
+            });
+
+            document.getElementById('dbg-footer-reset').addEventListener('click', function() {
+                elFooter.value = 0;
+                applyFooter();
+            });
+
+            var dragging = false, dx = 0, dy = 0;
+            panel.addEventListener('mousedown', function(e) {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'BUTTON') return;
+                dragging = true; dx = e.clientX - panel.offsetLeft; dy = e.clientY - panel.offsetTop;
+            });
+            document.addEventListener('mousemove', function(e) {
+                if (!dragging) return;
+                panel.style.left = (e.clientX - dx) + 'px'; panel.style.top = (e.clientY - dy) + 'px';
+                panel.style.bottom = 'auto';
+            });
+            document.addEventListener('mouseup', function() { dragging = false; });
+        })();
+
         const mailBtn = document.getElementById('mail-trigger');
         const mailOverlay = document.getElementById('mail-modal-overlay');
         const mailModal = document.getElementById('mail-modal');
