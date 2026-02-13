@@ -120,11 +120,28 @@ h3 { line-height: 0.9; font-weight: 400; }
     position: relative; z-index: 10;
 }
 .sub-link {
-    font-family: var(--font-en); font-size: 2rem; color: var(--c-text); text-decoration: none;
-    border-bottom: 2px solid transparent; transition: 0.3s; font-weight: 700;
+    font-family: var(--font-en);
+    font-size: 2rem;
+    color: #ffffff;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+    font-weight: 700;
+    display: inline-block;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
-.sub-link:hover { border-bottom: 2px solid var(--c-text); letter-spacing: 2px; }
-.sep { font-size: 2rem; opacity: 0.5; font-family: var(--font-digi); }
+.sub-link:hover {
+    border-bottom: 2px solid rgba(255, 77, 0, 0.8);
+    letter-spacing: 2px;
+    animation: shake-slight 0.4s ease-in-out 1;
+    color: rgba(255, 77, 0, 0.9);
+}
+.sep {
+    font-size: 2rem;
+    opacity: 0.5;
+    font-family: var(--font-digi);
+    color: rgba(255, 255, 255, 0.3);
+}
 
 /* GLITCH ANIMATION - Shadow カット */
 .glitch-link::before {
@@ -858,148 +875,504 @@ transform: rotate(-1deg) !important;
 .card-1, .card-2, .card-3, .card-4, .card-5 { box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
 
 /* GALLERY */
-.gallery-container-box { overflow: hidden; width: 100%; position: relative; margin-top: -80px; padding-top: 60px; background: rgb(240, 240, 240); }
-.gallery-wrapper { background: var(--pop-2); padding: 50px 0; transform: rotate(2deg) scale(1.1); position: relative; z-index: 100; display: flex; width: 120%; margin-left: -10%; }
+.gallery-container-box { overflow: visible; width: 100%; position: relative; margin-top: -77px; padding-top: 60px; }
+.gallery-wrapper { background: var(--pop-2); padding: 50px 0 150px 0; transform: rotate(2deg) scale(1.1); position: relative; z-index: 100; display: flex; width: 130%; margin-left: -15%; margin-top: -10px; clip-path: polygon(0 0px, 100% 0, 100% calc(100% - 104px), 0 calc(100% - 91px)); }
 .marquee-content { display: flex; gap: 20px; width: max-content; flex-shrink: 0; }
 .gallery-item { width: 400px; height: 300px; background: var(--c-white); border: 4px solid var(--c-text); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; font-family: var(--font-en); color: var(--c-text); }
 
 /* EXPLORE */
-.explore { padding: 150px 5% 100px; background: var(--pop-5); color: var(--c-text); position: relative; margin-top: 0px; z-index: 1; width: 100%; overflow: hidden; }
-.explore-title { font-size: 4rem; font-family: var(--font-en); text-align: center; margin-bottom: 60px; text-shadow: 4px 4px 0px var(--c-white); }
-.explore-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; position: relative; z-index: 10; }
-.explore-card { 
-    background: var(--c-white); border: 4px solid var(--c-text); padding: 40px; text-align: center; transition: 0.3s; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 300px; box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+/* ダークサイバー + グリッドアニメーション（estimate-qa-sectionまでカバー） */
+.explore {
+    padding: 150px 5% 200px;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(255, 77, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+        #1a1a2e;
+    color: #ffffff;
+    position: relative;
+    margin-top: -200px;
+    z-index: 1;
+    width: 100%;
+    overflow: visible;
 }
-.explore-card:hover { background: var(--c-white); color: var(--c-text); transform: translateY(-10px); box-shadow: 15px 15px 0px var(--c-text); }
+
+/* 動くグリッドライン - 縦線（estimate-qa-sectionまでカバー） */
+.explore::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background-image:
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 79px,
+            rgba(255, 77, 0, 0.15) 79px,
+            rgba(255, 77, 0, 0.15) 80px,
+            transparent 80px,
+            transparent 159px,
+            rgba(0, 255, 255, 0.1) 159px,
+            rgba(0, 255, 255, 0.1) 160px
+        );
+    animation: grid-pulse 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 動くグリッドライン - 横線（estimate-qa-sectionまでカバー） */
+.explore::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200%;
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 79px,
+            rgba(255, 77, 0, 0.08) 79px,
+            rgba(255, 77, 0, 0.08) 80px,
+            transparent 80px,
+            transparent 159px,
+            rgba(0, 255, 255, 0.06) 159px,
+            rgba(0, 255, 255, 0.06) 160px
+        );
+    animation: grid-pulse 4s ease-in-out infinite reverse;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes grid-pulse {
+    0%, 100% {
+        opacity: 0.3;
+        filter: blur(0px);
+    }
+    50% {
+        opacity: 0.6;
+        filter: blur(1px);
+    }
+}
+
+/* パターン2: 木目調（スタジオの温かみ） - コメントアウト */
+/*
+.explore {
+    padding: 150px 5% 100px;
+    background: linear-gradient(135deg, #f5e6d3 0%, #e8d5c4 100%);
+    color: var(--c-text);
+    position: relative;
+    margin-top: -200px;
+    z-index: 1;
+    width: 100%;
+    overflow: hidden;
+}
+.explore::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        repeating-linear-gradient(90deg, rgba(139, 90, 43, 0.03) 0px, transparent 1px, transparent 2px, rgba(139, 90, 43, 0.03) 3px),
+        repeating-linear-gradient(0deg, rgba(101, 67, 33, 0.03) 0px, transparent 1px, transparent 2px, rgba(101, 67, 33, 0.03) 3px),
+        linear-gradient(90deg, rgba(139, 90, 43, 0.02) 0%, transparent 50%, rgba(139, 90, 43, 0.02) 100%);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 1;
+}
+*/
+.explore-title {
+    font-size: 8rem;
+    font-family: var(--font-en);
+    color: #fff;
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 10;
+    margin-top: 0;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+/* 元のグリッド（auto-fit） */
+/*
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    position: relative;
+    z-index: 10;
+    perspective: 1000px;
+}
+*/
+
+/* 5つ横一列バージョン */
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    position: relative;
+    z-index: 10;
+    perspective: 1000px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+.explore-card {
+    background: rgba(15, 15, 25, 0.6);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 77, 0, 0.3);
+    padding: 40px;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    box-shadow:
+        0 0 20px rgba(255, 77, 0, 0.2),
+        inset 0 0 20px rgba(255, 77, 0, 0.05),
+        10px 10px 0px rgba(0, 0, 0, 0.3);
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+.explore-card:hover {
+    background: rgba(15, 15, 25, 0.8);
+    border-color: rgba(255, 77, 0, 0.6);
+    transform: translateY(-10px) translateZ(30px) rotateX(2deg);
+    box-shadow:
+        0 0 30px rgba(255, 77, 0, 0.5),
+        0 0 50px rgba(0, 255, 255, 0.2),
+        inset 0 0 30px rgba(255, 77, 0, 0.1),
+        15px 15px 0px rgba(0, 0, 0, 0.4);
+}
 .explore-icon { font-size: 4rem; margin-bottom: 20px; }
 .explore-name { font-size: 3rem; font-family: var(--font-en); line-height: 1; margin-bottom: 10px; }
 .explore-desc { font-size: 1rem; font-weight: bold; opacity: 0.8; }
 .card-link { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; }
-.ex-1:hover { background: var(--pop-6); } .ex-2:hover { background: var(--pop-4); color: var(--c-white); } .ex-3:hover { background: var(--pop-1); color: var(--c-white); } .ex-4:hover { background: var(--pop-3); color: var(--c-white); } .ex-5:hover { background: var(--pop-2); color: var(--c-text); }
+/* GEAR LIST Card - 緑のグラデーション、薄めのフィルター */
+.ex-1 {
+    background-image: url('/img/02X4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.ex-1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(0,50,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
+    z-index: 1;
+    transition: 0.3s;
+}
+.ex-1:hover::before {
+    background: linear-gradient(180deg, rgba(0,50,0,0.1) 0%, rgba(0,0,0,0.3) 100%);
+}
+.ex-1 .explore-icon,
+.ex-1 .explore-name,
+.ex-1 .explore-desc {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+}
+.ex-1:hover {
+    background-size: 110%;
+}
 
-/* ESTIMATE & Q&A (UPDATED: New Color Scheme) */
+/* WORKS Card - 紫/青のグラデーション、薄めのフィルター */
+.ex-2 {
+    background-image: url('/img/step3-lesson.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.ex-2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(30,0,50,0.2) 0%, rgba(0,0,50,0.5) 100%);
+    z-index: 1;
+    transition: 0.3s;
+}
+.ex-2:hover::before {
+    background: linear-gradient(180deg, rgba(30,0,50,0.1) 0%, rgba(0,0,50,0.3) 100%);
+}
+.ex-2 .explore-icon,
+.ex-2 .explore-name,
+.ex-2 .explore-desc {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+}
+.ex-2:hover {
+    background-size: 110%;
+}
+
+/* PRICE LIST Card - オレンジのグラデーション、薄めのフィルター */
+.ex-3 {
+    background-image: url('/img/01Mac.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.ex-3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(50,25,0,0.2) 0%, rgba(50,15,0,0.5) 100%);
+    z-index: 1;
+    transition: 0.3s;
+}
+.ex-3:hover::before {
+    background: linear-gradient(180deg, rgba(50,25,0,0.1) 0%, rgba(50,15,0,0.3) 100%);
+}
+.ex-3 .explore-icon,
+.ex-3 .explore-name,
+.ex-3 .explore-desc {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+}
+.ex-3:hover {
+    background-size: 110%;
+}
+
+/* LESSON Card - 黄色のグラデーション、薄めのフィルター */
+.ex-4 {
+    background-image: url('/img/Main06Lesson.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.ex-4::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(50,50,0,0.2) 0%, rgba(30,30,0,0.5) 100%);
+    z-index: 1;
+    transition: 0.3s;
+}
+.ex-4:hover::before {
+    background: linear-gradient(180deg, rgba(50,50,0,0.1) 0%, rgba(30,30,0,0.3) 100%);
+}
+.ex-4 .explore-icon,
+.ex-4 .explore-name,
+.ex-4 .explore-desc {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+}
+.ex-4:hover {
+    background-size: 110%;
+}
+
+/* BLOG Card - 茶色/赤のグラデーション、薄めのフィルター */
+.ex-5 {
+    background-image: url('/img/noke-story-classroom.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.ex-5::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(40,20,10,0.2) 0%, rgba(30,10,5,0.5) 100%);
+    z-index: 1;
+    transition: 0.3s;
+}
+.ex-5:hover::before {
+    background: linear-gradient(180deg, rgba(40,20,10,0.1) 0%, rgba(30,10,5,0.3) 100%);
+}
+.ex-5 .explore-icon,
+.ex-5 .explore-name,
+.ex-5 .explore-desc {
+    position: relative;
+    z-index: 2;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+}
+.ex-5:hover {
+    background-size: 110%;
+}
+
+/* ESTIMATE & Q&A - スタジオ背景 */
 .estimate-qa-section {
     padding: 100px 5%;
     border-top: none;
-    position: relative; z-index: 10; width: 100%;
-    background: var(--color-mustard); /* Updated to Mustard Yellow */
-    overflow: hidden;
-    margin-top: -80px;
-    padding-top: 180px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: url('/img/studio-window-bg.jpg') center center / cover no-repeat;
+    overflow: visible;
+    margin-top: 0;
 }
-.estimate-qa-section::after {
+
+/* 半透明オーバーレイで読みやすさ向上 */
+.estimate-qa-section::before {
     content: '';
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 80px;
-    background: rgb(240, 240, 240);
-    clip-path: polygon(0 0px, 100% 80px, 100% 100%, 0 100%);
-    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
     pointer-events: none;
+    z-index: 1;
 }
-.section-split { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; max-width: 1400px; margin: 0 auto; }
 
-.qa-area h2, .estimate-area h2 { 
-    font-family: var(--font-en); font-size: 3rem; 
-    color: var(--color-text-bold); /* Changed to Dark Gray */
-    margin-bottom: 30px; text-transform: uppercase; 
+.estimate-qa-section::after {
+    content: none;
+}
+.section-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.qa-area h2, .estimate-area h2 {
+    font-family: var(--font-en);
+    font-size: 3rem;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    text-shadow: none;
 }
 
 .search-box { position: relative; margin-bottom: 30px; }
 
-/* Search Input Style */
-.search-input { 
-    width: 100%; padding: 20px; font-size: 1.2rem; 
-    background: var(--color-card-bg); 
-    border: 2px solid var(--color-text-bold); 
-    color: var(--color-text-bold); 
-    outline: none; font-family: var(--font-jp); 
-    border-radius: 8px; /* Rounded */
+/* Search Input Style - クリーンモード */
+.search-input {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.2rem;
+    background: #ffffff;
+    border: 2px solid #e0e0e0;
+    color: #1a1a1a;
+    outline: none;
+    font-family: var(--font-jp);
+    border-radius: 8px;
     transition: all 0.3s;
 }
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
 .search-input:focus, .search-input:hover {
-    border-color: var(--color-primary); /* Pink on Hover */
+    border-color: rgba(255, 77, 0, 0.6);
+    background: rgba(255, 255, 255, 0.15);
 }
 
-/* Q&A List Style */
-.qa-list { 
-    max-height: 400px; overflow-y: auto; 
-    /* No Border, Background Transparent */
-    background: transparent; 
-    padding: 5px; 
+/* Q&A List Style - ダークモード */
+.qa-list {
+    max-height: 400px;
+    overflow-y: auto;
+    background: transparent;
+    padding: 5px;
 }
 
-.qa-item { 
-    padding: 15px 20px; 
+.qa-item {
+    padding: 15px 20px;
     margin-bottom: 15px;
-    background-color: var(--color-text-bold); /* Black Background */
-    color: var(--color-card-bg); /* White Text */
+    background: #ffffff;
+    color: #1a1a1a;
     border-radius: 12px;
-    cursor: pointer; 
-    transition: all 0.2s; 
-    /* Shadow Effect */
-    box-shadow: 0 4px 0 0 var(--color-primary), 0 6px 15px rgba(0, 0, 0, 0.1);
-    border-bottom: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.qa-item:hover { 
+.qa-item:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 0 0 var(--color-primary), 0 10px 20px rgba(0, 0, 0, 0.2);
-    background-color: #000; /* Slightly Darker on Hover */
+    background: #fafafa;
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 12px rgba(255, 77, 0, 0.15);
 }
 
-.qa-q { 
-    font-weight: bold; 
-    color: var(--color-secondary); /* Yellow for Question */
-    margin-bottom: 5px; 
+.qa-q {
+    font-weight: bold;
+    color: #000000; /* Black for Question */
+    margin-bottom: 5px;
 }
-.qa-a { 
-    font-size: 0.95rem; 
-    color: #ddd; 
-    display: none; 
-    margin-top: 10px; 
-    line-height: 1.6; 
-    border-top: 1px dashed #555;
+.qa-a {
+    font-size: 0.95rem;
+    color: #555;
+    display: none;
+    margin-top: 10px;
+    line-height: 1.6;
+    border-top: 1px dashed #e0e0e0;
     padding-top: 10px;
 }
 .qa-item.active .qa-a { display: block; }
 
 /* Estimate Form Style */
-.estimate-form { 
-    background: var(--color-card-bg); 
-    padding: 30px; 
-    border: 2px solid var(--color-text-bold); 
+.estimate-form {
+    background: #ffffff;
+    padding: 30px;
+    border: 2px solid #e0e0e0;
     border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 .form-group { margin-bottom: 20px; }
-.form-label { 
-    display: block; margin-bottom: 10px; font-weight: bold; 
-    color: var(--color-primary); /* Pink Label */
+.form-label {
+    display: block; margin-bottom: 10px; font-weight: bold;
+    color: #1a1a1a;
 }
 
 /* Dropdown Wrapper for Arrow */
 .select-wrapper { position: relative; }
 .select-wrapper::after {
     content: "▼";
-    position: absolute; top: 50%; right: 15px; 
-    transform: translateY(-50%); 
-    color: var(--color-text-bold); 
+    position: absolute; top: 50%; right: 15px;
+    transform: translateY(-50%);
+    color: var(--color-text-bold);
     pointer-events: none; font-size: 0.8rem;
 }
 
-.form-select { 
-    width: 100%; padding: 15px; 
-    background: var(--color-card-bg); 
-    border: 2px solid var(--color-text-bold); 
-    color: var(--color-text-bold); 
-    font-size: 1rem; 
+.form-select {
+    width: 100%; padding: 15px;
+    background: #ffffff;
+    border: 2px solid #e0e0e0;
+    color: #1a1a1a;
+    font-size: 1rem;
     border-radius: 8px; /* Rounded */
     appearance: none; /* Remove Default Arrow */
     cursor: pointer;
     transition: all 0.3s;
 }
 .form-select:focus, .form-select:hover {
-    border-color: var(--color-primary); /* Pink on Hover */
+    border-color: var(--color-primary);
 }
 
 .total-price-box { background: var(--c-white); color: var(--c-text); padding: 20px; text-align: center; font-family: var(--font-en); font-size: 2.5rem; font-weight: bold; margin: 20px 0; border: 4px solid var(--pop-1); transform: rotate(-2deg); }
