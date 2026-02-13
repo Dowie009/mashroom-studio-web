@@ -264,6 +264,49 @@ import Layout from '../layouts/Layout.astro';
                     あなたの「やりたいこと」を聞かせてください。<br>
                     <strong style="color:var(--pop-1);">強引な勧誘は一切ありません。</strong>
                 </p>
+
+                <!-- SIMPLE FLOW -->
+                <div class="simple-flow" style="margin-top:30px;">
+                    <div class="simple-step">
+                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <span class="step-text">送信</span>
+                    </div>
+                    <span class="simple-arrow">→</span>
+                    <div class="simple-step">
+                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <span class="step-text">返信</span>
+                    </div>
+                    <span class="simple-arrow">→</span>
+                    <div class="simple-step">
+                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span class="step-text">調整</span>
+                    </div>
+                    <span class="simple-arrow">→</span>
+                    <div class="simple-step">
+                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        <span class="step-text">相談</span>
+                    </div>
+                    <span class="simple-arrow">→</span>
+                    <div class="simple-step final-step">
+                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span class="step-text">決定</span>
+                    </div>
+                </div>
             </div>
 
             <div class="reserve-box reveal">
@@ -758,6 +801,55 @@ import Layout from '../layouts/Layout.astro';
         0%, 100% { transform: translateY(0px); }
         50% { transform: translateY(-10px); }
     }
+
+    /* SIMPLE FLOW */
+    .simple-flow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .simple-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        background: white;
+        padding: 12px 16px;
+        border-radius: 16px;
+        border: 2px solid #e0e0e0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: 0.3s;
+    }
+    .simple-step:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        border-color: var(--pop-2);
+    }
+    .step-emoji {
+        font-size: 1.8rem;
+        line-height: 1;
+    }
+    .step-text {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #666;
+        white-space: nowrap;
+    }
+    .simple-arrow {
+        font-size: 1.2rem;
+        color: #ccc;
+        font-weight: 700;
+    }
+    .final-step {
+        background: linear-gradient(135deg, #fff8f0 0%, #ffe8d0 100%);
+        border-color: var(--pop-1);
+    }
+    .final-step .step-text {
+        color: var(--pop-1);
+    }
+
     .reserve-box {
         background: white;
         border: 3px solid var(--c-text);
