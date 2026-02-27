@@ -268,41 +268,72 @@ import Layout from '../layouts/Layout.astro';
                 <!-- SIMPLE FLOW -->
                 <div class="simple-flow" style="margin-top:30px;">
                     <div class="simple-step">
-                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        <svg class="step-illust-svg" viewBox="0 0 100 100" fill="none">
+                            <!-- 手描き風の用紙 -->
+                            <path d="M15 20 Q15 18 17 18 L80 18 Q82 18 82 20 L82 85 Q82 87 80 87 L17 87 Q15 87 15 85 Z"
+                                  fill="#fff" stroke="#FF5555" stroke-width="2.5" stroke-linecap="round"/>
+                            <!-- ペン -->
+                            <path d="M60 35 L75 50 L73 52 L58 37 Z" fill="#FF5555"/>
+                            <circle cx="76" cy="51" r="3" fill="#FF5555"/>
+                            <!-- 線 -->
+                            <line x1="25" y1="35" x2="55" y2="35" stroke="#FF5555" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="25" y1="45" x2="70" y2="45" stroke="#FF5555" stroke-width="2" stroke-linecap="round"/>
+                            <line x1="25" y1="55" x2="50" y2="55" stroke="#FF5555" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                         <span class="step-text">送信</span>
                     </div>
                     <span class="simple-arrow">→</span>
                     <div class="simple-step">
-                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
+                        <svg class="step-illust-svg" viewBox="0 0 100 100" fill="none">
+                            <!-- 封筒 -->
+                            <path d="M10 30 L50 55 L90 30 L90 75 Q90 78 87 78 L13 78 Q10 78 10 75 Z"
+                                  fill="#87CEEB" stroke="#0087BD" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M10 30 L50 55 L90 30" stroke="#0087BD" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M10 30 L50 10 L90 30" fill="#fff" stroke="#0087BD" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <!-- ハート -->
+                            <circle cx="70" cy="25" r="8" fill="#FF5555"/>
                         </svg>
                         <span class="step-text">返信</span>
                     </div>
                     <span class="simple-arrow">→</span>
                     <div class="simple-step">
-                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
+                        <svg class="step-illust-svg" viewBox="0 0 100 100" fill="none">
+                            <!-- カレンダー -->
+                            <rect x="15" y="25" width="70" height="60" rx="5" fill="#fff" stroke="#C8E853" stroke-width="2.5"/>
+                            <rect x="15" y="25" width="70" height="15" rx="5" fill="#C8E853"/>
+                            <line x1="35" y1="20" x2="35" y2="30" stroke="#C8E853" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="65" y1="20" x2="65" y2="30" stroke="#C8E853" stroke-width="3" stroke-linecap="round"/>
+                            <!-- 日付マーク -->
+                            <circle cx="35" cy="55" r="5" fill="#C8E853"/>
+                            <circle cx="50" cy="55" r="5" fill="#E0E0E0"/>
+                            <circle cx="65" cy="55" r="5" fill="#E0E0E0"/>
+                            <circle cx="35" cy="70" r="5" fill="#E0E0E0"/>
+                            <circle cx="50" cy="70" r="5" fill="#E0E0E0"/>
                         </svg>
                         <span class="step-text">調整</span>
                     </div>
                     <span class="simple-arrow">→</span>
                     <div class="simple-step">
-                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        <svg class="step-illust-svg" viewBox="0 0 100 100" fill="none">
+                            <!-- 吹き出し -->
+                            <ellipse cx="50" cy="45" rx="35" ry="30" fill="#fff" stroke="#9C27B0" stroke-width="2.5"/>
+                            <path d="M35 65 L30 80 L45 68" fill="#fff" stroke="#9C27B0" stroke-width="2.5" stroke-linejoin="round"/>
+                            <!-- 顔 -->
+                            <circle cx="40" cy="40" r="3" fill="#9C27B0"/>
+                            <circle cx="60" cy="40" r="3" fill="#9C27B0"/>
+                            <path d="M40 52 Q50 58 60 52" stroke="#9C27B0" stroke-width="2.5" stroke-linecap="round" fill="none"/>
                         </svg>
                         <span class="step-text">相談</span>
                     </div>
                     <span class="simple-arrow">→</span>
                     <div class="simple-step final-step">
-                        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"></polyline>
+                        <svg class="step-illust-svg" viewBox="0 0 100 100" fill="none">
+                            <!-- チェックマーク + 星 -->
+                            <circle cx="50" cy="50" r="35" fill="#FFE5B4" stroke="#FF9800" stroke-width="2.5"/>
+                            <path d="M30 50 L45 65 L75 35" stroke="#FF9800" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                            <!-- 星 -->
+                            <path d="M20 25 L23 32 L30 33 L25 38 L27 45 L20 41 L13 45 L15 38 L10 33 L17 32 Z" fill="#FFD700"/>
+                            <path d="M80 70 L82 75 L87 76 L83 80 L85 85 L80 82 L75 85 L77 80 L73 76 L78 75 Z" fill="#FFD700"/>
                         </svg>
                         <span class="step-text">決定</span>
                     </div>
@@ -806,7 +837,7 @@ import Layout from '../layouts/Layout.astro';
     .simple-flow {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 15px;
         flex-wrap: wrap;
         justify-content: center;
     }
@@ -814,37 +845,39 @@ import Layout from '../layouts/Layout.astro';
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 5px;
+        gap: 8px;
         background: white;
-        padding: 12px 16px;
-        border-radius: 16px;
-        border: 2px solid #e0e0e0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        padding: 18px 20px;
+        border-radius: 20px;
+        border: 3px solid #e0e0e0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         transition: 0.3s;
     }
     .simple-step:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transform: translateY(-5px) rotate(2deg);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         border-color: var(--pop-2);
     }
-    .step-emoji {
-        font-size: 1.8rem;
-        line-height: 1;
+    .step-illust-svg {
+        width: 80px;
+        height: 80px;
     }
     .step-text {
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: #666;
+        font-size: 0.9rem;
+        font-weight: 900;
+        color: #333;
         white-space: nowrap;
+        font-family: var(--font-jp);
     }
     .simple-arrow {
-        font-size: 1.2rem;
-        color: #ccc;
+        font-size: 1.5rem;
+        color: #bbb;
         font-weight: 700;
     }
     .final-step {
         background: linear-gradient(135deg, #fff8f0 0%, #ffe8d0 100%);
         border-color: var(--pop-1);
+        border-width: 4px;
     }
     .final-step .step-text {
         color: var(--pop-1);
