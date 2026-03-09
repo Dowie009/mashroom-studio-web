@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://walewalewa.com/sitemap-index.xml
+Sitemap: https://mashroom-studio-web.vercel.app/sitemap-index.xml
