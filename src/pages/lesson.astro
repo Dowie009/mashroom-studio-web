@@ -248,16 +248,16 @@ import Layout from '../layouts/Layout.astro';
         <div class="reserve-top">
             <!-- 左カラム -->
             <div class="reserve-info">
-                <h2 class="section-title reveal" style="font-size:3.5rem; line-height:1;">無料相談予約</h2>
-                <div class="safe-badge reveal-hero">
+                <h2 class="section-title">無料相談予約</h2>
+                <div class="safe-badge">
                     <span class="safe-icon">🔒</span>
                     <span>完全無料・勧誘なし</span>
                 </div>
-                <div class="safe-badge reveal-hero">
+                <div class="safe-badge">
                     <span class="safe-icon">⏱</span>
                     <span>所要時間：約30分</span>
                 </div>
-                <div class="safe-badge reveal-hero">
+                <div class="safe-badge">
                     <span class="safe-icon">💬</span>
                     <span>オンライン / 対面 選択可</span>
                 </div>
@@ -266,16 +266,28 @@ import Layout from '../layouts/Layout.astro';
                     あなたの「やりたいこと」を聞かせてください。<br>
                     <strong style="color:var(--pop-1);">強引な勧誘は一切ありません。</strong>
                 </p>
-                <div class="voice-box reveal">
+                <div class="voice-box">
                     <div class="voice-title">💭 こんな相談が届いています</div>
-                    <div class="voice-item">「<em>仮歌のお仕事</em>を始めたい。機材を何から揃えればいいか分からない」</div>
-                    <div class="voice-item">「ミュージシャンだけど<em>声優の仕事</em>を家でやってみたい。機材選びから教えてほしい」</div>
-                    <div class="voice-item">「<em>レコーディング→納品→配信</em>までの流れを一通り知りたい」</div>
-                    <div class="voice-item">「<em>弾き語り</em>をもっとレベルアップしたい」</div>
+                    <div class="voice-item">
+                        <span class="voice-avatar">🙋‍♀️</span>
+                        <div class="voice-bubble">「<em>仮歌のお仕事</em>を始めたい。機材を何から揃えればいいか分からない」</div>
+                    </div>
+                    <div class="voice-item">
+                        <span class="voice-avatar">🙋‍♂️</span>
+                        <div class="voice-bubble">「ミュージシャンだけど<em>声優の仕事</em>を家でやってみたい。機材選びから教えてほしい」</div>
+                    </div>
+                    <div class="voice-item">
+                        <span class="voice-avatar">🙋‍♀️</span>
+                        <div class="voice-bubble">「<em>レコーディング→納品→配信</em>までの流れを一通り知りたい」</div>
+                    </div>
+                    <div class="voice-item">
+                        <span class="voice-avatar">🙋‍♂️</span>
+                        <div class="voice-bubble">「<em>弾き語り</em>をもっとレベルアップしたい」</div>
+                    </div>
                 </div>
             </div>
             <!-- 右カラム：フォーム -->
-            <div class="reserve-box reveal">
+            <div class="reserve-box">
                 <h3 style="font-size:1.5rem; margin-bottom:5px;">予約フォーム</h3>
                 <p class="form-sub">送信後、24時間以内にご返信します。</p>
                 <form id="reserve-form" action="https://formspree.io/f/xykdarno" method="POST">
@@ -319,11 +331,11 @@ import Layout from '../layouts/Layout.astro';
         <!-- 下部：ワークフロー（フル幅） -->
         <div class="workflow-area">
             <div class="workflow-label">
-                <h3 class="reveal" style="font-family:var(--font-en); font-size:1.8rem; color:var(--c-text); letter-spacing:0.1em;">HOW IT WORKS</h3>
-                <p class="reveal" style="color:#888; font-size:0.85rem; margin-top:5px;">送信からレッスン開始まで、こんな流れで進みます。</p>
+                <h3 style="font-family:var(--font-en); font-size:1.8rem; color:var(--c-text); letter-spacing:0.1em;">HOW IT WORKS</h3>
+                <p style="color:#888; font-size:0.85rem; margin-top:5px;">送信からレッスン開始まで、こんな流れで進みます。</p>
             </div>
             <div class="workflow-steps">
-                <div class="wf-step reveal">
+                <div class="wf-step">
                     <div class="wf-icon"><span>📝</span><span class="wf-num">1</span></div>
                     <div class="wf-content">
                         <div class="wf-step-title">送信</div>
@@ -331,7 +343,7 @@ import Layout from '../layouts/Layout.astro';
                     </div>
                 </div>
                 <div class="wf-arrow">▶</div>
-                <div class="wf-step reveal">
+                <div class="wf-step">
                     <div class="wf-icon"><span>💌</span><span class="wf-num">2</span></div>
                     <div class="wf-content">
                         <div class="wf-step-title">返信</div>
@@ -339,7 +351,7 @@ import Layout from '../layouts/Layout.astro';
                     </div>
                 </div>
                 <div class="wf-arrow">▶</div>
-                <div class="wf-step reveal">
+                <div class="wf-step">
                     <div class="wf-icon"><span>📅</span><span class="wf-num">3</span></div>
                     <div class="wf-content">
                         <div class="wf-step-title">日程調整</div>
@@ -347,7 +359,7 @@ import Layout from '../layouts/Layout.astro';
                     </div>
                 </div>
                 <div class="wf-arrow">▶</div>
-                <div class="wf-step reveal">
+                <div class="wf-step">
                     <div class="wf-icon"><span>💬</span><span class="wf-num">4</span></div>
                     <div class="wf-content">
                         <div class="wf-step-title">無料相談</div>
@@ -355,7 +367,7 @@ import Layout from '../layouts/Layout.astro';
                     </div>
                 </div>
                 <div class="wf-arrow">▶</div>
-                <div class="wf-step wf-step-final reveal">
+                <div class="wf-step wf-step-final">
                     <div class="wf-icon"><span>🎉</span><span class="wf-num">5</span></div>
                     <div class="wf-content">
                         <div class="wf-step-title">スタート！</div>
@@ -813,13 +825,29 @@ import Layout from '../layouts/Layout.astro';
         align-items: start;
         position: relative; z-index: 1;
     }
-    .reserve-info { text-align: left; padding: 20px 0; }
+    .reserve-info { text-align: left; padding: 0; }
     .reserve-info .section-title {
-        font-family: var(--font-en); font-weight: 900;
-        background: linear-gradient(135deg, var(--c-text) 0%, var(--pop-1) 100%);
-        -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        font-size: 3.5rem;
+        font-family: var(--font-en);
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--pop-3) 0%, #FF6600 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         background-clip: text;
-        margin-bottom: 25px; text-transform: uppercase; letter-spacing: 0.05em;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        line-height: 1;
+        /* グローバル.section-titleのリセット */
+        transform: none;
+        left: auto;
+        display: block;
+        text-align: left;
+        padding: 0;
+        box-shadow: none;
+        text-shadow: none;
+        color: var(--c-text);
+        position: static;
     }
     .reserve-desc { margin-top: 20px; line-height: 1.8; font-size: 0.95rem; color: #555; }
 
@@ -834,16 +862,29 @@ import Layout from '../layouts/Layout.astro';
     /* 相談例ボックス */
     .voice-box {
         margin-top: 25px; padding: 20px; background: white;
-        border: 2px solid #e0e0e0; border-radius: 14px;
-        box-shadow: 3px 3px 0 rgba(0,0,0,0.05);
+        border: 2px solid transparent; border-radius: 14px;
+        background-image: linear-gradient(white, white), linear-gradient(135deg, var(--pop-3), #FF6600);
+        background-origin: border-box; background-clip: padding-box, border-box;
+        box-shadow: 4px 4px 0 rgba(255,153,0,0.15);
     }
-    .voice-title { font-size: 0.85rem; font-weight: 900; color: var(--c-text); margin-bottom: 12px; }
+    .voice-title { font-size: 0.85rem; font-weight: 900; color: var(--c-text); margin-bottom: 15px; }
     .voice-item {
-        font-size: 0.82rem; color: #666; line-height: 1.5;
-        padding: 8px 0; border-bottom: 1px dashed #eee;
+        display: flex; align-items: flex-start; gap: 10px;
+        margin-bottom: 12px;
     }
-    .voice-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .voice-item em { font-style: normal; color: var(--pop-4); font-weight: 700; }
+    .voice-item:last-child { margin-bottom: 0; }
+    .voice-avatar {
+        font-size: 1.3rem; flex-shrink: 0;
+        width: 32px; height: 32px;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .voice-bubble {
+        background: #eae8e4; border: 2px solid #888; border-radius: 12px; border-top-left-radius: 2px;
+        padding: 10px 14px; font-size: 0.82rem; color: #111;
+        line-height: 1.6; position: relative; flex: 1;
+        box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+    }
+    .voice-bubble em { font-style: normal; color: var(--pop-4); font-weight: 700; }
 
     /* フォーム */
     .reserve-box {
