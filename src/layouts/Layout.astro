@@ -5,12 +5,16 @@ import '../styles/home.css';
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
 }
 
 const {
-  title = "札幌のレコーディング＆音楽制作スタジオ | MASHROOM STUDIO (歌ってみた/MV撮影/DTM教室)",
-  description = "札幌市北区のレコーディングスタジオ「MASHROOM STUDIO」。初心者歓迎の「歌ってみた」録音から、プロ仕様のMV撮影、DTMレッスン、企業向け楽曲制作までトータルサポート。機材充実、手ぶらでOK。あなたの「やりたい」をプロの技術で形にします。まずはお気軽にLINEでご相談を。",
+  title = "真柴道ゐのレコーディングスタジオ | MASHROOM STUDIO 札幌北区",
+  description = "札幌市北区のレコーディングスタジオ MASHROOM STUDIO。真柴道ゐ（マシバドウイ）主宰。歌ってみた録音・MV撮影・DTMレッスン・楽曲制作をトータルサポート。初心者歓迎、機材充実、手ぶらOK。",
+  ogImage = "/img/image_47d437.jpg",
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://walewalewa.com');
 ---
 
 <!doctype html>
@@ -21,7 +25,27 @@ const {
     <!-- SEO対策: タイトルと説明文 -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    
+    <link rel="canonical" href={canonicalURL.href} />
+
+    <!-- OGP (SNSシェア用) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`https://walewalewa.com${ogImage}`} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:site_name" content="MASHROOM STUDIO" />
+    <meta property="og:locale" content="ja_JP" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`https://walewalewa.com${ogImage}`} />
+
+    <!-- 追加SEO -->
+    <meta name="author" content="真柴道ゐ（マシバドウイ）" />
+    <meta name="keywords" content="レコーディングスタジオ,札幌,真柴道ゐ,マシバドウイ,MASHROOM STUDIO,歌ってみた,MV撮影,DTMレッスン,音楽制作,ボーカル録音,札幌北区,walewalewa" />
+
     <!-- 強制キャッシュ無効化（iPhone/Safari対策） -->
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Cache-Control" content="no-cache">
