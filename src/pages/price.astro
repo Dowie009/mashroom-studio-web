@@ -121,11 +121,13 @@ import Layout from '../layouts/Layout.astro';
 <style is:global>
     /* CURSOR（ページ固有） */
     .cursor.on-modal {
-        mix-blend-mode: normal; 
-        background: var(--pop-1); 
+        mix-blend-mode: normal;
+        background: var(--pop-1);
         box-shadow: 0 0 20px var(--pop-1);
         border: 2px solid white;
         width: 30px; height: 30px;
+        z-index: 999999 !important;
+        pointer-events: none;
     }
     .cursor.on-modal.hovered { width: 60px; height: 60px; opacity: 0.8; }
 
@@ -410,8 +412,8 @@ import Layout from '../layouts/Layout.astro';
     .modal-close:hover { transform: rotate(90deg); background: var(--pop-1); }
 
     /* ADD-ON SECTION (STICKER WALL) */
-    .addons-section { 
-        padding: 80px 0; 
+    .addons-section {
+        padding: 80px 0 140px;
         background: var(--pop-5); 
         border-top: 5px solid var(--c-text); 
         border-bottom: 5px solid var(--c-text); 
@@ -475,9 +477,7 @@ import Layout from '../layouts/Layout.astro';
     .sticker-name { font-size: 1.2em; font-family: var(--font-en); line-height: 1; margin-bottom: 5px; text-transform: uppercase; word-break: break-word;}
     .sticker-price { font-size: 1em; font-weight: 900; background: var(--c-text); color: var(--pop-2); padding: 2px 8px; border-radius: 4px; }
     
-    .sticker.is-std { background: var(--c-text); color: var(--c-white); }
-    .sticker.is-std .sticker-price { background: var(--c-white); color: var(--c-text); }
-    .sticker.is-std:hover { background: var(--pop-1); color: var(--c-text); }
+    /* isStd廃止 — 全ステッカー統一デザイン */
 
     /* FOOTER */
     footer { background: var(--c-text); color: var(--c-white); padding: 80px 5%; text-align: center; position: relative; z-index: 10; }
@@ -545,8 +545,8 @@ import Layout from '../layouts/Layout.astro';
             { name: "RECORDING", desc: "エンジニア付きレコーディング。<br>スタジオ・機材すべて込み。", priceH: "4,500", priceP: "24,000", unitH: "1h", unitP: "6h PACK", features: ["専属エンジニア付き", "スタジオ＆機材すべて込み", "初心者の方も大歓迎！", "マイク選定・セッティング", "データ当日お渡し"], recommend: true },
             // === 02. STUDENT（時間制・学生限定） ===
             { name: "STUDENT REC", desc: "学生限定の特別料金。<br>学生証のご提示をお願いします。", priceH: "3,000", priceP: "15,000", unitH: "1h", unitP: "6h PACK", features: ["エンジニア付き", "スタジオ＆機材すべて込み", "丁寧にアドバイス", "初心者大歓迎", "学生証ご提示ください"] },
-            // === 03. REC + MIX（REC時間制 + 立ち会いMIX ¥5,000） ===
-            { name: "REC + MIX", desc: "レコーディング＋立ち会いミックス。<br>ノイズ・ブレス・ピッチ修正もその場で完了。", priceH: "4,500", priceP: "29,000", unitH: "1h + MIX ¥5,000", unitP: "6h + MIX込", features: ["REC（¥4,500/h）＋ 立ち会いMIX（¥5,000）", "ノイズ・ブレス処理込み", "ピッチ修正もその場で対応", "仕上がりをリアルタイム確認", "立ち会いだからリテイク不要"] },
+            // === 03. 立ち会いMIX（単体¥5,000・PLAN01と組み合わせ推奨） ===
+            { name: "立ち会い MIX", desc: "その場で一緒にミックス。<br>ノイズ・ブレス・ピッチ修正も全部やります。", priceH: "5,000", priceP: "5,000", unitH: "1曲", unitP: "1曲", features: ["PLAN.01 RECと組み合わせがオススメ", "ノイズ・ブレス処理込み", "ピッチ修正もその場で対応", "仕上がりをリアルタイム確認", "立ち会いだからリテイク不要"] },
             // === 04. FULL PACKAGE（弾き語り限定・1曲単位） ===
             { name: "FULL PACKAGE", desc: "弾き語り（ギター/ピアノ）限定。<br>REC＋MIX＋マスタリングで1曲完結。", priceH: "15,000", priceP: "15,000", unitH: "1曲", unitP: "1曲", features: ["ギター or ピアノ弾き語り限定", "REC 約2h ＋ MIX・マスタリング約1h", "配信規格対応・SNSデータ作成", "多少の時間超過はご相談OK", "1曲まるごとお任せください"] },
             // === 05. VOCAL EDIT（立ち会い=時間制 / データ渡し=トラック制） ===
@@ -626,16 +626,16 @@ import Layout from '../layouts/Layout.astro';
             { label: "EDIT", name: "NOISE RED.", price: "¥3,000~", size: "sm", rot: -2, desc: "ノイズ除去処理。" },
             { label: "EDIT", name: "HARMONY", price: "¥3,000~", size: "sm", rot: 4, desc: "ハモリパートの生成・作成。" },
             // === CORE / 基本メニュー ===
-            { label: "CORE", name: "REC 1h", price: "¥4,500", size: "lg", rot: -1, isStd: true, desc: "エンジニア付きレコーディング（1時間）。" },
-            { label: "CORE", name: "REC 6h PACK", price: "¥24,000", size: "lg", rot: -4, isStd: true, desc: "6時間パック。1日MAX利用に最適。" },
-            { label: "CORE", name: "STUDENT 1h", price: "¥3,000", size: "lg", rot: 1, isStd: true, desc: "学生限定料金。学生証ご提示ください。" },
-            { label: "CORE", name: "立ち会いMIX", price: "¥5,000", size: "lg", rot: 3, isStd: true, desc: "REC時間＋¥5,000で立ち会いミックス。ノイズ・ピッチ修正込み。" },
+            { label: "CORE", name: "REC 1h", price: "¥4,500", size: "md", rot: -1, desc: "エンジニア付きレコーディング（1時間）。" },
+            { label: "CORE", name: "REC 6h PACK", price: "¥24,000", size: "md", rot: -4, desc: "6時間パック。1日MAX利用に最適。" },
+            { label: "CORE", name: "STUDENT 1h", price: "¥3,000", size: "md", rot: 1, desc: "学生限定料金。学生証ご提示ください。" },
+            { label: "CORE", name: "立ち会いMIX", price: "¥5,000 /曲", size: "md", rot: 3, desc: "PLAN.01 RECと組み合わせ推奨。ノイズ・ブレス・ピッチ修正込み。" },
             // === TIME / 時間 ===
             { label: "TIME", name: "EXTEND", price: "¥4,500 /h", size: "md", rot: 1, desc: "6hパック超過分の延長（通常時間単価）。" },
             { label: "TIME", name: "LATE NIGHT", price: "+20%", size: "md", rot: 2, desc: "深夜24時以降の利用割増。" },
             { label: "SERVICE", name: "RUSH", price: "+30%", size: "md", rot: 5, desc: "特急仕上げオプション。" },
             // === VIDEO / 映像 ===
-            { label: "VIDEO", name: "MV EDIT", price: "¥15,000~", size: "lg", rot: -1, isStd: true, desc: "iPhone素材撮りから本格ロケまで対応。" },
+            { label: "VIDEO", name: "MV EDIT", price: "¥15,000~", size: "md", rot: -1, desc: "iPhone素材撮りから本格ロケまで対応。" },
             { label: "VIDEO", name: "4K CAM", price: "¥3,000 /h", size: "md", rot: -1, desc: "4Kビデオカメラレンタル。" },
             { label: "VIDEO", name: "BACK PAPER", price: "¥2,000 /回", size: "sm", rot: 4, desc: "撮影用背景紙の利用。" },
             { label: "VIDEO", name: "LYRIC VIDEO", price: "¥15,000~", size: "md", rot: 2, desc: "AI＋映像ソフトでリリックビデオ制作。" },
@@ -656,10 +656,9 @@ import Layout from '../layouts/Layout.astro';
             { label: "SUPPORT", name: "ASSISTANT", price: "¥2,500 /h", size: "sm", rot: -5, desc: "レコーディングアシスタント。" },
             { label: "LESSON", name: "DAW LECTURE", price: "¥3,500 /h", size: "md", rot: 3, desc: "DAWソフトの使い方レクチャー。" },
             { label: "STREAM", name: "OBS SETUP", price: "¥3,000", size: "sm", rot: -2, desc: "配信ソフトOBSの設定代行。" },
-            // === CANCEL / キャンセル（STUOOM参考） ===
-            { label: "CANCEL", name: "14日前〜8日前", price: "30%", size: "md", rot: 2, desc: "予約料金の30%をキャンセル料として申し受けます。" },
-            { label: "CANCEL", name: "7日前〜2日前", price: "50%", size: "md", rot: -3, desc: "予約料金の50%をキャンセル料として申し受けます。" },
-            { label: "CANCEL", name: "前日・当日", price: "100%", size: "md", rot: 1, desc: "前日・当日キャンセルは全額をキャンセル料として申し受けます。" },
+            // === CANCEL / キャンセル ===
+            { label: "CANCEL", name: "3日前〜前日", price: "30%", size: "md", rot: -3, desc: "予約料金の30%をキャンセル料として申し受けます。" },
+            { label: "CANCEL", name: "当日", price: "100%", size: "md", rot: 1, desc: "当日キャンセルは全額をキャンセル料として申し受けます。" },
         ];
 
         const stickerWall = document.getElementById('sticker-wall');
