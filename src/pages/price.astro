@@ -96,7 +96,7 @@ import Layout from '../layouts/Layout.astro';
     </section>
 
     <!-- NAVIGATION HUB -->
-    <section style="background: var(--c-bg); padding: 50px 5% 60px; position: relative; z-index: 10; border-top: 5px solid var(--c-text); border-bottom: 5px solid var(--c-text);">
+    <section id="nav-hub" style="background: var(--c-bg); padding: 38px 5% 113px; position: relative; z-index: 10; border-top: 5px solid var(--c-text); border-bottom: 5px solid var(--c-text); margin-top: 0;">
         <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap;">
             <h2 style="font-family: var(--font-en); font-size: 2.5rem; color: var(--c-text); margin: 0; letter-spacing: 0.1em;">05. PRICE LIST</h2>
             <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
@@ -413,7 +413,7 @@ import Layout from '../layouts/Layout.astro';
 
     /* ADD-ON SECTION (STICKER WALL) */
     .addons-section {
-        padding: 80px 0 140px;
+        padding: 80px 0 139px;
         background: var(--pop-5); 
         border-top: 5px solid var(--c-text); 
         border-bottom: 5px solid var(--c-text); 
@@ -489,7 +489,7 @@ import Layout from '../layouts/Layout.astro';
     .hamburger-btn { position: fixed; top: 30px; right: 30px; z-index: 11000; width: 80px; height: 80px; background: var(--c-text); border: 4px solid var(--pop-2); border-radius: 12px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 6px; cursor: pointer; transition: 0.3s; }
     .hamburger-btn:hover { background: var(--pop-2); border-color: var(--c-black); }
     .hamburger-btn:hover .h-line { background: var(--c-black); }
-    .h-line { width: 40px; height: 4px; background: var(--c-black); transition: 0.3s; border-radius: 2px; }
+    .h-line { width: 40px; height: 5px; background: var(--c-white); transition: 0.3s; border-radius: 4px; pointer-events: none; }
     
     .pop-sidebar { position: fixed; top: 0; right: 0; width: 100%; max-width: 500px; height: 100vh; background: rgba(0,0,0,0.95); border-left: 4px solid var(--pop-2); z-index: 10500; transform: translateX(100%); display: flex; flex-direction: column; justify-content: center; padding: 40px; transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); }
     /* Price.html用のメニュー数字スタイル（黒背景用） */
@@ -928,4 +928,6 @@ import Layout from '../layouts/Layout.astro';
             gsap.fromTo(element, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power4.out', scrollTrigger: { trigger: element, start: 'top 85%' } });
         });
     }
+
+    /* DEBUG PANEL 削除済み */
 </script>

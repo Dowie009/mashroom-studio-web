@@ -42,14 +42,16 @@ function initCommon() {
         // ハンバーガーメニューが色を変えながら転がるアニメーション
         const colors = ["#FF0055", "#CCFF00", "#FF9900", "#9D00FF", "#00FFFF", "#FFFF00"];
         
-        // 回転アニメーション（GSAPの ScrollTrigger による回転を維持）
+        // 回転アニメーション（ページの長さに応じて回転量を動的計算）
+        const maxScroll = document.body.scrollHeight - window.innerHeight;
+        const rotations = Math.max(1, Math.round(maxScroll / 1700));
         gsap.to(burger, {
-            rotation: 360 * 3,
-            scrollTrigger: { 
-                trigger: "body", 
-                start: "top top", 
-                end: "bottom bottom", 
-                scrub: 1 
+            rotation: 360 * rotations,
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
             }
         });
         
