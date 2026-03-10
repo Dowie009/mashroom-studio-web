@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>予約セクション デザイン改善案</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif; background: #222; }
+
+  :root {
+    --c-bg: #f4f4f0;
+    --c-text: #333333;
+    --pop-1: #FF0055;
+    --pop-2: #CCFF00;
+    --pop-3: #FF9900;
+    --pop-4: #9D00FF;
+    --pop-5: #00FFFF;
+    --pop-6: #FFFF00;
+    --font-en: 'Anton', sans-serif;
+    --font-jp: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+  }
+
+  .label {
+    text-align: center; padding: 30px 20px 15px; color: #fff; font-size: 1.8rem;
+    font-family: var(--font-en); letter-spacing: 0.1em;
+  }
+  .label span { color: var(--pop-5); }
+  .sublabel {
+    text-align: center; color: #aaa; font-size: 0.95rem; padding-bottom: 25px;
+    max-width: 700px; margin: 0 auto; line-height: 1.6;
+  }
+
+  /* ===== CURRENT DESIGN ===== */
+  .current-section {
+    border: 3px dashed #ff4444; margin: 20px auto; max-width: 1200px; border-radius: 20px;
+    overflow: hidden; position: relative;
+  }
+  .current-section::after {
+    content: 'BEFORE（現状）'; position: absolute; top: 15px; left: 20px;
+    background: #ff4444; color: white; padding: 5px 15px; border-radius: 20px;
+    font-weight: 900; font-size: 0.85rem; z-index: 10;
+  }
+
+  /* ===== PROPOSED DESIGN ===== */
+  .proposed-section {
+    border: 3px solid var(--pop-2); margin: 20px auto; max-width: 1200px; border-radius: 20px;
+    overflow: hidden; position: relative;
+  }
+  .proposed-section::after {
+    content: 'AFTER（改善案）'; position: absolute; top: 15px; left: 20px;
+    background: var(--pop-2); color: #333; padding: 5px 15px; border-radius: 20px;
+    font-weight: 900; font-size: 0.85rem; z-index: 10;
+  }
+
+  /* ===== RESERVE SECTION (CURRENT) ===== */
+  .reserve-current {
+    padding: 80px 5%; text-align: center;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    position: relative; overflow: hidden;
+  }
+  .reserve-current .wrapper {
+    max-width: 1000px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 50px;
+    align-items: start;
+  }
+  .reserve-current .info { text-align: left; padding: 40px 20px; }
+  .reserve-current .info h2 {
+    font-size: 2.5rem; font-family: var(--font-jp); font-weight: 900;
+    color: #999; margin-bottom: 20px;
+  }
+  .reserve-current .safe-badge {
+    background: white; border: 2px solid #ccc; padding: 8px 15px; border-radius: 30px;
+    font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; gap: 10px;
+    margin-bottom: 10px; width: fit-content; color: #666;
+  }
+  .reserve-current .desc { margin-top: 20px; line-height: 1.8; font-size: 0.95rem; color: #555; }
+  .reserve-current .simple-flow {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 25px;
+  }
+  .reserve-current .simple-step {
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    background: white; padding: 12px 14px; border-radius: 15px; border: 2px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .reserve-current .step-icon { font-size: 1.8rem; }
+  .reserve-current .step-text { font-size: 0.8rem; font-weight: 900; color: #333; }
+  .reserve-current .simple-arrow { color: #bbb; font-weight: 700; }
+  .reserve-current .form-box {
+    background: white; border: 2px solid #ddd; border-radius: 20px; padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  }
+  .reserve-current .form-box h3 { font-size: 1.3rem; margin-bottom: 20px; color: #999; }
+  .reserve-current .input-field {
+    width: 100%; padding: 12px; background: #f9f9f9; border: 2px solid #ddd;
+    border-radius: 8px; font-size: 0.95rem; margin-bottom: 12px; outline: none;
+  }
+  .reserve-current textarea { resize: vertical; min-height: 80px; }
+  .reserve-current .submit-btn {
+    width: 100%; padding: 15px; background: #aaa; color: white;
+    border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 900;
+    font-family: var(--font-en); cursor: pointer;
+  }
+
+  /* ===== RESERVE SECTION (PROPOSED) ===== */
+  .reserve-new {
+    padding: 80px 5% 60px; text-align: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    position: relative; overflow: hidden;
+  }
+  .reserve-new::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(circle at 20% 50%, rgba(255,0,85,0.08) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 50%, rgba(0,255,255,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* グリッド背景 */
+  .reserve-new::after {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px; pointer-events: none;
+  }
+
+  .reserve-new .inner { position: relative; z-index: 1; max-width: 1000px; margin: 0 auto; }
+
+  /* ヘッダー部分 */
+  .reserve-new .header-area {
+    text-align: center; margin-bottom: 50px;
+  }
+  .reserve-new .header-area h2 {
+    font-size: 3.5rem; font-family: var(--font-en); font-weight: 900;
+    background: linear-gradient(135deg, var(--pop-5) 0%, var(--pop-2) 50%, var(--pop-3) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; letter-spacing: 0.05em; margin-bottom: 15px;
+  }
+  .reserve-new .header-sub {
+    font-size: 1.1rem; color: rgba(255,255,255,0.7); line-height: 1.8;
+  }
+  .reserve-new .header-sub strong {
+    color: var(--pop-1); font-weight: 900;
+  }
+
+  /* バッジ横並び */
+  .reserve-new .badge-row {
+    display: flex; justify-content: center; gap: 15px; margin: 25px 0 0;
+    flex-wrap: wrap;
+  }
+  .reserve-new .safe-badge {
+    background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.15); padding: 10px 20px; border-radius: 50px;
+    font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 10px;
+    color: white; transition: 0.3s;
+  }
+  .reserve-new .safe-badge:hover {
+    background: rgba(204,255,0,0.15); border-color: var(--pop-2);
+    transform: translateY(-2px);
+  }
+
+  /* メインコンテンツ */
+  .reserve-new .content-grid {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px;
+    align-items: start; text-align: left;
+  }
+
+  /* 左側：メリットカード */
+  .reserve-new .merit-area {}
+  .reserve-new .merit-card {
+    background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 16px;
+    padding: 25px; margin-bottom: 15px; transition: 0.3s;
+    display: flex; gap: 18px; align-items: flex-start;
+  }
+  .reserve-new .merit-card:hover {
+    background: rgba(255,255,255,0.1); transform: translateX(5px);
+    border-color: rgba(255,255,255,0.25);
+  }
+  .reserve-new .merit-icon {
+    font-size: 2.2rem; flex-shrink: 0; width: 50px; height: 50px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.08); border-radius: 12px;
+  }
+  .reserve-new .merit-text h4 {
+    font-size: 1.05rem; font-weight: 900; color: white; margin-bottom: 5px;
+  }
+  .reserve-new .merit-text p {
+    font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5;
+  }
+
+  /* CTA小テキスト */
+  .reserve-new .cta-note {
+    margin-top: 20px; padding: 15px 20px;
+    background: linear-gradient(90deg, rgba(255,0,85,0.1) 0%, transparent 100%);
+    border-left: 4px solid var(--pop-1); border-radius: 0 12px 12px 0;
+    color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.6;
+  }
+
+  /* 右側：フォーム */
+  .reserve-new .form-box {
+    background: rgba(255,255,255,0.95); border-radius: 24px; padding: 35px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 80px rgba(0,255,255,0.05);
+    position: relative; overflow: hidden;
+  }
+  .reserve-new .form-box::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    background: linear-gradient(90deg, var(--pop-5), var(--pop-2), var(--pop-3), var(--pop-1));
+  }
+  .reserve-new .form-box h3 {
+    font-size: 1.4rem; margin-bottom: 8px; color: var(--c-text); font-weight: 900;
+  }
+  .reserve-new .form-box .form-sub {
+    font-size: 0.85rem; color: #888; margin-bottom: 25px;
+  }
+  .reserve-new .input-group { margin-bottom: 16px; position: relative; }
+  .reserve-new .input-label {
+    display: block; font-size: 0.8rem; font-weight: 900; color: #555;
+    margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .reserve-new .required { color: var(--pop-1); margin-left: 3px; }
+  .reserve-new .input-field {
+    width: 100%; padding: 14px 16px; background: #f8f8f8; border: 2px solid #e0e0e0;
+    border-radius: 12px; font-size: 1rem; transition: 0.3s; outline: none;
+    font-family: var(--font-jp);
+  }
+  .reserve-new .input-field:focus {
+    border-color: var(--pop-5); background: white;
+    box-shadow: 0 0 0 4px rgba(0,255,255,0.1);
+  }
+  .reserve-new textarea { resize: vertical; min-height: 90px; }
+
+  /* レッスン形式チップ */
+  .reserve-new .chip-group { display: flex; gap: 8px; flex-wrap: wrap; }
+  .reserve-new .chip {
+    padding: 8px 16px; border: 2px solid #e0e0e0; border-radius: 50px;
+    font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: 0.2s;
+    background: white; color: #555; user-select: none;
+  }
+  .reserve-new .chip:hover, .reserve-new .chip.selected {
+    border-color: var(--pop-4); color: var(--pop-4); background: rgba(157,0,255,0.05);
+  }
+
+  .reserve-new .submit-btn {
+    width: 100%; padding: 18px; border: none; border-radius: 14px;
+    font-size: 1.2rem; font-weight: 900; cursor: pointer;
+    font-family: var(--font-en); text-transform: uppercase; letter-spacing: 0.1em;
+    background: linear-gradient(135deg, var(--c-text) 0%, #1a1a2e 100%);
+    color: white; transition: 0.3s; position: relative; overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    margin-top: 5px;
+  }
+  .reserve-new .submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, var(--pop-1) 0%, #c60044 100%);
+  }
+  .reserve-new .submit-note {
+    text-align: center; margin-top: 12px; font-size: 0.78rem; color: #999;
+  }
+
+  /* ===== 変更ポイント説明 ===== */
+  .changes {
+    max-width: 1000px; margin: 40px auto; padding: 0 20px;
+  }
+  .changes h3 {
+    font-family: var(--font-en); font-size: 1.5rem; color: var(--pop-2);
+    margin-bottom: 20px; letter-spacing: 0.1em;
+  }
+  .change-item {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 20px 25px; margin-bottom: 12px;
+    display: flex; gap: 15px; align-items: flex-start;
+  }
+  .change-num {
+    background: var(--pop-1); color: white; width: 30px; height: 30px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 0.85rem; flex-shrink: 0;
+  }
+  .change-content h4 { color: white; font-size: 1rem; margin-bottom: 5px; }
+  .change-content p { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.5; }
+
+  .divider { height: 3px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); margin: 50px auto; max-width: 800px; }
+</style>
+</head>
+<body>
+
+<div class="label">RESERVATION SECTION <span>REDESIGN</span></div>
+<p class="sublabel">予約セクションの改善案です。現状（BEFORE）と改善案（AFTER）を並べて比較できます。</p>
+
+<!-- ===== BEFORE ===== -->
+<div class="current-section">
+  <div class="reserve-current">
+    <div class="wrapper">
+      <div class="info">
+        <h2>無料相談予約</h2>
+        <div class="safe-badge"><span>🔒</span><span>完全無料・勧誘なし</span></div>
+        <div class="safe-badge"><span>⏱</span><span>所要時間：約30分</span></div>
+        <div class="safe-badge"><span>💬</span><span>オンライン/対面 選択可</span></div>
+        <p class="desc">
+          まずは気軽にお話ししましょう。<br>
+          あなたの「やりたいこと」を聞かせてください。<br>
+          <strong style="color:var(--pop-1);">強引な勧誘は一切ありません。</strong>
+        </p>
+        <div class="simple-flow">
+          <div class="simple-step"><span class="step-icon">📝</span><span class="step-text">送信</span></div>
+          <span class="simple-arrow">→</span>
+          <div class="simple-step"><span class="step-icon">💌</span><span class="step-text">返信</span></div>
+          <span class="simple-arrow">→</span>
+          <div class="simple-step"><span class="step-icon">📅</span><span class="step-text">調整</span></div>
+          <span class="simple-arrow">→</span>
+          <div class="simple-step"><span class="step-icon">💬</span><span class="step-text">相談</span></div>
+          <span class="simple-arrow">→</span>
+          <div class="simple-step" style="border-color:var(--pop-3);background:#fff8f0;"><span class="step-icon">✅</span><span class="step-text" style="color:var(--pop-3);">決定</span></div>
+        </div>
+      </div>
+      <div class="form-box">
+        <h3>予約フォーム</h3>
+        <input type="text" class="input-field" placeholder="お名前*">
+        <input type="email" class="input-field" placeholder="メールアドレス*">
+        <input type="tel" class="input-field" placeholder="電話番号（任意）">
+        <textarea class="input-field" placeholder="ご相談内容（任意）"></textarea>
+        <button class="submit-btn">予約を確定する</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== AFTER ===== -->
+<div class="proposed-section">
+  <div class="reserve-new">
+    <div class="inner">
+      <!-- ヘッダー（中央揃え） -->
+      <div class="header-area">
+        <h2>BOOK YOUR SESSION</h2>
+        <p class="header-sub">
+          まずは気軽にお話ししましょう。あなたの「やりたいこと」を聞かせてください。<br>
+          <strong>強引な勧誘は一切ありません。</strong>
+        </p>
+        <div class="badge-row">
+          <div class="safe-badge"><span>🔒</span><span>完全無料</span></div>
+          <div class="safe-badge"><span>⏱</span><span>約30分</span></div>
+          <div class="safe-badge"><span>💬</span><span>オンライン / 対面OK</span></div>
+          <div class="safe-badge"><span>🎯</span><span>勧誘なし保証</span></div>
+        </div>
+      </div>
+
+      <!-- 2カラム -->
+      <div class="content-grid">
+        <!-- 左: メリットカード -->
+        <div class="merit-area">
+          <div class="merit-card">
+            <div class="merit-icon">🎸</div>
+            <div class="merit-text">
+              <h4>機材の相談もOK</h4>
+              <p>「何を買えばいい？」からスタートできます。予算に合わせたアドバイスも。</p>
+            </div>
+          </div>
+          <div class="merit-card">
+            <div class="merit-icon">🗺</div>
+            <div class="merit-text">
+              <h4>あなた専用カリキュラム</h4>
+              <p>「3ヶ月で1曲完成」など、ゴールに合わせた学習プランを一緒に設計します。</p>
+            </div>
+          </div>
+          <div class="merit-card">
+            <div class="merit-icon">💻</div>
+            <div class="merit-text">
+              <h4>Zoom / LINE / スタジオ対面</h4>
+              <p>あなたの生活スタイルに合わせて、レッスン形式を自由に選べます。</p>
+            </div>
+          </div>
+          <div class="merit-card">
+            <div class="merit-icon">💰</div>
+            <div class="merit-text">
+              <h4>明朗会計・追加料金なし</h4>
+              <p>必要な費用は事前にすべてご提示。隠れた費用は一切ありません。</p>
+            </div>
+          </div>
+          <div class="cta-note">
+            💡 まずは30分の無料カウンセリングで、あなたの「やりたい音楽」を聞かせてください。申し込み後、24時間以内にご返信いたします。
+          </div>
+        </div>
+
+        <!-- 右: フォーム -->
+        <div class="form-box">
+          <h3>無料カウンセリング予約</h3>
+          <p class="form-sub">以下のフォームから送信してください。24時間以内にご返信します。</p>
+
+          <div class="input-group">
+            <label class="input-label">お名前<span class="required">*</span></label>
+            <input type="text" class="input-field" placeholder="山田 太郎">
+          </div>
+          <div class="input-group">
+            <label class="input-label">メールアドレス<span class="required">*</span></label>
+            <input type="email" class="input-field" placeholder="your@email.com">
+          </div>
+          <div class="input-group">
+            <label class="input-label">電話番号<span style="color:#aaa;margin-left:3px;font-size:0.75rem;">任意</span></label>
+            <input type="tel" class="input-field" placeholder="090-xxxx-xxxx">
+          </div>
+          <div class="input-group">
+            <label class="input-label">希望レッスン形式</label>
+            <div class="chip-group">
+              <span class="chip selected">🎵 DTM / DAW</span>
+              <span class="chip">🎸 楽器</span>
+              <span class="chip">🎤 ボーカル</span>
+              <span class="chip">🎼 作編曲</span>
+              <span class="chip">🤔 まだ分からない</span>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">ご相談内容<span style="color:#aaa;margin-left:3px;font-size:0.75rem;">任意</span></label>
+            <textarea class="input-field" placeholder="レッスンで実現したいこと、今の悩みなど自由にご記入ください。"></textarea>
+          </div>
+          <button class="submit-btn">無料カウンセリングを予約する</button>
+          <p class="submit-note">🔒 送信内容は暗号化され、安全に処理されます</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 変更ポイント説明 -->
+<div class="changes">
+  <h3>WHAT CHANGED?</h3>
+  <div class="change-item">
+    <div class="change-num">1</div>
+    <div class="change-content">
+      <h4>フローダイアグラム（送信→返信→調整→相談→決定）を削除</h4>
+      <p>上のLESSON FLOWセクションと情報が重複していたため削除。代わりに「メリットカード」で具体的な魅力を訴求。左側の情報密度が上がり、バランスが改善。</p>
+    </div>
+  </div>
+  <div class="change-item">
+    <div class="change-num">2</div>
+    <div class="change-content">
+      <h4>安心バッジを上部中央に移動 → 視認性大幅UP</h4>
+      <p>「完全無料」「勧誘なし」などの安心要素は、フォームを見る前に目に入る位置に。バッジをコンパクトにしてglassmorphismスタイルに統一。</p>
+    </div>
+  </div>
+  <div class="change-item">
+    <div class="change-num">3</div>
+    <div class="change-content">
+      <h4>ダークテーマ背景 → サイト全体のpop感を維持しつつプレミアム感を演出</h4>
+      <p>グレー背景からダーク背景に変更。グラデーションテキストとglassmorphismでMASHROOMらしいpop×スタイリッシュを実現。</p>
+    </div>
+  </div>
+  <div class="change-item">
+    <div class="change-num">4</div>
+    <div class="change-content">
+      <h4>フォームUI強化 → ラベル・プレースホルダー・チップ選択追加</h4>
+      <p>入力フィールドにラベル追加、レッスン形式のチップ選択を新設。ユーザーの入力ハードルを下げつつ、有用な情報を収集可能に。</p>
+    </div>
+  </div>
+  <div class="change-item">
+    <div class="change-num">5</div>
+    <div class="change-content">
+      <h4>Formspree連携対応準備</h4>
+      <p>フォームにaction/method属性を追加すればFormspree経由でGmailに通知が届く設計。アカウント作成後すぐに連携可能。</p>
+    </div>
+  </div>
+</div>
+
+<div style="height:60px;"></div>
+
+<script>
+  // チップ選択のインタラクション
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => chip.classList.toggle('selected'));
+  });
+</script>
+</body>
+</html>

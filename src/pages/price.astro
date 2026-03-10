@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="料金プラン｜札幌レコーディングスタジオ | MASHROOM STUDIO"
-  description="MASHROOM STUDIO の料金一覧。レコーディング・MV撮影・DTMレッスン・楽曲制作の各プランを掲載。札幌市北区、1時間1,500円〜。初心者から企業利用まで柔軟に対応。"
+  description="MASHROOM STUDIO の料金プラン。エンジニア付きREC ¥4,500/h〜、6hパック ¥24,000、学生 ¥3,000/h。ミックス・マスタリング・MV制作も対応。札幌市北区のレコーディングスタジオ。"
 >
     <script slot="head" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js" is:inline></script>
 
@@ -20,16 +20,16 @@ import Layout from '../layouts/Layout.astro';
     <!-- PAGE TITLE HEADER -->
     <div class="page-header">
         <h1 class="page-title reveal-text">PRICE LIST</h1>
-        <p class="page-subtitle reveal-text">15 TYPES OF CREATIVE MISSION</p>
+        <p class="page-subtitle reveal-text">RECORDING STUDIO PRICE — SAPPORO</p>
     </div>
 
     <!-- TOGGLE SWITCH -->
     <div class="toggle-container reveal-text">
-        <span class="toggle-label active" id="label-hourly">HOURLY (1h)</span>
+        <span class="toggle-label active" id="label-hourly">1h RATE</span>
         <div class="toggle-switch magnet" id="billing-toggle">
             <div class="toggle-knob"></div>
         </div>
-        <span class="toggle-label" id="label-pack">PACK (Deal!)</span>
+        <span class="toggle-label" id="label-pack">6h PACK (お得!)</span>
     </div>
 
     <div class="swipe-hint" id="swipe-hint">&lt;&lt;&lt; DRAG TO SPIN &gt;&gt;&gt;<br><span style="font-size:0.8em; opacity:0.8;">TAP CARD FOR DETAILS</span></div>
@@ -87,7 +87,7 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="addons-header">
             <h2 class="addons-title reveal-text">EXTRAS & FREEBIES</h2>
-            <div class="addons-sub reveal-text">業界の相場感もなんとなく分かる目安表</div>
+            <div class="addons-sub reveal-text">オプション・レンタル・キャンセル規定</div>
         </div>
 
         <div class="sticker-wall reveal-text" id="sticker-wall">
@@ -539,23 +539,25 @@ import Layout from '../layouts/Layout.astro';
     function initPrice() {
         gsap.registerPlugin(ScrollTrigger, Draggable);
 
-        // --- DATA: 15 PLANS ---
+        // --- DATA: 3 PACKAGES + 12 OPTIONS ---
         const plansData = [
-            { name: "REHEARSAL", desc: "個人の練習、作曲、デモ制作に。<br>爆音で鳴らせる防音ブース。", priceH: "1,500", priceP: "12,000", features: ["防音ブース (3畳)", "高速Wi-Fi完備", "DAW用モニター貸出", "マイク1本まで無料", "飲食持ち込み可"] },
-            { name: "STANDARD REC", desc: "本格的なボーカル・楽器録音。<br>業界標準のマイクとプロツールス完備。", priceH: "3,500", priceP: "28,000", features: ["メインスタジオ (10畳)", "Pro Tools システム", "Neumann U87Ai 常設", "コントロールルーム利用", "ラウンジ利用OK"], recommend: true },
-            { name: "FULL PROD.", desc: "エンジニア付きの完パケ制作。<br>ミックス・マスタリングまで対応。", priceH: "8,000", priceP: "65,000", features: ["全エリア完全貸切", "専属エンジニア1名付", "Mix/Mastering 修正2回迄", "映像撮影サポート", "機材フルアクセス"] },
-            { name: "VOCAL EDIT", desc: "ピッチ修正・リズム補正のみ。<br>歌ってみたのクオリティアップに。", priceH: "3,000", priceP: "20,000", features: ["Melodyne使用", "自然な補正", "ハモリ生成", "タイミング補正", "即日納品可"] },
-            { name: "MIXING", desc: "録音済みデータのミックス。<br>2mix納品まで。", priceH: "5,000", priceP: "15,000", features: ["パラデータ受領", "2回修正込", "エフェクト処理", "バランス調整", "2mix納品"] },
-            { name: "MASTERING", desc: "配信・CDプレス用の最終仕上げ。<br>音圧と質感を最適化。", priceH: "3,000", priceP: "5,000", features: ["音圧調整", "質感補正", "配信規格対応", "DDP書き出し", "曲間調整"] },
-            { name: "MV SHOOTING", desc: "スタジオ内でのMV撮影。<br>照明機材・カメラ利用。", priceH: "10,000", priceP: "80,000", features: ["4Kカメラ貸出", "照明機材一式", "背景紙利用", "撮影補助スタッフ", "データ即日渡し"] },
-            { name: "LYRIC VIDEO", desc: "イラストや素材を使った<br>リリックビデオ制作。", priceH: "Ask", priceP: "30,000~", features: ["After Effects制作", "文字アニメーション", "AIイラスト生成", "YouTube用エンコード", "サムネイル作成"] },
-            { name: "ARTWORK", desc: "ジャケット写真・アーティスト写真。<br>専属カメラマン手配。", priceH: "Ask", priceP: "20,000~", features: ["撮影ディレクション", "レタッチ編集", "デザインレイアウト", "スタジオ撮影", "ロケ撮影対応"] },
-            { name: "BEAT MAKE", desc: "オリジナルビート制作。<br>HipHop, R&B, Pops等。", priceH: "Ask", priceP: "30,000~", features: ["完全オリジナル", "パラデータ納品", "著作権譲渡可", "ジャンル相談", "独占使用権"] },
-            { name: "SONG WRITING", desc: "作詞・作曲・編曲の提供。<br>ゼロからの楽曲制作。", priceH: "Ask", priceP: "50,000~", features: ["ヒアリング重視", "デモ制作", "仮歌収録", "フルアレンジ", "譜面作成"] },
-            { name: "DTM LESSON", desc: "Logic, Studio One等の<br>操作方法・制作テクニック。", priceH: "4,000", priceP: "35,000", features: ["マンツーマン指導", "機材の使い方", "Mixテクニック", "初心者歓迎", "オンライン対応"] },
-            { name: "LIVE STREAM", desc: "スタジオからの生配信サポート。<br>高音質・高画質配信。", priceH: "6,000", priceP: "50,000", features: ["OBS設定", "マルチカメラ", "配信ミキシング", "アーカイブ録画", "回線手配"] },
-            { name: "NARRATION", desc: "CM・動画・ボイスドラマ等の<br>ナレーション収録。", priceH: "4,000", priceP: "30,000", features: ["ノイズ処理", "整音・編集", "映像同期(MA)", "ディレクション", "ファイルカット"] },
-            { name: "PODCAST", desc: "ポッドキャスト・ラジオ収録。<br>対談形式も可能。", priceH: "3,000", priceP: "25,000", features: ["マイク4本まで", "BGM挿入", "編集代行", "データ納品", "RSS配信サポート"] },
+            // === メインプラン（STUOOM参考・エンジニア付き） ===
+            { name: "RECORDING", desc: "エンジニア付きレコーディング。<br>スタジオ・機材・アドバイス込み。", priceH: "4,500", priceP: "24,000", features: ["専属エンジニア付き", "スタジオ＆機材すべて込み", "歌唱・演奏アドバイス", "マイク選定・セッティング", "データ当日お渡し"], recommend: true },
+            { name: "STUDENT REC", desc: "学生限定の特別料金。<br>学生証のご提示をお願いします。", priceH: "3,000", priceP: "15,000", features: ["エンジニア付き", "スタジオ＆機材すべて込み", "丁寧にアドバイス", "初心者大歓迎", "学生証ご提示ください"] },
+            { name: "REC + MIX", desc: "録音＋ミックスダウンのセット。<br>完パケ一歩手前まで。", priceH: "6,500", priceP: "35,000", features: ["レコーディング込み", "ミックスダウン（1曲）", "2回修正込み", "エフェクト処理", "2mix納品"] },
+            { name: "FULL PACKAGE", desc: "REC＋MIX＋マスタリング。<br>配信・CDプレスまで対応。", priceH: "7,500", priceP: "40,000", features: ["レコーディング込み", "ミックスダウン（1曲）", "マスタリング（1曲）", "配信規格対応", "SNS投稿用データ作成"] },
+            // === オプション・単品サービス ===
+            { name: "VOCAL EDIT", desc: "ピッチ修正・リズム補正。<br>歌ってみたのクオリティアップに。", priceH: "Ask", priceP: "12,000", features: ["Melodyne使用", "自然な補正", "ハモリ生成", "タイミング補正", "パッケージ併用で割引"] },
+            { name: "MIXING", desc: "録音済みデータのミックス。<br>単品でのご依頼に。", priceH: "Ask", priceP: "12,000~", features: ["パラデータ受領", "2回修正込", "エフェクト処理", "バランス調整", "2mix納品"] },
+            { name: "MASTERING", desc: "配信・CDプレス用の最終仕上げ。<br>音圧と質感を最適化。", priceH: "Ask", priceP: "5,000~", features: ["音圧調整", "質感補正", "配信規格対応", "DDP書き出し", "曲間調整"] },
+            { name: "MV SHOOTING", desc: "スタジオ内でのMV撮影・編集。<br>簡易MV制作パッケージ。", priceH: "Ask", priceP: "45,000~", features: ["4Kカメラ撮影", "簡易編集込み", "照明機材一式", "背景紙利用", "データ即日渡し"] },
+            { name: "LYRIC VIDEO", desc: "イラストや素材を使った<br>リリックビデオ制作。", priceH: "Ask", priceP: "25,000~", features: ["After Effects制作", "文字アニメーション", "AIイラスト生成", "YouTube用エンコード", "サムネイル作成"] },
+            { name: "BEAT MAKE", desc: "オリジナルビート制作。<br>HipHop, R&B, Pops等。", priceH: "Ask", priceP: "25,000~", features: ["完全オリジナル", "パラデータ納品", "著作権譲渡可", "ジャンル相談", "独占使用権"] },
+            { name: "SONG WRITING", desc: "作詞・作曲・編曲の提供。<br>ゼロからの楽曲制作。", priceH: "Ask", priceP: "45,000~", features: ["ヒアリング重視", "デモ制作", "仮歌収録", "フルアレンジ", "譜面作成"] },
+            { name: "DTM LESSON", desc: "Logic, Studio One等の<br>操作方法・制作テクニック。", priceH: "3,500", priceP: "18,000", features: ["マンツーマン指導", "機材の使い方", "Mixテクニック", "初心者歓迎", "オンライン対応"] },
+            { name: "CD PRESS", desc: "CDプレス・各種配信ストア<br>登録手続きの代行。", priceH: "Ask", priceP: "18,000~", features: ["配信ストア登録代行", "CDプレス手配", "ジャケットデータ入稿", "ISRC取得サポート", "配信スケジュール管理"] },
+            { name: "ARTWORK", desc: "ジャケット写真・アーティスト写真。<br>撮影ディレクション込み。", priceH: "Ask", priceP: "18,000~", features: ["撮影ディレクション", "レタッチ編集", "デザインレイアウト", "スタジオ撮影", "ロケ撮影対応"] },
+            { name: "LIVE STREAM", desc: "スタジオからの生配信サポート。<br>高音質・高画質配信。", priceH: "5,000", priceP: "25,000", features: ["OBS設定", "マルチカメラ", "配信ミキシング", "アーカイブ録画", "回線手配"] },
         ];
 
         // カラーパレット (Neon Colors)
@@ -595,7 +597,7 @@ import Layout from '../layouts/Layout.astro';
                     <div class="plan-price price-hourly">¥${plan.priceH}</div>
                     <div class="plan-price price-pack hidden">¥${plan.priceP}</div>
                     <div class="plan-unit unit-hourly">/ 1h</div>
-                    <div class="plan-unit unit-pack hidden">/ PACK</div>
+                    <div class="plan-unit unit-pack hidden">/ 6h PACK</div>
                 </div>
                 <ul class="plan-features">${featuresHtml}</ul>
                 <div class="btn-pop plan-btn" style="background:${color}; color:black; border-color:black;">DETAILS</div>
@@ -605,37 +607,45 @@ import Layout from '../layouts/Layout.astro';
 
         // --- RENDER STICKERS ---
         const stickerData = [
-            { label: "EDIT", name: "PITCH", price: "¥3,000~", size: "sm", rot: -3, desc: "ボーカルのピッチ修正を行います。" },
-            { label: "EDIT", name: "TIMING", price: "¥2,000~", size: "sm", rot: 2, desc: "リズムのズレを補正します。" },
-            { label: "INDUSTRY STD.", name: "MIXING", price: "¥15,000~", size: "lg", rot: -1, isStd: true, desc: "プロクオリティのミックスダウン。" },
-            { label: "OPTION", name: "HARMONY", price: "¥2,000~", size: "md", rot: 4, desc: "ハモリパートの生成・作成。" },
-            { label: "RENTAL", name: "GUITAR", price: "¥500 /h", size: "sm", rot: -5, desc: "エレキギターのレンタル。" },
-            { label: "RENTAL", name: "VIDEO LT.", price: "¥1,000 /h", size: "md", rot: 3, desc: "撮影用照明機材一式。" },
-            { label: "TIME", name: "EXTEND", price: "¥2,000 /h", size: "md", rot: 1, desc: "延長料金（1時間あたり）。" },
-            { label: "INDUSTRY STD.", name: "MASTERING", price: "¥5,000~", size: "lg", rot: -4, isStd: true, desc: "最終的な音圧・質感調整。" },
+            // === EDIT / 補正 ===
+            { label: "EDIT", name: "PITCH", price: "¥12,000 /曲", size: "md", rot: -3, desc: "ボーカルのピッチ修正。Melodyne使用。" },
+            { label: "EDIT", name: "TIMING", price: "¥12,000 /曲", size: "sm", rot: 2, desc: "リズムのズレを補正。ピッチ補正とセット割あり。" },
+            { label: "EDIT", name: "NOISE RED.", price: "¥3,000~", size: "sm", rot: -2, desc: "ノイズ除去処理。" },
+            { label: "EDIT", name: "HARMONY", price: "¥3,000~", size: "md", rot: 4, desc: "ハモリパートの生成・作成。" },
+            // === CORE / 基本メニュー ===
+            { label: "CORE", name: "REC 1h", price: "¥4,500", size: "lg", rot: -1, isStd: true, desc: "エンジニア付きレコーディング（1時間）。" },
+            { label: "CORE", name: "REC 6h PACK", price: "¥24,000", size: "lg", rot: -4, isStd: true, desc: "6時間パック。1日MAX利用に最適。" },
+            { label: "CORE", name: "STUDENT 1h", price: "¥3,000", size: "lg", rot: 1, isStd: true, desc: "学生限定料金。学生証ご提示ください。" },
+            // === TIME / 時間 ===
+            { label: "TIME", name: "EXTEND", price: "¥4,500 /h", size: "md", rot: 1, desc: "6hパック超過分の延長（通常時間単価）。" },
             { label: "TIME", name: "LATE NIGHT", price: "+20%", size: "md", rot: 2, desc: "深夜24時以降の利用割増。" },
-            { label: "DATA", name: "STEMS", price: "¥2,000~", size: "sm", rot: -2, desc: "パラデータ（ステム）の書き出し。" },
             { label: "SERVICE", name: "RUSH", price: "+30%", size: "md", rot: 5, desc: "特急仕上げオプション。" },
-            { label: "RENTAL", name: "BASS", price: "¥500 /h", size: "sm", rot: -4, desc: "エレキベースのレンタル。" },
-            { label: "RENTAL", name: "SNARE", price: "¥800 /h", size: "sm", rot: 3, desc: "スネアドラムのレンタル。" },
-            { label: "PRO STAFF", name: "REC ENG.", price: "¥5,000 /h", size: "lg", rot: 1, isStd: true, desc: "専属レコーディングエンジニア。" },
-            { label: "EDIT", name: "NOISE RED.", price: "¥2,000~", size: "sm", rot: -2, desc: "ノイズ除去処理。" },
-            { label: "OPTION", name: "VOCAL TUNE", price: "¥5,000 /曲", size: "md", rot: 5, desc: "ボーカル補正フルパック。" },
-            { label: "DATA", name: "DDP MASTER", price: "¥3,000", size: "sm", rot: -3, desc: "CDプレス用DDPデータ作成。" },
-            { label: "DAY PACK", name: "STUDIO LOCK", price: "¥65,000 /day", size: "lg", rot: 2, isStd: true, desc: "スタジオ1日完全貸切。" },
+            // === VIDEO / 映像 ===
+            { label: "VIDEO", name: "MV EDIT", price: "¥45,000~", size: "lg", rot: -1, isStd: true, desc: "簡易MV撮影・編集パッケージ。" },
             { label: "VIDEO", name: "4K CAM", price: "¥3,000 /h", size: "md", rot: -1, desc: "4Kビデオカメラレンタル。" },
-            { label: "VIDEO", name: "BACK PAPER", price: "¥2,000 /回", size: "md", rot: 4, desc: "撮影用背景紙の利用。" },
-            { label: "SUPPORT", name: "ASSISTANT", price: "¥2,500 /h", size: "sm", rot: -5, desc: "レコーディングアシスタント。" },
-            { label: "LESSON", name: "DAW LECTURE", price: "¥4,000 /h", size: "md", rot: 3, desc: "DAWソフトの使い方レクチャー。" },
-            { label: "BEAT MAKE", name: "EXCLUSIVE", price: "¥30,000~", size: "lg", rot: 1, isStd: true, desc: "ビート独占使用権。" },
-            { label: "DESIGN", name: "JACKET ART", price: "¥20,000~", size: "md", rot: -4, desc: "ジャケットデザイン制作。" },
-            { label: "VIDEO", name: "LYRIC VIDEO", price: "¥30,000~", size: "md", rot: 2, desc: "リリックビデオ制作。" },
-            { label: "STREAM", name: "OBS SETUP", price: "¥5,000", size: "sm", rot: -2, desc: "配信ソフトOBSの設定代行。" },
-            { label: "RENTAL", name: "CABLE SET", price: "¥500", size: "sm", rot: 4, desc: "シールド・ケーブル類セット。" },
+            { label: "VIDEO", name: "BACK PAPER", price: "¥2,000 /回", size: "sm", rot: 4, desc: "撮影用背景紙の利用。" },
+            { label: "VIDEO", name: "LYRIC VIDEO", price: "¥25,000~", size: "md", rot: 2, desc: "リリックビデオ制作。" },
+            // === DESIGN / デザイン ===
+            { label: "DESIGN", name: "JACKET ART", price: "¥18,000~", size: "md", rot: -4, desc: "ジャケットデザイン制作。" },
+            { label: "DESIGN", name: "GOODS", price: "見積もり", size: "md", rot: 3, desc: "グッズ制作代行（デザイン含む）。" },
+            // === DATA / 配信 ===
+            { label: "DATA", name: "CD PRESS", price: "¥18,000~", size: "md", rot: -3, desc: "CDプレス・配信ストア登録代行。" },
+            { label: "DATA", name: "STEMS", price: "¥2,000~", size: "sm", rot: -2, desc: "パラデータ（ステム）の書き出し。" },
+            { label: "DATA", name: "DDP MASTER", price: "¥3,000", size: "sm", rot: 1, desc: "CDプレス用DDPデータ作成。" },
+            // === RENTAL / レンタル ===
+            { label: "RENTAL", name: "GUITAR", price: "¥500 /h", size: "sm", rot: -5, desc: "エレキギターのレンタル。" },
+            { label: "RENTAL", name: "BASS", price: "¥500 /h", size: "sm", rot: -4, desc: "エレキベースのレンタル。" },
+            { label: "RENTAL", name: "VIDEO LT.", price: "¥1,000 /h", size: "md", rot: 3, desc: "撮影用照明機材一式。" },
+            { label: "RENTAL", name: "CABLE SET", price: "FREE", size: "sm", rot: 4, desc: "シールド・ケーブル類セット。" },
             { label: "RENTAL", name: "HEADPHONE", price: "FREE", size: "sm", rot: -3, desc: "モニターヘッドホン貸出。" },
-            { label: "PLANNING", name: "CONSULTING", price: "¥10,000~", size: "lg", rot: 1, isStd: true, desc: "音楽活動コンサルティング。" },
-            { label: "DATA", name: "BACKUP", price: "¥5,000", size: "sm", rot: -5, desc: "プロジェクトデータのバックアップ。" },
-            { label: "OTHER", name: "CATERING", price: "Ask", size: "sm", rot: 2, desc: "ケータリング手配。" }
+            // === SUPPORT / サポート ===
+            { label: "SUPPORT", name: "ASSISTANT", price: "¥2,500 /h", size: "sm", rot: -5, desc: "レコーディングアシスタント。" },
+            { label: "LESSON", name: "DAW LECTURE", price: "¥3,500 /h", size: "md", rot: 3, desc: "DAWソフトの使い方レクチャー。" },
+            { label: "STREAM", name: "OBS SETUP", price: "¥3,000", size: "sm", rot: -2, desc: "配信ソフトOBSの設定代行。" },
+            // === CANCEL / キャンセル（STUOOM参考） ===
+            { label: "CANCEL", name: "14日前〜8日前", price: "30%", size: "md", rot: 2, desc: "予約料金の30%をキャンセル料として申し受けます。" },
+            { label: "CANCEL", name: "7日前〜2日前", price: "50%", size: "md", rot: -3, desc: "予約料金の50%をキャンセル料として申し受けます。" },
+            { label: "CANCEL", name: "前日・当日", price: "100%", size: "md", rot: 1, desc: "前日・当日キャンセルは全額をキャンセル料として申し受けます。" },
         ];
 
         const stickerWall = document.getElementById('sticker-wall');
@@ -831,7 +841,7 @@ import Layout from '../layouts/Layout.astro';
                         <div class="plan-price price-hourly ${isPack ? 'hidden' : ''}">¥${data.priceH}</div>
                         <div class="plan-price price-pack ${isPack ? '' : 'hidden'}">¥${data.priceP}</div>
                         <div class="plan-unit unit-hourly ${isPack ? 'hidden' : ''}">/ 1時間</div>
-                        <div class="plan-unit unit-pack ${isPack ? '' : 'hidden'}">/ パック料金</div>
+                        <div class="plan-unit unit-pack ${isPack ? '' : 'hidden'}">/ 6h パック</div>
                     </div>
                 `;
                 
