@@ -1,11 +1,9 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mashroom-studio-web.vercel.app',
+  site: 'https://xn--3-sj5c.jp',
   output: 'static',
-  integrations: [sitemap()],
   build: {
     assets: '_assets'
   }

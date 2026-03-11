@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mashroom-studio-web.vercel.app/sitemap-index.xml
+Sitemap: https://xn--3-sj5c.jp/sitemap-index.xml
