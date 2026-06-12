@@ -1289,33 +1289,31 @@ transform: rotate(-1deg) !important;
     text-shadow: none;
 }
 
-.search-box { position: relative; margin-bottom: 30px; }
+/* Q&A 補助テキスト・カテゴリチップ・もっと見る */
+.qa-lead, .estimate-lead {
+    font-size: 0.95rem; line-height: 1.8; color: #444;
+    margin: -14px 0 22px;
+}
+.qa-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.qa-chip {
+    padding: 7px 14px; cursor: pointer;
+    background: #ffffff; color: #1a1a1a;
+    border: 2px solid #1a1a1a; border-radius: 100px;
+    font-size: 0.85rem; font-weight: 700; font-family: var(--font-jp);
+    transition: all 0.2s;
+}
+.qa-chip:hover { transform: translateY(-2px); }
+.qa-chip.is-active { background: #1a1a1a; color: #ffffff; }
+.qa-more-btn {
+    display: block; width: 100%; margin-top: 6px; padding: 14px;
+    background: #ffffff; color: #1a1a1a; cursor: pointer;
+    border: 2px dashed #1a1a1a; border-radius: 12px;
+    font-size: 0.95rem; font-weight: 700; font-family: var(--font-jp);
+    transition: all 0.2s;
+}
+.qa-more-btn:hover { background: #1a1a1a; color: #fff; border-style: solid; }
 
-/* Search Input Style - クリーンモード */
-.search-input {
-    width: 100%;
-    padding: 20px;
-    font-size: 1.2rem;
-    background: #ffffff;
-    border: 2px solid #e0e0e0;
-    color: #1a1a1a;
-    outline: none;
-    font-family: var(--font-jp);
-    border-radius: 8px;
-    transition: all 0.3s;
-}
-.search-input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-.search-input:focus, .search-input:hover {
-    border-color: rgba(255, 77, 0, 0.6);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-/* Q&A List Style - ダークモード */
 .qa-list {
-    max-height: 400px;
-    overflow-y: auto;
     background: transparent;
     padding: 5px;
 }
@@ -1397,6 +1395,14 @@ transform: rotate(-1deg) !important;
 .total-price-box { background: var(--c-white); color: var(--c-text); padding: 20px; text-align: center; font-family: var(--font-en); font-size: 2.5rem; font-weight: bold; margin: 20px 0; border: 4px solid var(--pop-1); transform: rotate(-2deg); }
 .line-copy-btn { display: block; width: 100%; padding: 15px; background: #06C755; color: white; text-align: center; font-weight: bold; text-decoration: none; font-size: 1.2rem; border: none; cursor: pointer; transition: 0.2s; }
 .line-copy-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+.estimate-breakdown {
+    margin: -8px 0 14px; font-size: 0.88rem; line-height: 1.8; color: #1a1a1a;
+    background: rgba(0, 0, 0, 0.04); border-radius: 8px; padding: 10px 14px;
+}
+.estimate-note { margin: 0 0 16px; font-size: 0.8rem; line-height: 1.7; color: #777; }
+.estimate-more { margin: 14px 0 0; font-size: 0.9rem; text-align: center; }
+.estimate-more a { color: #1a1a1a; font-weight: 700; }
 
 /* FOOTER */
 footer { padding: 100px 5%; text-align: center; border-top: none; position: relative; z-index: 3; width: 100%; margin-top: -80px; padding-top: 180px; background: rgb(240, 240, 240); }
@@ -1681,17 +1687,9 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
     .total-price-box { font-size: 2rem; transform: rotate(0deg); border-width: 2px; }
     .line-copy-btn { padding: 15px; font-size: 1.1rem; }
 
-    /* Q&A LIST MOBILE FIX (New Addition) */
-    .qa-list {
-        border: 4px solid var(--color-text-bold); /* 太めの枠線 */
-        background: rgba(255, 255, 255, 0.5); /* 半透明の白背景 */
-        border-radius: 8px;
-        padding: 15px;
-        margin-bottom: 40px; /* 次のセクションとの余白 */
-        max-height: 350px; /* スクロール領域の高さ制限 */
-        box-shadow: inset 0 0 15px rgba(0,0,0,0.1); /* 内側に影をつけて凹み感を出す */
-        -webkit-overflow-scrolling: touch; /* スマホでの慣性スクロール有効化 */
-    }
+    /* Q&A MOBILE: スクロール枠をやめて「5件+もっと見る」方式（JS制御） */
+    .qa-list { padding: 0; margin-bottom: 6px; }
+    .qa-chip { font-size: 0.8rem; padding: 6px 12px; }
 
     /* FOOTER MOBILE */
     footer { padding: 60px 5% 40px; }
@@ -1707,6 +1705,4 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
     /* REMOVE SHAKY ANIMATION ON MOBILE (JS制御とCSSの併用) */
     .reveal-text { opacity: 1 !important; transform: none !important; transition: opacity 0.5s ease; }
     
-    /* Q&AアコーディオンはPCのみ */
-    .qa-item.active .qa-a { display: none !important; }
 }

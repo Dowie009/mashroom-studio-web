@@ -225,8 +225,17 @@ import Layout from '../layouts/Layout.astro';
     <section class="estimate-qa-section" data-cursor="color-pop-6">
         <div class="section-split">
             <div class="qa-area">
-                <h2>Q&A SEARCH 🔍</h2>
-                <div class="search-box"><input type="text" id="qa-search" class="search-input" placeholder="キーワードを入力 (例: キャンセル, 機材, 駐車場...)"></div>
+                <h2>Q&A 💬</h2>
+                <p class="qa-lead">よくある質問 — 気になることは、だいたい誰かが先に聞いてくれています。質問をタップすると答えが開きます。</p>
+                <div class="qa-chips" id="qa-chips">
+                    <button class="qa-chip is-active" data-cat="all">すべて</button>
+                    <button class="qa-chip" data-cat="first">はじめての方</button>
+                    <button class="qa-chip" data-cat="price">料金・支払い</button>
+                    <button class="qa-chip" data-cat="booking">予約・営業</button>
+                    <button class="qa-chip" data-cat="rec">録音・制作</button>
+                    <button class="qa-chip" data-cat="video">映像・レッスン他</button>
+                    <button class="qa-chip" data-cat="access">設備・アクセス</button>
+                </div>
                 <div class="qa-list" id="qa-results">
                     <div class="qa-item"><div class="qa-q">Q1. 駐車場はありますか？</div><div class="qa-a">A. あります。事前にご連絡いただければ、2台まで駐車可能です。</div></div>
                     <div class="qa-item"><div class="qa-q">Q2. キャンセル料はかかりますか？</div><div class="qa-a">A. 1週間前まで：無料 前日まで：15% 当日：30%</div></div>
@@ -271,36 +280,61 @@ import Layout from '../layouts/Layout.astro';
                     <div class="qa-item"><div class="qa-q">Q41. 友人の同伴は可能ですか？</div><div class="qa-a">A. もちろん可能です。ご家族で来られる方もいらっしゃいます。</div></div>
                     <div class="qa-item"><div class="qa-q">Q42. 子連れでも大丈夫ですか？</div><div class="qa-a">A. お子様連れでも大歓迎です。安心してお越しください。</div></div>
                 </div>
+                <button id="qa-more" class="qa-more-btn">残りの質問も見る ▼</button>
             </div>
             <div class="estimate-area">
                 <h2>QUICK ESTIMATE ⚡</h2>
+                <p class="estimate-lead"><strong>簡易見積もり</strong> — 「結局いくらかかるの…？」が不安な方へ。選ぶだけで概算が出ます。</p>
                 <div class="estimate-form">
                     <div class="form-group">
-                        <label class="form-label">PLAN</label>
+                        <label class="form-label">PLAN ─ やりたいこと</label>
                         <div class="select-wrapper">
                             <select id="est-plan" class="form-select">
-                                <option value="4500">RECORDING (¥4,500/h)</option><option value="3000">STUDENT REC (¥3,000/h)</option>
+                                <option value="rec">レコーディング（歌ってみた・弾き語り等）¥4,500/h</option>
+                                <option value="student">学生レコーディング（学生証提示）¥3,000/h</option>
+                                <option value="lesson">DTMレッスン ¥3,500/h</option>
+                                <option value="lesson-student">DTMレッスン［学生］¥2,500/h</option>
+                                <option value="vocaledit">ボーカル修正（立ち会い・Melodyne）¥4,500/h</option>
+                                <option value="stream">ライブ配信サポート ¥5,000/h</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">HOURS</label>
+                        <label class="form-label">HOURS ─ 時間（1曲なら2〜3時間が目安）</label>
                         <div class="select-wrapper">
                             <select id="est-hours" class="form-select">
-                                <option value="1">1時間</option><option value="2">2時間</option><option value="3">3時間</option><option value="4">4時間</option><option value="5">5時間</option><option value="6">6時間 (Pack検討推奨)</option>
+                                <option value="1">1時間</option><option value="2">2時間</option><option value="3" selected>3時間</option><option value="4">4時間</option><option value="5">5時間</option><option value="6">6時間（🉐 1日パック適用）</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">OPTIONS</label>
+                        <label class="form-label">FINISH ─ 仕上げ（録った後どうする？）</label>
                         <div class="select-wrapper">
                             <select id="est-opt" class="form-select">
-                                <option value="0">なし</option><option value="15000">ミックス (¥15,000)</option><option value="5000">マスタリング (¥5,000)</option><option value="20000">ミックス＆マスタリング (¥20,000)</option>
+                                <option value="0">なし（録音データのお渡しのみ）</option>
+                                <option value="5000">立ち会いミックス ¥5,000/曲</option>
+                                <option value="8000">ミックス・弾き語り ¥8,000/曲</option>
+                                <option value="15000">ミックス・バンド〜10tr ¥15,000/曲</option>
+                                <option value="5000">マスタリング ¥5,000/曲</option>
+                                <option value="20000">ミックス＆マスタリング ¥20,000/曲</option>
                             </select>
                         </div>
                     </div>
-                    <div class="total-price-box">TOTAL: ¥<span id="est-total">4,500</span></div>
-                    <button id="copy-line-btn" class="line-copy-btn">この内容で<br>メール相談する 📩</button>
+                    <div class="form-group">
+                        <label class="form-label">VIDEO ─ 映像もつくる？</label>
+                        <div class="select-wrapper">
+                            <select id="est-video" class="form-select">
+                                <option value="0">なし</option>
+                                <option value="15000" data-from="1">Rec &amp; Shoot（撮影＋動画1本）+¥15,000〜</option>
+                                <option value="15000" data-from="1">リリックビデオ制作 +¥15,000〜</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="total-price-box">TOTAL: ¥<span id="est-total">13,500</span><span id="est-tilde"></span></div>
+                    <p class="estimate-breakdown" id="est-breakdown"></p>
+                    <p class="estimate-note">※税込・概算です。深夜（24時以降）は+20%、特急は+30%。正式なお見積もりは無料です。</p>
+                    <button id="copy-line-btn" class="line-copy-btn">この内容でメール相談する 📩</button>
+                    <p class="estimate-more">もっと細かく知りたい方は <a href="/price">料金表ページへ →</a></p>
                 </div>
             </div>
         </div>
@@ -616,20 +650,49 @@ import Layout from '../layouts/Layout.astro';
         document.querySelector('.gallery-wrapper').appendChild(clone);
         gsap.to('.marquee-content', { xPercent: -100, ease: "none", duration: 20, repeat: -1 });
 
-        const searchInput = document.getElementById('qa-search');
-        const qaItems = document.querySelectorAll('.qa-item');
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            qaItems.forEach(item => { item.style.display = item.innerText.toLowerCase().includes(term) ? 'block' : 'none'; });
-        });
-        
-        // Q&Aアコーディオンの切り替えロジック
-        qaItems.forEach(item => { item.addEventListener('click', () => { 
-            // PC版ではアコーディオン
-            if (window.innerWidth > 900) {
-                item.classList.toggle('active');
-            }
-        }); });
+        // --- Q&A: カテゴリ分け + 最初は5件だけ表示 ---
+        // Q1〜Q42 の順にカテゴリを割り当て（first=はじめて, price=料金, booking=予約, rec=録音制作, video=映像レッスン他, access=設備アクセス）
+        const QA_CATS = [
+            'access','price','rec','first','first','price','booking','first','rec','first',
+            'rec','video','video','video','video','video','rec','rec','price','rec',
+            'first','booking','rec','first','access','access','access','booking','booking','booking',
+            'booking','price','price','price','rec','rec','rec','video','access','access',
+            'first','first'
+        ];
+        const qaItems = [...document.querySelectorAll('.qa-item')];
+        qaItems.forEach((item, i) => { item.dataset.cat = QA_CATS[i] || 'first'; });
+
+        const qaMoreBtn = document.getElementById('qa-more');
+        const qaChips = [...document.querySelectorAll('.qa-chip')];
+        const QA_PREVIEW_COUNT = 5;
+        let qaFilter = 'all';
+        let qaExpanded = false;
+
+        function renderQa() {
+            let shown = 0;
+            let matchTotal = 0;
+            qaItems.forEach((item) => {
+                const matches = qaFilter === 'all' || item.dataset.cat === qaFilter;
+                if (matches) matchTotal++;
+                const visible = matches && (qaExpanded || shown < QA_PREVIEW_COUNT);
+                item.style.display = visible ? 'block' : 'none';
+                if (visible) shown++;
+            });
+            const hidden = matchTotal - shown;
+            qaMoreBtn.style.display = hidden > 0 ? 'block' : 'none';
+            qaMoreBtn.textContent = `残りの質問も見る（あと${hidden}問）▼`;
+        }
+        qaMoreBtn.addEventListener('click', () => { qaExpanded = true; renderQa(); });
+        qaChips.forEach(chip => chip.addEventListener('click', () => {
+            qaFilter = chip.dataset.cat;
+            qaExpanded = qaFilter !== 'all'; // カテゴリ選択時は絞られているので全件表示、「すべて」は5件プレビューに戻る
+            qaChips.forEach(c => c.classList.toggle('is-active', c === chip));
+            renderQa();
+        }));
+        renderQa();
+
+        // Q&Aアコーディオン（スマホ・PC共通）
+        qaItems.forEach(item => { item.addEventListener('click', () => { item.classList.toggle('active'); }); });
 
         // --- MISSIONS CARD CLICK LOGIC ---
         const cardItems = document.querySelectorAll('.card');
@@ -668,21 +731,51 @@ import Layout from '../layouts/Layout.astro';
             });
         });
 
-        // --- ESTIMATE AND OTHER LOGIC ---
+        // --- 簡易見積もり（正式料金表 price.astro / STUDIO.md と同じ数字） ---
+        const EST_PLANS = {
+            'rec': { label: 'レコーディング', hourly: 4500, pack6: 24000 },
+            'student': { label: '学生レコーディング', hourly: 3000, pack6: 15000 },
+            'lesson': { label: 'DTMレッスン', hourly: 3500, pack6: 18000 },
+            'lesson-student': { label: 'DTMレッスン（学生）', hourly: 2500, pack6: null },
+            'vocaledit': { label: 'ボーカル修正（立ち会い）', hourly: 4500, pack6: null },
+            'stream': { label: 'ライブ配信サポート', hourly: 5000, pack6: 25000 },
+        };
         const estPlan = document.getElementById('est-plan');
         const estHours = document.getElementById('est-hours');
         const estOpt = document.getElementById('est-opt');
+        const estVideo = document.getElementById('est-video');
         const estTotal = document.getElementById('est-total');
+        const estTilde = document.getElementById('est-tilde');
+        const estBreakdown = document.getElementById('est-breakdown');
         const copyBtn = document.getElementById('copy-line-btn');
 
         function calculateTotal() {
-            const total = (parseInt(estPlan.value) * parseInt(estHours.value)) + parseInt(estOpt.value);
+            const plan = EST_PLANS[estPlan.value];
+            const hours = parseInt(estHours.value);
+            const usePack = hours === 6 && plan.pack6;
+            const base = usePack ? plan.pack6 : plan.hourly * hours;
+            const finish = parseInt(estOpt.value);
+            const video = parseInt(estVideo.value);
+            const total = base + finish + video;
+            const isApprox = estVideo.selectedOptions[0].dataset.from === '1';
+
             estTotal.innerText = total.toLocaleString();
+            estTilde.innerText = isApprox ? '〜' : '';
+
+            const parts = [`${plan.label} ${hours}時間 ¥${base.toLocaleString()}`];
+            if (finish > 0) parts.push(estOpt.selectedOptions[0].text);
+            if (video > 0) parts.push(estVideo.selectedOptions[0].text.replace('+', ''));
+            let text = parts.join('  ＋  ');
+            if (usePack) {
+                const saving = plan.hourly * 6 - plan.pack6;
+                text += `　🉐 6時間パック適用で ¥${saving.toLocaleString()} おトクになっています`;
+            }
+            estBreakdown.textContent = text;
         }
-        [estPlan, estHours, estOpt].forEach(el => el.addEventListener('change', calculateTotal));
+        [estPlan, estHours, estOpt, estVideo].forEach(el => el.addEventListener('change', calculateTotal));
 
         copyBtn.addEventListener('click', () => {
-            const estimateText = `【見積もり相談】\nプラン: ${estPlan.options[estPlan.selectedIndex].text}\n時間: ${estHours.options[estHours.selectedIndex].text}\nオプション: ${estOpt.options[estOpt.selectedIndex].text}\n概算合計: ¥${estTotal.innerText}\n\nこの内容で予約・相談したいです。`;
+            const estimateText = `【見積もり相談】\nプラン: ${estPlan.selectedOptions[0].text}\n時間: ${estHours.selectedOptions[0].text}\n仕上げ: ${estOpt.selectedOptions[0].text}\n映像: ${estVideo.selectedOptions[0].text}\n概算合計: ¥${estTotal.innerText}${estTilde.innerText}\n\nこの内容で予約・相談したいです。`;
             const mailBodyInput = document.getElementById('mail-body');
             if (mailBodyInput) mailBodyInput.value = estimateText;
             openMailModal();
