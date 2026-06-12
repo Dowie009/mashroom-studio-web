@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageNav from '../components/PageNav.astro';
 ---
 
 <Layout
@@ -119,6 +120,12 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <!-- FOOTER -->
+    <PageNav items={[
+        { href: '/#estimate', label: 'ESTIMATE', title: 'ざっくり概算を知りたい', desc: '選ぶだけの簡易見積もりで「だいたいいくら」が分かります' },
+        { href: '/gear', label: 'GEAR', title: 'この値段で使える機材は？', desc: 'LEWITT PURE TUBE、Genelec 8351Aなど機材一覧へ' },
+        { href: '/#contact', label: 'CONTACT', title: '相談したい・予約したい', desc: '正式なお見積もりは無料。気軽にどうぞ' },
+    ]} />
+
     <footer>
         <p style="font-size: 0.75rem; letter-spacing: 0.15em; opacity: 0.6;">MASHROOM STUDIO — RECORDING & CREATIVE BASE — HOKKAIDO, SAPPORO</p>
         <p style="margin-top: 10px; font-size: 0.75rem; opacity: 0.5;">&copy; 2026 MASHROOM STUDIO</p>

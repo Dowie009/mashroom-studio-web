@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageNav from '../components/PageNav.astro';
 ---
 
 <Layout
@@ -86,7 +87,7 @@ import Layout from '../layouts/Layout.astro';
                         <div class="kinetic-item k-text-box" style="background:var(--c-text); color:var(--pop-5); border-color:var(--c-white);">VIEW<br>MORE</div>
                         <div class="kinetic-item k-text-box">WORKS<br>2025</div>
                         <div class="kinetic-item k-img-box k-wide"><img src="/img/unclose.jpg" alt="flumpool tour" class="k-img"></div>
-                        <div class="kinetic-item k-img-box"><img src="/img/placeholder_projz.png" alt="PROJECT Z" class="k-img"></div>
+                        <div class="kinetic-item k-img-box"><img src="/img/slides/studio-02.jpg" alt="PROJECT Z" class="k-img"></div>
                         <div class="kinetic-item k-text-box" style="background:var(--pop-2); border-color:var(--c-text);">PRODUCE</div>
                         <div class="kinetic-item k-img-box k-wide"><img src="/img/image_a03568.jpg" alt="ドラマ 対岸の家事" class="k-img"></div>
                         <div class="kinetic-item k-img-box k-circle"><img src="/img/L_Logo.jpeg" alt="ルタオ" class="k-img"></div>
@@ -143,6 +144,12 @@ import Layout from '../layouts/Layout.astro';
             <p style="font-size: 0.95rem; opacity: 0.7; margin-bottom: 20px;">真柴道ゐの物語、読んでみませんか？</p>
             <a href="https://blog.xn--3-sj5c.jp/" target="_blank" style="display: inline-block; font-family: var(--font-en); font-weight: bold; text-decoration: none; color: var(--c-text); border: 3px solid var(--c-text); padding: 12px 36px; font-size: 1rem; transition: 0.3s; letter-spacing: 0.05em;">READ THE STORY &rarr;</a>
         </div>
+
+        <PageNav items={[
+            { href: '/works', label: 'WORKS', title: 'つくってきたもの', desc: 'アーティスト作品から企業案件まで、制作実績一覧' },
+            { href: 'https://blog.xn--3-sj5c.jp/', label: 'BLOG', title: 'ノケ物語を読む', desc: 'この人の半生が自伝マンガになっています' },
+            { href: '/#contact', label: 'CONTACT', title: '会ってみたい・話したい', desc: '見学無料。コーヒー淹れて待ってます' },
+        ]} />
 
         <footer style="text-align: center; padding: 60px 20px 40px;">
             <p style="font-size: 0.75rem; letter-spacing: 0.15em; opacity: 0.6;">MASHROOM STUDIO — RECORDING & CREATIVE BASE — HOKKAIDO, SAPPORO</p>

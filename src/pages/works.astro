@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageNav from '../components/PageNav.astro';
 ---
 
 <Layout
@@ -166,14 +167,14 @@ import Layout from '../layouts/Layout.astro';
 
                     <div class="work-card magnet ratio-wide-card" style="--hover-color: var(--pop-1);">
                          <div class="work-img-box ratio-wide magnet">
-                            <img src="/img/placeholder_projz.png" alt="Project Z" class="work-img">
+                            <img src="/img/slides/studio-02.jpg" alt="Project Z" class="work-img">
                         </div>
                         <div class="work-tags">
                             <span class="work-tag magnet" data-tag="MASTERING" style="background:var(--c-text);">MASTERING</span>
                         </div>
                         <div class="work-title">PROJECT Z</div>
                         <p class="work-desc">Album Mastering</p>
-                        <div class="work-detail-data" data-img-src="/img/placeholder_projz.png">
+                        <div class="work-detail-data" data-img-src="/img/slides/studio-02.jpg">
                             <h3 class="modal-header">PROJECT Z</h3>
                             <p class="modal-body">
                                 全10曲のアルバムマスタリングを担当。<br>
@@ -371,6 +372,12 @@ import Layout from '../layouts/Layout.astro';
         <p style="font-size: 0.95rem; opacity: 0.7; margin-bottom: 20px;">制作の裏側とAI活用術を公開中</p>
         <a href="https://blog.xn--3-sj5c.jp/tech" target="_blank" style="display: inline-block; font-family: var(--font-en); font-weight: bold; text-decoration: none; color: var(--c-text); border: 3px solid var(--c-text); padding: 12px 36px; font-size: 1rem; transition: 0.3s; letter-spacing: 0.05em;">AI &amp; TECH BLOG &rarr;</a>
     </div>
+
+    <PageNav items={[
+        { href: '/price', label: 'PRICE', title: '同じクオリティでつくるなら', desc: 'レコーディング¥4,500/h〜。料金プランはこちら' },
+        { href: '/gear', label: 'GEAR', title: '何で録ってるの？', desc: 'この音をつくっている機材一覧を見る' },
+        { href: '/#contact', label: 'CONTACT', title: '自分の曲もつくりたい', desc: '相談・デモ送付はこちら。まずは気軽に' },
+    ]} />
 
     <footer>
         <p style="font-size: 0.75rem; letter-spacing: 0.15em; opacity: 0.6;">MASHROOM STUDIO — RECORDING & CREATIVE BASE — HOKKAIDO, SAPPORO</p>

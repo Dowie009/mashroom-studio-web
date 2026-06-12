@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageNav from '../components/PageNav.astro';
 ---
 
 <Layout
@@ -406,6 +407,12 @@ import Layout from '../layouts/Layout.astro';
         <a href="https://blog.xn--3-sj5c.jp/dtm" target="_blank" style="display: inline-block; font-family: var(--font-en); font-weight: bold; text-decoration: none; color: var(--c-text); border: 3px solid var(--c-text); padding: 12px 36px; font-size: 1rem; transition: 0.3s; letter-spacing: 0.05em;">DTM BLOG &rarr;</a>
     </div>
 
+    <PageNav items={[
+        { href: '/#contact', label: 'TRIAL', title: '初回お試し ¥2,000 から', desc: 'カウンセリング＆レッスン。まずは話してみるところから' },
+        { href: '/price', label: 'PRICE', title: '料金の全体像を見る', desc: 'レッスン以外のメニューもまとめて確認できます' },
+        { href: '/profile', label: 'PROFILE', title: '教えるのは、こんな人', desc: '現役プロデューサー・真柴道ゐの経歴と実績' },
+    ]} />
+
     <footer>
         <p style="font-size: 0.75rem; letter-spacing: 0.15em; opacity: 0.6;">MASHROOM STUDIO — RECORDING & CREATIVE BASE — HOKKAIDO, SAPPORO</p>
         <p style="margin-top: 10px; font-size: 0.75rem; opacity: 0.5;">&copy; 2026 MASHROOM STUDIO</p>
@@ -571,8 +578,8 @@ import Layout from '../layouts/Layout.astro';
         font-size: 3.5rem; font-weight: 900; line-height: 1.2; margin-bottom: 20px;
         color: var(--c-text); letter-spacing: 0.05em; white-space: nowrap;
     }
-    @media (max-width: 900px) {
-        .hero-title { white-space: normal; font-size: 2.5rem; line-height: 1.3; }
+    @media (max-width: 1099px) {
+        .hero-title { white-space: normal; font-size: clamp(1.6rem, 8.4vw, 2.5rem); line-height: 1.3; }
     }
 
     .hero-desc { font-size: 1rem; font-weight: 700; line-height: 1.8; max-width: 700px; color: #555; margin-bottom: 30px; }
@@ -1006,8 +1013,8 @@ import Layout from '../layouts/Layout.astro';
         .wf-bubble { font-size: 0.75rem; padding: 8px 10px; }
         .wf-arrow { width: 20px; font-size: 1rem; }
     }
-    @media (max-width: 900px) {
-        .hero-title { font-size: 2.5rem; }
+    @media (max-width: 1099px) {
+        .hero-title { font-size: clamp(1.6rem, 8.4vw, 2.5rem); }
         .flow-container { flex-direction: column; }
         .flow-card { min-height: auto; }
         .flow-arrow { transform: rotate(90deg); margin: 10px 0; }

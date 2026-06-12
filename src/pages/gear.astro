@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import PageNav from '../components/PageNav.astro';
 ---
 
 <Layout
@@ -224,6 +225,9 @@ import Layout from '../layouts/Layout.astro';
         <div class="more-grid reveal" id="more-grid">
             <!-- JSで生成 -->
         </div>
+        <div class="container" style="text-align:center; margin-top: 30px;">
+            <button id="more-gears-toggle" class="more-gears-toggle magnet">全部見る（あと<span id="more-gears-count">0</span>個）▼</button>
+        </div>
     </section>
 
     <!-- MODAL WINDOW -->
@@ -254,6 +258,12 @@ import Layout from '../layouts/Layout.astro';
         <p style="font-size: 0.95rem; opacity: 0.7; margin-bottom: 20px;">機材レビューやDTMのコツを発信中</p>
         <a href="https://blog.xn--3-sj5c.jp/dtm" target="_blank" style="display: inline-block; font-family: var(--font-en); font-weight: bold; text-decoration: none; color: var(--c-text); border: 3px solid var(--c-text); padding: 12px 36px; font-size: 1rem; transition: 0.3s; letter-spacing: 0.05em;">DTM BLOG &rarr;</a>
     </div>
+
+    <PageNav items={[
+        { href: '/price', label: 'PRICE', title: 'この機材で録ると、いくら？', desc: 'エンジニア付き¥4,500/h〜。料金プランを見る' },
+        { href: '/works', label: 'WORKS', title: '実際の音を聴いてみる', desc: 'この機材たちで作った制作実績はこちら' },
+        { href: '/#contact', label: 'CONTACT', title: '録ってみたくなったら', desc: '相談・見学・デモ送付はこちらから。見学は無料です' },
+    ]} />
 
     <footer>
         <p style="font-size: 0.75rem; letter-spacing: 0.15em; opacity: 0.6;">MASHROOM STUDIO — RECORDING & CREATIVE BASE — HOKKAIDO, SAPPORO</p>
@@ -600,10 +610,19 @@ import Layout from '../layouts/Layout.astro';
     .marquee { display: inline-block; animation: scroll 30s linear infinite; font-family: var(--font-en); font-size: 2.5rem; font-weight: 900; color: var(--c-black); }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     
-    .more-grid { 
-        display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; 
+    .more-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;
         max-width: 1400px; margin: 0 auto; padding: 0 5%;
     }
+    .more-item.more-collapsed { display: none; }
+    .more-gears-toggle {
+        padding: 16px 44px; cursor: pointer;
+        background: transparent; color: var(--c-white);
+        border: 2px dashed rgba(255, 255, 255, 0.5); border-radius: 100px;
+        font-family: var(--font-jp); font-size: 1rem; font-weight: 700; letter-spacing: 0.08em;
+        transition: all 0.25s;
+    }
+    .more-gears-toggle:hover { background: var(--c-white); color: #111; border-style: solid; }
     
     /* COLORFUL TILE CARD */
     .more-item { 
@@ -828,6 +847,10 @@ import Layout from '../layouts/Layout.astro';
             
             const globalIndex = mainGearData.length + index;
             el.addEventListener('click', () => openModal(globalIndex));
+
+            // 最初は12個だけ表示（「全部見る」で展開）
+            const MORE_PREVIEW_COUNT = 12;
+            if (index >= MORE_PREVIEW_COUNT) { el.classList.add('more-collapsed'); }
             
             // ランダムカラーホバー
             el.addEventListener('mouseenter', () => {
@@ -854,6 +877,22 @@ import Layout from '../layouts/Layout.astro';
 
             moreGrid.appendChild(el);
         });
+
+        // 「全部見る」展開ボタン
+        const moreToggle = document.getElementById('more-gears-toggle');
+        const moreCount = document.getElementById('more-gears-count');
+        const collapsedItems = moreGrid.querySelectorAll('.more-collapsed');
+        if (moreToggle && moreCount) {
+            if (collapsedItems.length === 0) {
+                moreToggle.style.display = 'none';
+            } else {
+                moreCount.textContent = collapsedItems.length;
+                moreToggle.addEventListener('click', () => {
+                    collapsedItems.forEach(item => item.classList.remove('more-collapsed'));
+                    moreToggle.style.display = 'none';
+                });
+            }
+        }
 
         // Modal Logic Updated
         const modalOverlay = document.getElementById('modal-overlay');

@@ -100,7 +100,14 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://xn--3-sj5c.jp');
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Kaisei+Decol:wght@400;700&family=Klee+One:wght@400;600&family=RocknRoll+One&family=Share+Tech+Mono&family=Yomogi&family=Zen+Kaku+Gothic+New:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
+
+    <style is:global>
+        /* 全ページ共通: モバイルでは「BACK TO HOME」がハンバーガーと衝突するため非表示（ハンバーガーとロゴで代替） */
+        @media (max-width: 700px) {
+            .back-btn { display: none !important; }
+        }
+    </style>
+
     <slot name="head" />
 </head>
 <body>
