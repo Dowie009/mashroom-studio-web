@@ -317,10 +317,29 @@ import Layout from '../layouts/Layout.astro';
         <div class="footer-btn-container">
             <a id="mail-trigger" class="btn-pop magnet">MAIL FORM 📩</a>
         </div>
-        <div style="text-align: center; margin: 60px auto 0; padding: 40px 20px; max-width: 600px; border-top: 2px dashed rgba(255,255,255,0.15);">
-            <p style="font-family: var(--font-en); font-size: 1.2rem; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px;">BLOG</p>
-            <p style="font-size: 0.95rem; opacity: 0.7; margin-bottom: 20px;">ブログも書いてます。覗いてみてください。</p>
-            <a href="https://blog.xn--3-sj5c.jp/" target="_blank" style="display: inline-block; font-family: var(--font-en); font-weight: bold; text-decoration: none; color: var(--c-white); border: 2px solid var(--c-white); padding: 12px 36px; font-size: 1rem; transition: 0.3s; letter-spacing: 0.05em;">VIEW BLOG &rarr;</a>
+
+        <!-- フッター埋め込み版・質問ボックス（浮遊ボタンがここに合流する） -->
+        <div id="footer-qbox" class="reveal-text">
+            <p class="footer-qbox-title">💬 メールフォームはちょっと重いな…という方へ</p>
+            <p class="footer-qbox-note">名前・メールアドレス不要。ひとことでも大丈夫です。<br><small>※返信がほしい場合は、連絡先も一緒に書いてもらえると返せます。</small></p>
+            <div class="footer-qbox-row">
+                <textarea id="footer-qbox-input" rows="2" placeholder="気軽に質問してください！"></textarea>
+                <button id="footer-qbox-send">送信</button>
+            </div>
+            <p class="footer-qbox-status" id="footer-qbox-status" aria-live="polite"></p>
+        </div>
+
+        <!-- BLOG: ノケ物語カード -->
+        <div class="footer-blog-wrap">
+            <a href="https://blog.xn--3-sj5c.jp/" target="_blank" class="footer-blog-card magnet" aria-label="ブログを見る">
+                <img src="/img/blog-classroom.png" alt="自伝マンガ「ノケ物語」" class="footer-blog-bg" loading="lazy">
+                <div class="footer-blog-overlay">
+                    <p class="footer-blog-label">BLOG</p>
+                    <p class="footer-blog-copy">自伝マンガ「ノケ物語」、連載中。</p>
+                    <p class="footer-blog-sub">このスタジオができるまでの実話。AI活用やDTMの話も書いてます。</p>
+                    <span class="footer-blog-cta">VIEW BLOG →</span>
+                </div>
+            </a>
         </div>
 
         <div style="margin-top: 60px; font-size: 0.75rem; letter-spacing: 0.15em; opacity: 0.6;">MASHROOM STUDIO — RECORDING & CREATIVE BASE — HOKKAIDO, SAPPORO</div>
@@ -355,9 +374,50 @@ import Layout from '../layouts/Layout.astro';
             border: 3px solid var(--c-text); box-shadow: 5px 5px 0 var(--pop-5);
             font-family: var(--font-en), 'Noto Sans JP', sans-serif;
             font-size: 0.95rem; font-weight: 900; letter-spacing: 0.05em;
-            transition: transform 0.15s, box-shadow 0.15s;
+            /* 初期は非表示。1画面分スクロールしたら出現、フッター到達で退場 */
+            opacity: 0; pointer-events: none; transform: translateY(14px);
+            transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.15s;
         }
-        #qbox-toggle:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--pop-5); }
+        #qbox-toggle.qbox-show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        #qbox-toggle.qbox-show:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 var(--pop-5); }
+
+        /* フッター埋め込み版・質問ボックス */
+        #footer-qbox {
+            max-width: 680px; margin: 56px auto 0; padding: 24px 22px;
+            background: var(--c-white); color: var(--c-text); text-align: left;
+            border: 3px solid var(--c-text); box-shadow: 8px 8px 0 var(--pop-2);
+        }
+        .footer-qbox-title { margin: 0 0 6px; font-weight: 900; font-size: 1.02rem; }
+        .footer-qbox-note { margin: 0 0 14px; font-size: 0.88rem; line-height: 1.7; opacity: 0.8; }
+        .footer-qbox-note small { font-size: 0.78rem; }
+        .footer-qbox-row { display: flex; gap: 8px; }
+        #footer-qbox-input { flex: 1; resize: none; padding: 10px 12px; font-size: 0.92rem; line-height: 1.6; border: 2px solid var(--c-text); font-family: inherit; }
+        #footer-qbox-send {
+            padding: 0 20px; cursor: pointer; flex-shrink: 0;
+            background: var(--c-text); color: var(--c-white); border: 2px solid var(--c-text);
+            font-weight: 900; font-size: 0.92rem;
+        }
+        #footer-qbox-send:disabled { opacity: 0.5; cursor: wait; }
+        .footer-qbox-status { margin: 10px 0 0; font-size: 0.85rem; font-weight: 700; min-height: 1.2em; }
+
+        /* BLOG: ノケ物語カード */
+        .footer-blog-wrap { max-width: 680px; margin: 64px auto 0; padding-top: 44px; border-top: 2px dashed rgba(0,0,0,0.18); }
+        .footer-blog-card {
+            display: block; position: relative; overflow: hidden; text-decoration: none;
+            border: 3px solid var(--c-text); box-shadow: 8px 8px 0 var(--c-text);
+            background: #1c1714; transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .footer-blog-card:hover { transform: translate(-3px, -3px); box-shadow: 12px 12px 0 var(--pop-2); }
+        .footer-blog-bg { width: 100%; display: block; transition: transform 0.5s ease; }
+        .footer-blog-card:hover .footer-blog-bg { transform: scale(1.04); }
+        .footer-blog-overlay {
+            position: absolute; inset: auto 0 0 0; padding: 44px 20px 16px; text-align: left;
+            background: linear-gradient(to top, rgba(20, 14, 10, 0.88), rgba(20, 14, 10, 0.0));
+        }
+        .footer-blog-label { margin: 0 0 2px; font-family: var(--font-en); font-size: 0.75rem; font-weight: 900; letter-spacing: 0.25em; color: var(--pop-2); }
+        .footer-blog-copy { margin: 0 0 4px; font-size: 1.15rem; font-weight: 900; color: #fff; }
+        .footer-blog-sub { margin: 0 0 10px; font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.85); }
+        .footer-blog-cta { display: inline-block; font-family: var(--font-en); font-weight: 900; font-size: 0.9rem; color: #fff; border: 2px solid #fff; padding: 8px 22px; letter-spacing: 0.08em; }
         #qbox-panel {
             position: fixed; bottom: 88px; right: 24px; z-index: 1500;
             display: none; flex-direction: column;
@@ -388,6 +448,10 @@ import Layout from '../layouts/Layout.astro';
         @media (max-width: 600px) {
             #qbox-toggle { bottom: 16px; right: 16px; }
             #qbox-panel { bottom: 76px; right: 16px; }
+            .footer-qbox-row { flex-direction: column; }
+            #footer-qbox-send { padding: 12px; }
+            /* 横長バナーを縦に深くトリミングして、右側の顔のイラストを見せる */
+            .footer-blog-bg { height: 300px; object-fit: cover; object-position: 76% center; }
         }
     </style>
 
@@ -416,6 +480,19 @@ import Layout from '../layouts/Layout.astro';
             qboxPanel.setAttribute('aria-hidden', 'true');
         });
 
+        async function sendQuestion(text) {
+            const res = await fetch('https://formsubmit.co/ajax/mashibamashiba@gmail.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    _subject: '【MASHROOM STUDIO】質問ボックス',
+                    message: text,
+                    page: location.href
+                })
+            });
+            if (!res.ok) throw new Error('send failed');
+        }
+
         qboxSend.addEventListener('click', async () => {
             const text = qboxInput.value.trim();
             if (!text) return;
@@ -423,16 +500,7 @@ import Layout from '../layouts/Layout.astro';
             qboxAppend(text, 'user');
             qboxInput.value = '';
             try {
-                const res = await fetch('https://formsubmit.co/ajax/mashibamashiba@gmail.com', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body: JSON.stringify({
-                        _subject: '【MASHROOM STUDIO】質問ボックス',
-                        message: text,
-                        page: location.href
-                    })
-                });
-                if (!res.ok) throw new Error('send failed');
+                await sendQuestion(text);
                 qboxAppend('質問が届きました！ありがとうございます🙌 連絡先が書いてあれば、道ゐから返信します。', 'studio');
             } catch (e) {
                 qboxAppend('送信に失敗しました…時間をおいてもう一度試してください。', 'studio');
@@ -440,6 +508,46 @@ import Layout from '../layouts/Layout.astro';
                 qboxSend.disabled = false;
             }
         });
+
+        // フッター埋め込み版の送信
+        const fqInput = document.getElementById('footer-qbox-input');
+        const fqSend = document.getElementById('footer-qbox-send');
+        const fqStatus = document.getElementById('footer-qbox-status');
+        fqSend.addEventListener('click', async () => {
+            const text = fqInput.value.trim();
+            if (!text) return;
+            fqSend.disabled = true;
+            fqStatus.textContent = '送信中…';
+            try {
+                await sendQuestion(text);
+                fqInput.value = '';
+                fqStatus.textContent = '届きました！ありがとうございます🙌 連絡先が書いてあれば返信します。';
+            } catch (e) {
+                fqStatus.textContent = '送信に失敗しました…時間をおいてもう一度試してください。';
+            } finally {
+                fqSend.disabled = false;
+            }
+        });
+
+        // 浮遊ボタンの出現制御:
+        // 1画面分スクロールで出現 → フッター（埋め込み版がある場所）が見えたら退場
+        const footerEl = document.getElementById('contact');
+        let footerInView = false;
+        function updateQboxVisibility() {
+            const pastHero = window.scrollY > window.innerHeight * 0.8;
+            const show = pastHero && !footerInView;
+            qboxToggle.classList.toggle('qbox-show', show);
+            if (!show) {
+                qboxPanel.classList.remove('qbox-open');
+                qboxPanel.setAttribute('aria-hidden', 'true');
+            }
+        }
+        new IntersectionObserver((entries) => {
+            footerInView = entries[0].isIntersecting;
+            updateQboxVisibility();
+        }, { threshold: 0.12 }).observe(footerEl);
+        window.addEventListener('scroll', updateQboxVisibility, { passive: true });
+        updateQboxVisibility();
     </script>
 
     <!-- MAIL MODAL -->
@@ -473,7 +581,7 @@ import Layout from '../layouts/Layout.astro';
             }
         }
 
-        const isMobile = window.innerWidth <= 900;
+        const isMobile = window.innerWidth <= 1099;
 
         if (!isMobile) {
             gsap.utils.toArray('.reveal-text').forEach(element => { 
