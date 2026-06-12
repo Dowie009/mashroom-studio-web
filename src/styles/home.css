@@ -440,9 +440,9 @@ display: flex; align-items: center; overflow: hidden;
 @keyframes scroll-diag { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
 /* === ABOUT SECTION === */
-.about { 
-padding: 280px 1% 100px; background: var(--pop-2); position: relative;
-clip-path: polygon(0 180px, 100% 0, 100% 100%, 0 100%); z-index: 1; margin-top: -120px; margin-bottom: -43px;
+.about {
+padding: calc(13vw + 100px) 1% 100px; background: var(--pop-2); position: relative;
+clip-path: polygon(0 13vw, 100% 0, 100% 100%, 0 100%); z-index: 1; margin-top: -120px; margin-bottom: -43px;
 border-top: none; border-bottom: none;
 width: 100%;
 }
@@ -1468,8 +1468,9 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
     
 
     /* ABOUT MOBILE CLEANUP */
-    .about { 
-        padding: 50px 5%; margin-top: -30px; 
+    .about {
+        /* clip-pathの斜め切り抜き(左端13vw)より下から内容が始まるよう余白を確保 */
+        padding: calc(13vw + 30px) 5% 50px; margin-top: -30px;
     }
     .about-collage-container {
         width: 100%; margin: 0;
