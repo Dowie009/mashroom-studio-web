@@ -92,19 +92,6 @@ h3 { line-height: 0.9; font-weight: 400; }
 .glitch-sub:hover { color: var(--pop-1); transform: scale(1.1); text-shadow: 0 0 0px var(--pop-1); /* 影なし */ }
 
 /* STUDIO NAV BAR */
-.studio-nav-bar {
-    margin: 60px auto 40px; padding: 20px;
-    background: var(--c-text); color: var(--c-white);
-    display: flex; justify-content: center; align-items: center;
-    gap: 40px; flex-wrap: wrap; border: 4px solid var(--c-text);
-    position: relative; transform: skewX(-10deg); max-width: 1200px; z-index: 10;
-}
-.studio-nav-bar::before {
-    content: 'NEXT ACTION';
-    position: absolute; top: -15px; left: 20px; background: var(--pop-2); color: var(--c-text);
-    padding: 2px 10px; font-family: var(--font-digi); font-weight: 700; transform: skewX(10deg);
-    border: 2px solid var(--c-text);
-}
 .nav-item {
     font-family: var(--font-en); font-size: 1.8rem; color: #888; text-decoration: none;
     transition: 0.3s; transform: skewX(10deg); display: flex; align-items: center; gap: 10px;
@@ -726,12 +713,14 @@ font-size: 0.9rem;
 }
 
 /* スタジオ写真スライドショー */
-.slideshow-frame { aspect-ratio: 3 / 2; overflow: hidden; }
+.slideshow-frame { overflow: hidden; }
 .slideshow-frame .slide {
     position: absolute; inset: 0; width: 100%; height: 100%;
-    object-fit: cover; opacity: 0; transition: opacity 1.2s ease;
+    object-fit: cover; opacity: 0 !important; transition: opacity 1.2s ease;
 }
-.slideshow-frame .slide.is-active { opacity: 1; }
+/* 1枚目は通常フローに置いて枠の高さを確保（aspect-ratio非対応環境でも崩れない） */
+.slideshow-frame .slide:first-child { position: relative; height: auto; }
+.slideshow-frame .slide.is-active { opacity: 1 !important; }
 
 .collage-photo-wrapper:hover { animation: shake-slight 0.4s ease-in-out 1; box-shadow: 15px 15px 0px var(--pop-4); }
 
@@ -766,10 +755,14 @@ transform: rotate(-1deg) !important;
 /* MENU SECTION - 発光量調整 (blur 15px -> 2px) */
 /* ===== MISSIONS SECTION - GLASSMORPHISM ===== */
 .menu {
-    padding: 100px 5%; position: relative; overflow: hidden; width: 100%;
-    background: url('/img/missions/bg-lodge.jpg') center/cover no-repeat fixed;
+    padding: 100px 5% 160px; position: relative; overflow: hidden; width: 100%;
+    /* Apple風: 深いニュートラルにソフトな色のグロー。fixed背景はiOS非対応のため不使用 */
+    background:
+        radial-gradient(640px 480px at 12% 8%, rgba(90, 125, 255, 0.32), transparent 65%),
+        radial-gradient(560px 420px at 88% 24%, rgba(168, 100, 255, 0.24), transparent 65%),
+        radial-gradient(760px 560px at 50% 100%, rgba(60, 200, 255, 0.14), transparent 65%),
+        #14151b;
     margin-top: 0px;
-    padding-top: 100px;
     z-index: 2;
 }
 .menu::before {
@@ -780,20 +773,6 @@ transform: rotate(-1deg) !important;
     background: linear-gradient(to right bottom, var(--pop-2) 50%, transparent 50%);
     z-index: 3;
     pointer-events: none;
-}
-.menu::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 80px;
-    background: rgb(240, 240, 240);
-    clip-path: polygon(0 0px, 100% 80px, 100% 100%, 0 100%);
-    z-index: 3;
-    pointer-events: none;
-}
-.menu-bg-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.4); z-index: 0;
 }
 
 .section-title { font-size: 8rem; font-family: var(--font-en); color: #fff; text-align: center; margin-bottom: 20px; position: relative; z-index: 2; margin-top: 0; text-shadow: 0 2px 20px rgba(0,0,0,0.5); }
@@ -806,9 +785,11 @@ transform: rotate(-1deg) !important;
 
 .card-for {
     display: inline-block; width: fit-content; margin-bottom: 10px;
-    background: var(--pop-2); color: var(--c-text);
+    background: rgba(255, 255, 255, 0.14); color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     font-family: var(--font-jp); font-weight: 700; font-size: 0.95rem;
-    padding: 4px 12px; border-radius: 6px; letter-spacing: 0.05em;
+    padding: 4px 14px; border-radius: 100px; letter-spacing: 0.05em;
 }
 
 .card-includes {
@@ -816,23 +797,41 @@ transform: rotate(-1deg) !important;
     font-size: 0.88rem; line-height: 1.8; color: rgba(255,255,255,0.9);
 }
 .card-includes li { padding-left: 1.3em; position: relative; }
-.card-includes li::before { content: '✓'; position: absolute; left: 0; color: var(--pop-2); font-weight: 700; }
+.card-includes li::before { content: '✓'; position: absolute; left: 0; color: #8ab4ff; font-weight: 700; }
 
 .price-note { display: block; font-size: 0.8rem; font-weight: 400; color: rgba(255,255,255,0.7); margin-top: 2px; white-space: normal; }
 
-/* 本気の人・法人向けバンド */
-.biz-band {
-    display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 30px;
-    max-width: 1300px; margin: 10px auto 0; padding: 18px 28px;
-    position: relative; z-index: 2;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 16px;
+/* FOR PROFESSIONALS（本気の人・法人向け）— あえてテイストを変えた重厚ブロック */
+.pro-block {
+    max-width: 1000px; margin: 80px auto 0; padding: 60px 48px;
+    position: relative; z-index: 2; text-align: center;
+    background: #0a0b0e;
+    border: 1px solid rgba(212, 180, 131, 0.45);
+    border-radius: 0;
 }
-.biz-band-label { font-size: 0.85rem; color: rgba(255,255,255,0.7); letter-spacing: 0.05em; }
-.biz-band-item { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: #fff; }
-.biz-band-link { font-size: 0.95rem; font-weight: 700; color: var(--pop-2); text-decoration: none; }
-.biz-band-link:hover { text-decoration: underline; }
+.pro-label {
+    font-family: var(--font-en); font-size: 0.8rem; font-weight: 400;
+    letter-spacing: 0.4em; color: #d4b483; margin: 0 0 18px;
+}
+.pro-title {
+    font-family: var(--font-jp); font-size: 1.9rem; font-weight: 600;
+    color: #f5f0e6; letter-spacing: 0.08em; margin: 0 0 40px;
+}
+.pro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; text-align: left; margin-bottom: 44px; }
+.pro-item h4 {
+    font-family: var(--font-en); font-size: 1.25rem; font-weight: 700; color: #fff;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+    border-bottom: 1px solid rgba(212, 180, 131, 0.35); padding-bottom: 12px; margin: 0 0 14px;
+}
+.pro-price { color: #d4b483; font-size: 1rem; white-space: nowrap; }
+.pro-price small { font-size: 0.75rem; color: rgba(212, 180, 131, 0.8); font-weight: 400; }
+.pro-item p { font-size: 0.9rem; line-height: 2; color: rgba(255,255,255,0.72); margin: 0; }
+.pro-cta {
+    display: inline-block; padding: 15px 56px;
+    border: 1px solid #d4b483; color: #d4b483; background: transparent;
+    text-decoration: none; font-size: 0.95rem; letter-spacing: 0.25em; transition: 0.3s;
+}
+.pro-cta:hover { background: #d4b483; color: #0a0b0e; }
 
 /* GLASS CARD */
 .card {
@@ -895,15 +894,15 @@ transform: rotate(-1deg) !important;
 .card-1, .card-2, .card-3 { box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
 
 /* GALLERY */
-.gallery-container-box { overflow: visible; width: 100%; position: relative; margin-top: -77px; padding-top: 60px; }
-.gallery-wrapper { background: var(--pop-2); padding: 50px 0 150px 0; transform: rotate(2deg) scale(1.1); position: relative; z-index: 100; display: flex; width: 130%; margin-left: -15%; margin-top: -10px; clip-path: polygon(0 0px, 100% 0, 100% calc(100% - 104px), 0 calc(100% - 91px)); }
-.marquee-content { display: flex; gap: 20px; width: max-content; flex-shrink: 0; }
+.gallery-container-box { overflow: visible; width: 100%; position: relative; z-index: 60; margin: -80px 0; padding: 0; }
+.gallery-wrapper { background: var(--pop-2); padding: 44px 0; transform: rotate(2deg) scale(1.1); position: relative; z-index: 100; display: flex; width: 130%; margin-left: -15%; box-shadow: 0 10px 40px rgba(0,0,0,0.25); }
+.marquee-content { display: flex; gap: 20px; width: max-content; flex-shrink: 0; padding-right: 20px; }
 .gallery-item { width: 400px; height: 300px; background: var(--c-white); border: 4px solid var(--c-text); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; font-family: var(--font-en); color: var(--c-text); }
 
 /* EXPLORE */
 /* ダークサイバー + グリッドアニメーション（estimate-qa-sectionまでカバー） */
 .explore {
-    padding: 150px 5% 200px;
+    padding: 230px 5% 200px;
     background:
         radial-gradient(circle at 20% 50%, rgba(255, 77, 0, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
@@ -1536,17 +1535,9 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
     .glitch-sub { font-size: 1.2rem; }
 
 
-    /* STUDIO NAV BAR MOBILE */
-    .studio-nav-bar { 
-        flex-direction: column; gap: 15px; transform: skewX(0); width: 90%; margin: 40px auto; 
-    }
-    .studio-nav-bar::before { transform: skewX(0); }
-    .nav-item { transform: skewX(0); justify-content: center; font-size: 1.2rem; }
-    .nav-sep { display: none; }
-    
     /* MISSIONS SYMMETRY & LIST DESIGN */
-    .menu { 
-        padding: 80px 5% 0; /* 下のギャラリーとの余白を削る */
+    .menu {
+        padding: 80px 5% 130px;
         margin-bottom: 0;
     }
     .section-title { font-size: 3.5rem; margin-bottom: 30px; width: 100%; }
@@ -1561,19 +1552,18 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
         width: 100%;
     }
 
-    .card { 
-        min-height: auto; 
-        margin-bottom: 0; 
-        padding: 20px; /* パディングを増やす */
+    .card {
+        min-height: auto;
+        margin-bottom: 0;
+        padding: 20px;
         height: auto;
         width: 100%; /* 縦一列 */
-        border: 2px solid var(--c-text); /* 境界線を明確に */
-        border-left: 6px solid var(--pop-1); 
-        box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+        border: 1px solid rgba(255, 255, 255, 0.22); /* ガラス感を維持 */
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
         transition: all 0.2s;
         cursor: pointer;
     }
-    .card.is-open { border-left-width: 10px; box-shadow: 8px 8px 0 rgba(0,0,0,0.2); } /* 開いた時のスタイル */
+    .card.is-open { border-color: rgba(255, 255, 255, 0.4); }
     
     /* PC版のテキストと価格を非表示にし、モバイル向け表示を構築 */
     .card p { 
@@ -1590,24 +1580,23 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
         font-family: var(--font-en);
     }
     
-    /* モバイル版カードの統一されたヘッダー要素を構築 */
+    /* モバイル版カードの統一されたヘッダー要素を構築（ガラス調バッジ） */
     .card::before {
-        content: attr(data-price); /* 価格を疑似要素で表示 */
+        content: attr(data-price);
         display: block;
         float: right;
-        font-size: 0.9rem; /* ★修正: 価格を小さく */
-        font-family: var(--font-hand);
+        font-size: 0.9rem;
         font-weight: 700;
-        background: var(--c-text);
-        color: var(--pop-2);
-        padding: 2px 8px;
-        border-radius: 4px;
-        transform: rotate(0deg);
-        margin-left: 10px; /* タイトルとの間隔 */
+        background: rgba(255, 255, 255, 0.16);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        padding: 2px 10px;
+        border-radius: 100px;
+        margin-left: 10px;
     }
-    .card-1::before { content: '¥4,500/h'; background: var(--pop-1); color: var(--c-white); }
-    .card-2::before { content: '¥15,000~'; background: var(--pop-2); color: var(--c-text); }
-    .card-3::before { content: '初回¥2,000'; background: var(--pop-3); color: var(--c-text); }
+    .card-1::before { content: '¥4,500/h'; }
+    .card-2::before { content: '¥15,000~'; }
+    .card-3::before { content: '初回¥2,000'; }
 
     /* モバイルでも実写・対象ラベル・含まれるものリストは表示 */
     .card-img { display: block; margin-bottom: 12px; }
@@ -1615,7 +1604,10 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
     .card-includes { font-size: 0.85rem; margin: 10px 0 0; }
     .price-note { display: inline; margin-left: 6px; }
 
-    .biz-band { flex-direction: column; align-items: flex-start; gap: 8px; margin: 16px 5% 0; padding: 16px 20px; }
+    .pro-block { margin: 50px 0 0; padding: 44px 24px; }
+    .pro-title { font-size: 1.4rem; }
+    .pro-grid { grid-template-columns: 1fr; gap: 28px; margin-bottom: 32px; }
+    .pro-cta { width: 100%; box-sizing: border-box; text-align: center; }
     
     /* ★修正3: POPULAR, NEW, RECOMMENDのバッジを小さく */
     .card-badge {
@@ -1635,41 +1627,36 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
         overflow: hidden;
         padding-top: 15px;
         margin-top: 15px;
-        border-top: 1px dashed #aaa;
+        border-top: 1px dashed rgba(255, 255, 255, 0.3);
         font-size: 0.9rem;
-        color: #444;
+        color: rgba(255, 255, 255, 0.85);
     }
     .card-details p {
         display: block !important; /* 詳細テキストを表示 */
         margin-bottom: 0;
     }
-    
+
     .card-toggle {
         display: block !important;
         font-size: 0.8rem;
-        color: var(--pop-1);
-        text-align: left; /* 左に寄せて目立たせる */
+        color: #8ab4ff;
+        text-align: left;
         margin-top: 10px;
         font-weight: bold;
         transition: color 0.2s;
     }
-    .card.is-open .card-toggle { color: var(--c-text); }
-
-    /* 各カードの左ボーダー色を設定 (視覚的ガイド) */
-    .card-1 { border-left-color: var(--pop-1); }
-    .card-2 { border-left-color: var(--pop-2); }
-    .card-3 { border-left-color: var(--pop-3); }
+    .card.is-open .card-toggle { color: rgba(255, 255, 255, 0.9); }
 
 
     /* GALLERY MOBILE */
-    .gallery-container-box { 
-        margin-top: 0; /* ★修正: 上のMISSIONSセクションとの余白を削る */
+    .gallery-container-box {
+        margin: -60px 0; /* 前後の濃色セクションに帯を重ねて白い隙間を消す */
     }
-    .gallery-wrapper { padding: 30px 0; transform: rotate(1deg) scale(1.05); width: 110%; margin-left: -5%; }
+    .gallery-wrapper { padding: 26px 0; transform: rotate(1deg) scale(1.05); width: 110%; margin-left: -5%; }
     .gallery-item { width: 150px; height: 100px; font-size: 1.5rem; border-width: 2px; }
 
     /* EXPLORE MOBILE */
-    .explore { padding: 50px 5% 30px; margin-top: 0; }
+    .explore { padding: 130px 5% 30px; margin-top: 0; }
     .explore-title { font-size: 3rem; margin-bottom: 30px; }
     .explore-grid {
         display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0; margin: 0 auto; width: 100%;
