@@ -70,9 +70,9 @@ h3 { line-height: 0.9; font-weight: 400; }
 .btn-pop:hover { transform: translate(-5px, -5px); box-shadow: 15px 15px 0px var(--c-text); background: var(--c-white); }
 
 /* NAV HUB */
-.nav-hub-container { 
-    display: flex; align-items: baseline; justify-content: flex-start; flex-wrap: wrap; 
-    gap: 30px; margin-top: 20px; padding: 15px 0; 
+.nav-hub-container {
+    display: flex; align-items: baseline; justify-content: flex-start; flex-wrap: wrap;
+    gap: 30px; margin-top: 60px; padding: 15px 0;
 }
 
 .glitch-link {
@@ -706,13 +706,8 @@ font-size: 0.9rem;
 
 
 .about-collage-container {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 90vw; width: 100%; margin: 0 auto; position: relative; align-items: center; 
+    display: block; max-width: min(90vw, 1000px); width: 100%; margin: 0 auto; position: relative;
 }
-
-.about-left-col { display: flex; flex-direction: column; gap: 20px; position: relative; }
-.about-right-col { display: flex; flex-direction: column; gap: 20px; position: relative; z-index: 10; }
-
-.handwritten-msg { width: 105%; max-width: none; height: auto; transform: rotate(0deg) scale(0.85); z-index: 1; margin-top: -160px; margin-bottom: 115px; pointer-events: none; }
 
 @keyframes shake-slight {
     0% { transform: rotate(2deg) scale(1); } 25% { transform: rotate(3deg) scale(1.02); }
@@ -726,9 +721,17 @@ font-size: 0.9rem;
 }
 
 .collage-photo-wrapper {
-    position: relative; transform: rotate(2deg); background: #000; width: 80%; margin: -130px auto 0; z-index: 2; 
+    position: relative; transform: rotate(2deg); background: #000; width: 100%; margin: 0 auto; z-index: 2;
     border: 4px solid var(--c-text); box-shadow: 15px 15px 0px #000000; transition: all 0.3s ease;
 }
+
+/* スタジオ写真スライドショー */
+.slideshow-frame { aspect-ratio: 3 / 2; overflow: hidden; }
+.slideshow-frame .slide {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; opacity: 0; transition: opacity 1.2s ease;
+}
+.slideshow-frame .slide.is-active { opacity: 1; }
 
 .collage-photo-wrapper:hover { animation: shake-slight 0.4s ease-in-out 1; box-shadow: 15px 15px 0px var(--pop-4); }
 
@@ -737,19 +740,6 @@ font-size: 0.9rem;
 .collage-photo { width: 100%; height: auto; display: block; opacity: 0.9; transition: opacity 0.3s; }
 .collage-photo:hover { opacity: 1; }
 
-/* SEO対策: H2タグ化 */
-.stamp-title {
-    font-family: var(--font-en); font-size: 3.5rem; line-height: 0.9; color: transparent; -webkit-text-stroke: 2px var(--c-text);
-    text-transform: uppercase; transform: rotate(-2deg); margin-bottom: 10px; width: fit-content; background: var(--pop-2); padding: 5px;
-    margin-top: 0;
-}
-.stamp-title span { display: block; background: var(--c-text); color: var(--pop-2); padding: 0 10px; -webkit-text-stroke: 0; }
-
-.message-card-img {
-    width: 100%; height: auto; border: 4px solid var(--c-text); box-shadow: 15px 15px 0px var(--c-text); transform: rotate(1deg);
-    background: var(--c-white); display: block; transition: all 0.3s ease;
-}
-.message-card-img:hover { animation: shake-slight-right 0.4s ease-in-out 1; box-shadow: 20px 20px 0px var(--pop-1); }
 /* INFO CARD HOVER */
 .info-card-link:hover .info-card {
 transform: rotate(0deg) scale(1.02);
@@ -1481,32 +1471,14 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
     .about { 
         padding: 50px 5%; margin-top: -30px; 
     }
-    .about-collage-container { 
-        grid-template-columns: 1fr; gap: 30px; width: 100%; margin: 0;
+    .about-collage-container {
+        width: 100%; margin: 0;
     }
-    .about-left-col, .about-right-col { align-items: center; }
-    /* ★修正2: お手紙の大きさを画面いっぱいに (左右の余白を最小限に) */
-    .handwritten-msg { 
-        width: 95%; /* ほぼ画面いっぱいに */
-        margin: 0 auto -15px auto; transform: rotate(-2deg); display: block;
+    .collage-photo-wrapper {
+        width: 95%; transform: rotate(1deg); margin: 0 auto 30px auto;
+        box-shadow: 8px 8px 0px #000000;
     }
-    .collage-photo-wrapper { 
-        width: 80%; transform: rotate(1deg); margin: -30px auto 20px auto; 
-    } 
-    .stamp-title { 
-        font-size: 2.5rem; margin-top: 10px; margin-bottom: 20px; 
-    }
-    
-    /* ★修正: お手紙画像(Message Card)の位置調整 - 枠内に収める */
-    .message-card-img { 
-        width: 92% !important; /* 画面幅の92%に設定して左右に余白を作る */
-        max-width: none !important; 
-        box-shadow: 8px 8px 0px var(--c-text); 
-        /* 左右autoで中央寄せ */
-        margin: 20px auto 30px auto !important; 
-        transform: none !important; /* 回転を解除して安定させる */
-    }
-    
+
     /* ★修正5: 「Who is Owner?」リンクの位置調整 */
     .nav-hub-container { 
         flex-direction: column; 

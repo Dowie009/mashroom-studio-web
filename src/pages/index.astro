@@ -57,16 +57,18 @@ import Layout from '../layouts/Layout.astro';
         -->
 
         <div class="about-collage-container">
-            <div class="about-left-col reveal-text">
-                <img src="/img/main-message.png" alt="MASHROOM Recording & Creative Studio - 音楽・映像・デザイン、海外テイストのエンターテイメント、最先端な技術のレコーディングスタジオ" class="handwritten-msg" loading="lazy">
-                <div class="collage-photo-wrapper">
-                    <img src="/img/Main00.jpg" alt="Studio" class="collage-photo" loading="lazy">
+            <div class="reveal-text">
+                <div class="collage-photo-wrapper slideshow-frame">
+                    <img src="/img/slides/studio-01.jpg" alt="MASHROOM STUDIO コントロールルーム" class="collage-photo slide is-active">
+                    <img src="/img/slides/studio-02.jpg" alt="制作環境（DAW・ウルトラワイドモニター）" class="collage-photo slide" loading="lazy">
+                    <img src="/img/slides/studio-03.jpg" alt="スタジオ内観" class="collage-photo slide" loading="lazy">
+                    <img src="/img/slides/studio-04.jpg" alt="ボーカルレコーディング風景" class="collage-photo slide" loading="lazy">
+                    <img src="/img/slides/studio-05.jpg" alt="スタジオ機材" class="collage-photo slide" loading="lazy">
+                    <img src="/img/slides/studio-06.jpg" alt="スタジオ風景" class="collage-photo slide" loading="lazy">
                 </div>
             </div>
 
-            <div class="about-right-col reveal-text">
-                <h2 class="stamp-title">NOT JUST<br><span>A STUDIO.</span></h2>
-                <img src="/img/Main Message02.jpg" alt="Message Card" class="message-card-img" loading="lazy">
+            <div class="reveal-text">
                 <div class="nav-hub-container">
                     <a href="/profile" class="glitch-link magnet" data-text="01 WHO IS OWNER?">01 WHO IS OWNER?</a>
                     <div class="nav-hub-others" style="display:flex; gap:40px; align-items:baseline; margin-left: 20px;">
@@ -602,6 +604,17 @@ import Layout from '../layouts/Layout.astro';
 
         // ページロード時に合計を計算
         calculateTotal();
+
+        // スタジオ写真スライドショー（4秒ごとにクロスフェード）
+        const slides = document.querySelectorAll('.slideshow-frame .slide');
+        if (slides.length > 1) {
+            let currentSlide = 0;
+            setInterval(() => {
+                slides[currentSlide].classList.remove('is-active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('is-active');
+            }, 4000);
+        }
 
         const mailBtn = document.getElementById('mail-trigger');
         const mailOverlay = document.getElementById('mail-modal-overlay');
