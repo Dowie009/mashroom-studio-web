@@ -800,9 +800,39 @@ transform: rotate(-1deg) !important;
 .section-title span { display: block; font-size: 2rem; font-family: var(--font-jp); color: rgba(255,255,255,0.8); letter-spacing: 0.2em; }
 
 .card-grid {
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px;
-    position: relative; z-index: 2; padding: 20px; max-width: 1600px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    position: relative; z-index: 2; padding: 20px; max-width: 1300px; margin: 0 auto;
 }
+
+.card-for {
+    display: inline-block; width: fit-content; margin-bottom: 10px;
+    background: var(--pop-2); color: var(--c-text);
+    font-family: var(--font-jp); font-weight: 700; font-size: 0.95rem;
+    padding: 4px 12px; border-radius: 6px; letter-spacing: 0.05em;
+}
+
+.card-includes {
+    list-style: none; margin: 0 0 16px; padding: 0;
+    font-size: 0.88rem; line-height: 1.8; color: rgba(255,255,255,0.9);
+}
+.card-includes li { padding-left: 1.3em; position: relative; }
+.card-includes li::before { content: '✓'; position: absolute; left: 0; color: var(--pop-2); font-weight: 700; }
+
+.price-note { display: block; font-size: 0.8rem; font-weight: 400; color: rgba(255,255,255,0.7); margin-top: 2px; white-space: normal; }
+
+/* 本気の人・法人向けバンド */
+.biz-band {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 30px;
+    max-width: 1300px; margin: 10px auto 0; padding: 18px 28px;
+    position: relative; z-index: 2;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18); border-radius: 16px;
+}
+.biz-band-label { font-size: 0.85rem; color: rgba(255,255,255,0.7); letter-spacing: 0.05em; }
+.biz-band-item { font-family: var(--font-en); font-size: 1rem; font-weight: 700; color: #fff; }
+.biz-band-link { font-size: 0.95rem; font-weight: 700; color: var(--pop-2); text-decoration: none; }
+.biz-band-link:hover { text-decoration: underline; }
 
 /* GLASS CARD */
 .card {
@@ -862,7 +892,7 @@ transform: rotate(-1deg) !important;
 .keep-break { display: inline-block; white-space: nowrap; }
 
 /* Individual card accents removed - uniform glass style */
-.card-1, .card-2, .card-3, .card-4, .card-5 { box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+.card-1, .card-2, .card-3 { box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
 
 /* GALLERY */
 .gallery-container-box { overflow: visible; width: 100%; position: relative; margin-top: -77px; padding-top: 60px; }
@@ -1575,11 +1605,17 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
         transform: rotate(0deg);
         margin-left: 10px; /* タイトルとの間隔 */
     }
-    .card-1::before { content: '¥5,000~/1h'; background: var(--pop-1); color: var(--c-white); }
+    .card-1::before { content: '¥4,500/h'; background: var(--pop-1); color: var(--c-white); }
     .card-2::before { content: '¥15,000~'; background: var(--pop-2); color: var(--c-text); }
-    .card-3::before { content: '¥2,000~'; background: var(--pop-3); color: var(--c-text); }
-    .card-4::before { content: '¥150,000〜'; background: var(--pop-4); color: var(--c-white); }
-    .card-5::before { content: '¥100,000~'; background: var(--pop-5); color: var(--c-text); }
+    .card-3::before { content: '初回¥2,000'; background: var(--pop-3); color: var(--c-text); }
+
+    /* モバイルでも実写・対象ラベル・含まれるものリストは表示 */
+    .card-img { display: block; margin-bottom: 12px; }
+    .card-for { font-size: 0.85rem; margin-bottom: 8px; }
+    .card-includes { font-size: 0.85rem; margin: 10px 0 0; }
+    .price-note { display: inline; margin-left: 6px; }
+
+    .biz-band { flex-direction: column; align-items: flex-start; gap: 8px; margin: 16px 5% 0; padding: 16px 20px; }
     
     /* ★修正3: POPULAR, NEW, RECOMMENDのバッジを小さく */
     .card-badge {
@@ -1623,8 +1659,6 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
     .card-1 { border-left-color: var(--pop-1); }
     .card-2 { border-left-color: var(--pop-2); }
     .card-3 { border-left-color: var(--pop-3); }
-    .card-4 { border-left-color: var(--pop-4); }
-    .card-5 { border-left-color: var(--pop-5); }
 
 
     /* GALLERY MOBILE */

@@ -87,88 +87,77 @@ import Layout from '../layouts/Layout.astro';
         <h2 class="section-title reveal-text"><span>Our Service</span>MISSIONS</h2>
 
         <div class="card-grid">
-            <!-- カード 1 -->
+            <!-- カード 1: 歌いたい -->
             <div class="card card-1 reveal-text magnet" data-card-id="card-1">
-                <div class="card-img"><img src="/img/missions/card-rec.jpg" alt="Recording" loading="lazy"></div>
-                <h3>01. Simple Rec</h3>
+                <div class="card-img"><img src="/img/missions/real-rec.jpg" alt="マイクの前で歌うレコーディング風景" loading="lazy"></div>
+                <div class="card-for">🎤 歌いたい</div>
+                <h3>01. Recording</h3>
                 <p>
-                    <span class="keep-break">来ちゃった！感覚で◎</span><br>
                     <span class="keep-break">「歌ってみた」も</span><span class="keep-break">「弾き語り」も。</span><br>
                     <span class="keep-break">録音って楽しい！を</span><br>
                     <span class="keep-break">まず体験してください！</span>
                 </p>
-                <div class="price">¥5,000~/1h</div>
+                <ul class="card-includes">
+                    <li>エンジニアが横につきます</li>
+                    <li>マイク選び・設定すべて込み</li>
+                    <li>データは当日お渡し</li>
+                </ul>
+                <div class="price">¥4,500/h <span class="price-note">学生¥3,000/h</span></div>
                 <div class="card-details">
-                    <p>初めての方でも安心！高品質なマイクとプリアンプで、歌ってみたや弾き語りを手軽にプロ品質で録音できます。面倒な準備は一切不要です。</p>
+                    <p>初めての方歓迎。1曲なら2〜3時間が目安です。6時間パック¥24,000も。高品質なマイクとプリアンプで、プロ品質の録音を気軽に。</p>
                 </div>
                 <div class="card-toggle">詳細を見る 🔽</div>
             </div>
-            <!-- カード 2 -->
+            <!-- カード 2: 作品にしたい -->
             <div class="card card-2 reveal-text magnet" data-card-id="card-2">
-                <div class="card-img"><img src="/img/missions/card-shoot.jpg" alt="Rec & Shoot" loading="lazy"></div>
-                <h3>02. Rec & Shoot</h3>
+                <div class="card-img"><img src="/img/missions/real-shoot.jpg" alt="ブースでのボーカル収録風景" loading="lazy"></div>
+                <div class="card-for">🎬 作品にしたい</div>
+                <h3>02. Rec &amp; Shoot</h3>
                 <p>
-                    <span class="keep-break">録音風景を、</span><br>
-                    <span class="keep-break">そのまま映像作品に。</span><br>
-                    <span class="keep-break">SNSでの発信、</span><br>
-                    <span class="keep-break">最高の機材で</span><span class="keep-break">やってみませんか？</span>
+                    <span class="keep-break">THE FIRST TAKEみたいな</span><br>
+                    <span class="keep-break">一発撮り、できます。</span><br>
+                    <span class="keep-break">歌う姿をそのまま</span><span class="keep-break">動画作品に。</span>
                 </p>
+                <ul class="card-includes">
+                    <li>レコーディング＋撮影で動画1本</li>
+                    <li>弾き語りでも、カラオケ音源×歌でも</li>
+                    <li>撮って出しなら即日納品OK</li>
+                </ul>
                 <div class="price">¥15,000~</div>
                 <div class="card-details">
-                    <p>レコーディング風景をプロのカメラで撮影し、そのままミュージックビデオやプロモーション動画に仕上げます。音と映像をワンストップで制作することで、最高のクリエイティブを提供します。</p>
+                    <p>コンデンサーマイクで録音しながら、その姿をカメラで撮影。歌ってみた動画やSNS用のリールが、最短その日のうちに完成します。</p>
                 </div>
                 <div class="card-toggle">詳細を見る 🔽</div>
             </div>
-            <!-- カード 3 -->
+            <!-- カード 3: 学びたい -->
             <div class="card card-3 reveal-text magnet" data-card-id="card-3">
-                <div class="card-img"><img src="/img/missions/card-school.jpg" alt="School" loading="lazy"></div>
-                <h3>03. School</h3>
+                <div class="card-img"><img src="/img/missions/real-lesson.jpg" alt="DTMレッスンの風景" loading="lazy"></div>
+                <div class="card-for">📚 学びたい</div>
+                <h3>03. Lesson</h3>
                 <p>
                     <span class="keep-break">現場で本当に使える</span><br>
                     <span class="keep-break">「技術」と「考え方」を</span><br>
-                    <span class="keep-break">シェアします。</span><br>
-                    <span class="keep-break">グループレッスンや</span><span class="keep-break">オンラインレッスンも◎</span>
+                    <span class="keep-break">マンツーマンで。</span>
                 </p>
-                <div class="price">¥2,000~</div>
+                <ul class="card-includes">
+                    <li>初回はお試しカウンセリング＆レッスン</li>
+                    <li>現役プロデューサーが直接指導</li>
+                    <li>オンライン・グループも◎</li>
+                </ul>
+                <div class="price">初回 ¥2,000 <span class="price-note">通常¥3,500/h・学生¥2,500/h</span></div>
                 <div class="card-details">
-                    <p>DTM、ミックス、ボーカル、ギターなど、現場で使える実践的な技術をマンツーマンで指導。初心者からプロ志向の方まで、目標に合わせたカスタムカリキュラムを提供します。</p>
+                    <p>まずはお試しで。今のレベルとやりたいことを聞いて、カリキュラムを一緒に決めます。DTM・ミックス・ボーカルなんでも。6時間パック¥18,000。</p>
                 </div>
                 <div class="card-toggle">詳細を見る 🔽</div>
             </div>
-            <!-- カード 4 -->
-            <div class="card card-4 reveal-text magnet" data-card-id="card-4">
-                <div class="card-img"><img src="/img/missions/card-branding.jpg" alt="Branding" loading="lazy"></div>
-                <h3>04. Branding</h3>
-                <p>
-                    <span class="keep-break">魅せ方の時代です！</span><br>
-                    <span class="keep-break">音楽を「仕事」に</span><span class="keep-break">するための、</span><br>
-                    <span class="keep-break">最初の一歩。</span><br>
-                    <span class="keep-break">3ヶ月間徹底的に</span><span class="keep-break">伴走します。</span>
-                </p>
-                <div class="price">¥150,000~/3ヶ月</div>
-                <div class="card-details">
-                    <p>音楽活動をビジネスとして成功させたいアーティスト向けの集中支援プログラム。ブランディング、コンテンツ戦略、プロモーションまで、3ヶ月間で集中的にサポートします。</p>
-                </div>
-                <div class="card-toggle">詳細を見る 🔽</div>
-            </div>
-            <!-- カード 5 -->
-            <div class="card card-5 reveal-text magnet" data-card-id="card-5">
-                <div class="card-img"><img src="/img/missions/card-business.jpg" alt="Business" loading="lazy"></div>
-                <h3>05. Business</h3>
-                <p>
-                    <span class="keep-break">御社のブランドを、</span><br>
-                    <span class="keep-break">今の時代に</span><span class="keep-break">フィットさせる</span><br>
-                    <span class="keep-break">お手伝いを。</span><br>
-                    <span class="keep-break">ありきたりではない、</span><br>
-                    <span class="keep-break">心に残る</span><span class="keep-break">クリエイティブを</span><br>
-                    <span class="keep-break">提案します。</span>
-                </p>
-                <div class="price">¥100,000~</div>
-                <div class="card-details">
-                    <p>CM、企業VP、イベント音楽など、法人向けの高品質な音響制作と楽曲提供。企業のブランドイメージを最大限に引き出すクリエイティブな提案を行います。</p>
-                </div>
-                <div class="card-toggle">詳細を見る 🔽</div>
-            </div>
+        </div>
+
+        <!-- 本気の人・法人向け -->
+        <div class="biz-band reveal-text">
+            <span class="biz-band-label">本気で音楽を仕事にしたい人・法人の方へ</span>
+            <span class="biz-band-item">Branding（3ヶ月伴走）¥150,000~</span>
+            <span class="biz-band-item">Business（法人制作）¥100,000~</span>
+            <a href="#contact" class="biz-band-link magnet">→ まずは相談する</a>
         </div>
 
         <!-- NEW STUDIO NAV BAR -->
