@@ -136,6 +136,34 @@
             border: 2px solid var(--lime);
             box-shadow: 3px 3px 0 #b9ff66, -2px -2px 0 rgba(185,255,102,0.5), 5px 5px 0 rgba(185,255,102,0.2);
         }
+
+        /* ── 2026年 先進技術デモ 共通テキスト ── */
+        .bt-main { color: #b9ff66; font-size: 1.2rem; font-weight: 900; line-height: 1.5; }
+        .bt-sub { margin-top: 12px; color: #777; font-size: 0.95rem; font-family: "Share Tech Mono", monospace; }
+
+        /* D① 呼吸する枠 — animated feTurbulence */
+        .bt-breathe {
+            background: #1a1a1a; padding: 16px 18px; border-radius: 6px;
+            border: 3px solid #b9ff66; filter: url(#breathe);
+            margin-bottom: 44px;
+        }
+
+        /* D④ 光が一周する枠 — CSS @property + conic-gradient */
+        @property --bt-ang {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        @keyframes bt-spin { to { --bt-ang: 360deg; } }
+        .bt-conic {
+            background:
+                linear-gradient(#1a1a1a, #1a1a1a) padding-box,
+                conic-gradient(from var(--bt-ang), transparent 0deg, #b9ff66 90deg, transparent 180deg) border-box;
+            border: 3px solid transparent;
+            border-radius: 6px;
+            animation: bt-spin 2.8s linear infinite;
+            margin-bottom: 44px;
+        }
     </style>
 </head>
 <body>
@@ -149,6 +177,18 @@
             <filter id="fs">
                 <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
                 <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- D①用: 呼吸する枠フィルター（animated feTurbulence） -->
+    <svg width="0" height="0" style="position:absolute;overflow:hidden">
+        <defs>
+            <filter id="breathe" x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.030" numOctaves="4" seed="5" result="n">
+                    <animate attributeName="baseFrequency" values="0.018;0.050;0.018" dur="3s" repeatCount="indefinite" />
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="5" xChannelSelector="R" yChannelSelector="G" />
             </filter>
         </defs>
     </svg>
@@ -209,6 +249,74 @@
             <p class="card-main">歌いたい、録りたい。それだけでOK。</p>
             <p class="card-sub">¥4,500/h · 学生 ¥3,000/h</p>
         </div>
+
+        <p class="divider">── 2026年 先進技術デモ ──</p>
+
+        <p class="style-label">D① 呼吸する枠 — animated feTurbulence<small class="desc">枠が生き物のようにゆらぐ。ページを開いた瞬間から動く。</small></p>
+        <div class="bt-breathe">
+            <p class="bt-main">歌いたい、録りたい。それだけでOK。</p>
+            <p class="bt-sub">¥4,500/h · 学生 ¥3,000/h</p>
+        </div>
+
+        <p class="style-label">D② ペンで描かれる枠 — SVG stroke-dashoffset<small class="desc">スクロール流入の瞬間に枠が描かれる。署名のような演出。（タップで再生）</small></p>
+        <div style="position:relative;cursor:pointer;margin-bottom:44px" id="bt-dw">
+            <div id="bt-dc" style="background:#1a1a1a;padding:16px 18px;border-radius:6px">
+                <p class="bt-main">歌いたい、録りたい。それだけでOK。</p>
+                <p class="bt-sub">¥4,500/h · 学生 ¥3,000/h</p>
+            </div>
+            <svg id="bt-ds" style="position:absolute;top:0;left:0;pointer-events:none;overflow:visible">
+                <rect id="bt-dr" fill="none" stroke="#b9ff66" stroke-width="3" rx="6" />
+            </svg>
+        </div>
+
+        <p class="style-label">D③ 本物の手描き枠 — Rough.js<small class="desc">Rough.jsがランダムな手描きSVGパスを生成。タップのたびに違う線になる。</small></p>
+        <div style="position:relative;cursor:pointer;margin-bottom:44px" id="bt-rw">
+            <div id="bt-rc" style="background:#1a1a1a;padding:16px 18px;border-radius:6px">
+                <p class="bt-main">歌いたい、録りたい。それだけでOK。</p>
+                <p class="bt-sub">¥4,500/h · 学生 ¥3,000/h</p>
+            </div>
+            <svg id="bt-rs" style="position:absolute;top:0;left:0;pointer-events:none;overflow:visible"></svg>
+        </div>
+
+        <p class="style-label">D④ 光が一周する枠 — CSS @property + conic-gradient<small class="desc">CSS @property で角度をアニメーション。ライムの光が枠をぐるぐる一周。2025〜26年のCSSにしか出来ない技。</small></p>
+        <div class="bt-conic" style="padding:16px 18px">
+            <p class="bt-main">歌いたい、録りたい。それだけでOK。</p>
+            <p class="bt-sub">¥4,500/h · 学生 ¥3,000/h</p>
+        </div>
     </div>
+
+    <script is:inline src="https://unpkg.com/roughjs@4.6.6/bundled/rough.js"></script>
+    <script is:inline>
+        function btPlayDraw() {
+            var c = document.getElementById('bt-dc'), s = document.getElementById('bt-ds'), r = document.getElementById('bt-dr');
+            if (!c || !s || !r) return;
+            var w = c.offsetWidth, h = c.offsetHeight;
+            s.setAttribute('width', w); s.setAttribute('height', h); s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+            r.setAttribute('x', '2'); r.setAttribute('y', '2'); r.setAttribute('width', w - 4); r.setAttribute('height', h - 4);
+            var p = 2 * (w + h);
+            r.style.transition = 'none'; r.style.strokeDasharray = p; r.style.strokeDashoffset = p;
+            requestAnimationFrame(function () { requestAnimationFrame(function () {
+                r.style.transition = 'stroke-dashoffset 2s cubic-bezier(.4,0,.2,1)'; r.style.strokeDashoffset = '0';
+            }); });
+        }
+        function btDrawRough() {
+            if (typeof rough === 'undefined') { setTimeout(btDrawRough, 200); return; }
+            var c = document.getElementById('bt-rc'), s = document.getElementById('bt-rs');
+            if (!c || !s) return;
+            while (s.firstChild) s.removeChild(s.firstChild);
+            var w = c.offsetWidth, h = c.offsetHeight;
+            s.setAttribute('width', w); s.setAttribute('height', h); s.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+            var rc = rough.svg(s);
+            s.appendChild(rc.rectangle(3, 3, w - 6, h - 6, { stroke: '#b9ff66', strokeWidth: 2.5, roughness: 2.8, bowing: 2, fill: 'none' }));
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            btPlayDraw();
+            document.getElementById('bt-dw').addEventListener('click', btPlayDraw);
+            btDrawRough();
+            document.getElementById('bt-rw').addEventListener('click', btDrawRough);
+        });
+        // フォント読込・回転でサイズが変わったら枠を引き直す
+        window.addEventListener('resize', function () { btPlayDraw(); btDrawRough(); });
+    </script>
 </body>
 </html>
