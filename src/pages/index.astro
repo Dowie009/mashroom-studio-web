@@ -75,7 +75,25 @@ import Layout from '../layouts/Layout.astro';
                 </div>
             </div>
 
-            <!-- [2-B] ナビハブ（01 WHO IS OWNER? + 02〜07リンク） -->
+            <!-- [2-B] 判断材料セクション（何屋か・料金・CTA）＋ ナビハブ -->
+            <div class="reveal-text">
+                <div class="fv-info">
+                    <h1 class="fv-info-h1">札幌北区で、歌ってみた・弾き語り・ボーカル録音ができる一軒家スタジオ</h1>
+                    <p class="fv-info-sub">初めての録音でも、エンジニアが横について進めます。録音、ミックス、SNS用動画まで相談できます。</p>
+                    <ul class="fv-info-facts">
+                        <li>エンジニア付き録音 <b>¥4,500/h</b></li>
+                        <li>学生 <b>¥3,000/h</b></li>
+                        <li>1曲2〜3時間目安</li>
+                        <li>駐車場あり</li>
+                        <li>見学相談OK</li>
+                    </ul>
+                    <div class="fv-info-cta">
+                        <a href="#contact" class="fv-btn fv-btn-primary magnet">空き日を聞く</a>
+                        <a href="/price/" class="fv-btn fv-btn-ghost magnet">料金を見る</a>
+                    </div>
+                </div>
+            </div>
+
             <div class="reveal-text">
                 <div class="nav-hub-container">
                     <span class="dev-label">2-B</span>
@@ -436,6 +454,55 @@ import Layout from '../layouts/Layout.astro';
         #footer-qbox, .footer-blog-wrap, .dev-copyright-host { position: relative; }
         /* #qbox-toggle 内のバッジはボタンの上に飛び出させる */
         #qbox-toggle .dev-label { top: -14px; left: -10px; }
+    </style>
+
+    <!-- [2-B] 判断材料セクションのスタイル（ダークトーンのカード） -->
+    <style is:global>
+        .fv-info {
+            max-width: min(90vw, 1000px); margin: 0 auto 52px;
+            background: #0d0d10; color: #fff;
+            border: 4px solid var(--c-text); box-shadow: 12px 12px 0 var(--c-text);
+            padding: 40px 34px;
+        }
+        .fv-info-h1 {
+            font-family: var(--font-jp); font-weight: 900; text-transform: none;
+            font-size: clamp(1.4rem, 3.2vw, 2.1rem); line-height: 1.5; letter-spacing: 0.01em;
+            margin: 0 0 18px;
+        }
+        .fv-info-sub {
+            font-size: clamp(0.95rem, 1.8vw, 1.12rem); line-height: 1.9; font-weight: 400;
+            color: rgba(255,255,255,0.88); margin: 0 0 26px;
+        }
+        .fv-info-facts {
+            list-style: none; display: flex; flex-wrap: wrap; gap: 10px 12px;
+            padding: 0; margin: 0 0 30px;
+        }
+        .fv-info-facts li {
+            display: flex; align-items: baseline; gap: 6px;
+            font-size: 0.9rem; color: rgba(255,255,255,0.85);
+            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.2);
+            padding: 9px 14px;
+        }
+        .fv-info-facts b {
+            font-family: var(--font-en); font-weight: 400; font-size: 1.15rem;
+            color: var(--pop-2); letter-spacing: 0.02em;
+        }
+        .fv-info-cta { display: flex; flex-wrap: wrap; gap: 14px; }
+        .fv-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            font-family: var(--font-jp); font-weight: 900; font-size: 1.05rem; line-height: 1.2;
+            text-decoration: none; padding: 15px 30px; border: 3px solid;
+            transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
+        }
+        .fv-btn-primary { background: var(--pop-2); color: var(--c-text); border-color: var(--c-text); box-shadow: 5px 5px 0 var(--pop-1); }
+        .fv-btn-primary:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--pop-1); }
+        .fv-btn-ghost { background: transparent; color: #fff; border-color: #fff; }
+        .fv-btn-ghost:hover { background: #fff; color: var(--c-text); }
+        @media (max-width: 760px) {
+            .fv-info { padding: 26px 20px; box-shadow: 8px 8px 0 var(--c-text); margin-bottom: 40px; }
+            .fv-info-cta { flex-direction: column; }
+            .fv-btn { width: 100%; }
+        }
     </style>
 
     <style is:global>
