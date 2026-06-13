@@ -1081,4 +1081,102 @@ import Layout from '../layouts/Layout.astro';
         updatePaddingTop();
         updateMarqueePosition();
     </script>
+
+    <!-- 3-Bサービスカード: スクロールで枠線がペンで描かれる演出 -->
+    <style is:global>
+        /* JSが動かない環境向けのフォールバック（薄いライム枠） */
+        .menu .card { border-color: rgba(185,255,102,0.22); }
+    </style>
+    <script is:inline>
+      (function () {
+        function initCardDraw() {
+          var cards = document.querySelectorAll('.menu .card');
+          if (!cards.length) return;
+
+          cards.forEach(function (card) {
+            // .card は既に position:relative / overflow:hidden / border-radius:16px
+            if (getComputedStyle(card).position === 'static') card.style.position = 'relative';
+
+            var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('data-card-draw', '');
+            svg.style.cssText = 'position:absolute;top:0;left:0;pointer-events:none;overflow:visible;z-index:3';
+
+            var rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('fill', 'none');
+            rect.setAttribute('stroke', '#b9ff66');
+            rect.setAttribute('stroke-width', '3');
+            rect.setAttribute('rx', '14');
+            svg.appendChild(rect);
+            card.appendChild(svg);
+
+            // overflow:hidden にクリップされないよう padding box(clientWidth/Height)に合わせる
+            function size() {
+              var w = card.clientWidth, h = card.clientHeight;
+              svg.setAttribute('width', w);
+              svg.setAttribute('height', h);
+              svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+              rect.setAttribute('x', '2');
+              rect.setAttribute('y', '2');
+              rect.setAttribute('width', Math.max(0, w - 4));
+              rect.setAttribute('height', Math.max(0, h - 4));
+              return 2 * (w + h);
+            }
+
+            var perimeter = size();
+            rect.style.strokeDasharray = perimeter;
+            rect.style.strokeDashoffset = perimeter; // 最初は非表示
+
+            var observer = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  var p = size();
+                  rect.style.transition = 'none';
+                  rect.style.strokeDasharray = p;
+                  rect.style.strokeDashoffset = p;
+                  requestAnimationFrame(function () {
+                    requestAnimationFrame(function () {
+                      rect.style.transition = 'stroke-dashoffset 1.8s cubic-bezier(.4,0,.2,1)';
+                      rect.style.strokeDashoffset = '0';
+                    });
+                  });
+                  observer.unobserve(card); // 一度だけ
+                }
+              });
+            }, { threshold: 0.25 });
+
+            observer.observe(card);
+          });
+
+          // リサイズ対応（debounce）。描画済みの枠はオフセット0のまま追従させる
+          var resizeTimer;
+          window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+              document.querySelectorAll('.menu .card > svg[data-card-draw]').forEach(function (svg) {
+                var card = svg.parentElement;
+                var rect = svg.querySelector('rect');
+                if (!rect) return;
+                var w = card.clientWidth, h = card.clientHeight;
+                svg.setAttribute('width', w); svg.setAttribute('height', h);
+                svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+                rect.setAttribute('width', Math.max(0, w - 4));
+                rect.setAttribute('height', Math.max(0, h - 4));
+                var p = 2 * (w + h);
+                rect.style.strokeDasharray = p;
+                // 既に描き終わっている枠はオフセット0を維持、未発火はpのまま
+                if (rect.style.strokeDashoffset !== '0px' && rect.style.strokeDashoffset !== '0') {
+                  rect.style.strokeDashoffset = p;
+                }
+              });
+            }, 200);
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initCardDraw);
+        } else {
+          initCardDraw();
+        }
+      })();
+    </script>
 </Layout>
