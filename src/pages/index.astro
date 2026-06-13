@@ -117,22 +117,31 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- [3-B] 3つのサービスカード -->
         <div class="card-grid">
-            <!-- [3-B①] Recording（歌う・録る） -->
-            <div class="card card-1 reveal-text magnet" data-card-id="card-1" data-price="¥4,500/h">
+            <!-- [3-B①] ソロ・弾き語り・歌ってみた（全面リニューアル） -->
+            <div class="card card-1 reveal-text magnet" data-card-id="card-1" data-price="¥5,000〜">
                 <span class="dev-label">3-B-1</span>
-                <div class="card-img"><img src="/img/missions/real-rec.jpg" alt="マイクの前で歌うレコーディング風景" loading="lazy"></div>
-                <div class="card-for">🎤 歌いたい・録りたい人へ</div>
-                <h3>01. Recording</h3>
-                <p class="card-lead">歌いたい、録りたい。<br>それだけでOK。</p>
-                <ul class="card-includes">
-                    <li>歌ってみた</li>
-                    <li>弾き語り</li>
-                    <li>ナレーション</li>
-                    <li>ボーカル録音</li>
-                    <li>ブース利用</li>
-                </ul>
-                <div class="price">¥4,500/h <span class="price-note">学生 ¥3,000/h</span></div>
-                <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">録音を相談する →</a>
+                <div class="sr-num">01</div>
+                <div class="sr-title">ソロ・弾き語り・歌ってみた</div>
+                <div class="sr-sub">SOLO RECORDING</div>
+                <div class="sr-tags">
+                    <span class="sr-tag">弾き語り</span>
+                    <span class="sr-tag">歌ってみた</span>
+                    <span class="sr-tag">SNS用音源</span>
+                </div>
+                <hr class="sr-divider">
+                <div class="sr-subtags">
+                    <span class="sr-subtag">ラジオ</span>
+                    <span class="sr-subtag">ポッドキャスト</span>
+                    <span class="sr-subtag">アフレコ</span>
+                    <span class="sr-subtag">ナレーション</span>
+                </div>
+                <div class="sr-body">
+                    <p class="sr-line">家でも録れるけど、これでいいのかな。</p>
+                    <p class="sr-line">投稿したいけど、音がちょっと物足りない。</p>
+                    <p class="sr-line">録音やミックスで困っている。</p>
+                </div>
+                <div class="sr-price">¥5,000〜 <span>/ 1h</span></div>
+                <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">メールで相談する →</a>
             </div>
             <!-- [3-B②] Rec & Shoot（録る＋映像） -->
             <div class="card card-2 reveal-text magnet" data-card-id="card-2" data-price="¥15,000~">
@@ -1081,6 +1090,35 @@ import Layout from '../layouts/Layout.astro';
         updatePaddingTop();
         updateMarqueePosition();
     </script>
+
+    <!-- 3-B-1 ソロ録音カード 全面リニューアル -->
+    <style is:global>
+        .sr-num {
+            font-family: var(--font-en); font-size: 44px; line-height: 1;
+            color: rgba(185,255,102,0.35); margin-bottom: 6px;
+        }
+        .sr-title { color: #fff; font-size: 17px; font-weight: 700; line-height: 1.45; }
+        .sr-sub {
+            font-size: 10px; letter-spacing: 0.18em; color: #666;
+            text-transform: uppercase; margin: 4px 0 16px;
+        }
+        .sr-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .sr-tag {
+            background: rgba(185,255,102,0.10); border: 1px solid rgba(185,255,102,0.40);
+            color: #b9ff66; font-size: 12px; padding: 3px 10px; border-radius: 3px;
+        }
+        .sr-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 10px 0; }
+        .sr-subtags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .sr-subtag {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14);
+            color: #888; font-size: 11px; padding: 2px 8px; border-radius: 3px;
+        }
+        .sr-body { margin: 18px 0; }
+        /* .card p をモバイルで隠す既存ルールを上書きして本文3行を表示 */
+        .menu .card-1 .sr-line { display: block !important; color: #aaa; font-size: 13px; line-height: 1.8; margin: 0; }
+        .sr-price { margin-top: auto; padding-top: 10px; color: #b9ff66; font-size: 20px; font-family: var(--font-en); letter-spacing: 0.02em; }
+        .sr-price span { font-size: 13px; color: rgba(185,255,102,0.7); }
+    </style>
 
     <!-- 3-Bサービスカード: スクロールで枠線がペンで描かれる演出 -->
     <style is:global>
