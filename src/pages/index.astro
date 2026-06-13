@@ -6,14 +6,18 @@ import Layout from '../layouts/Layout.astro';
   title="札幌のレコーディングスタジオ MASHROOM STUDIO｜真柴道ゐ主宰・北海道"
   description="北海道札幌市北区のレコーディングスタジオ MASHROOM STUDIO。真柴道ゐ（マシバドウイ）主宰。ボーカル録音・ミックス・マスタリング・MV撮影・作曲依頼・DTMレッスン・ボイトレまで。歌ってみた録音や弾き語りも歓迎。初心者OK、手ぶらOK。"
 >
-    <!-- 1. NEW HERO -->
+    <!-- ============================== [1] ファーストビュー / HERO ============================== -->
     <header class="new-hero">
+        <!-- [1-A] 背景画像 -->
         <div class="new-hero-bg">
+            <span class="dev-label">1-A</span>
             <img src="/img/hero-v2.jpg" alt="Background" fetchpriority="high">
         </div>
         <div class="particles-container" id="particles"></div>
         <div class="new-hero-content">
+            <!-- [1-B] MASHROOMロゴ -->
             <div class="new-hero-logo-container">
+                <span class="dev-label">1-B</span>
                 <div class="new-hero-logo-wrapper">
                     <!-- 背景グロー -->
                     <div class="logo-glow"></div>
@@ -25,8 +29,9 @@ import Layout from '../layouts/Layout.astro';
                     <div class="logo-shine"></div>
                 </div>
             </div>
-            <!-- 斜め帯 -->
+            <!-- [1-C] 斜めスクロール帯 -->
             <div class="diagonal-bar">
+                <span class="dev-label">1-C</span>
                 <div class="diagonal-content">
                     /// RECORDING STUDIO /// SAPPORO /// CREATIVE BASE /// MUSIC PRODUCTION /// VIDEO SHOOTING /// DTM LESSON /// RECORDING STUDIO /// SAPPORO /// CREATIVE BASE ///
                 </div>
@@ -34,7 +39,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
     </header>
 
-    <!-- 2. ABOUT -->
+    <!-- ============================== [2] ABOUT / スタジオ紹介＋ナビ ============================== -->
     <section class="about" data-cursor="color-pop-4">
         <!-- campaign_banner.pngが存在しないためコメントアウト -->
         <!--
@@ -57,8 +62,10 @@ import Layout from '../layouts/Layout.astro';
         -->
 
         <div class="about-collage-container">
+            <!-- [2-A] スタジオ写真スライドショー -->
             <div class="reveal-text">
                 <div class="collage-photo-wrapper slideshow-frame">
+                    <span class="dev-label">2-A</span>
                     <img src="/img/slides/studio-01.jpg" alt="MASHROOM STUDIO コントロールルーム" class="collage-photo slide is-active">
                     <img src="/img/slides/studio-02.jpg" alt="制作環境（DAW・ウルトラワイドモニター）" class="collage-photo slide" loading="lazy">
                     <img src="/img/slides/studio-03.jpg" alt="スタジオ内観" class="collage-photo slide" loading="lazy">
@@ -68,8 +75,10 @@ import Layout from '../layouts/Layout.astro';
                 </div>
             </div>
 
+            <!-- [2-B] ナビハブ（01 WHO IS OWNER? + 02〜07リンク） -->
             <div class="reveal-text">
                 <div class="nav-hub-container">
+                    <span class="dev-label">2-B</span>
                     <a href="/profile" class="glitch-link magnet" data-text="01 WHO IS OWNER?">01 WHO IS OWNER?</a>
                     <div class="nav-hub-others" style="display:flex; gap:40px; align-items:baseline; margin-left: 20px;">
                         <a href="/price" class="glitch-sub magnet">02 PRICE</a><a href="/works" class="glitch-sub magnet">03 WORKS</a>
@@ -81,13 +90,17 @@ import Layout from '../layouts/Layout.astro';
         </div>
     </section>
 
-    <!-- 3. MENUS -->
+    <!-- ============================== [3] MISSIONS / サービスメニュー ============================== -->
     <section class="menu">
+        <span class="dev-label">3-A</span>
+        <!-- [3-A] 見出し -->
         <h2 class="section-title reveal-text"><span>Our Service</span>MISSIONS</h2>
 
+        <!-- [3-B] 3つのサービスカード -->
         <div class="card-grid">
-            <!-- カード 1: 歌いたい -->
+            <!-- [3-B①] Recording（歌いたい） -->
             <div class="card card-1 reveal-text magnet" data-card-id="card-1">
+                <span class="dev-label">3-B-1</span>
                 <div class="card-img"><img src="/img/missions/real-rec.jpg" alt="マイクの前で歌うレコーディング風景" loading="lazy"></div>
                 <div class="card-for">🎤 歌いたい</div>
                 <h3>01. Recording</h3>
@@ -107,8 +120,9 @@ import Layout from '../layouts/Layout.astro';
                 </div>
                 <div class="card-toggle">詳細を見る 🔽</div>
             </div>
-            <!-- カード 2: 作品にしたい -->
+            <!-- [3-B②] Rec & Shoot（作品にしたい） -->
             <div class="card card-2 reveal-text magnet" data-card-id="card-2">
+                <span class="dev-label">3-B-2</span>
                 <div class="card-img"><img src="/img/missions/real-shoot.jpg" alt="ブースでのボーカル収録風景" loading="lazy"></div>
                 <div class="card-for">🎬 作品にしたい</div>
                 <h3>02. Rec &amp; Shoot</h3>
@@ -128,8 +142,9 @@ import Layout from '../layouts/Layout.astro';
                 </div>
                 <div class="card-toggle">詳細を見る 🔽</div>
             </div>
-            <!-- カード 3: 学びたい -->
+            <!-- [3-B③] Lesson（学びたい） -->
             <div class="card card-3 reveal-text magnet" data-card-id="card-3">
+                <span class="dev-label">3-B-3</span>
                 <div class="card-img"><img src="/img/missions/real-lesson.jpg" alt="DTMレッスンの風景" loading="lazy"></div>
                 <div class="card-for">📚 学びたい</div>
                 <h3>03. Lesson</h3>
@@ -151,8 +166,9 @@ import Layout from '../layouts/Layout.astro';
             </div>
         </div>
 
-        <!-- FOR PROFESSIONALS（本気の人・法人向け） -->
+        <!-- [3-C] FOR PROFESSIONALS（本気の人・法人向け） -->
         <div class="pro-block reveal-text">
+            <span class="dev-label">3-C</span>
             <p class="pro-label">FOR PROFESSIONALS</p>
             <h3 class="pro-title">本気で、音楽を仕事にする人へ。</h3>
             <div class="pro-grid">
@@ -169,8 +185,9 @@ import Layout from '../layouts/Layout.astro';
         </div>
     </section>
 
-    <!-- 4. GALLERY -->
+    <!-- ============================== [4] GALLERY / 流れる写真帯 ============================== -->
     <div class="gallery-container-box">
+        <span class="dev-label">4</span>
         <div class="gallery-wrapper" data-cursor="color-pop-4">
             <div class="marquee-content">
                 <div class="gallery-item">SOUND</div><div class="gallery-item" style="background:url('/img/Main02.jpg') center/cover;"></div>
@@ -183,10 +200,14 @@ import Layout from '../layouts/Layout.astro';
         </div>
     </div>
 
-    <!-- 5. EXPLORE -->
+    <!-- ============================== [5] EXPLORE / STUDIO CONTENTS ============================== -->
     <section class="explore" data-cursor="color-pop-1">
+        <span class="dev-label">5-A</span>
+        <!-- [5-A] 見出し -->
         <h2 class="explore-title reveal-text">STUDIO CONTENTS</h2>
+        <!-- [5-B] 5つの誘導カード（GEAR/WORKS/PRICE/LESSON/BLOG） -->
         <div class="explore-grid">
+            <span class="dev-label">5-B</span>
             <div class="explore-card ex-1 reveal-text magnet">
                 <div class="explore-name">GEAR LIST</div><div class="explore-desc">使用機材一覧を見る</div>
                 <a href="/gear" class="card-link" onclick="window.location.href='/gear'; return false;"></a>
@@ -213,18 +234,21 @@ import Layout from '../layouts/Layout.astro';
             </div>
         </div>
 
-        <!-- ひっそりメニュー -->
+        <!-- [5-C] サブナビ（WHO IS OWNER? / CONTACT） -->
         <div class="explore-sub-nav reveal-text">
+            <span class="dev-label">5-C</span>
             <a href="/profile" class="sub-link magnet">WHO IS OWNER?</a>
             <span class="sep">/</span>
             <a href="#contact" class="sub-link magnet">CONTACT</a>
         </div>
     </section>
 
-    <!-- ESTIMATE & Q&A (Modified to Light Theme + Dropdown Style) -->
+    <!-- ============================== [6] ESTIMATE & Q&A ============================== -->
     <section class="estimate-qa-section" id="estimate" data-cursor="color-pop-6">
         <div class="section-split">
+            <!-- [6-A] Q&A（よくある質問） -->
             <div class="qa-area">
+                <span class="dev-label">6-A</span>
                 <h2>Q&A 💬</h2>
                 <p class="qa-lead">よくある質問 — 気になることは、だいたい誰かが先に聞いてくれています。質問をタップすると答えが開きます。</p>
                 <div class="qa-chips" id="qa-chips">
@@ -282,7 +306,9 @@ import Layout from '../layouts/Layout.astro';
                 </div>
                 <button id="qa-more" class="qa-more-btn">残りの質問も見る ▼</button>
             </div>
+            <!-- [6-B] QUICK ESTIMATE（簡易見積もり） -->
             <div class="estimate-area">
+                <span class="dev-label">6-B</span>
                 <h2>QUICK ESTIMATE ⚡</h2>
                 <p class="estimate-lead"><strong>簡易見積もり</strong> — 「結局いくらかかるの…？」が不安な方へ。選ぶだけで概算が出ます。</p>
                 <div class="estimate-form">
@@ -340,8 +366,10 @@ import Layout from '../layouts/Layout.astro';
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ============================== [7] CONTACT / FOOTER ============================== -->
+    <!-- [7-A] ARE YOU READY / LET'S MAKE SOMETHING CRAZY / MAIL FORM -->
     <footer id="contact" data-cursor="color-pop-5">
+        <span class="dev-label">7-A</span>
         <p style="font-weight: bold; margin-bottom: 20px;">ARE YOU READY?</p>
         <div class="footer-cta reveal-text">LET'S MAKE<br>SOMETHING<br>CRAZY...</div>
         <p style="margin-bottom: 40px; font-size: 1.2rem;">まずは一度、スタジオに遊びに来ませんか？<br>美味しいコーヒー淹れて待ってる。</p>
@@ -352,8 +380,9 @@ import Layout from '../layouts/Layout.astro';
             <a id="mail-trigger" class="btn-pop magnet">MAIL FORM 📩</a>
         </div>
 
-        <!-- フッター埋め込み版・質問ボックス（浮遊ボタンがここに合流する） -->
+        <!-- [7-B] フッター埋め込み版・質問ボックス（浮遊ボタンがここに合流する） -->
         <div id="footer-qbox" class="reveal-text">
+            <span class="dev-label">7-B</span>
             <p class="footer-qbox-title">💬 メールフォームはちょっと重いな…という方へ</p>
             <p class="footer-qbox-note">名前・メールアドレス不要。ひとことでも大丈夫です。<br><small>※返信がほしい場合は、連絡先も一緒に書いてもらえると返せます。</small></p>
             <div class="footer-qbox-row">
@@ -363,8 +392,9 @@ import Layout from '../layouts/Layout.astro';
             <p class="footer-qbox-status" id="footer-qbox-status" aria-live="polite"></p>
         </div>
 
-        <!-- BLOG: ノケ物語カード -->
+        <!-- [7-C] BLOG「ノケ物語」カード -->
         <div class="footer-blog-wrap">
+            <span class="dev-label">7-C</span>
             <a href="https://blog.xn--3-sj5c.jp/" target="_blank" class="footer-blog-card magnet" aria-label="ブログを見る">
                 <img src="/img/blog-classroom.png" alt="自伝マンガ「ノケ物語」" class="footer-blog-bg" loading="lazy">
                 <div class="footer-blog-overlay">
@@ -376,16 +406,37 @@ import Layout from '../layouts/Layout.astro';
             </a>
         </div>
 
-        <div style="margin-top: 60px; font-size: 0.75rem; letter-spacing: 0.15em; opacity: 0.6;">MASHROOM STUDIO — RECORDING & CREATIVE BASE — HOKKAIDO, SAPPORO</div>
+        <!-- [7-D] コピーライト -->
+        <div class="dev-copyright-host" style="margin-top: 60px; font-size: 0.75rem; letter-spacing: 0.15em; opacity: 0.6;"><span class="dev-label">7-D</span>MASHROOM STUDIO — RECORDING & CREATIVE BASE — HOKKAIDO, SAPPORO</div>
         <div style="margin-top: 10px; font-size: 0.75rem; opacity: 0.5;">&copy; 2026 MASHROOM STUDIO</div>
     </footer>
 
-    <!-- モバイル固定CTA（スマホのみ・世界観はそのまま、予約導線だけ常時表示） -->
+    <!-- ============================== [8] モバイル固定CTA（スマホ下部・常時表示） ============================== -->
     <nav class="m-sticky" aria-label="クイック導線">
+        <span class="dev-label">8</span>
         <a href="#contact" class="m-sticky-btn m-sticky-main">空き日確認</a>
         <a href="/price/" class="m-sticky-btn">料金</a>
         <a href="https://www.instagram.com/walewalewa" target="_blank" rel="noopener noreferrer" class="m-sticky-btn">DM相談</a>
     </nav>
+
+    <!-- ============================== DEV: セクション記号ラベル（一時的・確認後にこのstyleと .dev-label / .dev-copyright-host を丸ごと削除） ============================== -->
+    <style is:global>
+        .dev-label {
+            position: absolute; top: 4px; left: 4px; z-index: 99990;
+            background: #fff; color: #000;
+            font-family: 'Share Tech Mono', monospace; font-weight: 900;
+            font-size: 13px; line-height: 1; letter-spacing: 0.02em;
+            padding: 5px 8px; border: 2px solid #000; box-shadow: 3px 3px 0 #FF0055;
+            pointer-events: none; white-space: nowrap; border-radius: 0;
+        }
+        /* バッジの位置基準（静的な要素にだけ relative を付与。絶対配置の要素には付けない） */
+        .nav-hub-container, .menu, .card, .pro-block,
+        .explore, .explore-grid, .explore-sub-nav,
+        .qa-area, .estimate-area, footer#contact,
+        #footer-qbox, .footer-blog-wrap, .dev-copyright-host { position: relative; }
+        /* #qbox-toggle 内のバッジはボタンの上に飛び出させる */
+        #qbox-toggle .dev-label { top: -14px; left: -10px; }
+    </style>
 
     <style is:global>
         .m-sticky { display: none; }
@@ -416,8 +467,8 @@ import Layout from '../layouts/Layout.astro';
         }
     </style>
 
-    <!-- QUESTION BOX（匿名質問ボックス） -->
-    <button id="qbox-toggle" aria-label="気軽に質問する">💬<span class="qbox-toggle-label">気軽に質問</span></button>
+    <!-- ============================== [9] 浮遊質問ボタン（💬 気軽に質問） ============================== -->
+    <button id="qbox-toggle" aria-label="気軽に質問する"><span class="dev-label">9</span>💬<span class="qbox-toggle-label">気軽に質問</span></button>
     <div id="qbox-panel" aria-hidden="true">
         <div class="qbox-header">
             <span>QUESTION BOX</span>
