@@ -1478,9 +1478,9 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
     /* NEW HERO MOBILE（現行ヒーロー .new-hero 用。ロゴを中央寄せ・画面内に収める） */
     .new-hero { height: 100vh; height: 100svh; min-height: 560px; }
     .new-hero-logo-container {
-        left: 0; right: 0; top: 6%;
-        width: 100%;
-        display: flex; justify-content: center;
+        left: 0; right: 0; top: 0; bottom: 0;
+        width: 100%; height: 100%;
+        display: flex; justify-content: center; align-items: center;
     }
     .new-hero-logo-wrapper { transform: scale(1.05); }
     .new-hero-logo-wrapper:hover { transform: scale(1.05); }
