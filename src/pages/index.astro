@@ -9,7 +9,7 @@ import Layout from '../layouts/Layout.astro';
     <!-- ============ 1. ファーストビュー ============ -->
     <header class="v2-hero">
         <div class="v2-hero-bg">
-            <img src="/img/20_compressed.jpg" alt="MASHROOM STUDIO 札幌北区のレコーディングスタジオ" />
+            <img src="/img/hero-v2.jpg" alt="MASHROOM STUDIO 札幌北区のレコーディングスタジオ" fetchpriority="high" />
         </div>
         <div class="v2-hero-inner">
             <p class="v2-hero-eyebrow">札幌・北区 ／ 一軒家レコーディングスタジオ</p>
@@ -197,6 +197,7 @@ import Layout from '../layouts/Layout.astro';
     </nav>
 
     <style>
+        :global(html) { scroll-behavior: smooth; }
         /* ===== ベース ===== */
         .v2-hero, .v2-clients, .v2-services, .v2-price, .v2-flow, .v2-voice, .v2-faq, .v2-contact {
             position: relative;
