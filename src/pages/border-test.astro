@@ -1,0 +1,154 @@
+---
+// ボーダースタイル比較デモ（一時ページ）
+// https://xn--3-sj5c.jp/border-test/ でiPhoneから5種類を見比べる用
+---
+
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Border Test｜MASHROOM STUDIO</title>
+    <style>
+        :root {
+            --bg: #111;
+            --card: #1a1a1a;
+            --lime: #b9ff66;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: var(--bg);
+            color: #fff;
+            font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Zen Kaku Gothic New", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            padding: 24px 18px 80px;
+            line-height: 1.6;
+        }
+        .back {
+            display: inline-block;
+            color: var(--lime);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+            letter-spacing: 0.02em;
+        }
+        .back:hover { text-decoration: underline; }
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+        .page-note {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 32px;
+        }
+        .demo {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .style-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--lime);
+            letter-spacing: 0.06em;
+            margin: 0 0 10px 2px;
+        }
+        .style-label small {
+            display: block;
+            color: rgba(255,255,255,0.5);
+            font-weight: 400;
+            font-size: 0.72rem;
+            letter-spacing: 0;
+            margin-top: 2px;
+        }
+        .card {
+            background: var(--card);
+            padding: 26px 22px;
+            margin-bottom: 44px;
+        }
+        .card-main {
+            font-size: 1.2rem;
+            font-weight: 900;
+            line-height: 1.5;
+        }
+        .card-sub {
+            margin-top: 12px;
+            font-size: 0.95rem;
+            font-family: "Share Tech Mono", monospace;
+            color: var(--lime);
+        }
+
+        /* ① 現在（ストレート） */
+        .s1 { border: 3px solid var(--lime); }
+
+        /* ② feTurbulence マイルド */
+        .s2 { border: 3px solid var(--lime); filter: url(#fm); }
+
+        /* ③ feTurbulence ストロング */
+        .s3 { border: 3px solid var(--lime); filter: url(#fs); }
+
+        /* ④ マルチカラー shadow */
+        .s4 { border: 2px solid var(--lime); box-shadow: 4px 4px 0 #ff006e, -3px -3px 0 #00f5d4; }
+
+        /* ⑤ 同色ブレ shadow */
+        .s5 {
+            border: 2px solid var(--lime);
+            box-shadow: 2px 3px 0 rgba(185,255,102,.5), -2px -2px 0 rgba(185,255,102,.3), 4px 5px 0 rgba(185,255,102,.15);
+        }
+    </style>
+</head>
+<body>
+    <!-- ②③用 SVGフィルター定義（画面には表示しない） -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <filter id="fm">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+            <filter id="fs">
+                <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+        </defs>
+    </svg>
+
+    <a href="/" class="back">← トップに戻る</a>
+    <h1 class="page-title">ボーダースタイル比較</h1>
+    <p class="page-note">5種類の枠線スタイルを見比べる一時ページです。</p>
+
+    <div class="demo">
+        <p class="style-label">① 現在（ストレート）<small>border: 3px solid #b9ff66</small></p>
+        <div class="card s1">
+            <p class="card-main">歌いたい、録りたい。それだけでOK。</p>
+            <p class="card-sub">¥4,500/h · 学生 ¥3,000/h</p>
+        </div>
+
+        <p class="style-label">② feTurbulence マイルド<small>filter: url(#fm) · scale=3, baseFreq=0.035, octaves=4</small></p>
+        <div class="card s2">
+            <p class="card-main">歌いたい、録りたい。それだけでOK。</p>
+            <p class="card-sub">¥4,500/h · 学生 ¥3,000/h</p>
+        </div>
+
+        <p class="style-label">③ feTurbulence ストロング<small>filter: url(#fs) · scale=9, baseFreq=0.04, octaves=3</small></p>
+        <div class="card s3">
+            <p class="card-main">歌いたい、録りたい。それだけでOK。</p>
+            <p class="card-sub">¥4,500/h · 学生 ¥3,000/h</p>
+        </div>
+
+        <p class="style-label">④ マルチカラー shadow<small>border 2px + box-shadow #ff006e / #00f5d4</small></p>
+        <div class="card s4">
+            <p class="card-main">歌いたい、録りたい。それだけでOK。</p>
+            <p class="card-sub">¥4,500/h · 学生 ¥3,000/h</p>
+        </div>
+
+        <p class="style-label">⑤ 同色ブレ shadow<small>border 2px + 多重 box-shadow（同色・段階透明度）</small></p>
+        <div class="card s5">
+            <p class="card-main">歌いたい、録りたい。それだけでOK。</p>
+            <p class="card-sub">¥4,500/h · 学生 ¥3,000/h</p>
+        </div>
+    </div>
+</body>
+</html>
