@@ -94,7 +94,8 @@ import Layout from '../layouts/Layout.astro';
                 </div>
             </div>
 
-            <div class="reveal-text">
+            <!-- 一時非表示（復元用に display:none。削除はしていない） -->
+            <div class="reveal-text" style="display:none">
                 <div class="nav-hub-container">
                     <span class="dev-label">2-B</span>
                     <a href="/profile" class="glitch-link magnet" data-text="01 WHO IS OWNER?">01 WHO IS OWNER?</a>
@@ -116,90 +117,87 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- [3-B] 3つのサービスカード -->
         <div class="card-grid">
-            <!-- [3-B①] Recording（歌いたい） -->
-            <div class="card card-1 reveal-text magnet" data-card-id="card-1">
+            <!-- [3-B①] Recording（歌う・録る） -->
+            <div class="card card-1 reveal-text magnet" data-card-id="card-1" data-price="¥4,500/h">
                 <span class="dev-label">3-B-1</span>
                 <div class="card-img"><img src="/img/missions/real-rec.jpg" alt="マイクの前で歌うレコーディング風景" loading="lazy"></div>
-                <div class="card-for">🎤 歌いたい</div>
+                <div class="card-for">🎤 歌いたい・録りたい人へ</div>
                 <h3>01. Recording</h3>
-                <p>
-                    <span class="keep-break">「歌ってみた」も</span><span class="keep-break">「弾き語り」も。</span><br>
-                    <span class="keep-break">録音って楽しい！を</span><br>
-                    <span class="keep-break">まず体験してください！</span>
-                </p>
+                <p class="card-lead">歌いたい、録りたい。<br>それだけでOK。</p>
                 <ul class="card-includes">
-                    <li>エンジニアが横につきます</li>
-                    <li>マイク選び・設定すべて込み</li>
-                    <li>データは当日お渡し</li>
+                    <li>歌ってみた</li>
+                    <li>弾き語り</li>
+                    <li>ナレーション</li>
+                    <li>ボーカル録音</li>
+                    <li>ブース利用</li>
                 </ul>
-                <div class="price">¥4,500/h <span class="price-note">学生¥3,000/h</span></div>
-                <div class="card-details">
-                    <p>初めての方歓迎。1曲なら2〜3時間が目安です。6時間パック¥24,000も。高品質なマイクとプリアンプで、プロ品質の録音を気軽に。</p>
-                </div>
-                <div class="card-toggle">詳細を見る 🔽</div>
+                <div class="price">¥4,500/h <span class="price-note">学生 ¥3,000/h</span></div>
+                <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">録音を相談する →</a>
             </div>
-            <!-- [3-B②] Rec & Shoot（作品にしたい） -->
-            <div class="card card-2 reveal-text magnet" data-card-id="card-2">
+            <!-- [3-B②] Rec & Shoot（録る＋映像） -->
+            <div class="card card-2 reveal-text magnet" data-card-id="card-2" data-price="¥15,000~">
                 <span class="dev-label">3-B-2</span>
-                <div class="card-img"><img src="/img/missions/real-shoot.jpg" alt="ブースでのボーカル収録風景" loading="lazy"></div>
-                <div class="card-for">🎬 作品にしたい</div>
+                <div class="card-img"><img src="/img/missions/real-shoot.jpg" alt="ボーカル収録と撮影の風景" loading="lazy"></div>
+                <div class="card-for">🎬 映像も作りたい人へ</div>
                 <h3>02. Rec &amp; Shoot</h3>
-                <p>
-                    <span class="keep-break">THE FIRST TAKEみたいな</span><br>
-                    <span class="keep-break">一発撮り、できます。</span><br>
-                    <span class="keep-break">歌う姿をそのまま</span><span class="keep-break">動画作品に。</span>
-                </p>
+                <p class="card-lead">録るだけじゃなく、<br>映像も残したい。</p>
                 <ul class="card-includes">
-                    <li>レコーディング＋撮影で動画1本</li>
-                    <li>弾き語りでも、カラオケ音源×歌でも</li>
-                    <li>撮って出しなら即日納品OK</li>
+                    <li>MV撮影</li>
+                    <li>縦動画（SNS用）</li>
+                    <li>ライブ映像</li>
+                    <li>YouTube素材</li>
+                    <li>Rec &amp; Shoot</li>
                 </ul>
                 <div class="price">¥15,000~</div>
-                <div class="card-details">
-                    <p>コンデンサーマイクで録音しながら、その姿をカメラで撮影。歌ってみた動画やSNS用のリールが、最短その日のうちに完成します。</p>
-                </div>
-                <div class="card-toggle">詳細を見る 🔽</div>
+                <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">映像制作を相談する →</a>
             </div>
-            <!-- [3-B③] Lesson（学びたい） -->
-            <div class="card card-3 reveal-text magnet" data-card-id="card-3">
+            <!-- [3-B③] Lesson 大人向け（プロ志向） -->
+            <div class="card card-3 reveal-text magnet" data-card-id="card-3" data-price="初回 ¥2,000">
                 <span class="dev-label">3-B-3</span>
-                <div class="card-img"><img src="/img/missions/real-lesson.jpg" alt="DTMレッスンの風景" loading="lazy"></div>
-                <div class="card-for">📚 学びたい</div>
+                <div class="card-img"><img src="/img/missions/real-lesson.jpg" alt="DTM・ミックスレッスンの風景" loading="lazy"></div>
+                <div class="card-for">🎯 プロを目指す大人へ</div>
                 <h3>03. Lesson</h3>
-                <p>
-                    <span class="keep-break">現場で本当に使える</span><br>
-                    <span class="keep-break">「技術」と「考え方」を</span><br>
-                    <span class="keep-break">マンツーマンで。</span>
-                </p>
+                <p class="card-lead">プロを目指す<br>あなたへ。</p>
                 <ul class="card-includes">
-                    <li>初回はお試しカウンセリング＆レッスン</li>
-                    <li>現役プロデューサーが直接指導</li>
-                    <li>オンライン・グループも◎</li>
+                    <li>DTMレッスン</li>
+                    <li>ミックスレッスン</li>
+                    <li>制作相談</li>
+                    <li>キャリア相談</li>
                 </ul>
-                <div class="price">初回 ¥2,000 <span class="price-note">通常¥3,500/h・学生¥2,500/h</span></div>
-                <div class="card-details">
-                    <p>まずはお試しで。今のレベルとやりたいことを聞いて、カリキュラムを一緒に決めます。DTM・ミックス・ボーカルなんでも。6時間パック¥18,000。</p>
-                </div>
-                <div class="card-toggle">詳細を見る 🔽</div>
+                <div class="price">¥3,500/h <span class="price-note">初回 ¥2,000</span></div>
+                <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">レッスンを相談する →</a>
+            </div>
+            <!-- [3-B④] For Teens 中高生向け -->
+            <div class="card card-4 reveal-text magnet" data-card-id="card-4" data-price="学生 ¥2,500/h">
+                <span class="dev-label">3-B-4</span>
+                <div class="card-img"><img src="/img/missions/card-school.jpg" alt="中高生向けDTM体験レッスン" loading="lazy"></div>
+                <div class="card-for">🌱 中高生・はじめての人へ</div>
+                <h3>04. For Teens</h3>
+                <p class="card-lead">音楽、始めてみない？<br>中高生大歓迎。</p>
+                <ul class="card-includes">
+                    <li>「DTMってなに？」から始められる</li>
+                    <li>PCで音楽を作る、新時代のやり方</li>
+                    <li>初回体験OK</li>
+                </ul>
+                <div class="price">学生 ¥2,500/h <span class="price-note">初回 ¥2,000</span></div>
+                <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">体験レッスンを聞く →</a>
             </div>
         </div>
 
-        <!-- [3-C] FOR PROFESSIONALS（本気の人・法人向け） -->
+        <!-- [3-C] FOR BUSINESS（企業・法人向けワンストップ） -->
         <div class="pro-block reveal-text">
             <span class="dev-label">3-C</span>
-            <p class="pro-label">FOR PROFESSIONALS</p>
-            <h3 class="pro-title">本気で、音楽を仕事にする人へ。</h3>
-            <div class="pro-grid">
-                <div class="pro-item">
-                    <h4>Branding <span class="pro-price">¥150,000~ <small>/ 3ヶ月</small></span></h4>
-                    <p>音楽を「仕事」にするための最初の一歩。ブランディング・コンテンツ戦略・プロモーションまで、3ヶ月間徹底的に伴走します。</p>
-                </div>
-                <div class="pro-item">
-                    <h4>Business <span class="pro-price">¥100,000~</span></h4>
-                    <p>CM・企業VP・イベント音楽など、法人向けの音響制作と楽曲提供。ありきたりではない、心に残るクリエイティブを提案します。</p>
-                </div>
-            </div>
-            <a href="#contact" class="pro-cta magnet">まずは相談する</a>
+            <p class="pro-label">FOR BUSINESS</p>
+            <h3 class="pro-title">映像も、音楽も、ブランディングも。<br>企業案件ワンストップ。</h3>
+            <ul class="pro-services">
+                <li>MV制作</li>
+                <li>プロモーション映像</li>
+                <li>CM音楽・ナレーション</li>
+                <li>ブランドミュージック</li>
+                <li>ロゴ・キャッチコピーまで相談可</li>
+            </ul>
+            <p class="pro-clients"><span class="pro-clients-label">納品実績</span>北海道コンサドーレ札幌／雪印メグミルク／札幌PARCO／LeTAO／TBS　など</p>
+            <a href="#contact" class="pro-cta magnet">法人・企業案件を相談する</a>
         </div>
     </section>
 
@@ -502,6 +500,60 @@ import Layout from '../layouts/Layout.astro';
             .fv-info { padding: 26px 20px; box-shadow: 8px 8px 0 var(--c-text); margin-bottom: 40px; }
             .fv-info-cta { flex-direction: column; }
             .fv-btn { width: 100%; }
+        }
+
+        /* === MISSIONS カード刷新（見出し・CTA・4枚グリッド・企業ブロック） === */
+        .card .card-lead {
+            font-size: 1.3rem; font-weight: 900; line-height: 1.45; color: #fff;
+            margin-bottom: 16px; display: block; font-family: var(--font-jp);
+        }
+        /* モバイルは元設計が .card p と .price を隠すため、見出し・料金を表示し直し、
+           重複するガラス価格バッジ(::before)は廃止して .price に統一 */
+        @media (max-width: 1099px) {
+            .menu .card .card-lead { display: block !important; font-size: 1.25rem; margin-bottom: 14px; }
+            .menu .card .price { display: block !important; margin-top: 14px; }
+            .menu .card::before { display: none !important; }
+        }
+        .card-cta {
+            display: block; margin-top: 16px; text-align: center; text-decoration: none;
+            font-family: var(--font-jp); font-weight: 900; font-size: 1rem; line-height: 1.2;
+            padding: 13px 16px; background: var(--pop-2); color: var(--c-text);
+            border: 2px solid var(--c-text); box-shadow: 4px 4px 0 var(--c-text);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .card-cta:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 var(--c-text); }
+
+        /* 4枚になったのでPCは2×2グリッドに */
+        @media (min-width: 1100px) {
+            .menu .card-grid { grid-template-columns: repeat(2, 1fr); max-width: 940px; }
+        }
+
+        /* 企業向けブロック（3-C） */
+        .pro-services {
+            list-style: none; display: flex; flex-wrap: wrap; gap: 10px;
+            padding: 0; margin: 0 auto 24px; max-width: 760px; justify-content: center;
+        }
+        .pro-services li {
+            font-size: 0.92rem; font-weight: 700; color: #f3e6cf;
+            background: rgba(212,180,131,0.1); border: 1px solid rgba(212,180,131,0.4);
+            padding: 8px 16px; border-radius: 100px;
+        }
+        .pro-clients {
+            max-width: 760px; margin: 0 auto 28px; font-size: 0.86rem; line-height: 1.9;
+            color: rgba(255,255,255,0.72);
+        }
+        .pro-clients-label {
+            display: inline-block; margin-right: 10px; padding: 2px 10px;
+            font-family: var(--font-en); font-size: 0.72rem; letter-spacing: 0.1em;
+            color: #0a0b0e; background: #d4b483; font-weight: 700;
+        }
+        /* 企業ブロック見出しの語中改行を防ぐ */
+        .pro-title { word-break: keep-all; overflow-wrap: anywhere; }
+        @media (max-width: 760px) {
+            .pro-services { gap: 8px; }
+            .pro-services li { font-size: 0.85rem; padding: 7px 13px; }
+            .pro-title { font-size: 1.2rem; line-height: 1.5; }
+            .pro-clients-label { display: inline-block; margin-bottom: 4px; }
         }
     </style>
 
