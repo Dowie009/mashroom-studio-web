@@ -514,13 +514,12 @@ import Layout from '../layouts/Layout.astro';
             position: relative; overflow: hidden; isolation: isolate;
             /* フルブリード（画面端まで）＋ 上の隙間を詰める＋枠/影なし */
             width: 100vw; max-width: none;
-            margin: -30px calc(50% - 50vw) 0;
+            /* about の padding-top(=13vw+30) を打ち消して写真をヒーローの斜め線直下まで引き上げる。
+               about の clip-path がこのFVを斜めにクリップ＝斜めラインに沿う。ライム帯は写真が覆う。 */
+            margin: calc(-13vw - 45px) calc(50% - 50vw) 0;
             min-height: clamp(540px, 74svh, 760px);
             display: flex; flex-direction: column; justify-content: flex-end;
             border: none; box-shadow: none; border-radius: 0;
-            /* 上端を斜めカット（ヒーロー下端の斜めラインを復元・右上がり） */
-            -webkit-clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
-            clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
         }
         .fv-cine-bg { position: absolute; inset: 0; z-index: 0; }
         .fv-cine-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
@@ -562,9 +561,9 @@ import Layout from '../layouts/Layout.astro';
             .fv-cine { min-height: clamp(560px, 82svh, 760px); }
             .fv-cine-content { padding: 24px 20px 26px; }
         }
-        /* PCは about の clip-path/margin が大きく隙間が広がるため、より詰める */
+        /* PCは about の padding-top が 13vw+100 と大きいため、それを打ち消す量に */
         @media (min-width: 1100px) {
-            .fv-cine { margin-top: -130px; }
+            .fv-cine { margin-top: calc(-13vw - 115px); }
         }
         /* A: スクロール連動のズーム/フェード用（transitionなし＝スクロール量に完全連動／逆再生可） */
         .fv-cine-bg { will-change: transform; transition: none; }
