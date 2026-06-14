@@ -75,21 +75,26 @@ import Layout from '../layouts/Layout.astro';
                 </div>
             </div>
 
-            <!-- [2-B] 判断材料セクション（何屋か・料金・CTA）＋ ナビハブ -->
-            <div class="reveal-text">
-                <div class="fv-info">
-                    <h1 class="fv-info-h1">札幌北区で、歌ってみた・弾き語り・ボーカル録音ができる一軒家スタジオ</h1>
-                    <p class="fv-info-sub">初めての録音でも、エンジニアが横について進めます。録音、ミックス、SNS用動画まで相談できます。</p>
-                    <ul class="fv-info-facts">
-                        <li>エンジニア付き録音 <b>¥4,500/h</b></li>
-                        <li>学生 <b>¥3,000/h</b></li>
-                        <li>1曲2〜3時間目安</li>
-                        <li>駐車場あり</li>
-                        <li>見学相談OK</li>
-                    </ul>
-                    <div class="fv-info-cta">
-                        <a href="#contact" class="fv-btn fv-btn-primary magnet">空き日を聞く</a>
-                        <a href="/price/" class="fv-btn fv-btn-ghost magnet">料金を見る</a>
+            <!-- [2-B] シネマティックFV（fv-test由来・黒カードを置き換え） -->
+            <div class="fv-cine" id="fvcine">
+                <div class="fv-cine-bg"><img src="/img/missions/real-rec.jpg" alt="MASH ROOM STUDIO レコーディング" loading="lazy"></div>
+                <div class="fv-cine-overlay"></div>
+                <div class="fv-cine-content">
+                    <p class="fv-cine-label anim d-label">MASH ROOM STUDIO · SAPPORO KITA-KU</p>
+                    <div class="fv-cine-line1 anim anim-copy d-line1">録りたい、</div>
+                    <div class="fv-cine-line2 anim anim-copy d-line2">その気持ちで来てください。</div>
+                    <div class="fv-cine-accent"></div>
+                    <h1 class="fv-cine-sub anim d-sub">札幌北区で、歌ってみた・弾き語り・ボーカル録音ができる一軒家スタジオ</h1>
+                    <div class="fv-cine-chips anim d-chips">
+                        <span class="fv-cine-chip-main">エンジニア付き録音 ¥4,500/h</span>
+                        <span class="fv-cine-chip-main">学生 ¥3,000/h</span>
+                        <span class="fv-cine-chip-sub">1曲2〜3時間目安</span>
+                        <span class="fv-cine-chip-sub">駐車場あり</span>
+                        <span class="fv-cine-chip-sub">見学相談OK</span>
+                    </div>
+                    <div class="fv-cine-cta anim d-cta">
+                        <a href="#contact" class="fv-cine-cta-main magnet">空き日を聞く</a>
+                        <a href="/price/" class="fv-cine-cta-sub magnet">料金を見る →</a>
                     </div>
                 </div>
             </div>
@@ -502,50 +507,53 @@ import Layout from '../layouts/Layout.astro';
 
     <!-- [2-B] 判断材料セクションのスタイル（ダークトーンのカード） -->
     <style is:global>
-        .fv-info {
-            max-width: min(90vw, 1000px); margin: 0 auto 52px;
-            background: #0d0d10; color: #fff;
+        /* [2-B] シネマティックFV（fv-test由来・フルブリード写真＋グレイン＋入場アニメ） */
+        .fv-cine {
+            position: relative; overflow: hidden; isolation: isolate;
+            max-width: min(92vw, 1000px); margin: 0 auto 52px;
+            min-height: clamp(540px, 74svh, 760px);
+            display: flex; flex-direction: column; justify-content: flex-end;
             border: 4px solid var(--c-text); box-shadow: 12px 12px 0 var(--c-text);
-            padding: 40px 34px;
         }
-        .fv-info-h1 {
-            font-family: var(--font-jp); font-weight: 900; text-transform: none;
-            font-size: clamp(1.4rem, 3.2vw, 2.1rem); line-height: 1.5; letter-spacing: 0.01em;
-            margin: 0 0 18px;
+        .fv-cine-bg { position: absolute; inset: 0; z-index: 0; }
+        .fv-cine-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+        .fv-cine-overlay {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.66) 55%, rgba(0,0,0,0.9) 100%);
         }
-        .fv-info-sub {
-            font-size: clamp(0.95rem, 1.8vw, 1.12rem); line-height: 1.9; font-weight: 400;
-            color: rgba(255,255,255,0.88); margin: 0 0 26px;
+        .fv-cine::after {
+            content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.04; mix-blend-mode: overlay;
         }
-        .fv-info-facts {
-            list-style: none; display: flex; flex-wrap: wrap; gap: 10px 12px;
-            padding: 0; margin: 0 0 30px;
-        }
-        .fv-info-facts li {
-            display: flex; align-items: baseline; gap: 6px;
-            font-size: 0.9rem; color: rgba(255,255,255,0.85);
-            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.2);
-            padding: 9px 14px;
-        }
-        .fv-info-facts b {
-            font-family: var(--font-en); font-weight: 400; font-size: 1.15rem;
-            color: var(--pop-2); letter-spacing: 0.02em;
-        }
-        .fv-info-cta { display: flex; flex-wrap: wrap; gap: 14px; }
-        .fv-btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            font-family: var(--font-jp); font-weight: 900; font-size: 1.05rem; line-height: 1.2;
-            text-decoration: none; padding: 15px 30px; border: 3px solid;
-            transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, color 0.18s ease;
-        }
-        .fv-btn-primary { background: var(--pop-2); color: var(--c-text); border-color: var(--c-text); box-shadow: 5px 5px 0 var(--pop-1); }
-        .fv-btn-primary:hover { transform: translate(-3px,-3px); box-shadow: 8px 8px 0 var(--pop-1); }
-        .fv-btn-ghost { background: transparent; color: #fff; border-color: #fff; }
-        .fv-btn-ghost:hover { background: #fff; color: var(--c-text); }
+        .fv-cine-content { position: relative; z-index: 3; padding: 30px 26px 32px; }
+        .fv-cine-label { font-size: 10px; letter-spacing: 0.22em; color: var(--pop-2); text-transform: uppercase; font-weight: 700; margin: 0; }
+        .fv-cine-line1 { font-family: var(--font-en); font-weight: 400; font-size: clamp(48px, 13vw, 80px); line-height: 1.0; color: #fff; margin-top: 14px; letter-spacing: 0.01em; }
+        .fv-cine-line2 { font-family: var(--font-en); font-weight: 400; font-size: clamp(20px, 6vw, 36px); line-height: 1.2; color: rgba(255,255,255,0.85); margin-top: 4px; letter-spacing: 0.02em; }
+        .fv-cine-accent { width: 0; height: 2px; background: var(--pop-2); margin: 18px 0 0; transition: width 0.8s cubic-bezier(.4,0,.2,1); transition-delay: 0.9s; }
+        .fv-cine-sub { font-family: var(--font-jp); font-weight: 400; font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7; margin: 16px 0 0; max-width: 32em; text-transform: none; }
+        .fv-cine-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+        .fv-cine-chip-main { border: 1px solid rgba(185,255,102,0.5); color: var(--pop-2); background: rgba(185,255,102,0.08); font-size: 12px; padding: 4px 12px; border-radius: 4px; font-weight: 500; }
+        .fv-cine-chip-sub { border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); font-size: 11px; padding: 3px 10px; border-radius: 4px; }
+        .fv-cine-cta { margin-top: 26px; }
+        .fv-cine-cta-main { display: flex; align-items: center; justify-content: center; background: var(--pop-2); color: #111; font-weight: 700; border: none; border-radius: 4px; width: 100%; height: 52px; font-size: 15px; letter-spacing: 0.05em; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+        .fv-cine-cta-main:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(185,255,102,0.3); }
+        .fv-cine-cta-sub { color: rgba(255,255,255,0.6); font-size: 13px; text-decoration: underline; text-underline-offset: 4px; display: block; text-align: center; margin-top: 10px; }
+        .fv-cine-cta-sub:hover { color: #fff; }
+        /* 入場アニメ（IntersectionObserverで is-visible 付与） */
+        .fv-cine .anim { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.2,.7,.2,1); }
+        .fv-cine .anim-copy { transform: translateY(30px); transition-duration: 0.7s; }
+        .fv-cine.is-visible .anim { opacity: 1; transform: translateY(0); }
+        .fv-cine.is-visible .fv-cine-accent { width: 60px; }
+        .fv-cine .d-label { transition-delay: 0.15s; }
+        .fv-cine .d-line1 { transition-delay: 0.3s; }
+        .fv-cine .d-line2 { transition-delay: 0.5s; }
+        .fv-cine .d-sub { transition-delay: 0.7s; }
+        .fv-cine .d-chips { transition-delay: 0.8s; }
+        .fv-cine .d-cta { transition-delay: 0.9s; }
         @media (max-width: 760px) {
-            .fv-info { padding: 26px 20px; box-shadow: 8px 8px 0 var(--c-text); margin-bottom: 40px; }
-            .fv-info-cta { flex-direction: column; }
-            .fv-btn { width: 100%; }
+            .fv-cine { min-height: clamp(560px, 82svh, 760px); box-shadow: 8px 8px 0 var(--c-text); margin-bottom: 40px; }
+            .fv-cine-content { padding: 24px 20px 26px; }
         }
 
         /* === MISSIONS カード刷新（見出し・CTA・4枚グリッド・企業ブロック） === */
@@ -1273,6 +1281,23 @@ import Layout from '../layouts/Layout.astro';
           document.addEventListener('DOMContentLoaded', initCardDraw);
         } else {
           initCardDraw();
+        }
+      })();
+    </script>
+
+    <!-- [2-B] シネマティックFV 入場アニメ発火（スクロールで画面内に入ったら） -->
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('fvcine');
+        if (!el) return;
+        function show() { el.classList.add('is-visible'); }
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) { if (e.isIntersecting) { show(); io.unobserve(el); } });
+          }, { threshold: 0.2 });
+          io.observe(el);
+        } else {
+          show();
         }
       })();
     </script>
