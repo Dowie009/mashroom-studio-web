@@ -144,22 +144,33 @@ import Layout from '../layouts/Layout.astro';
                 <div class="sr-price">¥5,000〜 <span>/ 1h</span></div>
                 <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">メールで相談する →</a>
             </div>
-            <!-- [3-B②] Rec & Shoot（録る＋映像） -->
-            <div class="card card-2 reveal-text magnet" data-card-id="card-2" data-price="¥15,000~">
+            <!-- [3-B②] バンド・ユニット制作（card-1と同構成） -->
+            <div class="card card-2 reveal-text magnet" data-card-id="card-2" data-price="¥35,000〜">
                 <span class="dev-label">3-B-2</span>
-                <div class="card-img"><img src="/img/missions/real-shoot.jpg" alt="ボーカル収録と撮影の風景" loading="lazy"></div>
-                <div class="card-for">🎬 映像も作りたい人へ</div>
-                <h3>02. Rec &amp; Shoot</h3>
-                <p class="card-lead">録るだけじゃなく、<br>映像も残したい。</p>
-                <ul class="card-includes">
-                    <li>MV撮影</li>
-                    <li>縦動画（SNS用）</li>
-                    <li>ライブ映像</li>
-                    <li>YouTube素材</li>
-                    <li>Rec &amp; Shoot</li>
-                </ul>
-                <div class="price">¥15,000~</div>
-                <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">映像制作を相談する →</a>
+                <div class="card-img"><img src="/img/missions/real-shoot.jpg" alt="バンド・ユニットのレコーディング風景" loading="lazy"></div>
+                <div class="sr-num">02</div>
+                <div class="sr-title">バンド・ユニット制作</div>
+                <div class="sr-sub">BAND / UNIT PRODUCTION</div>
+                <div class="sr-tags">
+                    <span class="sr-tag">バンド</span>
+                    <span class="sr-tag">ユニット</span>
+                    <span class="sr-tag">デモ制作</span>
+                    <span class="sr-tag">リリース音源</span>
+                </div>
+                <hr class="sr-divider">
+                <div class="sr-subtags">
+                    <span class="sr-subtag">アレンジ</span>
+                    <span class="sr-subtag">ミックス</span>
+                    <span class="sr-subtag">同期音源</span>
+                    <span class="sr-subtag">外部ドラム録音</span>
+                </div>
+                <div class="sr-body">
+                    <p class="sr-line">リリースに向けて、バンドの曲をしっかり録りたい。</p>
+                    <p class="sr-line">レコーディングしながら、アレンジや構成をもう一段詰めたい。</p>
+                    <p class="sr-line">同期音源やライブ用SE、再生システムの相談まで対応できます。</p>
+                </div>
+                <div class="sr-price">¥35,000〜</div>
+                <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">制作を相談する →</a>
             </div>
             <!-- [3-B③] Lesson 大人向け（プロ志向） -->
             <div class="card card-3 reveal-text magnet" data-card-id="card-3" data-price="初回 ¥2,000">
@@ -1099,7 +1110,7 @@ import Layout from '../layouts/Layout.astro';
             color: rgba(185,255,102,0.35); margin-bottom: 6px;
             transition: color 0.35s ease, text-shadow 0.35s ease;
         }
-        .menu .card-1:hover .sr-num {
+        .menu .card:hover .sr-num {
             color: #b9ff66;
             text-shadow: 0 0 24px rgba(185,255,102,0.55);
         }
@@ -1121,7 +1132,7 @@ import Layout from '../layouts/Layout.astro';
         }
         .sr-body { margin: 18px 0; }
         /* .card p をモバイルで隠す既存ルールを上書きして本文3行を表示 */
-        .menu .card-1 .sr-line { display: block !important; color: #e0e0e0; font-size: 14px; line-height: 1.8; margin: 0; }
+        .menu .card .sr-line { display: block !important; color: #e0e0e0; font-size: 14px; line-height: 1.8; margin: 0; }
         .sr-price { margin-top: auto; padding-top: 10px; color: #b9ff66; font-size: 20px; font-family: var(--font-en); letter-spacing: 0.02em; }
         .sr-price span { font-size: 13px; color: rgba(185,255,102,0.7); }
     </style>
