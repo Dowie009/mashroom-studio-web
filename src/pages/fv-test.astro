@@ -1,0 +1,192 @@
+---
+// ファーストビュー 本気リデザイン案（一時ページ）
+// https://xn--3-sj5c.jp/fv-test/ でiPhoneから確認
+---
+
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>FV案｜MASH ROOM STUDIO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+    <style>
+        :root { --lime: #b9ff66; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: #000; }
+        body {
+            font-family: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            color: #fff;
+        }
+
+        /* ← トップへ */
+        .fv-back {
+            position: fixed; top: 16px; left: 16px; z-index: 20;
+            color: rgba(255,255,255,0.8); text-decoration: none;
+            font-size: 12px; letter-spacing: 0.04em;
+            background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.2);
+            padding: 6px 12px; border-radius: 4px; backdrop-filter: blur(4px);
+        }
+        .fv-back:hover { color: #fff; }
+
+        /* セクション */
+        .fv {
+            position: relative; width: 100%;
+            min-height: 100svh; min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: space-between;
+            padding: 72px 22px 40px;
+            overflow: hidden;
+        }
+        .fv-bg { position: absolute; inset: 0; z-index: 0; }
+        .fv-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+        .fv-overlay {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.72) 60%, rgba(0,0,0,0.9) 100%);
+        }
+        /* グレイン（SVG noise） */
+        .fv::after {
+            content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.035; mix-blend-mode: overlay;
+        }
+
+        .fv-top, .fv-bottom { position: relative; z-index: 3; }
+        .fv-bottom { display: flex; flex-direction: column; }
+
+        /* 上部ラベル */
+        .fv-label {
+            font-size: 10px; letter-spacing: 0.22em; color: var(--lime);
+            text-transform: uppercase; font-weight: 700;
+        }
+
+        /* メインコピー */
+        .fv-line1 {
+            font-family: "Anton", sans-serif; font-weight: 400;
+            font-size: clamp(52px, 14vw, 80px); line-height: 1.0; color: #fff;
+            letter-spacing: 0.01em;
+        }
+        .fv-line2 {
+            font-family: "Anton", sans-serif; font-weight: 400;
+            font-size: clamp(22px, 6vw, 36px); line-height: 1.2; color: rgba(255,255,255,0.85);
+            margin-top: 4px; letter-spacing: 0.02em;
+        }
+
+        /* ライムのアクセントライン */
+        .fv-accent {
+            width: 0; height: 2px; background: var(--lime); margin: 18px 0 0;
+            transition: width 0.8s cubic-bezier(.4,0,.2,1);
+            transition-delay: 0.9s;
+        }
+
+        /* SEOサブテキスト */
+        .fv-sub {
+            font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7;
+            margin-top: 16px; max-width: 30em;
+        }
+
+        /* チップ群 */
+        .fv-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+        .fv-chip-main {
+            border: 1px solid rgba(185,255,102,0.5); color: var(--lime);
+            background: rgba(185,255,102,0.08);
+            font-size: 12px; padding: 4px 12px; border-radius: 4px; font-weight: 500;
+        }
+        .fv-chip-sub {
+            border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6);
+            font-size: 11px; padding: 3px 10px; border-radius: 4px;
+        }
+
+        /* CTA */
+        .fv-cta { margin-top: 26px; }
+        .fv-cta-main {
+            display: flex; align-items: center; justify-content: center;
+            background: var(--lime); color: #111; font-weight: 600;
+            border: none; border-radius: 4px; width: 100%; height: 52px;
+            font-size: 15px; letter-spacing: 0.05em; text-decoration: none;
+            font-family: inherit; cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .fv-cta-main:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(185,255,102,0.3); }
+        .fv-cta-sub {
+            color: rgba(255,255,255,0.6); font-size: 13px;
+            text-decoration: underline; text-underline-offset: 4px;
+            display: block; text-align: center; margin-top: 10px;
+        }
+        .fv-cta-sub:hover { color: #fff; }
+
+        /* ===== 入場アニメーション ===== */
+        .anim {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(.2,.7,.2,1);
+        }
+        .anim-copy { transform: translateY(30px); transition-duration: 0.7s; }
+        .is-visible .anim { opacity: 1; transform: translateY(0); }
+        .is-visible .fv-accent { width: 60px; }
+
+        /* delay（各要素） */
+        .d-label { transition-delay: 0.2s; }
+        .d-line1 { transition-delay: 0.4s; }
+        .d-line2 { transition-delay: 0.65s; }
+        .d-sub   { transition-delay: 0.85s; }
+        .d-chips { transition-delay: 0.95s; }
+        .d-cta   { transition-delay: 1.05s; }
+
+        @media (min-width: 768px) {
+            .fv { padding: 88px 8% 56px; }
+            .fv-bottom { max-width: 760px; }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="fv-back">← トップへ</a>
+
+    <section class="fv grain-overlay" id="fv">
+        <div class="fv-bg"><img src="/img/missions/real-rec.jpg" alt="MASH ROOM STUDIO レコーディング" /></div>
+        <div class="fv-overlay"></div>
+
+        <div class="fv-top">
+            <p class="fv-label anim d-label">MASH ROOM STUDIO · SAPPORO KITA-KU</p>
+        </div>
+
+        <div class="fv-bottom">
+            <h1 class="fv-line1 anim anim-copy d-line1">録りたい、</h1>
+            <p class="fv-line2 anim anim-copy d-line2">その気持ちで来てください。</p>
+            <div class="fv-accent"></div>
+            <p class="fv-sub anim d-sub">札幌北区で、歌ってみた・弾き語り・ボーカル録音ができる一軒家スタジオ</p>
+
+            <div class="fv-chips anim d-chips">
+                <span class="fv-chip-main">エンジニア付き録音 ¥4,500/h</span>
+                <span class="fv-chip-main">学生 ¥3,000/h</span>
+                <span class="fv-chip-sub">1曲2〜3時間目安</span>
+                <span class="fv-chip-sub">駐車場あり</span>
+                <span class="fv-chip-sub">見学相談OK</span>
+            </div>
+
+            <div class="fv-cta anim d-cta">
+                <a href="/#contact" class="fv-cta-main">空き日を聞く</a>
+                <a href="/price/" class="fv-cta-sub">料金を見る →</a>
+            </div>
+        </div>
+    </section>
+
+    <script is:inline>
+        (function () {
+            function reveal() {
+                document.getElementById('fv').classList.add('is-visible');
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function () {
+                    // 1フレーム置いてからtransitionを発火（初期状態を確実に描画）
+                    requestAnimationFrame(function () { requestAnimationFrame(reveal); });
+                });
+            } else {
+                requestAnimationFrame(function () { requestAnimationFrame(reveal); });
+            }
+        })();
+    </script>
+</body>
+</html>
