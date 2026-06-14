@@ -512,10 +512,12 @@ import Layout from '../layouts/Layout.astro';
         /* [2-B] シネマティックFV（fv-test由来・フルブリード写真＋グレイン＋入場アニメ） */
         .fv-cine {
             position: relative; overflow: hidden; isolation: isolate;
-            max-width: min(92vw, 1000px); margin: 0 auto 52px;
+            /* フルブリード（画面端まで）＋ 上の隙間を詰める＋枠/影なし */
+            width: 100vw; max-width: none;
+            margin: -30px calc(50% - 50vw) 0;
             min-height: clamp(540px, 74svh, 760px);
             display: flex; flex-direction: column; justify-content: flex-end;
-            border: 4px solid var(--c-text); box-shadow: 12px 12px 0 var(--c-text);
+            border: none; box-shadow: none; border-radius: 0;
         }
         .fv-cine-bg { position: absolute; inset: 0; z-index: 0; }
         .fv-cine-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
@@ -554,7 +556,7 @@ import Layout from '../layouts/Layout.astro';
         .fv-cine .d-chips { transition-delay: 0.8s; }
         .fv-cine .d-cta { transition-delay: 0.9s; }
         @media (max-width: 760px) {
-            .fv-cine { min-height: clamp(560px, 82svh, 760px); box-shadow: 8px 8px 0 var(--c-text); margin-bottom: 40px; }
+            .fv-cine { min-height: clamp(560px, 82svh, 760px); }
             .fv-cine-content { padding: 24px 20px 26px; }
         }
         /* A: スクロール連動のズーム/フェード用（will-change） */
