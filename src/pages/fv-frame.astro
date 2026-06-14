@@ -1,6 +1,6 @@
 ---
-// FV比較A: 黄緑ゼロ・写真が画面最上部まで（一時ページ・noindex）
-// https://xn--3-sj5c.jp/fv-full/
+// FV比較C: 写真を8pxライム縁で囲み、上下を斜めカット（一時ページ・noindex）
+// https://xn--3-sj5c.jp/fv-frame/
 ---
 
 <!doctype html>
@@ -9,7 +9,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
-    <title>FV比較 FULL｜MASH ROOM STUDIO</title>
+    <title>FV比較 FRAME｜MASH ROOM STUDIO</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -26,30 +26,34 @@
             border: 1px solid rgba(255,255,255,0.22); border-radius: 8px; padding: 4px;
             backdrop-filter: blur(6px);
         }
-        .cmp-nav a { font-size: 11px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 5px 11px; border-radius: 5px; letter-spacing: 0.04em; }
+        .cmp-nav a { font-size: 11px; color: rgba(255,255,255,0.7); text-decoration: none; padding: 5px 10px; border-radius: 5px; letter-spacing: 0.04em; }
         .cmp-nav a.on { background: var(--lime); color: #111; font-weight: 700; }
 
-        /* FV本体（写真は画面最上部 top:0 から・ライム背景なし） */
-        .fv {
+        /* 外側＝ライム（縁）。内側に写真。 */
+        .fv-frame {
             position: relative; width: 100%;
             min-height: 100svh; min-height: 100vh;
+            background: var(--lime);            /* これが8pxの縁＋斜め部分に覗くライム */
+            padding: 8px;                        /* ライムの縁 = 8px */
             display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 72px 22px 44px; overflow: hidden;
+            overflow: hidden;
         }
-        .fv-bg, .fv-overlay {
-            position: absolute; inset: 0;
-            -webkit-clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
-            clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+        /* 写真コンテナ（枠ギリギリまで・上下斜めカット） */
+        .fv-frame-photo {
+            position: absolute; inset: 8px; z-index: 0;
+            border-radius: 2px; overflow: hidden;
+            -webkit-clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
+            clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
         }
-        .fv-bg { z-index: 0; }
-        .fv-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-        .fv-overlay { z-index: 1; background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.68) 55%, rgba(0,0,0,0.92) 100%); }
-        .fv::after {
-            content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+        .ffp-img { position: absolute; inset: 0; }
+        .ffp-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+        .ffp-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.68) 55%, rgba(0,0,0,0.92) 100%); }
+        .fv-frame-photo::after {
+            content: ''; position: absolute; inset: 0; pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             opacity: 0.04; mix-blend-mode: overlay;
         }
-        .fv-content { position: relative; z-index: 3; }
+        .fv-content { position: relative; z-index: 3; padding: 64px 18px 56px; }
 
         .fv-label { font-size: 10px; letter-spacing: 0.22em; color: var(--lime); text-transform: uppercase; font-weight: 700; }
         .fv-line1 { font-family: "Anton", sans-serif; font-size: clamp(48px, 13vw, 80px); line-height: 1.0; color: #fff; margin-top: 14px; letter-spacing: 0.01em; }
@@ -77,20 +81,22 @@
         .d-chips { transition-delay: 0.9s; }
         .d-cta { transition-delay: 1.0s; }
 
-        @media (min-width: 768px) { .fv { padding: 88px 8% 56px; } .fv-content { max-width: 760px; } }
+        @media (min-width: 768px) { .fv-content { padding: 88px 6% 64px; max-width: 820px; } }
     </style>
 </head>
 <body>
     <nav class="cmp-nav">
-        <a href="/fv-full/" class="on">FULL</a>
+        <a href="/fv-full/">FULL</a>
         <a href="/fv-edge/">EDGE</a>
-        <a href="/fv-frame/">FRAME</a>
+        <a href="/fv-frame/" class="on">FRAME</a>
         <a href="/">トップ</a>
     </nav>
 
-    <section class="fv" id="fv">
-        <div class="fv-bg"><img src="/img/missions/real-rec.jpg" alt="MASH ROOM STUDIO レコーディング" /></div>
-        <div class="fv-overlay"></div>
+    <section class="fv-frame" id="fv">
+        <div class="fv-frame-photo">
+            <div class="ffp-img"><img src="/img/missions/real-rec.jpg" alt="MASH ROOM STUDIO レコーディング" /></div>
+            <div class="ffp-overlay"></div>
+        </div>
         <div class="fv-content">
             <p class="fv-label anim d-label">MASH ROOM STUDIO · SAPPORO KITA-KU</p>
             <div class="fv-line1 anim anim-copy d-line1">録りたい、</div>
