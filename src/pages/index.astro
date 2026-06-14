@@ -1333,13 +1333,13 @@ import Layout from '../layouts/Layout.astro';
           // セクションは画面中ほどにあるため rect.top 基準で 0〜1 を算出
           var progress = Math.min(Math.max(-rect.top / h, 0), 1);
 
-          // A: 写真ズームアウト 1.08 → 1.0
-          if (bg) bg.style.transform = 'scale(' + (1.08 - 0.08 * progress).toFixed(4) + ')';
+          // A: 写真ズームアウト（ゆっくり。フルスクロールでも少しズームが残る）
+          if (bg) bg.style.transform = 'scale(' + (1.08 - 0.08 * progress * 0.7).toFixed(4) + ')';
 
-          // A: テキストフェードアップ（progress 0〜0.5 で消える）
+          // A: テキストフェードアップ（ゆっくり。半分で約50%、終端付近で消えきる）
           if (content) {
-            content.style.opacity = Math.max(1 - progress * 2, 0);
-            content.style.transform = 'translateY(-' + (progress * 30).toFixed(2) + 'px)';
+            content.style.opacity = Math.max(1 - progress * 0.9, 0);
+            content.style.transform = 'translateY(-' + (progress * 15).toFixed(2) + 'px)';
           }
 
           // C: プログレスライン
