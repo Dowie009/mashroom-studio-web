@@ -98,6 +98,8 @@ import Layout from '../layouts/Layout.astro';
                     </div>
                 </div>
             </div>
+            <!-- C: FVスクロールプログレスライン（画面左端固定） -->
+            <div class="fv-progress-bar" aria-hidden="true"></div>
 
             <!-- 一時非表示（復元用に display:none。削除はしていない） -->
             <div class="reveal-text" style="display:none">
@@ -555,6 +557,16 @@ import Layout from '../layouts/Layout.astro';
             .fv-cine { min-height: clamp(560px, 82svh, 760px); box-shadow: 8px 8px 0 var(--c-text); margin-bottom: 40px; }
             .fv-cine-content { padding: 24px 20px 26px; }
         }
+        /* A: スクロール連動のズーム/フェード用（will-change） */
+        .fv-cine-bg { will-change: transform; }
+        .fv-cine-content { will-change: opacity, transform; }
+        /* C: FVスクロールプログレスライン */
+        .fv-progress-bar {
+            position: fixed; left: 0; top: 0; width: 3px; height: 0%;
+            background: var(--pop-2); z-index: 100;
+            transition: height 0.08s linear;
+        }
+        .fv-progress-bar.hidden { opacity: 0; transition: opacity 0.3s ease; }
 
         /* === MISSIONS カード刷新（見出し・CTA・4枚グリッド・企業ブロック） === */
         .card .card-lead {
@@ -1299,6 +1311,47 @@ import Layout from '../layouts/Layout.astro';
         } else {
           show();
         }
+      })();
+    </script>
+
+    <!-- [2-B] シネマティックFV スクロール連動（A: 写真ズームアウト＋テキストフェード / C: プログレスライン） -->
+    <script is:inline>
+      (function () {
+        var section = document.querySelector('.fv-cine');
+        if (!section) return;
+        var bg = section.querySelector('.fv-cine-bg');
+        var content = section.querySelector('.fv-cine-content');
+        var bar = document.querySelector('.fv-progress-bar');
+        var ticking = false;
+
+        function update() {
+          ticking = false;
+          var rect = section.getBoundingClientRect();
+          var h = rect.height || 1;
+          // セクションは画面中ほどにあるため rect.top 基準で 0〜1 を算出
+          var progress = Math.min(Math.max(-rect.top / h, 0), 1);
+
+          // A: 写真ズームアウト 1.08 → 1.0
+          if (bg) bg.style.transform = 'scale(' + (1.08 - 0.08 * progress).toFixed(4) + ')';
+
+          // A: テキストフェードアップ（progress 0〜0.5 で消える）
+          if (content) {
+            content.style.opacity = Math.max(1 - progress * 2, 0);
+            content.style.transform = 'translateY(-' + (progress * 30).toFixed(2) + 'px)';
+          }
+
+          // C: プログレスライン
+          if (bar) {
+            bar.style.height = (progress * 100).toFixed(2) + '%';
+            if (progress <= 0 || progress >= 1) bar.classList.add('hidden');
+            else bar.classList.remove('hidden');
+          }
+        }
+        function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        update();
       })();
     </script>
 </Layout>
