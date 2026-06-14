@@ -518,6 +518,9 @@ import Layout from '../layouts/Layout.astro';
             min-height: clamp(540px, 74svh, 760px);
             display: flex; flex-direction: column; justify-content: flex-end;
             border: none; box-shadow: none; border-radius: 0;
+            /* 上端を斜めカット（ヒーロー下端の斜めラインを復元・右上がり） */
+            -webkit-clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
         }
         .fv-cine-bg { position: absolute; inset: 0; z-index: 0; }
         .fv-cine-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
@@ -563,9 +566,9 @@ import Layout from '../layouts/Layout.astro';
         @media (min-width: 1100px) {
             .fv-cine { margin-top: -130px; }
         }
-        /* A: スクロール連動のズーム/フェード用（will-change） */
-        .fv-cine-bg { will-change: transform; }
-        .fv-cine-content { will-change: opacity, transform; }
+        /* A: スクロール連動のズーム/フェード用（transitionなし＝スクロール量に完全連動／逆再生可） */
+        .fv-cine-bg { will-change: transform; transition: none; }
+        .fv-cine-content { will-change: opacity, transform; transition: none; }
         /* C: FVスクロールプログレスライン */
         .fv-progress-bar {
             position: fixed; left: 0; top: 0; width: 3px; height: 0%;
@@ -1333,23 +1336,23 @@ import Layout from '../layouts/Layout.astro';
         function update() {
           ticking = false;
           var rect = section.getBoundingClientRect();
-          var h = rect.height || 1;
-          // セクションは画面中ほどにあるため rect.top 基準で 0〜1 を算出
-          var progress = Math.min(Math.max(-rect.top / h, 0), 1);
+          var sectionH = section.offsetHeight || 1;
+          // セクション上端が画面上端より上に出た量 / セクション高さ → 0〜1
+          var progress = Math.min(Math.max(-rect.top / sectionH, 0), 1);
 
-          // A: 写真ズームアウト（ゆっくり。フルスクロールでも少しズームが残る）
-          if (bg) bg.style.transform = 'scale(' + (1.08 - 0.08 * progress * 0.7).toFixed(4) + ')';
+          // A: 写真ズームアウト（スクロール量に直接連動・逆再生可）
+          if (bg) bg.style.transform = 'scale(' + (1.08 - 0.06 * progress).toFixed(4) + ')';
 
-          // A: テキストフェードアップ（ゆっくり。半分で約50%、終端付近で消えきる）
+          // A: テキストフェードアップ（progress 0〜0.7 でフェード）
           if (content) {
-            content.style.opacity = Math.max(1 - progress * 0.9, 0);
-            content.style.transform = 'translateY(-' + (progress * 15).toFixed(2) + 'px)';
+            content.style.opacity = Math.max(1 - progress / 0.7, 0).toFixed(4);
+            content.style.transform = 'translateY(-' + (progress * 20).toFixed(2) + 'px)';
           }
 
           // C: プログレスライン
           if (bar) {
             bar.style.height = (progress * 100).toFixed(2) + '%';
-            if (progress <= 0 || progress >= 1) bar.classList.add('hidden');
+            if (progress >= 0.98) bar.classList.add('hidden');
             else bar.classList.remove('hidden');
           }
         }
