@@ -172,21 +172,33 @@ import Layout from '../layouts/Layout.astro';
                 <div class="sr-price">¥35,000〜</div>
                 <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">制作を相談する →</a>
             </div>
-            <!-- [3-B③] Lesson 大人向け（プロ志向） -->
-            <div class="card card-3 reveal-text magnet" data-card-id="card-3" data-price="初回 ¥2,000">
+            <!-- [3-B③] レッスン・制作サポート（card-1/2と同構成） -->
+            <div class="card card-3 reveal-text magnet" data-card-id="card-3" data-price="¥3,500〜">
                 <span class="dev-label">3-B-3</span>
                 <div class="card-img"><img src="/img/missions/real-lesson.jpg" alt="DTM・ミックスレッスンの風景" loading="lazy"></div>
-                <div class="card-for">🎯 プロを目指す大人へ</div>
-                <h3>03. Lesson</h3>
-                <p class="card-lead">プロを目指す<br>あなたへ。</p>
-                <ul class="card-includes">
-                    <li>DTMレッスン</li>
-                    <li>ミックスレッスン</li>
-                    <li>制作相談</li>
-                    <li>キャリア相談</li>
-                </ul>
-                <div class="price">¥3,500/h <span class="price-note">初回 ¥2,000</span></div>
-                <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">レッスンを相談する →</a>
+                <div class="sr-num">03</div>
+                <div class="sr-title">レッスン・制作サポート</div>
+                <div class="sr-sub">LESSON / CREATIVE SUPPORT</div>
+                <div class="sr-tags">
+                    <span class="sr-tag">DTM</span>
+                    <span class="sr-tag">作詞作曲</span>
+                    <span class="sr-tag">ミックス相談</span>
+                    <span class="sr-tag">録音環境</span>
+                </div>
+                <hr class="sr-divider">
+                <div class="sr-subtags">
+                    <span class="sr-subtag">同期音源</span>
+                    <span class="sr-subtag">SE制作</span>
+                    <span class="sr-subtag">ポッドキャスト</span>
+                    <span class="sr-subtag">活動相談</span>
+                </div>
+                <div class="sr-body">
+                    <p class="sr-line">曲を作りたいけど、進め方がわからない。</p>
+                    <p class="sr-line">DTMやミックスを、今の環境に合わせて教えてほしい。</p>
+                    <p class="sr-line">同期音源、SE、ポッドキャストなど、制作まわりを一緒に整えたい。</p>
+                </div>
+                <div class="sr-price">¥3,500〜 <span>/ 1h</span></div>
+                <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">制作サポートを相談する →</a>
             </div>
             <!-- [3-B④] For Teens 中高生向け -->
             <div class="card card-4 reveal-text magnet" data-card-id="card-4" data-price="学生 ¥2,500/h">
@@ -1141,22 +1153,16 @@ import Layout from '../layouts/Layout.astro';
         .sr-sub { transition: color 0.3s ease; }
         .menu .card .sr-line { transition: color 0.3s ease; }
 
-        /* ホバー時にタイトル・サブタイトル・本文を明るく（PC） */
-        .menu .card-1:hover .sr-title,
-        .menu .card-2:hover .sr-title { color: #ffffff; text-shadow: 0 0 18px rgba(255,255,255,0.25); }
-        .menu .card-1:hover .sr-sub,
-        .menu .card-2:hover .sr-sub { color: #bbbbbb; }
-        .menu .card-1:hover .sr-line,
-        .menu .card-2:hover .sr-line { color: #ffffff; }
+        /* ホバー時にタイトル・サブタイトル・本文を明るく（PC・sr-構成の全カード共通） */
+        .menu .card:hover .sr-title { color: #ffffff; text-shadow: 0 0 18px rgba(255,255,255,0.25); }
+        .menu .card:hover .sr-sub { color: #bbbbbb; }
+        .menu .card:hover .sr-line { color: #ffffff; }
 
         /* モバイルでは常に明るい状態（ホバーなし） */
         @media (max-width: 1099px) {
-            .menu .card-1 .sr-title,
-            .menu .card-2 .sr-title { color: #ffffff; }
-            .menu .card-1 .sr-sub,
-            .menu .card-2 .sr-sub { color: #aaaaaa; }
-            .menu .card-1 .sr-line,
-            .menu .card-2 .sr-line { color: #f0f0f0; }
+            .menu .card .sr-title { color: #ffffff; }
+            .menu .card .sr-sub { color: #aaaaaa; }
+            .menu .card .sr-line { color: #f0f0f0; }
         }
     </style>
 
