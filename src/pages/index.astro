@@ -29,8 +29,8 @@ import Layout from '../layouts/Layout.astro';
                     <div class="logo-shine"></div>
                 </div>
             </div>
-            <!-- [1-C] 斜めスクロール帯 -->
-            <div class="diagonal-bar">
+            <!-- [1-C] 斜めスクロール帯（黒マーキーバー）— FV直結のため非表示 -->
+            <div class="diagonal-bar" style="display:none">
                 <span class="dev-label">1-C</span>
                 <div class="diagonal-content">
                     /// RECORDING STUDIO /// SAPPORO /// CREATIVE BASE /// MUSIC PRODUCTION /// VIDEO SHOOTING /// DTM LESSON /// RECORDING STUDIO /// SAPPORO /// CREATIVE BASE ///
@@ -62,8 +62,8 @@ import Layout from '../layouts/Layout.astro';
         -->
 
         <div class="about-collage-container">
-            <!-- [2-A] スタジオ写真スライドショー -->
-            <div class="reveal-text">
+            <!-- [2-A] スタジオ写真スライドショー（潰れて黒影線だけ残るため非表示・FV直結） -->
+            <div class="reveal-text" style="display:none">
                 <div class="collage-photo-wrapper slideshow-frame">
                     <span class="dev-label">2-A</span>
                     <img src="/img/slides/studio-01.jpg" alt="MASHROOM STUDIO コントロールルーム" class="collage-photo slide is-active">
@@ -558,6 +558,10 @@ import Layout from '../layouts/Layout.astro';
         @media (max-width: 760px) {
             .fv-cine { min-height: clamp(560px, 82svh, 760px); }
             .fv-cine-content { padding: 24px 20px 26px; }
+        }
+        /* PCは about の clip-path/margin が大きく隙間が広がるため、より詰める */
+        @media (min-width: 1100px) {
+            .fv-cine { margin-top: -130px; }
         }
         /* A: スクロール連動のズーム/フェード用（will-change） */
         .fv-cine-bg { will-change: transform; }
