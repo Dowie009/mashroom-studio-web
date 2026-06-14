@@ -769,8 +769,12 @@ transform: rotate(-1deg) !important;
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 60px;
-    background: linear-gradient(to right bottom, var(--pop-2) 50%, transparent 50%);
+    height: 64px;
+    /* 旧: linear-gradient(to right bottom ...) は角度がボックスの縦横比（=画面幅）依存で
+       iOSで不安定（水平化）になっていた。clip-path（%指定）で常に安定した斜めに固定。 */
+    background: var(--pop-2);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 52%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 52%, 0 100%);
     z-index: 3;
     pointer-events: none;
 }
