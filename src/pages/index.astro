@@ -29,8 +29,8 @@ import Layout from '../layouts/Layout.astro';
                     <div class="logo-shine"></div>
                 </div>
             </div>
-            <!-- [1-C] 斜めスクロール帯（黒マーキーバー）— FV直結のため非表示 -->
-            <div class="diagonal-bar" style="display:none">
+            <!-- [1-C] 斜めスクロール帯 -->
+            <div class="diagonal-bar">
                 <span class="dev-label">1-C</span>
                 <div class="diagonal-content">
                     /// RECORDING STUDIO /// SAPPORO /// CREATIVE BASE /// MUSIC PRODUCTION /// VIDEO SHOOTING /// DTM LESSON /// RECORDING STUDIO /// SAPPORO /// CREATIVE BASE ///
@@ -62,8 +62,8 @@ import Layout from '../layouts/Layout.astro';
         -->
 
         <div class="about-collage-container">
-            <!-- [2-A] スタジオ写真スライドショー（潰れて黒影線だけ残るため非表示・FV直結） -->
-            <div class="reveal-text" style="display:none">
+            <!-- [2-A] スタジオ写真スライドショー -->
+            <div class="reveal-text">
                 <div class="collage-photo-wrapper slideshow-frame">
                     <span class="dev-label">2-A</span>
                     <img src="/img/slides/studio-01.jpg" alt="MASHROOM STUDIO コントロールルーム" class="collage-photo slide is-active">
@@ -512,14 +512,10 @@ import Layout from '../layouts/Layout.astro';
         /* [2-B] シネマティックFV（fv-test由来・フルブリード写真＋グレイン＋入場アニメ） */
         .fv-cine {
             position: relative; overflow: hidden; isolation: isolate;
-            /* フルブリード（画面端まで）＋ 上の隙間を詰める＋枠/影なし */
-            width: 100vw; max-width: none;
-            /* about の padding-top(=13vw+30) を打ち消して写真をヒーローの斜め線直下まで引き上げる。
-               about の clip-path がこのFVを斜めにクリップ＝斜めラインに沿う。ライム帯は写真が覆う。 */
-            margin: calc(-13vw - 45px) calc(50% - 50vw) 0;
+            max-width: min(92vw, 1000px); margin: 0 auto 52px;
             min-height: clamp(540px, 74svh, 760px);
             display: flex; flex-direction: column; justify-content: flex-end;
-            border: none; box-shadow: none; border-radius: 0;
+            border: 4px solid var(--c-text); box-shadow: 12px 12px 0 var(--c-text);
         }
         .fv-cine-bg { position: absolute; inset: 0; z-index: 0; }
         .fv-cine-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
@@ -558,16 +554,12 @@ import Layout from '../layouts/Layout.astro';
         .fv-cine .d-chips { transition-delay: 0.8s; }
         .fv-cine .d-cta { transition-delay: 0.9s; }
         @media (max-width: 760px) {
-            .fv-cine { min-height: clamp(560px, 82svh, 760px); }
+            .fv-cine { min-height: clamp(560px, 82svh, 760px); box-shadow: 8px 8px 0 var(--c-text); margin-bottom: 40px; }
             .fv-cine-content { padding: 24px 20px 26px; }
         }
-        /* PCは about の padding-top が 13vw+100 と大きいため、それを打ち消す量に */
-        @media (min-width: 1100px) {
-            .fv-cine { margin-top: calc(-13vw - 115px); }
-        }
-        /* A: スクロール連動のズーム/フェード用（transitionなし＝スクロール量に完全連動／逆再生可） */
-        .fv-cine-bg { will-change: transform; transition: none; }
-        .fv-cine-content { will-change: opacity, transform; transition: none; }
+        /* A: スクロール連動のズーム/フェード用（will-change） */
+        .fv-cine-bg { will-change: transform; }
+        .fv-cine-content { will-change: opacity, transform; }
         /* C: FVスクロールプログレスライン */
         .fv-progress-bar {
             position: fixed; left: 0; top: 0; width: 3px; height: 0%;
@@ -1335,23 +1327,23 @@ import Layout from '../layouts/Layout.astro';
         function update() {
           ticking = false;
           var rect = section.getBoundingClientRect();
-          var sectionH = section.offsetHeight || 1;
-          // セクション上端が画面上端より上に出た量 / セクション高さ → 0〜1
-          var progress = Math.min(Math.max(-rect.top / sectionH, 0), 1);
+          var h = rect.height || 1;
+          // セクションは画面中ほどにあるため rect.top 基準で 0〜1 を算出
+          var progress = Math.min(Math.max(-rect.top / h, 0), 1);
 
-          // A: 写真ズームアウト（スクロール量に直接連動・逆再生可）
-          if (bg) bg.style.transform = 'scale(' + (1.08 - 0.06 * progress).toFixed(4) + ')';
+          // A: 写真ズームアウト 1.08 → 1.0
+          if (bg) bg.style.transform = 'scale(' + (1.08 - 0.08 * progress).toFixed(4) + ')';
 
-          // A: テキストフェードアップ（progress 0〜0.7 でフェード）
+          // A: テキストフェードアップ（progress 0〜0.5 で消える）
           if (content) {
-            content.style.opacity = Math.max(1 - progress / 0.7, 0).toFixed(4);
-            content.style.transform = 'translateY(-' + (progress * 20).toFixed(2) + 'px)';
+            content.style.opacity = Math.max(1 - progress * 2, 0);
+            content.style.transform = 'translateY(-' + (progress * 30).toFixed(2) + 'px)';
           }
 
           // C: プログレスライン
           if (bar) {
             bar.style.height = (progress * 100).toFixed(2) + '%';
-            if (progress >= 0.98) bar.classList.add('hidden');
+            if (progress <= 0 || progress >= 1) bar.classList.add('hidden');
             else bar.classList.remove('hidden');
           }
         }
