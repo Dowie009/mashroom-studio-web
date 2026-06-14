@@ -1097,6 +1097,11 @@ import Layout from '../layouts/Layout.astro';
         .sr-num {
             font-family: var(--font-en); font-size: 44px; line-height: 1;
             color: rgba(185,255,102,0.35); margin-bottom: 6px;
+            transition: color 0.35s ease, text-shadow 0.35s ease;
+        }
+        .menu .card-1:hover .sr-num {
+            color: #b9ff66;
+            text-shadow: 0 0 24px rgba(185,255,102,0.55);
         }
         .sr-title { color: #fff; font-size: 17px; font-weight: 700; line-height: 1.45; }
         .sr-sub {
@@ -1111,12 +1116,12 @@ import Layout from '../layouts/Layout.astro';
         .sr-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 10px 0; }
         .sr-subtags { display: flex; flex-wrap: wrap; gap: 6px; }
         .sr-subtag {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14);
-            color: #888; font-size: 11px; padding: 2px 8px; border-radius: 3px;
+            background: rgba(245,155,80,0.10); border: 1px solid rgba(245,155,80,0.38);
+            color: #f5a05a; font-size: 11px; padding: 2px 8px; border-radius: 3px;
         }
         .sr-body { margin: 18px 0; }
         /* .card p をモバイルで隠す既存ルールを上書きして本文3行を表示 */
-        .menu .card-1 .sr-line { display: block !important; color: #aaa; font-size: 13px; line-height: 1.8; margin: 0; }
+        .menu .card-1 .sr-line { display: block !important; color: #e0e0e0; font-size: 14px; line-height: 1.8; margin: 0; }
         .sr-price { margin-top: auto; padding-top: 10px; color: #b9ff66; font-size: 20px; font-family: var(--font-en); letter-spacing: 0.02em; }
         .sr-price span { font-size: 13px; color: rgba(185,255,102,0.7); }
     </style>
