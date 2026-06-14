@@ -1135,6 +1135,29 @@ import Layout from '../layouts/Layout.astro';
         .menu .card .sr-line { display: block !important; color: #e0e0e0; font-size: 14px; line-height: 1.8; margin: 0; }
         .sr-price { margin-top: auto; padding-top: 10px; color: #b9ff66; font-size: 20px; font-family: var(--font-en); letter-spacing: 0.02em; }
         .sr-price span { font-size: 13px; color: rgba(185,255,102,0.7); }
+
+        /* 遷移はデフォルト（非ホバー）状態に付与しておく */
+        .sr-title { transition: color 0.3s ease, text-shadow 0.3s ease; }
+        .sr-sub { transition: color 0.3s ease; }
+        .menu .card .sr-line { transition: color 0.3s ease; }
+
+        /* ホバー時にタイトル・サブタイトル・本文を明るく（PC） */
+        .menu .card-1:hover .sr-title,
+        .menu .card-2:hover .sr-title { color: #ffffff; text-shadow: 0 0 18px rgba(255,255,255,0.25); }
+        .menu .card-1:hover .sr-sub,
+        .menu .card-2:hover .sr-sub { color: #bbbbbb; }
+        .menu .card-1:hover .sr-line,
+        .menu .card-2:hover .sr-line { color: #ffffff; }
+
+        /* モバイルでは常に明るい状態（ホバーなし） */
+        @media (max-width: 1099px) {
+            .menu .card-1 .sr-title,
+            .menu .card-2 .sr-title { color: #ffffff; }
+            .menu .card-1 .sr-sub,
+            .menu .card-2 .sr-sub { color: #aaaaaa; }
+            .menu .card-1 .sr-line,
+            .menu .card-2 .sr-line { color: #f0f0f0; }
+        }
     </style>
 
     <!-- 3-Bサービスカード: スクロールで枠線がペンで描かれる演出 -->
