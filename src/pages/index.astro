@@ -1194,11 +1194,19 @@ import Layout from '../layouts/Layout.astro';
         .menu .card:hover .sr-sub { color: #bbbbbb; }
         .menu .card:hover .sr-line { color: #ffffff; }
 
-        /* モバイルでは常に明るい状態（ホバーなし） */
+        /* モバイル: 通常時はやや暗め。スクロールで画面中央に来たカードだけ自動で光る */
         @media (max-width: 1099px) {
-            .menu .card .sr-title { color: #ffffff; }
-            .menu .card .sr-sub { color: #aaaaaa; }
-            .menu .card .sr-line { color: #f0f0f0; }
+            /* 通常（中央以外）＝暗め */
+            .menu .card .sr-num { color: rgba(185,255,102,0.30); text-shadow: none; }
+            .menu .card .sr-title { color: #c7c7c7; text-shadow: none; }
+            .menu .card .sr-sub { color: #777777; }
+            .menu .card .sr-line { color: #9a9a9a; }
+
+            /* 画面中央ゾーンに入ったカード＝光る */
+            .menu .card.card-in-center .sr-num { color: #b9ff66; text-shadow: 0 0 24px rgba(185,255,102,0.55); }
+            .menu .card.card-in-center .sr-title { color: #ffffff; text-shadow: 0 0 18px rgba(255,255,255,0.25); }
+            .menu .card.card-in-center .sr-sub { color: #bbbbbb; }
+            .menu .card.card-in-center .sr-line { color: #ffffff; }
         }
     </style>
 
@@ -1377,19 +1385,21 @@ import Layout from '../layouts/Layout.astro';
 
         // ② FIRST GUIDE見出し：画面に入ったら下からせり上がってフェードイン（一度だけ）
         var titleEl = document.getElementById('firstGuideTitle');
+        console.log('[FV-anim] firstGuideTitle found:', !!titleEl, 'IO:', 'IntersectionObserver' in window);
         if (titleEl && 'IntersectionObserver' in window) {
           titleEl.style.opacity = '0';
-          titleEl.style.transform = 'translateY(40px)';
-          titleEl.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+          titleEl.style.transform = 'translateY(60px)';
+          titleEl.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
           var titleObs = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
               if (e.isIntersecting) {
+                console.log('[FV-anim] title intersecting → reveal');
                 e.target.style.opacity = '1';
                 e.target.style.transform = 'translateY(0)';
                 titleObs.unobserve(e.target);
               }
             });
-          }, { threshold: 0.3 });
+          }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
           titleObs.observe(titleEl);
         }
 
@@ -1419,6 +1429,32 @@ import Layout from '../layouts/Layout.astro';
             });
           }, { threshold: 0.2 });
           cards.forEach(function (card) { cardObs.observe(card); });
+        }
+
+        // ④ スクロール中、画面中央ゾーン（画面高25〜75%）に来たカードを自動で光らせる
+        var menuCards = document.querySelectorAll('.menu .card');
+        if (menuCards.length) {
+          var hlTicking = false;
+          function updateCardHighlight() {
+            var vh = window.innerHeight;
+            menuCards.forEach(function (card) {
+              var rect = card.getBoundingClientRect();
+              var center = rect.top + rect.height / 2;
+              if (center > vh * 0.25 && center < vh * 0.75) {
+                card.classList.add('card-in-center');
+              } else {
+                card.classList.remove('card-in-center');
+              }
+            });
+            hlTicking = false;
+          }
+          window.addEventListener('scroll', function () {
+            if (!hlTicking) { hlTicking = true; requestAnimationFrame(updateCardHighlight); }
+          }, { passive: true });
+          window.addEventListener('resize', function () {
+            if (!hlTicking) { hlTicking = true; requestAnimationFrame(updateCardHighlight); }
+          }, { passive: true });
+          updateCardHighlight(); // 初期実行
         }
       })();
     </script>
