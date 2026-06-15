@@ -120,12 +120,12 @@ import Layout from '../layouts/Layout.astro';
     <section class="menu">
         <span class="dev-label">3-A</span>
         <!-- [3-A] 見出し -->
-        <h2 class="section-title reveal-text"><span>初めての方へ</span>FIRST GUIDE</h2>
+        <h2 class="section-title" id="firstGuideTitle"><span>初めての方へ</span>FIRST GUIDE</h2>
 
         <!-- [3-B] 3つのサービスカード -->
         <div class="card-grid">
             <!-- [3-B①] ソロ・弾き語り・歌ってみた（全面リニューアル） -->
-            <div class="card card-1 reveal-text magnet" data-card-id="card-1" data-price="¥5,000〜">
+            <div class="card card-1 stagger-card magnet" data-card-id="card-1" data-price="¥5,000〜">
                 <span class="dev-label">3-B-1</span>
                 <div class="card-img"><img src="/img/missions/real-rec.jpg" alt="マイクの前で歌うレコーディング風景" loading="lazy"></div>
                 <div class="sr-num">01</div>
@@ -152,7 +152,7 @@ import Layout from '../layouts/Layout.astro';
                 <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">メールで相談する →</a>
             </div>
             <!-- [3-B②] バンド・ユニット制作（card-1と同構成） -->
-            <div class="card card-2 reveal-text magnet" data-card-id="card-2" data-price="¥35,000〜">
+            <div class="card card-2 stagger-card magnet" data-card-id="card-2" data-price="¥35,000〜">
                 <span class="dev-label">3-B-2</span>
                 <div class="card-img"><img src="/img/missions/real-shoot.jpg" alt="バンド・ユニットのレコーディング風景" loading="lazy"></div>
                 <div class="sr-num">02</div>
@@ -180,7 +180,7 @@ import Layout from '../layouts/Layout.astro';
                 <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">制作を相談する →</a>
             </div>
             <!-- [3-B③] レッスン・制作サポート（card-1/2と同構成） -->
-            <div class="card card-3 reveal-text magnet" data-card-id="card-3" data-price="¥3,500〜">
+            <div class="card card-3 stagger-card magnet" data-card-id="card-3" data-price="¥3,500〜">
                 <span class="dev-label">3-B-3</span>
                 <div class="card-img"><img src="/img/missions/real-lesson.jpg" alt="DTM・ミックスレッスンの風景" loading="lazy"></div>
                 <div class="sr-num">03</div>
@@ -208,7 +208,7 @@ import Layout from '../layouts/Layout.astro';
                 <a href="#contact" class="card-cta magnet" onclick="event.stopPropagation()">制作サポートを相談する →</a>
             </div>
             <!-- [3-B④] 音源＋映像制作（card-1/2/3と同構成） -->
-            <div class="card card-4 reveal-text magnet" data-card-id="card-4" data-price="¥15,000〜">
+            <div class="card card-4 stagger-card magnet" data-card-id="card-4" data-price="¥15,000〜">
                 <span class="dev-label">3-B-4</span>
                 <div class="card-img"><img src="/img/missions/card-school.jpg" alt="音源＋映像制作の風景" loading="lazy"></div>
                 <div class="sr-num">04</div>
@@ -1355,6 +1355,71 @@ import Layout from '../layouts/Layout.astro';
         window.addEventListener('scroll', onScroll, { passive: true });
         window.addEventListener('resize', onScroll, { passive: true });
         update();
+      })();
+    </script>
+
+    <!-- スクロール連動エフェクト（① ヒーローパララックス ② FIRST GUIDE見出し ③ 3-Bカードのスタガー） -->
+    <script is:inline>
+      (function () {
+        // ① ヒーロー背景写真のパララックス（スクロール量の40%でゆっくり下へ）
+        var heroImg = document.querySelector('.new-hero-bg img');
+        if (heroImg) {
+          var ticking = false;
+          function applyParallax() {
+            heroImg.style.transform = 'translateY(' + (window.scrollY * 0.4) + 'px)';
+            ticking = false;
+          }
+          window.addEventListener('scroll', function () {
+            if (!ticking) { ticking = true; requestAnimationFrame(applyParallax); }
+          }, { passive: true });
+          applyParallax();
+        }
+
+        // ② FIRST GUIDE見出し：画面に入ったら下からせり上がってフェードイン（一度だけ）
+        var titleEl = document.getElementById('firstGuideTitle');
+        if (titleEl && 'IntersectionObserver' in window) {
+          titleEl.style.opacity = '0';
+          titleEl.style.transform = 'translateY(40px)';
+          titleEl.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+          var titleObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                e.target.style.opacity = '1';
+                e.target.style.transform = 'translateY(0)';
+                titleObs.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.3 });
+          titleObs.observe(titleEl);
+        }
+
+        // ③ 3-Bサービスカード：1枚ずつ100ms差でフェードイン＋せり上がり（一度だけ）
+        var cards = document.querySelectorAll('.card-grid .stagger-card');
+        if (cards.length && 'IntersectionObserver' in window) {
+          cards.forEach(function (card, i) {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.5s ease ' + (i * 0.1) + 's, transform 0.5s ease ' + (i * 0.1) + 's';
+          });
+          var cardObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                var card = e.target;
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+                cardObs.unobserve(card);
+                // 出現後はtransition/transformを解放（magnetのホバー追従を妨げない）
+                card.addEventListener('transitionend', function done(ev) {
+                  if (ev.propertyName !== 'transform') return;
+                  card.removeEventListener('transitionend', done);
+                  card.style.transition = '';
+                  card.style.transform = '';
+                });
+              }
+            });
+          }, { threshold: 0.2 });
+          cards.forEach(function (card) { cardObs.observe(card); });
+        }
       })();
     </script>
 </Layout>
