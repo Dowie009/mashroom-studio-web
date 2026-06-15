@@ -507,6 +507,49 @@ import Layout from '../layouts/Layout.astro';
         #qbox-toggle .dev-label { top: -14px; left: -10px; }
     </style>
 
+    <!-- ============================== セクション差別化（6A/6B/7A/7B/7C/フッター）テクスチャ＆アクセント ============================== -->
+    <!-- ※ 6A・6B・フッターは明るい背景（白オーバーレイ／rgb(240,240,240)）のため、白チントではなく暗チントのパターンで視認できるよう調整 -->
+    <style is:global>
+        /* [6-A] Q&A：微細なドットパターン背景 */
+        .qa-area {
+            background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+            padding: 28px 24px;
+            border-radius: 4px;
+        }
+        /* [6-B] QUICK ESTIMATE：45度の細ラインストライプ背景 */
+        .estimate-area {
+            background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.035) 0px, rgba(0,0,0,0.035) 1px, transparent 1px, transparent 12px);
+            padding: 28px 24px;
+            border-radius: 4px;
+        }
+        /* 各セクション見出しの直前に共通のライムアクセントライン */
+        .qa-area h2::before,
+        .estimate-area h2::before {
+            content: '';
+            display: block;
+            width: 36px;
+            height: 2px;
+            background: #b9ff66;
+            margin-bottom: 10px;
+        }
+        /* [7-A] フッターCTA：上端にライムのradial-gradient glow ＋ 上端ライムボーダー */
+        footer#contact { border-top: 2px solid #b9ff66; }
+        footer#contact::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 320px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(185,255,102,0.10) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: -1; /* footer(z-index:3)のスタッキング内。背景の上・本文の下に描画 */
+        }
+        /* [7-B] 質問ボックス：上端にライムのアクセントライン */
+        #footer-qbox { border-top: 3px solid rgba(185,255,102,0.9); }
+        /* [7-C] BLOGカード：区切り線をライム破線にして差別化 */
+        .footer-blog-wrap { border-top: 2px dashed rgba(185,255,102,0.55); }
+    </style>
+
     <!-- [2-B] 判断材料セクションのスタイル（ダークトーンのカード） -->
     <style is:global>
         /* [2-B] シネマティックFV（fv-test由来・フルブリード写真＋グレイン＋入場アニメ） */
@@ -1456,6 +1499,50 @@ import Layout from '../layouts/Layout.astro';
           }, { passive: true });
           updateCardHighlight(); // 初期実行
         }
+      })();
+    </script>
+
+    <!-- スクロールリビール（6A〜フッター）：各セクションの要素をスクロールで順番に出現させる -->
+    <script is:inline>
+      (function () {
+        if (!('IntersectionObserver' in window)) return;
+
+        // 汎用スクロールリビール関数（二重適用＆GSAP管理要素を除外）
+        function addReveal(selector, dir, staggerSec) {
+          document.querySelectorAll(selector).forEach(function (el, i) {
+            if (el.dataset.revealed) return;                 // 二重適用防止
+            if (el.classList.contains('reveal-text')) return; // GSAP(.reveal-text)管理は除外
+            el.dataset.revealed = '1';
+            el.style.opacity = '0';
+            el.style.transform = dir === 'x'
+              ? 'translateX(' + (i % 2 === 0 ? '-30px' : '30px') + ')'
+              : 'translateY(28px)';
+            el.style.transition = 'opacity 0.6s ease ' + (i * staggerSec) + 's, transform 0.6s ease ' + (i * staggerSec) + 's';
+            var ob = new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                var t = e.target;
+                t.style.opacity = '1';
+                t.style.transform = 'none';
+                ob.unobserve(t);
+                // 出現後はinline transform/transitionを解放（ホバー追従を妨げない）
+                t.addEventListener('transitionend', function done(ev) {
+                  if (ev.propertyName !== 'transform') return;
+                  t.removeEventListener('transitionend', done);
+                  t.style.transition = '';
+                  t.style.transform = '';
+                });
+              });
+            }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+            ob.observe(el);
+          });
+        }
+
+        // 実際の index.astro の構造に合わせて呼び出し
+        addReveal('.qa-area .qa-chip', 'x', 0.06);                                          // 6A: Q&Aカテゴリチップ（左右交互）
+        addReveal('.estimate-area .form-group, .estimate-area .total-price-box', 'y', 0.1); // 6B: 見積フォーム各行
+        addReveal('footer#contact > p, footer#contact .footer-btn-container', 'y', 0.14);   // 7A: CTAコピー＋MAILボタン
+        addReveal('.footer-blog-wrap', 'y', 0.1);                                           // 7C: BLOGカード（7Bの#footer-qboxは.reveal-textでGSAP管理のため除外）
       })();
     </script>
 </Layout>
