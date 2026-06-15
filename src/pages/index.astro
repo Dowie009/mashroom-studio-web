@@ -62,8 +62,8 @@ import Layout from '../layouts/Layout.astro';
         -->
 
         <div class="about-collage-container">
-            <!-- [2-A] スタジオ写真スライドショー -->
-            <div class="reveal-text">
+            <!-- [2-A] スタジオ写真スライドショー（潰れて黒影線だけ残るため非表示） -->
+            <div class="reveal-text" style="display:none">
                 <div class="collage-photo-wrapper slideshow-frame">
                     <span class="dev-label">2-A</span>
                     <img src="/img/slides/studio-01.jpg" alt="MASHROOM STUDIO コントロールルーム" class="collage-photo slide is-active">
@@ -512,13 +512,13 @@ import Layout from '../layouts/Layout.astro';
         /* [2-B] シネマティックFV（fv-test由来・フルブリード写真＋グレイン＋入場アニメ） */
         .fv-cine {
             position: relative; overflow: hidden; isolation: isolate;
-            max-width: min(92vw, 1000px); margin: 0 auto 52px;
+            max-width: min(92vw, 1000px); margin: 0 auto 20px;
             min-height: clamp(540px, 74svh, 760px);
             display: flex; flex-direction: column; justify-content: flex-end;
-            /* 上下を斜めにトリミング（%指定＝iOS安全。.about/.menu::before の斜めと同方向＝右上がり）。
-               clip-pathと競合するため border/box-shadow/border-radius は付けない。 */
-            -webkit-clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
-            clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
+            /* 上下を斜めにトリミング（%指定＝iOS安全）。上=6.5%(about7.4°相当)/下=4%(menu4.5°相当)で
+               セクション境目の斜めと角度を合わせる。border/box-shadow/border-radiusは付けない。 */
+            -webkit-clip-path: polygon(0 6.5%, 100% 0, 100% 96%, 0 100%);
+            clip-path: polygon(0 6.5%, 100% 0, 100% 96%, 0 100%);
         }
         .fv-cine-bg { position: absolute; inset: 0; z-index: 0; }
         .fv-cine-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
@@ -557,7 +557,7 @@ import Layout from '../layouts/Layout.astro';
         .fv-cine .d-chips { transition-delay: 0.8s; }
         .fv-cine .d-cta { transition-delay: 0.9s; }
         @media (max-width: 760px) {
-            .fv-cine { min-height: clamp(560px, 82svh, 760px); margin-bottom: 40px; }
+            .fv-cine { min-height: clamp(560px, 82svh, 760px); margin-bottom: 18px; }
             .fv-cine-content { padding: 24px 20px 50px; }
         }
         /* A: スクロール連動のズーム/フェード用（will-change） */
