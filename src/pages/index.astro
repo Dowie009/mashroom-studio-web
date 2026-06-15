@@ -6,6 +6,9 @@ import Layout from '../layouts/Layout.astro';
   title="札幌のレコーディングスタジオ MASHROOM STUDIO｜真柴道ゐ主宰・北海道"
   description="北海道札幌市北区のレコーディングスタジオ MASHROOM STUDIO。真柴道ゐ（マシバドウイ）主宰。ボーカル録音・ミックス・マスタリング・MV撮影・作曲依頼・DTMレッスン・ボイトレまで。歌ってみた録音や弾き語りも歓迎。初心者OK、手ぶらOK。"
 >
+    <!-- [0] ページ全体スクロール進捗バー（右端固定） -->
+    <div id="scroll-progress-rail" aria-hidden="true"><div id="scroll-progress-fill"></div></div>
+
     <!-- ============================== [1] ファーストビュー / HERO ============================== -->
     <header class="new-hero">
         <!-- [1-A] 背景画像 -->
@@ -318,7 +321,8 @@ import Layout from '../layouts/Layout.astro';
             <!-- [6-A] Q&A（よくある質問） -->
             <div class="qa-area">
                 <span class="dev-label">6-A</span>
-                <h2>Q&A 💬</h2>
+                <span class="section-bg-num" aria-hidden="true">06</span>
+                <h2 class="section-wipe-heading">Q&A 💬</h2>
                 <p class="qa-lead">よくある質問 — 気になることは、だいたい誰かが先に聞いてくれています。質問をタップすると答えが開きます。</p>
                 <div class="qa-chips" id="qa-chips">
                     <button class="qa-chip is-active" data-cat="all">すべて</button>
@@ -378,7 +382,8 @@ import Layout from '../layouts/Layout.astro';
             <!-- [6-B] QUICK ESTIMATE（簡易見積もり） -->
             <div class="estimate-area">
                 <span class="dev-label">6-B</span>
-                <h2>QUICK ESTIMATE ⚡</h2>
+                <span class="section-bg-num" aria-hidden="true">07</span>
+                <h2 class="section-wipe-heading">QUICK ESTIMATE ⚡</h2>
                 <p class="estimate-lead"><strong>簡易見積もり</strong> — 「結局いくらかかるの…？」が不安な方へ。選ぶだけで概算が出ます。</p>
                 <div class="estimate-form">
                     <div class="form-group">
@@ -439,6 +444,7 @@ import Layout from '../layouts/Layout.astro';
     <!-- [7-A] ARE YOU READY / LET'S MAKE SOMETHING CRAZY / MAIL FORM -->
     <footer id="contact" data-cursor="color-pop-5">
         <span class="dev-label">7-A</span>
+        <span class="section-bg-num" aria-hidden="true">08</span>
         <p style="font-weight: bold; margin-bottom: 20px;">ARE YOU READY?</p>
         <div class="footer-cta reveal-text">LET'S MAKE<br>SOMETHING<br>CRAZY...</div>
         <p style="margin-bottom: 40px; font-size: 1.2rem;">まずは一度、スタジオに遊びに来ませんか？<br>美味しいコーヒー淹れて待ってる。</p>
@@ -452,6 +458,7 @@ import Layout from '../layouts/Layout.astro';
         <!-- [7-B] フッター埋め込み版・質問ボックス（浮遊ボタンがここに合流する） -->
         <div id="footer-qbox" class="reveal-text">
             <span class="dev-label">7-B</span>
+            <span class="section-bg-num" aria-hidden="true">09</span>
             <p class="footer-qbox-title">💬 メールフォームはちょっと重いな…という方へ</p>
             <p class="footer-qbox-note">名前・メールアドレス不要。ひとことでも大丈夫です。<br><small>※返信がほしい場合は、連絡先も一緒に書いてもらえると返せます。</small></p>
             <div class="footer-qbox-row">
@@ -548,6 +555,55 @@ import Layout from '../layouts/Layout.astro';
         #footer-qbox { border-top: 3px solid rgba(185,255,102,0.9); }
         /* [7-C] BLOGカード：区切り線をライム破線にして差別化 */
         .footer-blog-wrap { border-top: 2px dashed rgba(185,255,102,0.55); }
+    </style>
+
+    <!-- ============================== ダイナミックスクロール強化（進捗バー / 大番号 / 見出しワイプ） ============================== -->
+    <style is:global>
+        /* ① ページ右端の縦スクロール進捗バー */
+        #scroll-progress-rail {
+            position: fixed; right: 0; top: 0;
+            width: 3px; height: 100vh;
+            background: rgba(255,255,255,0.08);
+            z-index: 9999; pointer-events: none;
+        }
+        #scroll-progress-fill {
+            width: 100%; height: 0%;
+            background: #b9ff66; transition: none;
+            box-shadow: 0 0 8px rgba(185,255,102,0.6);
+        }
+
+        /* ② 各セクション背景の巨大な半透明番号 */
+        .qa-area, .estimate-area, footer#contact, #footer-qbox { overflow: hidden; }
+        /* 実コンテンツを大番号より前面へ（dev-label/大番号自身は除外） */
+        .qa-area > *:not(.section-bg-num):not(.dev-label),
+        .estimate-area > *:not(.section-bg-num):not(.dev-label),
+        footer#contact > *:not(.section-bg-num):not(.dev-label),
+        #footer-qbox > *:not(.section-bg-num):not(.dev-label) {
+            position: relative; z-index: 1;
+        }
+        .section-bg-num {
+            position: absolute;
+            font-family: 'Anton', sans-serif;
+            font-size: clamp(180px, 40vw, 350px);
+            font-weight: 900;
+            color: rgba(185,255,102,0.05);
+            top: -20px; right: -20px;
+            line-height: 1;
+            pointer-events: none; user-select: none;
+            z-index: 0; letter-spacing: -0.04em;
+        }
+
+        /* ④ セクション見出しのクリップワイプ（左からスパッと切れ込む） */
+        .section-wipe-heading {
+            -webkit-clip-path: inset(0 100% 0 0);
+            clip-path: inset(0 100% 0 0);
+            -webkit-transition: -webkit-clip-path 0.7s cubic-bezier(0.22,1,0.36,1);
+            transition: clip-path 0.7s cubic-bezier(0.22,1,0.36,1);
+        }
+        .section-wipe-heading.revealed {
+            -webkit-clip-path: inset(0 0% 0 0);
+            clip-path: inset(0 0% 0 0);
+        }
     </style>
 
     <!-- [2-B] 判断材料セクションのスタイル（ダークトーンのカード） -->
@@ -1507,17 +1563,23 @@ import Layout from '../layouts/Layout.astro';
       (function () {
         if (!('IntersectionObserver' in window)) return;
 
-        // 汎用スクロールリビール関数（二重適用＆GSAP管理要素を除外）
-        function addReveal(selector, dir, staggerSec) {
+        // 汎用スクロールリビール関数（大げさ＆ダイナミック版・GSAP管理要素は除外）
+        // dir: 'x'=左右交互スライド / 'y'=下からせり上がり
+        // opts: { distance:px(既定70), scale:true で 0.93→1 のスケールイン }
+        function addReveal(selector, dir, staggerSec, opts) {
+          opts = opts || {};
+          var distance = opts.distance || 70;
+          var scaleTo = opts.scale ? ' scale(0.93)' : '';
+          var ease = 'cubic-bezier(0.22,1,0.36,1)'; // 勢いよく飛び込んでスパッと止まる
           document.querySelectorAll(selector).forEach(function (el, i) {
             if (el.dataset.revealed) return;                 // 二重適用防止
             if (el.classList.contains('reveal-text')) return; // GSAP(.reveal-text)管理は除外
             el.dataset.revealed = '1';
             el.style.opacity = '0';
             el.style.transform = dir === 'x'
-              ? 'translateX(' + (i % 2 === 0 ? '-30px' : '30px') + ')'
-              : 'translateY(28px)';
-            el.style.transition = 'opacity 0.6s ease ' + (i * staggerSec) + 's, transform 0.6s ease ' + (i * staggerSec) + 's';
+              ? 'translateX(' + (i % 2 === 0 ? -distance : distance) + 'px)' + scaleTo
+              : 'translateY(' + distance + 'px)' + scaleTo;
+            el.style.transition = 'opacity 0.7s ' + ease + ' ' + (i * staggerSec) + 's, transform 0.7s ' + ease + ' ' + (i * staggerSec) + 's';
             var ob = new IntersectionObserver(function (entries) {
               entries.forEach(function (e) {
                 if (!e.isIntersecting) return;
@@ -1533,16 +1595,48 @@ import Layout from '../layouts/Layout.astro';
                   t.style.transform = '';
                 });
               });
-            }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+            }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
             ob.observe(el);
           });
         }
 
         // 実際の index.astro の構造に合わせて呼び出し
-        addReveal('.qa-area .qa-chip', 'x', 0.06);                                          // 6A: Q&Aカテゴリチップ（左右交互）
-        addReveal('.estimate-area .form-group, .estimate-area .total-price-box', 'y', 0.1); // 6B: 見積フォーム各行
-        addReveal('footer#contact > p, footer#contact .footer-btn-container', 'y', 0.14);   // 7A: CTAコピー＋MAILボタン
-        addReveal('.footer-blog-wrap', 'y', 0.1);                                           // 7C: BLOGカード（7Bの#footer-qboxは.reveal-textでGSAP管理のため除外）
+        addReveal('.qa-area .qa-chip', 'x', 0.05);                                                    // 6A: Q&Aカテゴリチップ（左右交互）
+        addReveal('.estimate-area .form-group, .estimate-area .total-price-box', 'y', 0.09, { scale: true }); // 6B: 見積フォーム各行（スケールイン）
+        addReveal('footer#contact > p, footer#contact .footer-btn-container', 'y', 0.12);             // 7A: CTAコピー＋MAILボタン
+        addReveal('.footer-blog-wrap', 'y', 0.1, { scale: true });                                    // 7C: BLOGカード（スケールイン／7Bの#footer-qboxは.reveal-textでGSAP管理のため除外）
+
+        // ④ セクション見出しのクリップワイプ（左からスパッと切れ込む）
+        document.querySelectorAll('.section-wipe-heading').forEach(function (el) {
+          var wo = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              e.target.classList.add('revealed');
+              wo.unobserve(e.target);
+            });
+          }, { threshold: 0.2 });
+          wo.observe(el);
+        });
+      })();
+    </script>
+
+    <!-- ① ページ全体スクロール進捗バー（右端）：スクロール量に応じてライムが伸びる -->
+    <script is:inline>
+      (function () {
+        var fill = document.getElementById('scroll-progress-fill');
+        if (!fill) return;
+        var ticking = false;
+        function update() {
+          ticking = false;
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          var p = max > 0 ? window.scrollY / max : 0;
+          if (p < 0) p = 0; else if (p > 1) p = 1;
+          fill.style.height = (p * 100) + '%';
+        }
+        function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        update();
       })();
     </script>
 </Layout>
