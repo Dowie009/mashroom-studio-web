@@ -1,5 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { execSync } from 'child_process';
+let gitHash = 'dev';
+try {
+  gitHash = execSync('git rev-parse --short HEAD').toString().trim();
+} catch (e) {}
 ---
 
 <Layout
@@ -12,7 +17,7 @@ import Layout from '../layouts/Layout.astro';
     <!-- ============================== [1] ファーストビュー / HERO ============================== -->
     <header class="new-hero">
         <!-- [1-A] 背景画像 -->
-        <span class="dev-label" style="position:fixed;top:auto;bottom:56px;left:8px;z-index:9999;font-size:10px;background:#b9ff66;color:#000;padding:2px 7px;border-radius:3px;font-family:monospace;letter-spacing:0.05em;pointer-events:none;">v 2f3de9a</span>
+        <span class="dev-label" style="position:fixed;top:auto;bottom:56px;left:8px;z-index:9999;font-size:10px;background:#b9ff66;color:#000;padding:2px 7px;border-radius:3px;font-family:monospace;letter-spacing:0.05em;pointer-events:none;">v {gitHash}</span>
         <div class="new-hero-bg">
             <span class="dev-label">1-A</span>
             <img src="/img/hero-v2.jpg" alt="Background" fetchpriority="high">
