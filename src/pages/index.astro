@@ -242,10 +242,11 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <!-- [3-C] FOR BUSINESS（企業・法人向けワンストップ） -->
-        <div class="pro-block reveal-text">
+        <div class="pro-block">
             <span class="dev-label">3-C</span>
+            <span class="section-bg-num" aria-hidden="true">03</span>
             <p class="pro-label">FOR BUSINESS</p>
-            <h3 class="pro-title">映像も、音楽も、ブランディングも。<br>企業案件ワンストップ。</h3>
+            <h3 class="pro-title section-wipe-heading">映像も、音楽も、ブランディングも。<br>企業案件ワンストップ。</h3>
             <ul class="pro-services">
                 <li>MV制作</li>
                 <li>プロモーション映像</li>
@@ -276,31 +277,32 @@ import Layout from '../layouts/Layout.astro';
     <!-- ============================== [5] EXPLORE / STUDIO CONTENTS ============================== -->
     <section class="explore" data-cursor="color-pop-1">
         <span class="dev-label">5-A</span>
+        <span class="section-bg-num" aria-hidden="true">05</span>
         <!-- [5-A] 見出し -->
-        <h2 class="explore-title reveal-text">STUDIO CONTENTS</h2>
+        <h2 class="explore-title section-wipe-heading">STUDIO CONTENTS</h2>
         <!-- [5-B] 5つの誘導カード（GEAR/WORKS/PRICE/LESSON/BLOG） -->
         <div class="explore-grid">
             <span class="dev-label">5-B</span>
-            <div class="explore-card ex-1 reveal-text magnet">
+            <div class="explore-card ex-1 magnet">
                 <div class="explore-name">GEAR LIST</div><div class="explore-desc">使用機材一覧を見る</div>
                 <a href="/gear" class="card-link" onclick="window.location.href='/gear'; return false;"></a>
             </div>
-            <div class="explore-card ex-2 reveal-text magnet">
+            <div class="explore-card ex-2 magnet">
                 <div class="explore-name">WORKS</div><div class="explore-desc">制作実績・お客様の声</div>
                 <a href="/works" class="card-link" onclick="window.location.href='/works'; return false;"></a>
             </div>
-            <div class="explore-card ex-3 reveal-text magnet">
+            <div class="explore-card ex-3 magnet">
                 <div class="explore-name">PRICE LIST</div><div class="explore-desc">詳細料金表を見る</div>
                 <a href="/price" class="card-link" onclick="window.location.href='/price'; return false;"></a>
             </div>
             <!-- ADDED LESSON -->
-            <div class="explore-card ex-4 reveal-text magnet">
+            <div class="explore-card ex-4 magnet">
                 <div class="explore-name">LESSON</div>
                 <div class="explore-desc">スクール・講座情報</div>
                 <a href="/lesson" class="card-link" onclick="window.location.href='/lesson'; return false;"></a>
             </div>
             <!-- ★追加★ BLOGカード -->
-            <div class="explore-card ex-5 reveal-text magnet">
+            <div class="explore-card ex-5 magnet">
                 <div class="explore-name">BLOG</div>
                 <div class="explore-desc">AI活用術・DTM機材レビュー</div>
                 <a href="https://blog.xn--3-sj5c.jp/" class="card-link" target="_blank"></a>
@@ -1485,22 +1487,22 @@ import Layout from '../layouts/Layout.astro';
 
         // ② FIRST GUIDE見出し：画面に入ったら下からせり上がってフェードイン（一度だけ）
         var titleEl = document.getElementById('firstGuideTitle');
-        console.log('[FV-anim] firstGuideTitle found:', !!titleEl, 'IO:', 'IntersectionObserver' in window);
         if (titleEl && 'IntersectionObserver' in window) {
           titleEl.style.opacity = '0';
           titleEl.style.transform = 'translateY(60px)';
           titleEl.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-          var titleObs = new IntersectionObserver(function (entries) {
+          new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
               if (e.isIntersecting) {
-                console.log('[FV-anim] title intersecting → reveal');
                 e.target.style.opacity = '1';
                 e.target.style.transform = 'translateY(0)';
-                titleObs.unobserve(e.target);
+              } else {
+                // 画面外に出たらリセット（次回スクロールで再アニメ）
+                e.target.style.opacity = '0';
+                e.target.style.transform = 'translateY(60px)';
               }
             });
-          }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-          titleObs.observe(titleEl);
+          }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }).observe(titleEl);
         }
 
         // ③ 3-Bサービスカード：1枚ずつ100ms差でフェードイン＋せり上がり（一度だけ）
@@ -1573,31 +1575,38 @@ import Layout from '../layouts/Layout.astro';
           var scaleTo = opts.scale ? ' scale(0.93)' : '';
           var ease = 'cubic-bezier(0.22,1,0.36,1)'; // 勢いよく飛び込んでスパッと止まる
           document.querySelectorAll(selector).forEach(function (el, i) {
-            if (el.dataset.revealed) return;                 // 二重適用防止
             if (el.classList.contains('reveal-text')) return; // GSAP(.reveal-text)管理は除外
-            el.dataset.revealed = '1';
+            var initTx = (dir === 'x'
+              ? 'translateX(' + (i % 2 === 0 ? -distance : distance) + 'px)'
+              : 'translateY(' + distance + 'px)') + scaleTo;
+            var trans = 'opacity 0.7s ' + ease + ' ' + (i * staggerSec) + 's, transform 0.7s ' + ease + ' ' + (i * staggerSec) + 's';
+            // 初期状態（非表示）
             el.style.opacity = '0';
-            el.style.transform = dir === 'x'
-              ? 'translateX(' + (i % 2 === 0 ? -distance : distance) + 'px)' + scaleTo
-              : 'translateY(' + distance + 'px)' + scaleTo;
-            el.style.transition = 'opacity 0.7s ' + ease + ' ' + (i * staggerSec) + 's, transform 0.7s ' + ease + ' ' + (i * staggerSec) + 's';
-            var ob = new IntersectionObserver(function (entries) {
+            el.style.transform = initTx;
+            el.style.transition = trans;
+            new IntersectionObserver(function (entries) {
               entries.forEach(function (e) {
-                if (!e.isIntersecting) return;
                 var t = e.target;
-                t.style.opacity = '1';
-                t.style.transform = 'none';
-                ob.unobserve(t);
-                // 出現後はinline transform/transitionを解放（ホバー追従を妨げない）
-                t.addEventListener('transitionend', function done(ev) {
-                  if (ev.propertyName !== 'transform') return;
-                  t.removeEventListener('transitionend', done);
-                  t.style.transition = '';
-                  t.style.transform = '';
-                });
+                if (e.isIntersecting) {
+                  // 入った → 表示（毎回アニメ）
+                  t.style.transition = trans;
+                  t.style.opacity = '1';
+                  t.style.transform = 'none';
+                  // 出現後はinline transform/transitionを解放（:hover等の追従を妨げない）
+                  t.addEventListener('transitionend', function done(ev) {
+                    if (ev.propertyName !== 'transform') return;
+                    t.removeEventListener('transitionend', done);
+                    if (t.style.opacity === '1') { t.style.transition = ''; t.style.transform = ''; }
+                  });
+                } else {
+                  // 出た → アニメなしで初期状態へリセット（次回スクロールで再アニメ）
+                  t.style.transition = 'none';
+                  t.style.opacity = '0';
+                  t.style.transform = initTx;
+                  requestAnimationFrame(function () { t.style.transition = trans; });
+                }
               });
-            }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-            ob.observe(el);
+            }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }).observe(el);
           });
         }
 
@@ -1606,17 +1615,17 @@ import Layout from '../layouts/Layout.astro';
         addReveal('.estimate-area .form-group, .estimate-area .total-price-box', 'y', 0.09, { scale: true }); // 6B: 見積フォーム各行（スケールイン）
         addReveal('footer#contact > p, footer#contact .footer-btn-container', 'y', 0.12);             // 7A: CTAコピー＋MAILボタン
         addReveal('.footer-blog-wrap', 'y', 0.1, { scale: true });                                    // 7C: BLOGカード（スケールイン／7Bの#footer-qboxは.reveal-textでGSAP管理のため除外）
+        addReveal('.pro-block .pro-label, .pro-block .pro-services li, .pro-block .pro-clients, .pro-block .pro-cta', 'x', 0.07); // 3C: 企業向けブロック（左右交互スライド）
+        addReveal('.gallery-container-box', 'y', 0);                                                   // 4: 流れる写真帯（下からせり上がり）
+        addReveal('.explore .explore-card', 'x', 0.12);                                                // 5B: STUDIO CONTENTSカード（左右交互スライド）
 
-        // ④ セクション見出しのクリップワイプ（左からスパッと切れ込む）
+        // ④ セクション見出しのクリップワイプ（左からスパッと切れ込む・リピート）
         document.querySelectorAll('.section-wipe-heading').forEach(function (el) {
-          var wo = new IntersectionObserver(function (entries) {
+          new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
-              if (!e.isIntersecting) return;
-              e.target.classList.add('revealed');
-              wo.unobserve(e.target);
+              e.target.classList.toggle('revealed', e.isIntersecting);
             });
-          }, { threshold: 0.2 });
-          wo.observe(el);
+          }, { threshold: 0.2 }).observe(el);
         });
       })();
     </script>

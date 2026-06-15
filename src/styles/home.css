@@ -811,10 +811,17 @@ transform: rotate(-1deg) !important;
 .pro-block {
     max-width: 1000px; margin: 80px auto 0; padding: 60px 48px;
     position: relative; z-index: 2; text-align: center;
-    background: #0a0b0e;
+    /* [②3C] 右からライムが差し込むグロー */
+    background:
+        radial-gradient(ellipse at 100% 50%, rgba(185,255,102,0.07) 0%, transparent 60%),
+        #0a0b0e;
     border: 1px solid rgba(212, 180, 131, 0.45);
     border-radius: 0;
+    overflow: hidden; /* 大番号03をクリップ */
 }
+/* [②3C] 実コンテンツを大番号より前面へ */
+.pro-block > *:not(.section-bg-num):not(.dev-label) { position: relative; z-index: 1; }
+.pro-block > .section-bg-num { color: rgba(185,255,102,0.06); }
 .pro-label {
     font-family: var(--font-en); font-size: 0.8rem; font-weight: 400;
     letter-spacing: 0.4em; color: #d4b483; margin: 0 0 18px;
@@ -900,7 +907,12 @@ transform: rotate(-1deg) !important;
 .card-1, .card-2, .card-3 { box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
 
 /* GALLERY */
-.gallery-container-box { overflow: visible; width: 100%; position: relative; z-index: 60; margin: -80px 0; padding: 0; }
+.gallery-container-box {
+    overflow: visible; width: 100%; position: relative; z-index: 60; margin: -80px 0; padding: 0;
+    /* [②4] 回転バンドの隅（三角の隙間）に覗く微細ドットグリッド */
+    background-image: radial-gradient(circle, rgba(185,255,102,0.10) 1px, transparent 1px);
+    background-size: 22px 22px;
+}
 .gallery-wrapper { background: var(--pop-2); padding: 44px 0; transform: rotate(2deg) scale(1.1); position: relative; z-index: 100; display: flex; width: 130%; margin-left: -15%; box-shadow: 0 10px 40px rgba(0,0,0,0.25); }
 .marquee-content { display: flex; gap: 20px; width: max-content; flex-shrink: 0; padding-right: 20px; }
 .gallery-item { width: 400px; height: 300px; background: var(--c-white); border: 4px solid var(--c-text); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; font-family: var(--font-en); color: var(--c-text); }
@@ -909,10 +921,8 @@ transform: rotate(-1deg) !important;
 /* ダークサイバー + グリッドアニメーション（estimate-qa-sectionまでカバー） */
 .explore {
     padding: 230px 5% 200px;
-    background:
-        radial-gradient(circle at 20% 50%, rgba(255, 77, 0, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
-        #1a1a2e;
+    /* [②5B] 少し明るめの黒（Works/フォトギャラリー系の落ち着いたトーン） */
+    background: #0f0f0f;
     color: #ffffff;
     position: relative;
     margin-top: -200px;
@@ -920,6 +930,8 @@ transform: rotate(-1deg) !important;
     width: 100%;
     overflow: visible;
 }
+/* [②5B] 大番号05（overflow:visibleのため枠内に収めて配置・最背面） */
+.explore > .section-bg-num { top: 110px; right: 0; color: rgba(185,255,102,0.05); z-index: 0; }
 
 /* 動くグリッドライン - 縦線（estimate-qa-sectionまでカバー） */
 .explore::before {
