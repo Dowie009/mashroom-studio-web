@@ -1712,8 +1712,8 @@ footer { padding: 100px 5%; text-align: center; border-top: none; position: rela
 
     /* FOOTER MOBILE */
     footer { padding: 60px 5% 40px; }
-    .footer-cta { font-size: 3rem; margin-bottom: 20px; }
-    footer > p:nth-of-type(2) { font-size: 1rem !important; margin-bottom: 30px !important; }
+    .footer-headline { margin-bottom: 22px; }
+    .footer-subcopy { font-size: 0.98rem; margin-bottom: 32px; }
     .footer-btn-container { flex-direction: column; gap: 15px; }
     .btn-pop, .btn-glitch { width: 100%; min-width: 0; height: 60px; font-size: 1.2rem; }
     .btn-glitch { font-size: 1.5rem; }
