@@ -41,7 +41,7 @@
     linear-gradient(115deg, transparent 0 17%, rgba(200, 148, 69, 0.12) 17% 18%, transparent 18% 44%, rgba(21, 62, 84, 0.1) 44% 45%, transparent 45%),
     repeating-linear-gradient(90deg, rgba(23, 23, 23, 0.035) 0 1px, transparent 1px 72px),
     repeating-linear-gradient(0deg, rgba(23, 23, 23, 0.026) 0 1px, transparent 1px 72px);
-  transform: translate3d(0, calc(var(--veo-scroll) * -110px), 0);
+  transform: translate3d(calc(var(--veo-scroll) * -92px), calc(var(--veo-scroll) * -28px), 0);
 }
 
 .veo3-page::after {
@@ -51,7 +51,7 @@
     radial-gradient(circle at calc(14% + var(--veo-scroll) * 38%) 18%, rgba(163, 57, 71, 0.16), transparent 18rem),
     radial-gradient(circle at calc(86% - var(--veo-scroll) * 34%) 34%, rgba(110, 182, 189, 0.16), transparent 20rem),
     conic-gradient(from calc(var(--veo-scroll) * 180deg) at 72% 22%, transparent, rgba(200, 148, 69, 0.1), transparent 32%);
-  transform: translate3d(0, calc(var(--veo-scroll) * 90px), 0);
+  transform: translate3d(calc(var(--veo-scroll) * 82px), calc(var(--veo-scroll) * 22px), 0);
 }
 
 body:has(.veo3-page) .hamburger-btn,
@@ -171,7 +171,7 @@ body:has(.v3-home) .cursor {
   background:
     linear-gradient(115deg, transparent 0 28%, rgba(200, 148, 69, 0.26) 28% 30%, transparent 30% 45%, rgba(110, 182, 189, 0.18) 45% 47%, transparent 47%),
     repeating-linear-gradient(-12deg, rgba(255, 250, 240, 0.09) 0 1px, transparent 1px 18px);
-  transform: translate3d(0, calc(var(--veo-scroll) * -120px), 0) rotate(-8deg);
+  transform: translate3d(calc(var(--veo-scroll) * -120px), calc(var(--veo-scroll) * -26px), 0) rotate(calc(-8deg + var(--veo-scroll) * 5deg));
   transform-origin: center;
   pointer-events: none;
 }
@@ -338,7 +338,7 @@ body:has(.v3-home) .cursor {
   background:
     radial-gradient(circle, rgba(255, 250, 240, 0.42), transparent 62%),
     conic-gradient(from 90deg, rgba(200, 148, 69, 0.14), transparent, rgba(21, 62, 84, 0.1), transparent);
-  transform: translate3d(0, calc(var(--veo-scroll) * -90px), 0) rotate(calc(var(--veo-scroll) * 80deg));
+  transform: translate3d(calc(var(--veo-scroll) * -84px), calc(var(--veo-scroll) * -18px), 0) rotate(calc(var(--veo-scroll) * 80deg));
   pointer-events: none;
 }
 
@@ -436,7 +436,7 @@ body:has(.v3-home) .cursor {
 .veo3-price-card:hover,
 .veo3-step:hover,
 .veo3-feature:hover {
-  transform: translateY(-4px) rotateX(1.4deg);
+  transform: translateY(-3px);
   border-color: rgba(200, 148, 69, 0.5);
   box-shadow: 0 28px 80px rgba(23, 23, 23, 0.12);
 }
@@ -756,6 +756,53 @@ body:has(.v3-home) .cursor {
     opacity 0.78s ease,
     transform 0.78s cubic-bezier(0.2, 0.8, 0.2, 1),
     clip-path 0.78s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.veo3-puzzle {
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+.veo3-puzzle::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 3;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--veo-red);
+  box-shadow:
+    -18px -18px 0 rgba(200, 148, 69, 0.78),
+    -36px 0 0 rgba(21, 62, 84, 0.72);
+  opacity: 0;
+  transform: translate3d(16px, 16px, 0) scale(0.7);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+
+.veo3-puzzle.is-visible::after {
+  opacity: 1;
+  transform: none;
+}
+
+.veo3-section-head.veo3-puzzle-head {
+  position: relative;
+}
+
+.veo3-section-head.veo3-puzzle-head::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -18px;
+  width: min(38vw, 420px);
+  height: 26px;
+  background:
+    linear-gradient(90deg, var(--veo-red) 0 23%, transparent 23% 31%, var(--veo-gold) 31% 61%, transparent 61% 70%, var(--veo-blue) 70%);
+  clip-path: polygon(0 0, 94% 0, 100% 50%, 94% 100%, 0 100%, 6% 50%);
+  opacity: 0.14;
+  transform: translateX(calc(var(--veo-scroll) * -110px));
+  pointer-events: none;
 }
 
 .veo3-reveal.is-visible {
