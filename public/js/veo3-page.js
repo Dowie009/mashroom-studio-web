@@ -2,7 +2,7 @@
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const decorate = () => {
-    const cards = document.querySelectorAll('.veo3-card, .veo3-price-card, .veo3-step, .veo3-feature');
+    const cards = document.querySelectorAll('.veo3-card, .veo3-step, .veo3-feature');
     cards.forEach((card, index) => {
       if ((index + 1) % 3 === 0) card.classList.add('veo3-puzzle');
     });
@@ -142,7 +142,7 @@
       );
     });
 
-    gsap.utils.toArray('.veo3-card:not(.veo3-puzzle), .veo3-price-card:not(.veo3-puzzle), .veo3-step:not(.veo3-puzzle), .veo3-feature:not(.veo3-puzzle)').forEach((node, index) => {
+    gsap.utils.toArray('.veo3-card:not(.veo3-puzzle), .veo3-step:not(.veo3-puzzle), .veo3-feature:not(.veo3-puzzle)').forEach((node, index) => {
       gsap.fromTo(node,
         { x: index % 2 === 0 ? -18 : 18, opacity: 0.88 },
         {
