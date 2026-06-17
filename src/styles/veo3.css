@@ -574,12 +574,14 @@ body:has(.v3-home) .cursor {
   background:
     linear-gradient(90deg, rgba(23, 23, 23, 0.04) 0 1px, transparent 1px 100%),
     linear-gradient(0deg, rgba(23, 23, 23, 0.035) 0 1px, transparent 1px 100%),
-    radial-gradient(circle at 18% 18%, rgba(35, 93, 115, 0.18), transparent 24rem),
-    radial-gradient(circle at 84% 20%, rgba(200, 148, 69, 0.18), transparent 22rem),
+    radial-gradient(circle at 18% 18%, rgba(75, 183, 197, 0.2), transparent 24rem),
+    radial-gradient(circle at 84% 20%, rgba(214, 170, 85, 0.2), transparent 22rem),
+    radial-gradient(circle at 72% 68%, rgba(157, 131, 212, 0.14), transparent 24rem),
     linear-gradient(180deg, #f8f3ea, #ece0ce 54%, #f7f0e5);
   background-size:
     76px 76px,
     76px 76px,
+    auto,
     auto,
     auto,
     auto;
@@ -605,7 +607,7 @@ body:has(.v3-home) .cursor {
 .veo3-price-page #plans {
   background:
     linear-gradient(180deg, rgba(255, 250, 240, 0.74), rgba(255, 250, 240, 0.46)),
-    linear-gradient(90deg, rgba(35, 93, 115, 0.08), transparent 34%, rgba(163, 57, 71, 0.06) 68%, transparent);
+    linear-gradient(90deg, rgba(75, 183, 197, 0.1), transparent 34%, rgba(212, 92, 112, 0.08) 68%, transparent);
 }
 
 .veo3-price-page .veo3-price-grid {
@@ -622,13 +624,17 @@ body:has(.v3-home) .cursor {
   min-height: 100%;
   flex-direction: column;
   padding: 26px 24px 24px;
-  border-color: rgba(23, 23, 23, 0.16);
+  border-color: rgba(23, 23, 23, 0.13);
   border-top: 0;
   border-left: 4px solid var(--plan-accent);
   background:
+    radial-gradient(circle at 18% 10%, color-mix(in srgb, var(--plan-accent) 18%, transparent), transparent 14rem),
     linear-gradient(180deg, rgba(255, 250, 240, 0.96), rgba(255, 250, 240, 0.88)),
-    linear-gradient(90deg, var(--plan-soft), transparent 42%);
-  box-shadow: 0 18px 42px rgba(23, 23, 23, 0.07);
+    linear-gradient(90deg, var(--plan-soft), transparent 46%);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--plan-accent) 20%, transparent),
+    0 0 28px color-mix(in srgb, var(--plan-accent) 18%, transparent),
+    0 18px 42px rgba(23, 23, 23, 0.07);
 }
 
 .veo3-price-page .veo3-price-card::before {
@@ -640,10 +646,11 @@ body:has(.v3-home) .cursor {
   position: absolute;
   top: 24px;
   right: 24px;
-  width: 52px;
-  height: 1px;
-  background: var(--plan-accent);
-  opacity: 0.55;
+  width: 64px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--plan-accent));
+  opacity: 0.9;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--plan-accent) 62%, transparent);
   pointer-events: none;
 }
 
@@ -651,14 +658,19 @@ body:has(.v3-home) .cursor {
   border-color: rgba(23, 23, 23, 0.18);
   border-left-color: var(--plan-accent);
   background:
+    radial-gradient(circle at 18% 10%, color-mix(in srgb, var(--plan-accent) 22%, transparent), transparent 14rem),
     linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(255, 250, 240, 0.9)),
-    linear-gradient(90deg, var(--plan-soft), transparent 46%);
+    linear-gradient(90deg, var(--plan-soft), transparent 50%);
 }
 
 .veo3-price-page .veo3-price-card:hover {
   transform: translateY(-2px);
   border-color: rgba(23, 23, 23, 0.22);
   border-left-color: var(--plan-accent);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--plan-accent) 28%, transparent),
+    0 0 36px color-mix(in srgb, var(--plan-accent) 24%, transparent),
+    0 22px 48px rgba(23, 23, 23, 0.09);
 }
 
 .veo3-price-page .veo3-price-card .veo3-tag {
@@ -691,7 +703,9 @@ body:has(.v3-home) .cursor {
   letter-spacing: 0;
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
-  text-shadow: none;
+  text-shadow:
+    0 0 18px color-mix(in srgb, var(--plan-accent) 28%, transparent),
+    0 1px 0 rgba(255, 250, 240, 0.8);
 }
 
 .veo3-price-page .veo3-price small {
@@ -732,6 +746,7 @@ body:has(.v3-home) .cursor {
   height: 6px;
   background: var(--plan-accent);
   opacity: 0.76;
+  box-shadow: 0 0 10px color-mix(in srgb, var(--plan-accent) 58%, transparent);
 }
 
 .veo3-table {
