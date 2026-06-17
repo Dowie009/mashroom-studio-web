@@ -605,8 +605,8 @@ body:has(.v3-home) .cursor {
 
 .veo3-price-page #plans {
   background:
-    radial-gradient(circle at 14% 18%, rgba(75, 183, 197, 0.26), transparent 24rem),
-    radial-gradient(circle at 86% 16%, rgba(214, 170, 85, 0.2), transparent 24rem),
+    radial-gradient(circle at 14% 18%, rgba(185, 140, 63, 0.18), transparent 24rem),
+    radial-gradient(circle at 86% 16%, rgba(255, 250, 240, 0.08), transparent 24rem),
     linear-gradient(90deg, rgba(0, 0, 0, 0.86), rgba(0, 0, 0, 0.5) 54%, rgba(0, 0, 0, 0.76)),
     linear-gradient(0deg, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.18) 58%, rgba(0, 0, 0, 0.62)),
     url('/img/hero-v2.jpg') center/cover;
@@ -633,7 +633,7 @@ body:has(.v3-home) .cursor {
   border: 0;
   border-radius: 0;
   background:
-    linear-gradient(118deg, transparent 0 20%, rgba(255, 250, 240, 0.12) 20% 20.4%, transparent 20.4% 52%, rgba(75, 183, 197, 0.16) 52% 52.35%, transparent 52.35%),
+    linear-gradient(118deg, transparent 0 20%, rgba(255, 250, 240, 0.12) 20% 20.4%, transparent 20.4% 52%, rgba(185, 140, 63, 0.18) 52% 52.35%, transparent 52.35%),
     repeating-linear-gradient(90deg, rgba(255, 250, 240, 0.05) 0 1px, transparent 1px 180px);
   opacity: 0.72;
   transform: translate3d(calc(var(--veo-scroll) * -34px), 0, 0);
@@ -658,13 +658,12 @@ body:has(.v3-home) .cursor {
   border-top: 0;
   border-left: 4px solid var(--plan-accent);
   background:
-    radial-gradient(circle at 18% 10%, color-mix(in srgb, var(--plan-accent) 24%, transparent), transparent 14rem),
+    radial-gradient(circle at 18% 10%, rgba(185, 140, 63, 0.12), transparent 14rem),
     linear-gradient(180deg, rgba(255, 250, 240, 0.11), rgba(255, 250, 240, 0.055)),
     linear-gradient(90deg, var(--plan-soft), transparent 46%);
   backdrop-filter: blur(18px) saturate(1.08);
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--plan-accent) 20%, transparent),
-    0 0 32px color-mix(in srgb, var(--plan-accent) 18%, transparent),
+    0 0 0 1px rgba(255, 250, 240, 0.08),
     0 22px 56px rgba(0, 0, 0, 0.34);
 }
 
@@ -680,8 +679,8 @@ body:has(.v3-home) .cursor {
   width: 64px;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--plan-accent));
-  opacity: 0.9;
-  box-shadow: 0 0 16px color-mix(in srgb, var(--plan-accent) 62%, transparent);
+  opacity: 0.68;
+  box-shadow: none;
   pointer-events: none;
 }
 
@@ -689,7 +688,7 @@ body:has(.v3-home) .cursor {
   border-color: rgba(255, 250, 240, 0.2);
   border-left-color: var(--plan-accent);
   background:
-    radial-gradient(circle at 18% 10%, color-mix(in srgb, var(--plan-accent) 28%, transparent), transparent 14rem),
+    radial-gradient(circle at 18% 10%, rgba(185, 140, 63, 0.14), transparent 14rem),
     linear-gradient(180deg, rgba(255, 250, 240, 0.13), rgba(255, 250, 240, 0.07)),
     linear-gradient(90deg, var(--plan-soft), transparent 50%);
 }
@@ -699,8 +698,7 @@ body:has(.v3-home) .cursor {
   border-color: rgba(255, 250, 240, 0.28);
   border-left-color: var(--plan-accent);
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--plan-accent) 28%, transparent),
-    0 0 36px color-mix(in srgb, var(--plan-accent) 24%, transparent),
+    0 0 0 1px rgba(255, 250, 240, 0.12),
     0 26px 62px rgba(0, 0, 0, 0.4);
 }
 
@@ -734,9 +732,7 @@ body:has(.v3-home) .cursor {
   letter-spacing: 0;
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
-  text-shadow:
-    0 0 18px color-mix(in srgb, var(--plan-accent) 28%, transparent),
-    0 1px 0 rgba(255, 250, 240, 0.8);
+  text-shadow: 0 1px 0 rgba(255, 250, 240, 0.22);
 }
 
 .veo3-price-page .veo3-price small {
@@ -777,7 +773,7 @@ body:has(.v3-home) .cursor {
   height: 6px;
   background: var(--plan-accent);
   opacity: 0.76;
-  box-shadow: 0 0 10px color-mix(in srgb, var(--plan-accent) 58%, transparent);
+  box-shadow: none;
 }
 
 .veo3-table {
