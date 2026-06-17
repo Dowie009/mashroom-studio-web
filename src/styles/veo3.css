@@ -102,31 +102,43 @@ body:has(.v3-home) .cursor {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: 10px 12px;
-  border: 1px solid rgba(23, 23, 23, 0.18);
+  padding: 10px 12px 10px 14px;
+  border: 1px solid rgba(255, 250, 240, 0.34);
   border-radius: var(--veo-radius);
-  background: rgba(255, 250, 240, 0.82);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 16px 48px rgba(23, 23, 23, 0.08);
+  background:
+    linear-gradient(135deg, rgba(255, 250, 240, 0.42), rgba(255, 250, 240, 0.2)),
+    rgba(255, 250, 240, 0.2);
+  backdrop-filter: blur(24px) saturate(1.18);
+  -webkit-backdrop-filter: blur(24px) saturate(1.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 250, 240, 0.58),
+    inset 0 -1px 0 rgba(23, 23, 23, 0.07),
+    0 18px 54px rgba(0, 0, 0, 0.16);
 }
 
 .veo3-brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  color: rgba(23, 23, 23, 0.92);
   font-family: var(--font-en);
   font-size: 1.02rem;
   letter-spacing: 0.08em;
   white-space: nowrap;
+  text-shadow: 0 1px 0 rgba(255, 250, 240, 0.32);
 }
 
 .veo3-brand::before {
   content: "";
-  width: 10px;
+  flex: 0 0 38px;
+  width: 38px;
   height: 10px;
   border-radius: 999px;
-  background: var(--veo-red);
-  box-shadow: 18px 0 0 var(--veo-gold), 36px 0 0 var(--veo-blue);
+  background:
+    radial-gradient(circle at 5px 50%, var(--veo-red) 0 4px, transparent 4.6px),
+    radial-gradient(circle at 19px 50%, rgba(200, 148, 69, 0.92) 0 3.2px, transparent 3.8px),
+    radial-gradient(circle at 32px 50%, rgba(21, 62, 84, 0.86) 0 2.8px, transparent 3.4px);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.18));
 }
 
 .veo3-nav-links {
@@ -138,16 +150,19 @@ body:has(.v3-home) .cursor {
 .veo3-nav-links a {
   padding: 9px 11px;
   border-radius: var(--veo-radius);
-  color: rgba(23, 23, 23, 0.68);
+  color: rgba(23, 23, 23, 0.72);
   font-size: 0.86rem;
   font-weight: 800;
-  transition: background 0.18s ease, color 0.18s ease;
+  transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
 }
 
 .veo3-nav-links a:hover,
 .veo3-nav-links a.is-current {
-  background: var(--veo-ink);
+  background: rgba(12, 12, 12, 0.84);
   color: var(--veo-card);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 250, 240, 0.14),
+    0 8px 18px rgba(0, 0, 0, 0.18);
 }
 
 .veo3-hero {
@@ -654,17 +669,18 @@ body:has(.v3-home) .cursor {
   min-height: 100%;
   flex-direction: column;
   padding: 26px 24px 24px;
-  border-color: rgba(255, 250, 240, 0.16);
+  border-color: rgba(255, 250, 240, 0.13);
   border-top: 0;
-  border-left: 4px solid var(--plan-accent);
+  border-left: 2px solid var(--plan-accent);
   background:
-    radial-gradient(circle at 18% 10%, rgba(255, 250, 240, 0.08), transparent 14rem),
-    linear-gradient(180deg, rgba(255, 250, 240, 0.14), rgba(255, 250, 240, 0.07)),
-    linear-gradient(90deg, var(--plan-soft), transparent 46%);
-  backdrop-filter: blur(18px) saturate(1.08);
+    radial-gradient(circle at 18% 10%, rgba(255, 250, 240, 0.045), transparent 13rem),
+    linear-gradient(180deg, rgba(255, 250, 240, 0.09), rgba(255, 250, 240, 0.035)),
+    linear-gradient(90deg, var(--plan-soft), transparent 42%),
+    rgba(4, 5, 5, 0.38);
+  backdrop-filter: blur(18px) saturate(1.02);
   box-shadow:
-    0 0 0 1px rgba(255, 250, 240, 0.08),
-    0 22px 56px rgba(0, 0, 0, 0.34);
+    0 0 0 1px rgba(255, 250, 240, 0.055),
+    0 20px 52px rgba(0, 0, 0, 0.38);
 }
 
 .veo3-price-page .veo3-price-card::before {
@@ -676,36 +692,37 @@ body:has(.v3-home) .cursor {
   position: absolute;
   top: 24px;
   right: 24px;
-  width: 64px;
-  height: 2px;
+  width: 52px;
+  height: 1px;
   background: linear-gradient(90deg, transparent, var(--plan-accent));
-  opacity: 0.68;
+  opacity: 0.58;
   box-shadow: none;
   pointer-events: none;
 }
 
 .veo3-price-page .veo3-price-card.featured {
-  border-color: rgba(255, 250, 240, 0.2);
+  border-color: rgba(255, 250, 240, 0.16);
   border-left-color: var(--plan-accent);
   background:
-    radial-gradient(circle at 18% 10%, rgba(255, 250, 240, 0.1), transparent 14rem),
-    linear-gradient(180deg, rgba(255, 250, 240, 0.16), rgba(255, 250, 240, 0.08)),
-    linear-gradient(90deg, var(--plan-soft), transparent 50%);
+    radial-gradient(circle at 18% 10%, rgba(255, 250, 240, 0.06), transparent 13rem),
+    linear-gradient(180deg, rgba(255, 250, 240, 0.11), rgba(255, 250, 240, 0.045)),
+    linear-gradient(90deg, var(--plan-soft), transparent 46%),
+    rgba(5, 6, 6, 0.34);
 }
 
 .veo3-price-page .veo3-price-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 250, 240, 0.28);
+  border-color: rgba(255, 250, 240, 0.22);
   border-left-color: var(--plan-accent);
   box-shadow:
-    0 0 0 1px rgba(255, 250, 240, 0.12),
-    0 26px 62px rgba(0, 0, 0, 0.4);
+    0 0 0 1px rgba(255, 250, 240, 0.095),
+    0 24px 58px rgba(0, 0, 0, 0.42);
 }
 
 .veo3-price-page .veo3-price-card .veo3-tag {
   margin-bottom: 16px;
   padding: 0 0 8px;
-  border-bottom: 1px solid color-mix(in srgb, var(--plan-accent) 42%, rgba(23, 23, 23, 0.12));
+  border-bottom: 1px solid color-mix(in srgb, var(--plan-accent) 30%, rgba(255, 250, 240, 0.1));
   border-radius: 0;
   background: transparent;
   color: var(--plan-accent);
@@ -723,16 +740,16 @@ body:has(.v3-home) .cursor {
 .veo3-price-page .veo3-price {
   margin-top: 20px;
   padding-top: 18px;
-  border-top: 1px solid rgba(255, 250, 240, 0.14);
-  color: rgba(255, 250, 240, 0.96);
+  border-top: 1px solid rgba(255, 250, 240, 0.105);
+  color: rgba(255, 250, 240, 0.92);
   font-family: "Zen Kaku Gothic New", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: clamp(2.35rem, 3.15vw, 3.45rem);
-  font-weight: 900;
+  font-size: clamp(2.18rem, 2.92vw, 3.2rem);
+  font-weight: 850;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0;
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.26);
 }
 
 .veo3-price-page .veo3-price small {
@@ -757,7 +774,7 @@ body:has(.v3-home) .cursor {
   position: relative;
   padding: 11px 0 11px 18px;
   border: 0;
-  border-top: 1px solid rgba(255, 250, 240, 0.13);
+  border-top: 1px solid rgba(255, 250, 240, 0.095);
   border-radius: 0;
   background: transparent;
   color: rgba(255, 250, 240, 0.78);
@@ -772,7 +789,7 @@ body:has(.v3-home) .cursor {
   width: 6px;
   height: 6px;
   background: var(--plan-accent);
-  opacity: 0.76;
+  opacity: 0.62;
   box-shadow: none;
 }
 
@@ -1110,7 +1127,7 @@ body:has(.v3-home) .cursor {
   }
 
   .veo3-price-page .veo3-price {
-    font-size: clamp(2.55rem, 12vw, 3.35rem);
+    font-size: clamp(2.28rem, 10.8vw, 3rem);
   }
 
   .veo3-mobile-cta {
@@ -1123,11 +1140,16 @@ body:has(.v3-home) .cursor {
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
     padding: 7px;
-    border: 1px solid rgba(23, 23, 23, 0.14);
+    border: 1px solid rgba(255, 250, 240, 0.42);
     border-radius: var(--veo-radius);
-    background: rgba(255, 250, 240, 0.9);
-    backdrop-filter: blur(18px);
-    box-shadow: 0 16px 36px rgba(23, 23, 23, 0.16);
+    background:
+      linear-gradient(135deg, rgba(255, 250, 240, 0.34), rgba(255, 250, 240, 0.14)),
+      rgba(255, 250, 240, 0.18);
+    backdrop-filter: blur(24px) saturate(1.18);
+    -webkit-backdrop-filter: blur(24px) saturate(1.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 250, 240, 0.62),
+      0 16px 42px rgba(0, 0, 0, 0.24);
   }
 
   .veo3-mobile-cta a {
@@ -1136,10 +1158,16 @@ body:has(.v3-home) .cursor {
     align-items: center;
     justify-content: center;
     border-radius: var(--veo-radius);
-    background: var(--veo-ink);
+    border: 1px solid rgba(255, 250, 240, 0.12);
+    background:
+      linear-gradient(180deg, rgba(255, 250, 240, 0.08), transparent),
+      rgba(8, 8, 8, 0.72);
     color: var(--veo-card);
     font-size: 0.84rem;
     font-weight: 900;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 250, 240, 0.16),
+      0 8px 18px rgba(0, 0, 0, 0.16);
   }
 }
 
