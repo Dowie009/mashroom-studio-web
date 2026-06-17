@@ -101,28 +101,29 @@ body:has(.v3-home) .cursor {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding: 10px 12px 10px 14px;
-  border: 1px solid rgba(255, 250, 240, 0.34);
+  gap: 14px;
+  padding: 6px 10px 6px 13px;
+  border: 1px solid rgba(255, 250, 240, 0.36);
   border-radius: var(--veo-radius);
   background:
-    linear-gradient(135deg, rgba(255, 250, 240, 0.42), rgba(255, 250, 240, 0.2)),
-    rgba(255, 250, 240, 0.2);
-  backdrop-filter: blur(24px) saturate(1.18);
-  -webkit-backdrop-filter: blur(24px) saturate(1.18);
+    linear-gradient(112deg, rgba(255, 250, 240, 0.54) 0%, rgba(255, 250, 240, 0.22) 42%, rgba(110, 182, 189, 0.13) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(23, 23, 23, 0.06)),
+    rgba(255, 250, 240, 0.18);
+  backdrop-filter: blur(16px) saturate(1.1);
+  -webkit-backdrop-filter: blur(16px) saturate(1.1);
   box-shadow:
-    inset 0 1px 0 rgba(255, 250, 240, 0.58),
-    inset 0 -1px 0 rgba(23, 23, 23, 0.07),
-    0 18px 54px rgba(0, 0, 0, 0.16);
+    inset 0 1px 0 rgba(255, 250, 240, 0.62),
+    inset 0 -1px 0 rgba(23, 23, 23, 0.08),
+    0 14px 38px rgba(0, 0, 0, 0.16);
 }
 
 .veo3-brand {
   position: relative;
   display: inline-flex;
   align-items: center;
-  flex: 0 0 clamp(330px, 28vw, 380px);
-  width: clamp(330px, 28vw, 380px);
-  height: 42px;
+  flex: 0 0 clamp(205px, 19vw, 252px);
+  width: clamp(205px, 19vw, 252px);
+  height: 32px;
   overflow: hidden;
   gap: 0;
   color: rgba(23, 23, 23, 0.92);
@@ -136,17 +137,14 @@ body:has(.v3-home) .cursor {
 .veo3-brand::before {
   content: "";
   position: absolute;
-  left: -8px;
-  top: -78px;
-  width: clamp(360px, 30vw, 420px);
-  height: clamp(203px, 17vw, 237px);
-  background: url('/img/MASHROOM_Logo.png') center / contain no-repeat;
+  inset: 0;
+  background: url('/img/mashroom-wordmark-compact-nav.png') left center / contain no-repeat;
   filter:
-    brightness(1.08)
-    contrast(1.12)
-    drop-shadow(0 7px 16px rgba(0, 0, 0, 0.22));
-  mix-blend-mode: multiply;
-  opacity: 0.96;
+    brightness(1.16)
+    contrast(1.28)
+    drop-shadow(0 1px 3px rgba(0, 0, 0, 0.12));
+  image-rendering: auto;
+  opacity: 0.99;
 }
 
 .veo3-nav-links {
