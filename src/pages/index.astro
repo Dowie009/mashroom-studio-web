@@ -8,6 +8,7 @@ import Layout from '../layouts/Layout.astro';
   ogImage="/img/hero-v2.jpg"
 >
   <main class="v3-home">
+    <div class="v3-scroll-rail" aria-hidden="true"><span></span></div>
     <nav class="v3-topbar" aria-label="ホーム内ナビゲーション">
       <a href="#hero" class="v3-brand">MASHROOM STUDIO</a>
       <div class="v3-nav-links">
@@ -27,9 +28,17 @@ import Layout from '../layouts/Layout.astro';
         <img class="v3-hero-slide" src="/img/slides/studio-04.jpg" alt="">
       </div>
       <div class="v3-hero-shade"></div>
+      <div class="v3-hero-orbit" aria-hidden="true">
+        <span>REC</span>
+        <span>MIX</span>
+        <span>相談</span>
+      </div>
       <div class="v3-hero-inner">
         <p class="v3-kicker">01 / HERO</p>
-        <h1 id="hero-title">録音・ミックス・<br class="v3-mobile-only">制作相談。<br>札幌の小さな<br class="v3-mobile-only">プライベート<br class="v3-mobile-only">スタジオです。</h1>
+        <h1 id="hero-title" class="v3-hero-title">
+          <span class="v3-title-line v3-title-main">録音・ミックス・<span class="v3-title-nowrap">制作相談</span></span>
+          <span class="v3-title-line v3-title-sub">札幌北区の<br class="v3-mobile-only">プライベートスタジオです</span>
+        </h1>
         <p class="v3-hero-copy">
           歌、弾き語り、バンド、ナレーション、映像音楽など。
           録音からミックス、必要に応じてアレンジや制作相談まで対応します。
@@ -93,7 +102,7 @@ import Layout from '../layouts/Layout.astro';
       </div>
       <div class="v3-career-layout">
         <div class="v3-career-photo">
-          <img src="/img/image_47d437.jpg" alt="MASHROOM STUDIOのオーナー・制作環境">
+          <img src="/img/slides/studio-06.jpg" alt="MASHROOM STUDIOの制作スペース">
         </div>
         <div class="v3-career-list">
           <article><time>Artist</time><h3>flumpool / Chevon / TRIPLANE / Rihwa ほか</h3><p>レコーディング、制作、サポート、マニピュレートなど案件ごとに担当。</p></article>
@@ -258,13 +267,37 @@ import Layout from '../layouts/Layout.astro';
       --v3-wine: #7c2638;
       --v3-blue: #173b4f;
       --v3-green: #3d5a47;
+      --v3-cyan: #6eb6bd;
       --v3-radius: 8px;
-      background: var(--v3-paper);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(185, 140, 63, 0.22), transparent 22rem),
+        radial-gradient(circle at 88% 6%, rgba(110, 182, 189, 0.16), transparent 23rem),
+        linear-gradient(180deg, var(--v3-paper), #ede3d4 48%, #f7f1e7);
       color: var(--v3-ink);
       font-family: var(--font-jp);
       font-weight: 400;
       letter-spacing: 0;
       overflow-x: clip;
+    }
+
+    .v3-scroll-rail {
+      position: fixed;
+      top: 0;
+      right: 14px;
+      z-index: 1400;
+      width: 3px;
+      height: 100svh;
+      background: rgba(21, 21, 21, 0.12);
+      pointer-events: none;
+    }
+
+    .v3-scroll-rail span {
+      display: block;
+      width: 100%;
+      height: 12%;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--v3-brass), var(--v3-wine), var(--v3-cyan));
+      transform-origin: top;
     }
 
     .v3-home *,
@@ -367,9 +400,54 @@ import Layout from '../layouts/Layout.astro';
 
     .v3-hero-shade {
       background:
-        linear-gradient(90deg, rgba(10,10,10,0.82), rgba(10,10,10,0.48) 48%, rgba(10,10,10,0.2)),
+        radial-gradient(circle at 78% 22%, rgba(185, 140, 63, 0.18), transparent 22rem),
+        linear-gradient(90deg, rgba(10,10,10,0.84), rgba(10,10,10,0.46) 48%, rgba(10,10,10,0.22)),
         linear-gradient(0deg, rgba(10,10,10,0.84), rgba(10,10,10,0.05) 54%);
       z-index: 1;
+    }
+
+    .v3-hero-orbit {
+      position: absolute;
+      right: max(20px, calc((100vw - 1120px) / 2));
+      top: 22%;
+      z-index: 2;
+      display: grid;
+      gap: 10px;
+      color: rgba(255, 250, 240, 0.76);
+      font-family: var(--font-digi);
+      font-size: 0.76rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      pointer-events: none;
+    }
+
+    .v3-hero-orbit span {
+      width: 82px;
+      height: 82px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 250, 240, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 250, 240, 0.07);
+      backdrop-filter: blur(12px);
+      animation: v3Float 5.4s ease-in-out infinite;
+    }
+
+    .v3-hero-orbit span:nth-child(2) {
+      transform: translateX(-34px);
+      animation-delay: -1.2s;
+      color: var(--v3-brass);
+    }
+
+    .v3-hero-orbit span:nth-child(3) {
+      transform: translateX(16px);
+      animation-delay: -2.1s;
+      color: var(--v3-cyan);
+    }
+
+    @keyframes v3Float {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -16px; }
     }
 
     .v3-hero-inner {
@@ -403,8 +481,37 @@ import Layout from '../layouts/Layout.astro';
 
     .v3-hero h1 {
       max-width: 880px;
-      font-size: clamp(2.25rem, 6.8vw, 5.6rem);
+      font-size: clamp(2.25rem, 6.8vw, 5.75rem);
       color: var(--v3-white);
+    }
+
+    .v3-hero-title {
+      display: grid;
+      gap: 12px;
+    }
+
+    .v3-title-line {
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    .v3-title-nowrap {
+      white-space: nowrap;
+    }
+
+    .v3-title-main {
+      padding: 0.03em 0.1em 0.09em;
+      background: rgba(255, 250, 240, 0.08);
+      border-left: 6px solid var(--v3-brass);
+      text-shadow: 0 18px 44px rgba(0, 0, 0, 0.36);
+    }
+
+    .v3-title-sub {
+      margin-left: clamp(0px, 7vw, 96px);
+      color: rgba(255, 250, 240, 0.88);
+      font-size: 0.62em;
+      line-height: 1.25;
     }
 
     .v3-hero-copy {
@@ -910,6 +1017,39 @@ import Layout from '../layouts/Layout.astro';
 
     .v3-mobile-cta { display: none; }
 
+    .v3-work-card,
+    .v3-career-list article,
+    .v3-first-grid article,
+    .v3-price-row,
+    .v3-note-box,
+    .v3-template,
+    .v3-studio-copy,
+    .v3-career-photo,
+    .v3-section-head {
+      position: relative;
+      will-change: transform, opacity;
+    }
+
+    .v3-work-card::before,
+    .v3-career-list article::before,
+    .v3-first-grid article::before,
+    .v3-price-row::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, transparent, rgba(255, 250, 240, 0.22), transparent);
+      transform: translateX(-120%);
+      transition: transform 0.7s ease;
+    }
+
+    .v3-work-card:hover::before,
+    .v3-career-list article:hover::before,
+    .v3-first-grid article:hover::before,
+    .v3-price-row:hover::before {
+      transform: translateX(120%);
+    }
+
     @media (max-width: 900px) {
       .v3-mobile-only { display: block; }
 
@@ -927,6 +1067,26 @@ import Layout from '../layouts/Layout.astro';
         margin-left: 14px;
         margin-right: auto;
         padding-bottom: 34px;
+      }
+
+      .v3-hero-orbit {
+        top: 112px;
+        right: 18px;
+        gap: 6px;
+      }
+
+      .v3-hero-orbit span {
+        width: 48px;
+        height: 48px;
+        font-size: 0.62rem;
+      }
+
+      .v3-title-main {
+        border-left-width: 4px;
+      }
+
+      .v3-title-sub {
+        margin-left: 22px;
       }
 
       .v3-hero-copy {
@@ -1038,7 +1198,7 @@ import Layout from '../layouts/Layout.astro';
 
     @media (max-width: 430px) {
       .v3-hero h1 {
-        font-size: clamp(1.86rem, 8.4vw, 2.75rem);
+        font-size: clamp(1.95rem, 8.8vw, 2.85rem);
       }
 
       .v3-btn {
@@ -1066,5 +1226,63 @@ import Layout from '../layouts/Layout.astro';
 
     rotateSlides('.v3-hero-slide');
     rotateSlides('.v3-studio-slide');
+
+    const rail = document.querySelector('.v3-scroll-rail span');
+    const updateRail = () => {
+      if (!rail) return;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? window.scrollY / max : 0;
+      rail.style.transform = `scaleY(${Math.max(0.12, progress)})`;
+    };
+    updateRail();
+    window.addEventListener('scroll', updateRail, { passive: true });
+
+    const motionTargets = document.querySelectorAll(
+      '.v3-section-head, .v3-work-card, .v3-career-list article, .v3-career-photo, .v3-price-row, .v3-note-box, .v3-studio-copy, .v3-first-grid article, .v3-template'
+    );
+
+    if ('IntersectionObserver' in window) {
+      motionTargets.forEach((target) => {
+        target.style.opacity = '0';
+        target.style.transform = 'translateY(34px)';
+        target.style.transition = 'opacity 720ms ease, transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1)';
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+
+      motionTargets.forEach((target, index) => {
+        target.style.transitionDelay = `${Math.min(index % 5, 4) * 55}ms`;
+        observer.observe(target);
+      });
+    }
+
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.to('.v3-hero-media', {
+        yPercent: 9,
+        scale: 1.06,
+        ease: 'none',
+        scrollTrigger: { trigger: '.v3-hero', start: 'top top', end: 'bottom top', scrub: true }
+      });
+      gsap.to('.v3-hero-orbit', {
+        y: 80,
+        ease: 'none',
+        scrollTrigger: { trigger: '.v3-hero', start: 'top top', end: 'bottom top', scrub: true }
+      });
+      gsap.utils.toArray('.v3-work-card').forEach((card, index) => {
+        gsap.to(card, {
+          y: index % 2 === 0 ? -22 : 18,
+          ease: 'none',
+          scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: 1.2 }
+        });
+      });
+    }
   </script>
 </Layout>
