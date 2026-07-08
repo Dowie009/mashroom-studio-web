@@ -1,7 +1,6 @@
 ---
 import '../styles/common.css';
 import '../styles/home.css';
-import '../styles/veo3.css';
 
 interface Props {
   title?: string;
@@ -49,7 +48,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://xn--3-sj5c.jp');
 
     <!-- 追加SEO -->
     <meta name="author" content="真柴道ゐ（マシバドウイ）" />
-    <meta name="keywords" content="レコーディングスタジオ,札幌,真柴道ゐ,マシバドウイ,MASHROOM STUDIO,歌ってみた,MV撮影,DTMレッスン,音楽制作,ボーカル録音,札幌北区,dowie009" />
+    <meta name="keywords" content="レコーディングスタジオ,札幌,真柴道ゐ,マシバドウイ,MASHROOM STUDIO,歌ってみた,MV撮影,DTMレッスン,音楽制作,ボーカル録音,札幌北区,walewalewa" />
 
     <!-- 強制キャッシュ無効化（iPhone/Safari対策） -->
     <meta http-equiv="Pragma" content="no-cache">
@@ -93,10 +92,8 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://xn--3-sj5c.jp');
         "closes": "23:00"
       },
       "sameAs": [
-        "https://www.instagram.com/dowie009",
-        "https://www.tiktok.com/@dowie009",
-        "https://x.com/dowie_now",
-        "https://www.facebook.com/mashibamashiba"
+        "https://www.instagram.com/walewalewa",
+        "https://twitter.com/walewalewa"
       ]
     })} />
 
@@ -145,7 +142,7 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://xn--3-sj5c.jp');
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" is:inline></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" is:inline></script>
     <script is:inline src="/js/common.js"></script>
-    <script is:inline src="/js/veo3-page.js"></script>
     <slot name="scripts" />
 </body>
 </html>
+

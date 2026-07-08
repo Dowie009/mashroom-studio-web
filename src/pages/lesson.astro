@@ -1,160 +1,1178 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-const nav = [
-  { href: '/', label: 'Home' },
-  { href: '/works/', label: 'Works' },
-  { href: '/profile/', label: 'Profile' },
-  { href: '/gear/', label: 'Gear' },
-  { href: '/lesson/', label: 'Lesson', current: true },
-  { href: '/price/', label: 'Price' },
-  { href: '/#contact', label: 'Contact' },
-];
-
-const lessons = [
-  {
-    tag: 'BEGINNER',
-    title: 'DTMはじめて相談',
-    image: '/img/step1-counseling.png',
-    text: 'DAW選び、機材購入、最初の1曲、録音のやり方。最初につまずくところをまとめて整理。',
-  },
-  {
-    tag: 'SONG',
-    title: 'オリジナル曲制作',
-    image: '/img/step2-planning.png',
-    text: '鼻歌、コード、歌詞、デモから1曲の形へ。アレンジや音色選びも一緒に詰めます。',
-  },
-  {
-    tag: 'MIX',
-    title: 'ミックス添削',
-    image: '/img/step3-lesson.png',
-    text: '自分で作った音源を聴きながら、EQ、コンプ、空間、音量、書き出しまで確認。',
-  },
-  {
-    tag: 'RELEASE',
-    title: '発信・リリース準備',
-    image: '/img/step4-completion.png',
-    text: '配信リリース、YouTube、SNS動画、プロフィール文、次の制作計画まで相談。',
-  },
-];
-
-const flow = [
-  ['01', '今の状態を送る', '音源、スクショ、悩み、やりたい曲。未完成で問題ありません。'],
-  ['02', '一緒に整理する', '何から直すか、何を買うか、どの順番で進むかを決めます。'],
-  ['03', '手を動かす', '画面共有またはスタジオで、実際のプロジェクトを触りながら進めます。'],
-  ['04', '次の一手を残す', '終わった後に何をすればいいか、宿題や制作手順を明確にします。'],
-];
-
-const targets = ['DTM初心者', '学生', '歌ってみた', '弾き語り', '地下アイドル', 'バンドマン', '宅録勢', '作曲初心者'];
+import PageNav from '../components/PageNav.astro';
 ---
 
 <Layout
-  title="DTMレッスン・制作相談｜札幌北区 | MASHROOM STUDIO"
-  description="札幌北区のMASHROOM STUDIOでDTMレッスン、作曲相談、ミックス添削、録音相談。初心者、学生、歌ってみた、弾き語り、バンドマン向け。オンライン相談も対応。"
-  ogImage="/img/lesson-page-screenshot.jpg"
+  title="DTMレッスン・ボイトレ・ボーカルレッスン 札幌｜初心者歓迎 | MASHROOM STUDIO"
+  description="札幌でDTMレッスン・ボイトレ・ボーカルレッスン・弾き語り指導を受けるなら MASHROOM STUDIO。真柴道ゐがマンツーマンで直接指導。オンラインレッスン（Zoom・LINE）にも対応。北海道で音楽を学びたい初心者から上級者まで。"
 >
-  <main class="veo3-page">
-    <nav class="veo3-nav" aria-label="サイト内ナビゲーション">
-      <a class="veo3-brand" href="/">MASHROOM STUDIO</a>
-      <div class="veo3-nav-links">
-        {nav.map((item) => <a class={item.current ? 'is-current' : ''} href={item.href}>{item.label}</a>)}
-      </div>
-    </nav>
+    <div class="bg-decor"></div>
+    <div class="bg-grid"></div>
 
-    <section class="veo3-hero" aria-labelledby="lesson-title">
-      <div class="veo3-hero-media" aria-hidden="true">
-        <img src="/img/Main06Lesson.jpg" alt="">
-      </div>
-      <div class="veo3-hero-content">
-        <div>
-          <p class="veo3-kicker">03 / LESSON</p>
-          <h1 id="lesson-title">教科書より、<br>あなたの曲を触る。</h1>
-          <p class="veo3-lede">
-            DTM、録音、ミックス、作曲、機材、発信。
-            一般論ではなく、いま作っている曲や活動に必要なことから一緒に進めます。
-          </p>
-          <div class="veo3-actions">
-            <a class="veo3-btn veo3-btn-primary" href="/#contact">相談する</a>
-            <a class="veo3-btn" href="#lesson-menu">内容を見る</a>
-          </div>
-        </div>
-        <aside class="veo3-hero-panel veo3-float">
-          <strong>オンラインも対面も対応</strong>
-          <p>Zoom、LINE、スタジオ対面。制作状況に合わせて、いちばん進む形を選びます。</p>
-        </aside>
-      </div>
+    <header>
+        <a href="/" class="logo-container magnet">
+            <img src="/img/logo.png" alt="MASHROOM STUDIO" class="logo-img">
+            <img src="/img/logo.png" alt="" class="logo-glitch logo-glitch-1">
+            <img src="/img/logo.png" alt="" class="logo-glitch logo-glitch-2">
+        </a>
+        <a href="/" class="back-btn magnet">← BACK TO HOME</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-tag reveal-hero">ONLINE & STUDIO LESSON</div>
+        <h1 class="hero-title">
+            <span class="nowrap">あなたの音楽を、</span><br class="br-sp"><span class="nowrap">プロのクオリティで。</span>
+        </h1>
+        <p class="hero-desc reveal-hero">
+            「わからない」を「できた！」に変える最短ルート。<br class="br-pc">
+            初心者からプロ志向まで、<br class="br-sp">一人ひとりに合わせたマンツーマンレッスン。
+        </p>
+        <a href="#reserve" class="hero-btn magnet reveal-hero">無料相談を予約する</a>
     </section>
 
-    <section class="veo3-section" id="lesson-menu" aria-labelledby="lesson-menu-title">
-      <div class="veo3-section-head veo3-reveal">
-        <div>
-          <p class="veo3-kicker">MENU</p>
-          <h2 id="lesson-menu-title">相談できること</h2>
-        </div>
-        <p>「レッスン」と言っても、型通りのカリキュラムより実制作に寄せます。困っている場所を直接見ます。</p>
-      </div>
-      <div class="veo3-grid four">
-        {lessons.map((item) => (
-          <article class="veo3-card veo3-reveal">
-            <div class="veo3-card-image">
-              <img src={item.image} alt={item.title} loading="lazy">
+    <section class="flow-section">
+        <h2 class="section-title reveal">LESSON FLOW</h2>
+        
+        <div class="flow-container">
+            <div class="flow-card magnet reveal-card">
+                <div class="step-num">01</div>
+                <div class="step-illust">
+                    <img src="/img/step1-counseling.png" alt="無料カウンセリング">
+                </div>
+                <h3 class="step-title">無料カウンセリング</h3>
+                <p class="step-short">まずはあなたの<br>「やりたいこと」を<br>お聞かせください。</p>
+                <div class="toggle-icon">CLICK FOR DETAIL</div>
+                
+                <div class="card-detail">
+                    <ul class="flow-detail-list">
+                        <li>
+                            <span class="emoji">🗣</span>
+                            <span class="txt"><strong>ヒアリング:</strong> あなたの「悩み」や「夢」をリラックスしてお話しましょう。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🎸</span>
+                            <span class="txt"><strong>機材相談:</strong> 「何を買えばいい？」から相談OK。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">💻</span>
+                            <span class="txt"><strong>形式自由:</strong> Zoom / LINE / スタジオ対面、選べます。</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div class="veo3-card-body">
-              <span class="veo3-tag">{item.tag}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
+
+            <div class="flow-arrow reveal-card">▶</div>
+
+            <div class="flow-card magnet reveal-card">
+                <div class="step-num">02</div>
+                <div class="step-illust">
+                    <img src="/img/step2-planning.png" alt="プランのご提案">
+                </div>
+                <h3 class="step-title">プランのご提案</h3>
+                <p class="step-short">あなただけの<br>「上達の地図」を<br>作ります。</p>
+                <div class="toggle-icon">CLICK FOR DETAIL</div>
+
+                 <div class="card-detail">
+                    <ul class="flow-detail-list">
+                        <li>
+                            <span class="emoji">🗺</span>
+                            <span class="txt"><strong>上達の地図:</strong> あなた専用のカリキュラムを作成。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🎯</span>
+                            <span class="txt"><strong>目標設定:</strong> 「3ヶ月で1曲」「予算5万円で」など具体的に。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">💰</span>
+                            <span class="txt"><strong>明朗会計:</strong> 必要な費用を事前にご提示。無理な勧誘なし！</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-          </article>
-        ))}
-      </div>
-    </section>
 
-    <section class="veo3-section alt" aria-labelledby="flow-title">
-      <div class="veo3-section-head veo3-reveal">
-        <div>
-          <p class="veo3-kicker">FLOW</p>
-          <h2 id="flow-title">進め方</h2>
+            <div class="flow-arrow reveal-card">▶</div>
+
+            <div class="flow-card magnet reveal-card">
+                <div class="step-num">03</div>
+                <div class="step-illust">
+                    <img src="/img/step3-lesson.png" alt="レッスンスタート">
+                </div>
+                <h3 class="step-title">レッスンスタート</h3>
+                <p class="step-short">いよいよ制作開始！<br>一緒に手を<br>動かしましょう。</p>
+                <div class="toggle-icon">CLICK FOR DETAIL</div>
+
+                 <div class="card-detail">
+                    <ul class="flow-detail-list">
+                        <li>
+                            <span class="emoji">🔥</span>
+                            <span class="txt"><strong>実践形式:</strong> 画面共有や実機操作で、「作りながら」学ぶ。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🎵</span>
+                            <span class="txt"><strong>あなた仕様:</strong> 教科書通りではなく、「作りたい曲」のための技術を。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">📹</span>
+                            <span class="txt"><strong>復習OK:</strong> レッスン動画を録画して後で見返せます。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flow-arrow reveal-card">▶</div>
+
+            <div class="flow-card magnet reveal-card">
+                <div class="step-num">04</div>
+                <div class="step-illust">
+                    <img src="/img/step4-completion.png" alt="完成&フィードバック">
+                </div>
+                <h3 class="step-title">完成 & フィードバック</h3>
+                <p class="step-short">作品の完成！<br>次のステップへ。</p>
+                <div class="toggle-icon">CLICK FOR DETAIL</div>
+
+                 <div class="card-detail">
+                    <ul class="flow-detail-list">
+                        <li>
+                            <span class="emoji">✨</span>
+                            <span class="txt"><strong>プロの視点:</strong> クオリティを上げるための最終アドバイス。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🚀</span>
+                            <span class="txt"><strong>発信サポート:</strong> SNS投稿や配信リリースの手順もレクチャー。</span>
+                        </li>
+                        <li>
+                            <span class="emoji">🤝</span>
+                            <span class="txt"><strong>次のステップ:</strong> 「できた！」を自信に、次の目標へ。</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <p>目的は「習った気がする」ではなく、次に進める状態を作ること。終わった後の一手まで残します。</p>
-      </div>
-      <div class="veo3-grid four">
-        {flow.map(([num, title, text]) => (
-          <article class="veo3-step veo3-reveal">
-            <span class="veo3-tag">{num}</span>
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </article>
-        ))}
-      </div>
     </section>
 
-    <section class="veo3-section dark" aria-labelledby="target-title">
-      <div class="veo3-section-head veo3-reveal">
-        <div>
-          <p class="veo3-kicker">FOR</p>
-          <h2 id="target-title">こういう人向け</h2>
+    <section class="case-section">
+        <div class="case-header">
+            <h2 class="section-title reveal">CASE STUDY</h2>
+            <p class="case-sub reveal">実際にどんな人が利用しているの？</p>
         </div>
-        <p>完璧に準備してから来る必要はありません。むしろ詰まっている状態のほうが相談の価値があります。</p>
-      </div>
-      <div class="veo3-strip veo3-reveal">
-        {targets.map((item) => <span>{item}</span>)}
-      </div>
+
+        <div class="case-container">
+            <div class="case-grid">
+                <div class="case-card magnet reveal">
+                    <div class="case-tag" style="background:var(--pop-1); color:white;">歌ってみた初心者</div>
+                    <h3 class="case-title">初めての録音。<br>機材選びからMixまで。</h3>
+                    <p class="case-digest">PCも持っていない状態からスタート。予算10万円で揃う機材の選定アドバイスから始め...</p>
+                    <div class="case-footer">
+                        <span>3ヶ月コース</span>
+                        <span class="case-price">Click to Open</span>
+                    </div>
+                    <div class="card-detail">
+                        <p style="margin-bottom:10px;">PCも持っていない状態からスタートしたAさん。予算10万円で揃う機材の選定アドバイスから始め、3ヶ月後には自分で動画投稿まで！</p>
+                        <ul class="case-detail-list">
+                            <li><span>01</span> カウンセリング：予算と目標の設定</li>
+                            <li><span>02</span> 機材購入同行 & セットアップ講習</li>
+                            <li><span>03</span> DAW（Studio One）の基本操作レッスン</li>
+                            <li><span>04</span> 初レコーディング & 簡易ミックス指導</li>
+                            <li><span>GOAL</span> 「歌ってみた」初投稿完了！</li>
+                        </ul>
+                        <div style="text-align:right; font-weight:bold; color:var(--pop-1); margin-top:10px;">¥60,000 (全6回)</div>
+                    </div>
+                </div>
+                
+                <div class="case-card magnet reveal" style="border-left-color: var(--pop-5);">
+                    <div class="case-tag" style="background:var(--pop-5); color:black;">オリジナル曲制作</div>
+                    <h3 class="case-title">鼻歌から<br>フルアレンジへ。</h3>
+                    <p class="case-digest">メロディは浮かぶけどコードがわからない方。AI作曲支援ツールの使い方とコード進行の基礎をレッスン。</p>
+                    <div class="case-footer">
+                        <span>2ヶ月コース</span>
+                        <span class="case-price">Click to Open</span>
+                    </div>
+                    <div class="card-detail">
+                        <p style="margin-bottom:10px;">メロディは浮かぶけどコードがわからないBさん。AI作曲支援ツールの使い方と、コード進行の基礎をレッスン。</p>
+                        <ul class="case-detail-list">
+                            <li><span>01</span> 作りたい曲のイメージ共有</li>
+                            <li><span>02</span> AIツール（Synthesizer V等）活用法</li>
+                            <li><span>03</span> コード進行のパズル的理解</li>
+                            <li><span>04</span> アレンジ構築 & 音色選び</li>
+                            <li><span>GOAL</span> オリジナル曲のデモ完成！</li>
+                        </ul>
+                        <div style="text-align:right; font-weight:bold; color:var(--pop-5); margin-top:10px;">¥45,000 (全4回)</div>
+                    </div>
+                </div>
+
+                <div class="case-card magnet reveal" style="border-left-color: var(--pop-2);">
+                    <div class="case-tag" style="background:var(--pop-2); color:black;">バンドマン</div>
+                    <h3 class="case-title">デモ音源の<br>クオリティアップ。</h3>
+                    <p class="case-digest">バンドのデモ音源をよりプロフェッショナルに。ミックス・マスタリングの実践レッスン。</p>
+                    <div class="case-footer">
+                        <span>1.5ヶ月コース</span>
+                        <span class="case-price">Click to Open</span>
+                    </div>
+                    <div class="card-detail">
+                        <p style="margin-bottom:10px;">バンド活動をしているCさん。自分たちで録音したデモのクオリティを上げたい！</p>
+                        <ul class="case-detail-list">
+                            <li><span>01</span> 現状のデモ音源分析</li>
+                            <li><span>02</span> ミックスの基礎理論レッスン</li>
+                            <li><span>03</span> プラグインの実践的な使い方</li>
+                            <li><span>04</span> マスタリングの基本</li>
+                            <li><span>GOAL</span> 配信リリース可能なクオリティに！</li>
+                        </ul>
+                        <div style="text-align:right; font-weight:bold; color:var(--pop-2); margin-top:10px;">¥35,000 (全3回)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section class="veo3-cta" aria-labelledby="contact-title">
-      <p class="veo3-kicker">CONTACT</p>
-      <h2 id="contact-title">最初の相談では、作品が未完成でいいです。</h2>
-      <p>今の音源、困っていること、やりたい方向、使っているDAWを送ってください。そこから必要な順番を組みます。</p>
-      <div class="veo3-actions">
-        <a class="veo3-btn veo3-btn-primary" href="/#contact">相談する</a>
-        <a class="veo3-btn" href="/price/">料金を見る</a>
-      </div>
+    <section class="faq-section" id="faq">
+        <h2 class="section-title reveal">FAQ</h2>
+        <div class="faq-container">
+            <div class="faq-item reveal">
+                <div class="faq-q">Q. 完全初心者でも大丈夫ですか？</div>
+                <div class="faq-a">A. もちろんです！機材の選び方から丁寧にサポートします。「何もわからない」状態からのスタートでも全く問題ありません。</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">Q. オンラインレッスンはどのように行いますか？</div>
+                <div class="faq-a">A. ZoomやDiscordなどのビデオ通話ツールを使用します。画面共有で実際の作業を見せながら進めるので、対面レッスンとほぼ同じ感覚で学べます。</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">Q. レッスン料金の支払い方法は？</div>
+                <div class="faq-a">A. 銀行振込、クレジットカード決済、PayPayなど各種決済に対応しています。詳しくはカウンセリング時にご案内します。</div>
+            </div>
+            <div class="faq-item reveal">
+                <div class="faq-q">Q. キャンセルや日程変更は可能ですか？</div>
+                <div class="faq-a">A. レッスン開始24時間前までのご連絡であれば、日程変更が可能です。それ以降のキャンセルは1回分消化となりますのでご注意ください。</div>
+            </div>
+        </div>
     </section>
 
-    <nav class="veo3-mobile-cta" aria-label="固定CTA">
-      <a href="#lesson-menu">内容</a>
-      <a href="/price/">料金</a>
-      <a href="/#contact">相談</a>
-    </nav>
-  </main>
+    <section class="reserve-section" id="reserve">
+        <!-- 上部 2カラム -->
+        <div class="reserve-top">
+            <!-- 左カラム -->
+            <div class="reserve-info">
+                <h2 class="section-title">無料相談予約</h2>
+                <div class="safe-badge">
+                    <span class="safe-icon">🔒</span>
+                    <span>完全無料・勧誘なし</span>
+                </div>
+                <div class="safe-badge">
+                    <span class="safe-icon">⏱</span>
+                    <span>所要時間：約30分</span>
+                </div>
+                <div class="safe-badge">
+                    <span class="safe-icon">💬</span>
+                    <span>オンライン / 対面 選択可</span>
+                </div>
+                <p class="reserve-desc">
+                    まずは気軽にお話ししましょう。<br>
+                    あなたの「やりたいこと」を聞かせてください。<br>
+                    <strong style="color:var(--pop-1);">強引な勧誘は一切ありません。</strong>
+                </p>
+                <div class="voice-box">
+                    <div class="voice-title">💭 こんな相談が届いています</div>
+                    <div class="voice-item">
+                        <span class="voice-avatar">🙋‍♀️</span>
+                        <div class="voice-bubble">「<em>仮歌のお仕事</em>を始めたい。機材を何から揃えればいいか分からない」</div>
+                    </div>
+                    <div class="voice-item">
+                        <span class="voice-avatar">🙋‍♂️</span>
+                        <div class="voice-bubble">「ミュージシャンだけど<em>声優の仕事</em>を家でやってみたい。機材選びから教えてほしい」</div>
+                    </div>
+                    <div class="voice-item">
+                        <span class="voice-avatar">🙋‍♀️</span>
+                        <div class="voice-bubble">「<em>レコーディング→納品→配信</em>までの流れを一通り知りたい」</div>
+                    </div>
+                    <div class="voice-item">
+                        <span class="voice-avatar">🙋‍♂️</span>
+                        <div class="voice-bubble">「<em>弾き語り</em>をもっとレベルアップしたい」</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 右カラム：フォーム -->
+            <div class="reserve-box">
+                <h3 style="font-size:1.5rem; margin-bottom:5px;">予約フォーム</h3>
+                <p class="form-sub">送信後、24時間以内にご返信します。</p>
+                <form id="reserve-form" action="https://formspree.io/f/xykdarno" method="POST">
+                    <div class="input-group">
+                        <label class="input-label">お名前<span class="required">*</span></label>
+                        <input type="text" name="name" class="input-field" placeholder="山田 太郎" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">メールアドレス<span class="required">*</span></label>
+                        <input type="email" name="email" class="input-field" placeholder="your@email.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">電話番号<span class="optional-tag">任意</span></label>
+                        <input type="tel" name="phone" class="input-field" placeholder="090-xxxx-xxxx">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">興味のある分野</label>
+                        <input type="hidden" name="interest" id="interest-hidden" value="">
+                        <div class="chip-group">
+                            <span class="chip" data-chip>🎵 DTM</span>
+                            <span class="chip" data-chip>🎸 楽器</span>
+                            <span class="chip" data-chip>🎤 ボーカル</span>
+                            <span class="chip" data-chip>🎼 作編曲</span>
+                            <span class="chip" data-chip>🤔 未定</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">ご相談内容<span class="optional-tag">任意</span></label>
+                        <textarea name="message" class="input-field" rows="3" placeholder="例：この曲みたいな曲を作りたい！/ 機材選びから相談したい / 配信のやり方を知りたい　など"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn magnet">予約を確定する</button>
+                </form>
+                <!-- 送信完了メッセージ -->
+                <div id="thank-you" style="display:none; text-align:center; padding:40px 20px;">
+                    <div style="font-size:3rem; margin-bottom:15px;">🎉</div>
+                    <h3 style="font-size:1.5rem; margin-bottom:10px;">送信ありがとうございます！</h3>
+                    <p style="color:#555; line-height:1.8;">24時間以内にご返信いたします。<br>しばらくお待ちください。</p>
+                </div>
+            </div>
+        </div>
+        <!-- 下部：ワークフロー（フル幅） -->
+        <div class="workflow-area">
+            <div class="workflow-label">
+                <h3 style="font-family:var(--font-en); font-size:1.8rem; color:var(--c-text); letter-spacing:0.1em;">HOW IT WORKS</h3>
+                <p style="color:#888; font-size:0.85rem; margin-top:5px;">送信からレッスン開始まで、こんな流れで進みます。</p>
+            </div>
+            <div class="workflow-steps">
+                <div class="wf-step">
+                    <div class="wf-icon"><span>📝</span><span class="wf-num">1</span></div>
+                    <div class="wf-content">
+                        <div class="wf-step-title">送信</div>
+                        <div class="wf-bubble"><div class="wf-speaker">あなた →</div>「<em>DTM始めたい</em>けど、何からやればいいか分からなくて...」</div>
+                    </div>
+                </div>
+                <div class="wf-arrow">▶</div>
+                <div class="wf-step">
+                    <div class="wf-icon"><span>💌</span><span class="wf-num">2</span></div>
+                    <div class="wf-content">
+                        <div class="wf-step-title">返信</div>
+                        <div class="wf-bubble"><div class="wf-speaker">MASHROOM →</div>「機材ゼロからでも大丈夫！まず<em>30分だけ</em>お話しませんか？」</div>
+                    </div>
+                </div>
+                <div class="wf-arrow">▶</div>
+                <div class="wf-step">
+                    <div class="wf-icon"><span>📅</span><span class="wf-num">3</span></div>
+                    <div class="wf-content">
+                        <div class="wf-step-title">日程調整</div>
+                        <div class="wf-bubble"><div class="wf-speaker">あなた →</div>「<em>水曜の夜20時</em>なら空いてます！」</div>
+                    </div>
+                </div>
+                <div class="wf-arrow">▶</div>
+                <div class="wf-step">
+                    <div class="wf-icon"><span>💬</span><span class="wf-num">4</span></div>
+                    <div class="wf-content">
+                        <div class="wf-step-title">無料相談</div>
+                        <div class="wf-bubble"><div class="wf-speaker">MASHROOM →</div>「今ある<em>パソコン、iPhoneだけ</em>でも始められますよ！」</div>
+                    </div>
+                </div>
+                <div class="wf-arrow">▶</div>
+                <div class="wf-step wf-step-final">
+                    <div class="wf-icon"><span>🎉</span><span class="wf-num">5</span></div>
+                    <div class="wf-content">
+                        <div class="wf-step-title">スタート！</div>
+                        <div class="wf-bubble"><div class="wf-speaker">あなた →</div>「<em>お願いします</em>！」</div>
+                        <div class="wf-or">or</div>
+                        <div class="wf-bubble wf-bubble-alt"><div class="wf-speaker">あなた →</div>「今回は<em class="em-muted">見送り</em>で！」</div>
+                        <div class="wf-ok">どちらでも大丈夫です 🙌</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: var(--c-bg); padding: 50px 5% 60px; position: relative; z-index: 10; border-top: 5px solid var(--c-text); border-bottom: 5px solid var(--c-text);">
+        <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 30px; flex-wrap: wrap;">
+            <h2 style="font-family: var(--font-en); font-size: 2.5rem; color: var(--c-text); margin: 0; letter-spacing: 0.1em;">03. LESSON</h2>
+            <div style="display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+                <a href="/" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">00. HOME</a>
+                <a href="/profile" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">01. PROFILE</a>
+                <a href="/works" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">02. WORKS</a>
+                <a href="/lesson" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white); opacity: 0.5; pointer-events: none;">03. LESSON</a>
+                <a href="/gear" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">04. GEAR</a>
+                <a href="/price" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">05. PRICE</a>
+                <a href="https://blog.xn--3-sj5c.jp/" class="hub-link magnet" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">06. BLOG</a>
+                <a href="/#contact" class="hub-link magnet" style="font-family: var(--font-en); font-size: 1.2rem; color: var(--c-text); text-decoration: none; padding: 8px 20px; border: 2px solid var(--c-text); border-radius: 30px; transition: 0.3s; background: var(--c-white);">07. CONTACT</a>
+            </div>
+        </div>
+    </section>
+
+    <div style="text-align: center; margin: 80px auto 0; padding: 40px 20px; max-width: 600px; border-top: 2px dashed rgba(0,0,0,0.1);">
+        <p style="font-family: var(--font-en); font-size: 1.2rem; font-weight: 900; letter-spacing: 0.1em; margin-bottom: 8px;">BLOG</p>
+        <p style="font-size: 0.95rem; opacity: 0.7; margin-bottom: 20px;">DTMの始め方、機材選びのヒントはこちら</p>
+        <a href="https://blog.xn--3-sj5c.jp/dtm" target="_blank" style="display: inline-block; font-family: var(--font-en); font-weight: bold; text-decoration: none; color: var(--c-text); border: 3px solid var(--c-text); padding: 12px 36px; font-size: 1rem; transition: 0.3s; letter-spacing: 0.05em;">DTM BLOG &rarr;</a>
+    </div>
+
+    <PageNav items={[
+        { href: '/#contact', label: 'TRIAL', title: '初回お試し ¥2,000 から', desc: 'カウンセリング＆レッスン。まずは話してみるところから' },
+        { href: '/price', label: 'PRICE', title: '料金の全体像を見る', desc: 'レッスン以外のメニューもまとめて確認できます' },
+        { href: '/profile', label: 'PROFILE', title: '教えるのは、こんな人', desc: '現役プロデューサー・真柴道ゐの経歴と実績' },
+    ]} />
+
+    <footer>
+        <p style="font-size: 0.75rem; letter-spacing: 0.15em; opacity: 0.6;">MASHROOM STUDIO — RECORDING & CREATIVE BASE — HOKKAIDO, SAPPORO</p>
+        <p style="margin-top: 10px; font-size: 0.75rem; opacity: 0.5;">&copy; 2026 MASHROOM STUDIO</p>
+    </footer>
 </Layout>
+
+<style is:global>
+    :root {
+        --c-bg: #f4f4f0; 
+        --c-text: #333333;
+        --c-accent: #000000;
+    }
+
+    /* BACKGROUND DECORATION */
+    .bg-decor {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        pointer-events: none; opacity: 0.4;
+        background-image: 
+            radial-gradient(circle at 10% 20%, rgba(255, 0, 85, 0.03) 0%, transparent 20%),
+            radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.03) 0%, transparent 20%);
+    }
+    .bg-grid {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        background-image: linear-gradient(#e0e0e0 1px, transparent 1px), linear-gradient(90deg, #e0e0e0 1px, transparent 1px);
+        background-size: 50px 50px; opacity: 0.3; pointer-events: none;
+    }
+
+    /* HEADER (Works style) */
+    header {
+        padding: 10px 3%;
+        display: flex; justify-content: space-between; align-items: center;
+        background: var(--c-white); border-bottom: 4px solid var(--c-text);
+        position: relative; z-index: 100; height: 150px;
+    }
+    .logo-container {
+        display: block;
+        text-decoration: none;
+        position: relative;
+        width: auto;
+        height: 120px;
+    }
+    .logo-img {
+        height: 100%;
+        width: auto;
+        transition: 0.3s;
+    }
+    .logo-glitch {
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%;
+        width: auto;
+        opacity: 0;
+        pointer-events: none;
+    }
+    .logo-container:hover .logo-glitch-1 {
+        animation: glitch1 0.3s infinite;
+        opacity: 0.8;
+    }
+    .logo-container:hover .logo-glitch-2 {
+        animation: glitch2 0.3s infinite;
+        opacity: 0.8;
+    }
+    @keyframes glitch1 {
+        0%, 100% { transform: translate(0); filter: hue-rotate(0deg); }
+        25% { transform: translate(-5px, 2px); filter: hue-rotate(90deg); }
+        50% { transform: translate(3px, -3px); filter: hue-rotate(180deg); }
+        75% { transform: translate(-2px, 5px); filter: hue-rotate(270deg); }
+    }
+    @keyframes glitch2 {
+        0%, 100% { transform: translate(0); filter: hue-rotate(180deg); }
+        25% { transform: translate(4px, -2px); filter: hue-rotate(270deg); }
+        50% { transform: translate(-3px, 4px); filter: hue-rotate(0deg); }
+        75% { transform: translate(2px, -4px); filter: hue-rotate(90deg); }
+    }
+    .logo-container:hover .logo-img {
+        transform: scale(1.02);
+        transition: 0.3s;
+    }
+    .back-btn {
+        font-family: var(--font-en);
+        font-weight: bold;
+        text-decoration: none;
+        color: var(--c-text);
+        border: 2px solid var(--c-text);
+        padding: 10px 20px;
+        transition: 0.3s;
+        margin-right: 100px;
+    }
+    .back-btn:hover { background: var(--c-text); color: var(--c-white); }
+
+    .hamburger-btn { 
+        position: fixed; top: 30px; right: 30px; z-index: 11000; 
+        width: 80px; height: 80px; 
+        background: var(--c-text); 
+        border: 4px solid var(--pop-2); 
+        border-radius: 10px;
+        display: flex; flex-direction: column; justify-content: center; align-items: center; 
+        gap: 6px; cursor: pointer; 
+        transition: background 0.3s;
+        box-shadow: 5px 5px 0px rgba(0,0,0,0.2); 
+    }
+    .hamburger-btn:hover { background: var(--pop-1); border-color: var(--c-white); }
+    .hamburger-btn:hover .h-line { background: var(--c-white); }
+    
+    .h-line { width: 40px; height: 5px; background: var(--c-white); transition: 0.3s; pointer-events: none; border-radius: 4px; }
+    
+    .hamburger-btn.is-active {
+        background: var(--c-white) !important;
+        border-color: var(--c-text) !important;
+        transform: rotate(0deg) !important;
+    }
+    .hamburger-btn.is-active .h-line:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .hamburger-btn.is-active .h-line:nth-child(2) { opacity: 0; }
+    .hamburger-btn.is-active .h-line:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
+    .hamburger-btn.is-active .h-line { background: var(--c-text); }
+
+    .pop-sidebar { position: fixed; top: 0; right: 0; width: 500px; max-width: 90vw; height: 100vh; background: rgba(255, 255, 255, 0.95); border-left: 8px solid var(--c-text); z-index: 10500; transform: translateX(120%) skewX(-5deg); transform-origin: top right; box-shadow: -20px 0 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; justify-content: center; padding: 40px; background-image: radial-gradient(var(--pop-5) 2px, transparent 2px); background-size: 30px 30px; }
+    .menu-list { list-style: none; width: 100%; text-align: right; }
+    .menu-item { margin: 15px 0; perspective: 1000px; }
+    .menu-link { display: inline-block; font-family: var(--font-en); font-size: 4rem; font-weight: 900; color: var(--c-text); text-decoration: none; line-height: 1; text-transform: uppercase; position: relative; transition: 0.3s; padding: 0 10px; background: transparent; }
+    .menu-link .menu-num { color: rgba(0, 0, 0, 0.4); }
+    .menu-item:nth-child(1) .menu-link:hover { color: var(--pop-1); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+    .menu-item:nth-child(2) .menu-link:hover { color: var(--pop-2); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+    .menu-item:nth-child(3) .menu-link:hover { color: var(--pop-3); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+    .menu-item:nth-child(4) .menu-link:hover { color: var(--pop-4); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+    .menu-item:nth-child(5) .menu-link:hover { color: var(--pop-5); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+    .menu-item:nth-child(6) .menu-link:hover { color: var(--pop-6); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+    .menu-item:nth-child(7) .menu-link:hover { color: var(--pop-1); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-white); }
+    .menu-item:nth-child(8) .menu-link:hover { color: var(--pop-6); text-shadow: 5px 5px 0px var(--c-text); transform: translateX(-20px) scale(1.1); background: var(--c-text); }
+    .menu-deco { position: absolute; bottom: 20px; right: 40px; font-family: var(--font-digi); font-size: 1rem; color: var(--c-text); opacity: 0.5; text-align: right; }
+    .menu-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.3); z-index: 10400;
+        visibility: hidden; opacity: 0; transition: 0.3s;
+        backdrop-filter: blur(2px);
+    }
+    .menu-overlay.is-active { visibility: visible; opacity: 1; }
+
+    /* UTILITY FOR LINE BREAKS */
+    .br-pc { display: block; }
+    .br-sp { display: none; }
+    @media (max-width: 768px) {
+        .br-pc { display: none; }
+        .br-sp { display: block; }
+    }
+    .nowrap { white-space: nowrap; }
+
+    /* HERO (COMPACT) */
+    .hero { 
+        height: 60vh; 
+        display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; 
+        padding-top: 60px;
+    }
+    
+    .hero-tag {
+        font-family: var(--font-en); font-size: 1rem; color: var(--c-text); 
+        background: var(--pop-2); border: 2px solid var(--c-text); 
+        padding: 5px 20px; border-radius: 50px; margin-bottom: 15px; 
+        box-shadow: 4px 4px 0px var(--c-text); display: inline-block;
+    }
+    
+    .hero-title { 
+        font-size: 3.5rem; font-weight: 900; line-height: 1.2; margin-bottom: 20px;
+        color: var(--c-text); letter-spacing: 0.05em; white-space: nowrap;
+    }
+    @media (max-width: 1099px) {
+        .hero-title { white-space: normal; font-size: clamp(1.6rem, 8.4vw, 2.5rem); line-height: 1.3; }
+    }
+
+    .hero-desc { font-size: 1rem; font-weight: 700; line-height: 1.8; max-width: 700px; color: #555; margin-bottom: 30px; }
+    
+    .hero-btn {
+        display: inline-block; padding: 15px 50px; font-size: 1.2rem; font-weight: 900; 
+        color: var(--c-text); background: linear-gradient(90deg, var(--pop-5), var(--pop-4)); 
+        border: 3px solid var(--c-text); border-radius: 12px;
+        text-decoration: none; font-family: var(--font-en); 
+        box-shadow: 8px 8px 0px var(--c-text); transition: 0.2s;
+        position: relative; overflow: hidden; text-transform: uppercase;
+    }
+    .hero-btn:hover { transform: translate(-3px, -3px); box-shadow: 12px 12px 0px var(--pop-1); background: var(--c-white); }
+    
+    /* WORKFLOW SECTION */
+    .flow-section { 
+        padding: 80px 5%; position: relative; overflow: hidden; 
+        background-color: var(--pop-6);
+        background-image: repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 20px,
+            rgba(255, 255, 255, 0.3) 20px,
+            rgba(255, 255, 255, 0.3) 40px
+        );
+        border-bottom: 5px solid var(--c-text);
+    }
+    .section-title { 
+        font-size: 4rem; font-family: var(--font-en); text-align: center; margin-bottom: 50px; 
+        color: var(--c-text); position: relative; display: block;
+        text-shadow: 4px 4px 0px var(--c-white);
+        background: var(--c-text); color: var(--pop-6); display: inline-block;
+        padding: 5px 30px; transform: skewX(-10deg) translateX(-50%); left: 50%;
+        box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+    }
+    
+    .flow-container {
+        max-width: 1400px; margin: 0 auto; 
+        display: flex; justify-content: space-between; gap: 20px;
+        position: relative; flex-wrap: wrap; 
+        align-items: flex-start;
+    }
+    
+    .flow-card {
+        flex: 1; min-width: 260px; 
+        background: #ffffff; 
+        color: var(--c-text);
+        border-radius: 16px; padding: 30px 20px; position: relative;
+        cursor: pointer; transition: 0.3s;
+        border: 4px solid var(--c-text);
+        box-shadow: 10px 10px 0px rgba(0,0,0,0.2);
+        display: flex; flex-direction: column; align-items: center; text-align: center;
+        min-height: 350px;
+        z-index: 1;
+        height: auto;
+    }
+    
+    .flow-card:hover { 
+        transform: translateY(-10px) rotate(2deg); 
+        z-index: 10; 
+    }
+
+    .step-num {
+        font-family: var(--font-en); font-size: 1.8rem; color: var(--c-text); 
+        background: var(--pop-5); width: 50px; height: 50px; border-radius: 50%;
+        display: flex; justify-content: center; align-items: center;
+        border: 3px solid var(--c-text); margin-bottom: 15px;
+        position: absolute; top: -25px;
+    }
+    .flow-card:nth-child(1) .step-num { background: var(--pop-1); color:white; }
+    .flow-card:nth-child(3) .step-num { background: var(--pop-5); color:black; }
+    .flow-card:nth-child(5) .step-num { background: var(--pop-2); color:black; }
+    .flow-card:nth-child(7) .step-num { background: var(--pop-4); color: white; }
+
+    /* ★修正: イラスト部分のデザイン - 画像表示用 */
+    .step-illust {
+        width: 100%; height: 140px; 
+        border-radius: 12px; margin-bottom: 15px; margin-top: 20px;
+        overflow: hidden; 
+        display: flex; justify-content: center; align-items: center; 
+        position: relative;
+        transition: 0.3s;
+    }
+    
+    /* 画像のスタイル */
+    .step-illust img {
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover;
+        border-radius: 12px;
+    }
+    
+    /* STEP 1: ピンク/赤系 */
+    .flow-card:nth-child(1) .step-illust {
+        background: linear-gradient(135deg, #ffebf0 0%, #ffe0e8 100%);
+        border: 3px solid var(--pop-1);
+    }
+    
+    /* STEP 2: シアン系 */
+    .flow-card:nth-child(3) .step-illust {
+        background: linear-gradient(135deg, #e0f7ff 0%, #ccf2ff 100%);
+        border: 3px solid var(--pop-5);
+    }
+    
+    /* STEP 3: ライム/黄緑系 */
+    .flow-card:nth-child(5) .step-illust {
+        background: linear-gradient(135deg, #f7ffe0 0%, #eeff99 100%);
+        border: 3px solid var(--pop-2);
+    }
+    
+    /* STEP 4: 紫系 */
+    .flow-card:nth-child(7) .step-illust {
+        background: linear-gradient(135deg, #f3e8ff 0%, #e8d5ff 100%);
+        border: 3px solid var(--pop-4);
+    }
+    
+    .flow-card:hover .step-illust {
+        transform: scale(1.05) rotate(-2deg);
+    }
+    
+    .step-title { font-size: 1.4rem; font-weight: 900; margin-bottom: 10px; }
+    .step-short { 
+        font-size: 1rem; line-height: 1.5; margin-bottom: 15px; font-weight: 700; color: #555;
+        min-height: 4.5em;
+    }
+    
+    .toggle-icon { margin-top: auto; font-size: 1rem; font-weight:bold; transition: 0.3s; color: white; background: var(--c-text); padding: 5px 15px; border-radius: 20px; }
+    .flow-card:hover .toggle-icon { background: var(--pop-1); }
+
+    .card-detail {
+        display: none;
+        width: 100%;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 2px dashed #ccc;
+        text-align: left;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #333;
+        animation: fadeIn 0.5s ease;
+    }
+    .flow-card.active .card-detail, .case-card.active .card-detail {
+        display: block;
+    }
+    .flow-card.active .toggle-icon, .case-card.active .case-price {
+        background: var(--c-text); color: var(--pop-2);
+    }
+    .flow-card.active .toggle-icon::after { content: " ▼ OPEN"; }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+    .flow-arrow {
+        font-size: 2rem; color: var(--c-text); align-self: center; margin: 0 5px; opacity: 0.5;
+    }
+
+    .flow-detail-list { list-style: none; padding: 0; margin-top: 10px; }
+    .flow-detail-list li { margin-bottom: 12px; font-size: 0.95rem; line-height: 1.6; text-align: left; padding-left: 0; display: flex; align-items: baseline; }
+    .flow-detail-list li .emoji { font-size: 1.2rem; margin-right: 8px; flex-shrink: 0; width: 20px; text-align: center; }
+    .flow-detail-list strong { margin-right: 5px; font-weight: 900; font-family: var(--font-jp); }
+    .flow-detail-list .txt { flex-grow: 1; }
+
+    .flow-card:nth-child(1) .flow-detail-list strong { color: var(--pop-1); }
+    .flow-card:nth-child(3) .flow-detail-list strong { color: #00838f; }
+    .flow-card:nth-child(5) .flow-detail-list strong { color: #558b2f; }
+    .flow-card:nth-child(7) .flow-detail-list strong { color: var(--pop-4); }
+
+    /* CASE STUDY SECTION */
+    .case-section { 
+        padding: 80px 5%; background: #fdf0f3; 
+        position: relative; 
+        background-image: radial-gradient(#eec0c0 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+    
+    .case-header { text-align: center; margin-bottom: 40px; margin-top: 0; }
+    .case-section .section-title { 
+        margin-bottom: 5px; color: var(--c-text); font-size: 3.5rem; 
+        background: none; transform: none; left: auto; box-shadow: none; display: inline-block;
+        text-shadow: 2px 2px 0 white;
+    }
+    .case-sub { font-weight: bold; color: #666; font-size: 1rem; background: white; padding: 5px 15px; border-radius: 20px; display: inline-block; border: 1px solid #ddd; }
+
+    .case-container { max-width: 1200px; margin: 0 auto; }
+    
+    .case-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;
+        align-items: stretch;
+    }
+
+    .case-card {
+        background: white;
+        border: 2px solid white;
+        border-left: 6px solid var(--c-text);
+        border-radius: 12px;
+        padding: 25px; position: relative; transition: 0.3s;
+        display: flex; flex-direction: column; cursor: pointer;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        z-index: 1;
+        height: 100%;
+    }
+    .case-card:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 20px 40px rgba(0,0,0,0.1); z-index: 10; }
+    
+    .case-tag { 
+        display: inline-block; padding: 3px 10px; background: #eee; color: #333; 
+        font-size: 0.8rem; font-weight: bold; border-radius: 20px; margin-bottom: 10px; width: fit-content;
+        border: 1px solid #ddd;
+    }
+    .case-title { font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; line-height: 1.4; color: var(--c-text); }
+    .case-digest { flex-grow: 1; font-size: 0.9rem; color: #666; line-height: 1.6; margin-bottom: 20px; }
+    
+    .case-footer { 
+        margin-top: auto; display: flex; justify-content: space-between; align-items: center; 
+        font-size: 0.9rem; font-weight: bold; border-top: 2px dashed #f0f0f0; padding-top: 15px;
+        width: 100%;
+    }
+    .case-price { color: var(--pop-1); font-family: var(--font-en); font-size: 1.3rem; }
+
+    .case-detail-list { margin-top: 10px; list-style: none; padding: 0; }
+    .case-detail-list li { margin-bottom: 5px; font-size: 0.9rem; border-bottom: 1px dashed #eee; padding-bottom: 3px; }
+    .case-detail-list span { font-weight: bold; margin-right: 5px; color: var(--pop-1); font-family: var(--font-en); }
+
+    /* FAQ SECTION */
+    .faq-section { 
+        padding: 80px 5%; background: #fff; position: relative; border-top: 5px solid var(--c-text);
+        background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+    .faq-container { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .faq-item { 
+        background: white; border: 3px solid var(--c-text); border-radius: 12px; margin-bottom: 15px; 
+        cursor: pointer; transition: 0.2s; box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+    }
+    .faq-item:hover { border-color: var(--pop-4); box-shadow: 8px 8px 0 var(--pop-4); transform: translate(-2px, -2px); }
+    .faq-q { padding: 20px; font-weight: bold; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; }
+    .faq-q::after { content: '+'; font-family: var(--font-en); font-size: 1.5rem; color: var(--c-text); }
+    .faq-item.active .faq-q::after { content: '-'; }
+    .faq-item.active .faq-q { background: var(--pop-4); color: white; }
+    .faq-a { padding: 0 20px 20px; display: none; font-size: 0.95rem; line-height: 1.6; color: #555; }
+    .faq-item.active .faq-a { display: block; }
+
+    /* RESERVATION */
+    .reserve-section {
+        padding: 80px 5% 0;
+        text-align: center;
+        background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        border-top: 5px solid var(--c-text);
+        position: relative;
+        overflow: hidden;
+    }
+    .reserve-section::before {
+        content: '📅';
+        position: absolute; font-size: 20rem; opacity: 0.03;
+        top: 30%; left: 10%;
+        transform: translate(-50%, -50%) rotate(-15deg);
+        pointer-events: none;
+    }
+    .reserve-top {
+        max-width: 1000px; margin: 0 auto;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 50px;
+        align-items: start;
+        position: relative; z-index: 1;
+    }
+    .reserve-info { text-align: left; padding: 0; }
+    .reserve-info .section-title {
+        font-size: 3.5rem;
+        font-family: var(--font-en);
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--pop-3) 0%, #FF6600 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        line-height: 1;
+        /* グローバル.section-titleのリセット */
+        transform: none;
+        left: auto;
+        display: block;
+        text-align: left;
+        padding: 0;
+        box-shadow: none;
+        text-shadow: none;
+        color: var(--c-text);
+        position: static;
+    }
+    .reserve-desc { margin-top: 20px; line-height: 1.8; font-size: 0.95rem; color: #555; }
+
+    .safe-badge {
+        background: white; border: 2px solid var(--c-text); padding: 8px 15px; border-radius: 30px;
+        font-size: 0.9rem; font-weight: bold; display: flex; align-items: center; gap: 10px;
+        margin-bottom: 10px; width: fit-content; cursor: default; transition: 0.2s; box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+    }
+    .safe-badge:hover { transform: scale(1.05); background: var(--pop-2); }
+    .safe-icon { font-size: 1.2rem; }
+
+    /* 相談例ボックス */
+    .voice-box {
+        margin-top: 25px; padding: 20px; background: white;
+        border: 2px solid transparent; border-radius: 14px;
+        background-image: linear-gradient(white, white), linear-gradient(135deg, var(--pop-3), #FF6600);
+        background-origin: border-box; background-clip: padding-box, border-box;
+        box-shadow: 4px 4px 0 rgba(255,153,0,0.15);
+    }
+    .voice-title { font-size: 0.85rem; font-weight: 900; color: var(--c-text); margin-bottom: 15px; }
+    .voice-item {
+        display: flex; align-items: flex-start; gap: 10px;
+        margin-bottom: 12px;
+    }
+    .voice-item:last-child { margin-bottom: 0; }
+    .voice-avatar {
+        font-size: 1.3rem; flex-shrink: 0;
+        width: 32px; height: 32px;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .voice-bubble {
+        background: #eae8e4; border: 2px solid #888; border-radius: 12px; border-top-left-radius: 2px;
+        padding: 10px 14px; font-size: 0.82rem; color: #111;
+        line-height: 1.6; position: relative; flex: 1;
+        box-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+    }
+    .voice-bubble em { font-style: normal; color: var(--pop-4); font-weight: 700; }
+
+    /* フォーム */
+    .reserve-box {
+        background: white; border: 3px solid var(--c-text);
+        border-radius: 20px; padding: 30px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .form-sub { font-size: 0.8rem; color: #888; margin-bottom: 20px; }
+    .input-group { margin-bottom: 14px; }
+    .input-label { display: block; font-size: 0.8rem; font-weight: 900; color: #555; margin-bottom: 4px; }
+    .required { color: var(--pop-1); margin-left: 2px; }
+    .optional-tag { color: #aaa; margin-left: 3px; font-size: 0.7rem; font-weight: normal; }
+    .input-field {
+        width: 100%; padding: 13px 15px; background: #f9f9f9; border: 2px solid #ddd;
+        border-radius: 8px; font-size: 1rem; transition: 0.3s; outline: none;
+        font-family: var(--font-jp);
+    }
+    .input-field:focus { border-color: var(--pop-1); box-shadow: 0 0 10px rgba(255,0,85,0.1); background: white; }
+    textarea.input-field { resize: vertical; min-height: 70px; }
+    .chip-group { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chip {
+        padding: 7px 14px; border: 2px solid #ddd; border-radius: 30px;
+        font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.2s;
+        background: white; color: #555; user-select: none;
+    }
+    .chip:hover, .chip.selected { border-color: var(--pop-4); color: var(--pop-4); background: rgba(157,0,255,0.05); }
+    .submit-btn {
+        width: 100%; padding: 15px; background: var(--c-text); color: white;
+        border: none; border-radius: 10px; font-size: 1.2rem; font-weight: 900; cursor: pointer;
+        font-family: var(--font-en); text-transform: uppercase; transition: 0.3s;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3); margin-top: 5px;
+    }
+    .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: var(--pop-1); }
+
+    /* ワークフロー */
+    .workflow-area {
+        margin-top: 60px; padding: 50px 0 60px;
+        border-top: 3px dashed #ccc;
+        position: relative; z-index: 1;
+    }
+    .workflow-label { text-align: center; margin-bottom: 35px; }
+    .workflow-steps {
+        display: flex; align-items: flex-start; justify-content: center;
+        gap: 0; max-width: 1100px; margin: 0 auto;
+    }
+    .wf-step { flex: 1; text-align: center; position: relative; padding: 0 10px; }
+    .wf-icon {
+        width: 70px; height: 70px; border-radius: 50%;
+        border: 3px solid var(--c-text); background: white;
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 12px; font-size: 1.8rem;
+        box-shadow: 4px 4px 0 rgba(0,0,0,0.1); transition: 0.3s;
+        position: relative;
+    }
+    .wf-step:hover .wf-icon { transform: translateY(-5px) rotate(5deg); box-shadow: 6px 6px 0 rgba(0,0,0,0.15); }
+    .wf-num {
+        position: absolute; top: -6px; right: -6px;
+        width: 22px; height: 22px; border-radius: 50%;
+        background: var(--c-text); color: white;
+        font-family: var(--font-en); font-size: 0.7rem; font-weight: 900;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .wf-step-title { font-size: 0.95rem; font-weight: 900; color: var(--c-text); margin-bottom: 8px; }
+    .wf-bubble {
+        background: white; border: 2px solid #e0e0e0;
+        border-radius: 12px; padding: 10px 12px;
+        font-size: 0.78rem; line-height: 1.5; color: #555;
+        text-align: left; position: relative;
+        box-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+    }
+    .wf-bubble::before {
+        content: ''; position: absolute; top: -8px; left: 25px;
+        width: 0; height: 0;
+        border-left: 8px solid transparent; border-right: 8px solid transparent;
+        border-bottom: 8px solid #e0e0e0;
+    }
+    .wf-bubble::after {
+        content: ''; position: absolute; top: -5px; left: 27px;
+        width: 0; height: 0;
+        border-left: 6px solid transparent; border-right: 6px solid transparent;
+        border-bottom: 6px solid white;
+    }
+    .wf-speaker { font-size: 0.65rem; font-weight: 900; color: #aaa; margin-bottom: 3px; }
+    .wf-bubble em { font-style: normal; color: var(--pop-1); font-weight: 700; }
+    .wf-bubble .em-muted { color: #999; }
+    .wf-bubble-alt { border-color: #ddd; background: #fafafa; }
+    .wf-bubble-alt::before { border-bottom-color: #ddd; }
+    .wf-bubble-alt::after { border-bottom-color: #fafafa; }
+    .wf-arrow {
+        display: flex; align-items: center; justify-content: center;
+        padding-top: 25px; width: 30px; flex-shrink: 0;
+        font-size: 1.2rem; color: #bbb; font-weight: 700;
+    }
+    .wf-or { font-family: var(--font-en); font-size: 0.75rem; color: #bbb; text-align: center; margin: 6px 0; letter-spacing: 0.1em; }
+    .wf-ok { font-size: 0.72rem; color: #999; margin-top: 8px; text-align: center; }
+    .wf-step-final .wf-icon { border-color: var(--pop-3); background: #fff8f0; }
+    .wf-step-final .wf-num { background: var(--pop-3); }
+    .wf-step-final .wf-step-title { color: var(--pop-3); }
+    .wf-step-final .wf-bubble { border-color: var(--pop-3); }
+    .wf-step-final .wf-bubble::before { border-bottom-color: var(--pop-3); }
+
+    footer { background: var(--c-text); color: white; padding: 50px 5%; text-align: center; }
+
+    /* ===== レスポンシブ ===== */
+    @media (max-width: 1100px) {
+        .workflow-steps { max-width: 100%; padding: 0 10px; }
+        .wf-step { padding: 0 6px; }
+        .wf-icon { width: 60px; height: 60px; font-size: 1.5rem; }
+        .wf-bubble { font-size: 0.75rem; padding: 8px 10px; }
+        .wf-arrow { width: 20px; font-size: 1rem; }
+    }
+    @media (max-width: 1099px) {
+        .hero-title { font-size: clamp(1.6rem, 8.4vw, 2.5rem); }
+        .flow-container { flex-direction: column; }
+        .flow-card { min-height: auto; }
+        .flow-arrow { transform: rotate(90deg); margin: 10px 0; }
+        .case-grid { grid-template-columns: 1fr; }
+        .section-title { font-size: 3rem; }
+        .reserve-section { padding: 60px 5% 0; }
+        .reserve-top { grid-template-columns: 1fr; gap: 30px; }
+        .reserve-info { padding: 10px 0; }
+        .reserve-info .section-title { font-size: 2.8rem !important; }
+        .workflow-steps { flex-wrap: wrap; justify-content: center; gap: 15px 0; max-width: 600px; margin: 0 auto; }
+        .wf-step { flex: 0 0 33.33%; max-width: 33.33%; padding: 0 8px; margin-bottom: 10px; }
+        .wf-arrow { display: none; }
+        .wf-step { position: relative; }
+        .wf-step::after {
+            content: '▶'; position: absolute; top: 28px; right: -5px;
+            font-size: 0.8rem; color: #ccc;
+        }
+        .wf-step:nth-child(3)::after, .wf-step:last-child::after { display: none; }
+    }
+    @media (max-width: 600px) {
+        .reserve-section { padding: 40px 4% 0; }
+        .reserve-info .section-title { font-size: 2.2rem !important; }
+        .safe-badge { font-size: 0.8rem; padding: 6px 12px; }
+        .reserve-desc { font-size: 0.88rem; }
+        .voice-box { padding: 15px; }
+        .voice-item { font-size: 0.78rem; }
+        .reserve-box { padding: 20px; }
+        .reserve-box h3 { font-size: 1.3rem; }
+        .input-field { padding: 11px 12px; font-size: 0.9rem; }
+        .chip { padding: 6px 10px; font-size: 0.75rem; }
+        .submit-btn { font-size: 1rem; padding: 13px; }
+        .workflow-area { margin-top: 40px; padding: 35px 0 50px; }
+        .workflow-steps { flex-direction: column; align-items: center; gap: 12px; max-width: 100%; padding: 0 15px; }
+        .wf-step { flex: none; max-width: 100%; width: 100%; display: flex; align-items: flex-start; gap: 15px; text-align: left; padding: 0; }
+        .wf-icon { width: 50px; height: 50px; font-size: 1.3rem; margin: 0; flex-shrink: 0; }
+        .wf-content { flex: 1; }
+        .wf-step-title { text-align: left; margin-bottom: 5px; font-size: 0.9rem; }
+        .wf-bubble { margin-bottom: 6px; }
+        .wf-bubble::before, .wf-bubble::after { display: none; }
+        .wf-or { text-align: left; margin: 4px 0; }
+        .wf-ok { text-align: left; }
+    }
+</style>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        function waitForGSAP() {
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                initLesson();
+            } else {
+                setTimeout(waitForGSAP, 50);
+            }
+        }
+        waitForGSAP();
+    });
+
+    function initLesson() {
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+        }
+
+        // Chip selection toggle + hidden input sync
+        document.querySelectorAll('[data-chip]').forEach(chip => {
+            chip.addEventListener('click', () => {
+                chip.classList.toggle('selected');
+                const selected = [...document.querySelectorAll('[data-chip].selected')]
+                    .map(c => c.textContent.trim());
+                document.getElementById('interest-hidden').value = selected.join(', ');
+            });
+        });
+
+        // Formspree AJAX submit
+        const form = document.getElementById('reserve-form');
+        const thankYou = document.getElementById('thank-you');
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('.submit-btn');
+                btn.textContent = '送信中...';
+                btn.disabled = true;
+                try {
+                    const res = await fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (res.ok) {
+                        form.style.display = 'none';
+                        thankYou.style.display = 'block';
+                    } else {
+                        btn.textContent = '送信に失敗しました。もう一度お試しください。';
+                        btn.disabled = false;
+                    }
+                } catch {
+                    btn.textContent = '通信エラー。もう一度お試しください。';
+                    btn.disabled = false;
+                }
+            });
+        }
+
+        // Flow cards toggle
+        document.querySelectorAll('.flow-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+
+        // Case cards toggle
+        document.querySelectorAll('.case-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+
+        // FAQ items toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // GSAP reveal animations
+        if (typeof gsap !== 'undefined') {
+            gsap.utils.toArray('.reveal').forEach(el => {
+                gsap.from(el, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 80%',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 1
+                });
+            });
+
+            gsap.utils.toArray('.reveal-card').forEach((el, index) => {
+                gsap.from(el, {
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    },
+                    y: 80,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: index * 0.1
+                });
+            });
+
+            gsap.utils.toArray('.reveal-hero').forEach((el, index) => {
+                gsap.from(el, {
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    delay: index * 0.2
+                });
+            });
+        }
+    }
+</script>
